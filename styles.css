@@ -79,18 +79,22 @@ a {
 }
 
 .site-header {
-  width: min(1180px, calc(100% - 48px));
+  width: 100%;
   height: 88px;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0 max(24px, calc((100% - 1180px) / 2)) 0 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--line);
+  gap: 12px 18px;
+  background: #E5FF42;
+  border-bottom: 0;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
+  align-self: stretch;
   gap: 10px;
   color: var(--teal-dark);
   font-family: Arial, Helvetica, sans-serif;
@@ -98,11 +102,12 @@ a {
   line-height: 1;
 }
 
-.brand-logo {
-  width: 148px;
-  height: auto;
+.site-header .brand-logo {
+  width: auto;
+  height: 100%;
   display: block;
   flex: 0 0 auto;
+  background: #E5FF42;
 }
 
 .brand-product {
@@ -149,10 +154,10 @@ nav a.active::after {
   content: "";
   position: absolute;
   right: 0;
-  bottom: -1px;
+  bottom: 0;
   left: 0;
   height: 3px;
-  background: var(--accent);
+  background: var(--ink);
 }
 
 nav a span {
@@ -161,8 +166,8 @@ nav a span {
   display: inline-grid;
   place-items: center;
   border-radius: 9px;
-  color: var(--ink);
-  background: var(--accent);
+  color: #E5FF42;
+  background: var(--ink);
   font-size: 10px;
 }
 
@@ -177,12 +182,13 @@ nav a span {
   border: 1px solid var(--ink);
   border-radius: 10px;
   color: var(--ink);
-  background: var(--accent);
+  background: var(--white);
   cursor: pointer;
   font-size: 11px;
   font-weight: 700;
   box-shadow: 3px 3px 0 var(--ink);
   transition: transform .2s, box-shadow .2s;
+  flex: 0 0 auto;
 }
 
 .install-button:hover,
@@ -220,10 +226,11 @@ nav a span {
   align-items: center;
   gap: 9px;
   padding: 7px 12px 7px 7px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--ink);
   border-radius: 22px;
-  background: rgba(255, 255, 255, .72);
+  background: var(--white);
   cursor: pointer;
+  flex: 0 0 auto;
 }
 
 .profile > span:first-child {
@@ -232,8 +239,8 @@ nav a span {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  color: var(--ink);
-  background: var(--accent);
+  color: #E5FF42;
+  background: var(--ink);
   font-weight: 700;
 }
 
@@ -1023,6 +1030,8 @@ footer {
 
 .footer-logo {
   width: 140px;
+  height: auto;
+  display: block;
 }
 
 footer p span {
@@ -1112,18 +1121,25 @@ footer p a {
 }
 
 @media (max-width: 620px) {
-  .site-header,
   main,
   footer {
     width: min(100% - 28px, 1080px);
   }
 
   .site-header {
+    width: 100%;
     height: 72px;
+    padding: 0 10px 0 0;
+    gap: 8px;
   }
 
-  .brand-logo {
-    width: 132px;
+  .site-header .brand-logo {
+    width: auto;
+    height: 100%;
+    max-width: 42vw;
+    object-fit: contain;
+    object-position: left center;
+    background: #E5FF42;
   }
 
   .site-header .brand-product {
