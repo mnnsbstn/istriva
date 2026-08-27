@@ -1,4 +1,4 @@
-name: Send daily Istriva weather updates
+name: Send daily ISTRIVA weather updates
 
 on:
   pull_request:

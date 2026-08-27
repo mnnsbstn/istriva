@@ -1,4 +1,4 @@
-name: Deploy Istriva to GitHub Pages
+name: Deploy ISTRIVA to GitHub Pages
 
 on:
   push:
