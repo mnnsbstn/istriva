@@ -89,7 +89,7 @@ class NotificationPayloadTests(unittest.TestCase):
         self.assertEqual(payload["target_channel"], "push")
         self.assertEqual(
             payload["url"],
-            "https://mnnsbstn.github.io/istria-vacay-planner/?destination=pula",
+            "https://mnnsbstn.github.io/istriva/?destination=pula",
         )
         self.assertEqual(
             payload["filters"],

@@ -103,12 +103,12 @@ a {
   width: 100%;
   height: 88px;
   margin: 0;
-  padding: 0 max(24px, calc((100% - 1180px) / 2)) 0 0;
+  padding: 0 max(24px, calc((100% - 1180px) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px 18px;
-  background: #E5FF42;
+  background: #000000;
   border-bottom: 0;
 }
 
@@ -124,11 +124,24 @@ a {
 }
 
 .site-header .brand-logo {
-  width: auto;
-  height: 100%;
+  width: 64px;
+  height: 64px;
   display: block;
   flex: 0 0 auto;
-  background: #E5FF42;
+  object-fit: cover;
+  background: #000000;
+}
+
+.site-header .brand-product {
+  color: var(--white);
+}
+
+.site-header .brand small {
+  color: var(--accent);
+}
+
+.site-header nav a {
+  color: #b7bcb7;
 }
 
 .brand-product {
@@ -167,7 +180,7 @@ nav a {
 
 nav a:hover,
 nav a.active {
-  color: var(--ink);
+  color: var(--white);
 }
 
 nav a.active::after {
@@ -177,7 +190,7 @@ nav a.active::after {
   bottom: 0;
   left: 0;
   height: 3px;
-  background: var(--ink);
+  background: var(--accent);
 }
 
 nav a span {
@@ -186,8 +199,8 @@ nav a span {
   display: inline-grid;
   place-items: center;
   border-radius: 9px;
-  color: #E5FF42;
-  background: var(--ink);
+  color: var(--ink);
+  background: var(--accent);
   font-size: 10px;
 }
 
@@ -206,7 +219,7 @@ nav a span {
   cursor: pointer;
   font-size: 11px;
   font-weight: 700;
-  box-shadow: 3px 3px 0 var(--ink);
+  box-shadow: 3px 3px 0 var(--accent);
   transition: transform .2s, box-shadow .2s;
   flex: 0 0 auto;
 }
@@ -214,7 +227,7 @@ nav a span {
 .install-button:hover,
 .notification-button:hover {
   transform: translate(1px, 1px);
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--accent);
 }
 
 .install-button[hidden],
@@ -237,8 +250,8 @@ nav a span {
 }
 
 .notification-button.active {
-  color: var(--accent);
-  background: var(--ink);
+  color: var(--ink);
+  background: var(--accent);
 }
 
 .profile {
@@ -1284,19 +1297,22 @@ h2 {
 }
 
 footer {
-  width: min(1180px, calc(100% - 48px));
+  width: 100%;
   min-height: 120px;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0 max(24px, calc((100% - 1180px) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 25px;
-  border-top: 1px solid var(--line);
-  color: var(--ink-soft);
+  border-top: 0;
+  color: #aeb3ae;
+  background: #000000;
   font-size: 10px;
 }
 
 .footer-brand {
+  align-self: center;
   gap: 9px;
 }
 
@@ -1306,14 +1322,23 @@ footer {
   display: block;
   flex: 0 0 auto;
   object-fit: cover;
-  background: #E5FF42;
+  background: #000000;
+}
+
+.footer-brand .brand-product {
+  color: var(--white);
+}
+
+.footer-brand small {
+  color: var(--accent);
 }
 
 footer p span {
-  color: var(--ink);
+  color: var(--accent);
 }
 
 footer p a {
+  color: var(--white);
   text-decoration: underline;
   text-decoration-color: var(--accent);
   text-decoration-thickness: 3px;
@@ -1396,25 +1421,23 @@ footer p a {
 }
 
 @media (max-width: 620px) {
-  main,
-  footer {
+  main {
     width: min(100% - 28px, 1080px);
   }
 
   .site-header {
     width: 100%;
     height: 72px;
-    padding: 0 10px 0 0;
+    padding: 0 14px;
     gap: 8px;
   }
 
   .site-header .brand-logo {
-    width: auto;
-    height: 100%;
-    max-width: 42vw;
-    object-fit: contain;
-    object-position: left center;
-    background: #E5FF42;
+    width: 52px;
+    height: 52px;
+    max-width: none;
+    object-fit: cover;
+    background: #000000;
   }
 
   .site-header .brand-product {
@@ -1432,13 +1455,18 @@ footer p a {
     background: transparent;
   }
 
+  .profile > span:first-child {
+    color: var(--ink);
+    background: var(--accent);
+  }
+
   .install-button,
   .notification-button {
     width: 38px;
     min-height: 38px;
     padding: 0;
     font-size: 0;
-    box-shadow: 2px 2px 0 var(--ink);
+    box-shadow: 2px 2px 0 var(--accent);
   }
 
   .install-button span {
@@ -1616,9 +1644,10 @@ footer p a {
   }
 
   footer {
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    padding: 28px 0;
+    padding: 28px 14px;
   }
 
   .prototype-note {
