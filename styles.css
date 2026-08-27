@@ -764,7 +764,7 @@ h2 {
 .filters {
   min-height: 70px;
   display: grid;
-  grid-template-columns: 1.3fr 1px .8fr .8fr;
+  grid-template-columns: 1.55fr 1px .75fr .75fr;
   align-items: center;
   gap: 22px;
   margin-top: 26px;
@@ -803,6 +803,55 @@ h2 {
 
 .filter-label strong {
   font-size: 12px;
+}
+
+.family-controls {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+}
+
+.family-controls legend {
+  margin-bottom: 3px;
+  color: var(--ink-soft);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.family-counts {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.family-counts label {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.family-counts input {
+  width: 43px;
+  height: 30px;
+  padding: 3px 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--white);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.family-counts input:focus {
+  border-color: var(--ink);
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 .divider {

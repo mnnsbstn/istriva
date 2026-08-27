@@ -38,7 +38,7 @@
       <span class="action-label">Updates</span>
     </button>
     <button class="profile" type="button" aria-label="Profil der Familie öffnen">
-      <span>4</span>
+      <span id="party-size">4</span>
       <span class="profile-label">Familie<br><strong>in <span id="profile-destination">Pula</span></strong></span>
       <span aria-hidden="true">⌄</span>
     </button>
@@ -113,9 +113,21 @@
       </div>
 
       <div class="filters" aria-label="Plan anpassen">
-        <div class="filter-label">
+        <div class="filter-label family-filter">
           <span>☷</span>
-          <div><small>UNTERWEGS MIT</small><strong>2 Erwachsenen · 2 Kindern</strong></div>
+          <fieldset class="family-controls">
+            <legend>UNTERWEGS MIT</legend>
+            <div class="family-counts">
+              <label>
+                <span>Erwachsene</span>
+                <input id="adult-count" type="number" min="1" max="8" step="1" inputmode="numeric" value="2">
+              </label>
+              <label>
+                <span>Kinder</span>
+                <input id="child-count" type="number" min="0" max="8" step="1" inputmode="numeric" value="2">
+              </label>
+            </div>
+          </fieldset>
         </div>
         <div class="divider"></div>
         <label class="select-wrap">

@@ -478,6 +478,10 @@ const replanButton = document.querySelector("#replan-button");
 const shareButton = document.querySelector("#share-button");
 const installButton = document.querySelector("#install-button");
 const notificationButton = document.querySelector("#notification-button");
+const profileButton = document.querySelector(".profile");
+const partySize = document.querySelector("#party-size");
+const adultCount = document.querySelector("#adult-count");
+const childCount = document.querySelector("#child-count");
 const notificationDialog = document.querySelector("#notification-dialog");
 const notificationDestination = document.querySelector("#notification-destination");
 const weatherNotifications = document.querySelector("#weather-notifications");
@@ -501,6 +505,7 @@ const ONESIGNAL_APP_ID = "cd00c6cc-ad14-4246-9cde-4de743ce8238";
 const ONESIGNAL_SAFARI_WEB_ID = "web.onesignal.auto.4ed285de-faf5-4c6c-a346-3ff91e5aded6";
 const NOTIFICATION_SETTINGS_KEY = "bura-notification-settings-v1";
 const DESTINATION_STORAGE_KEY = "bura-selected-destination";
+const FAMILY_SETTINGS_KEY = "bura-family-settings-v1";
 let planIndex = 0;
 let toastTimer;
 let deferredInstallPrompt;
@@ -558,6 +563,56 @@ function saveDestination(destination) {
   } catch {
     // The current selection still works when browser storage is unavailable.
   }
+}
+
+function clampCount(value, minimum, maximum, fallback) {
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) ? Math.min(maximum, Math.max(minimum, parsed)) : fallback;
+}
+
+function getFamilySettings() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(FAMILY_SETTINGS_KEY) || "null");
+    return {
+      adults: clampCount(stored?.adults, 1, 8, 2),
+      children: clampCount(stored?.children, 0, 8, 2)
+    };
+  } catch {
+    return { adults: 2, children: 2 };
+  }
+}
+
+function familyDescription(settings = getFamilySettings()) {
+  const adults = settings.adults === 1 ? "1 Erwachsener" : `${settings.adults} Erwachsene`;
+  const children = settings.children === 1 ? "1 Kind" : `${settings.children} Kinder`;
+  return `${adults} · ${children}`;
+}
+
+function updateFamilyUI(settings = getFamilySettings()) {
+  adultCount.value = settings.adults;
+  childCount.value = settings.children;
+  partySize.textContent = settings.adults + settings.children;
+  profileButton.setAttribute(
+    "aria-label",
+    `${familyDescription(settings)} – Familienprofil öffnen`
+  );
+}
+
+function saveFamilySettings() {
+  const current = getFamilySettings();
+  const settings = {
+    adults: clampCount(adultCount.value, 1, 8, current.adults),
+    children: clampCount(childCount.value, 0, 8, current.children)
+  };
+
+  try {
+    localStorage.setItem(FAMILY_SETTINGS_KEY, JSON.stringify(settings));
+  } catch {
+    // The current values still work when browser storage is unavailable.
+  }
+
+  updateFamilyUI(settings);
+  showToast(`Familie angepasst: ${familyDescription(settings)}`);
 }
 
 function describeWeather(code) {
@@ -999,6 +1054,10 @@ destinationSelect.addEventListener("change", () => {
   showToast(`Euer Tagesplan für ${destination.name} ist bereit`);
 });
 
+[adultCount, childCount].forEach((input) => {
+  input.addEventListener("change", saveFamilySettings);
+});
+
 weatherSelect.addEventListener("change", () => {
   planIndex = 0;
   weatherManuallySelected = true;
@@ -1021,9 +1080,10 @@ replanButton.addEventListener("click", () => {
 
 shareButton.addEventListener("click", async () => {
   const destination = istriaDestinations[destinationSelect.value];
+  const family = familyDescription();
   const shareData = {
     title: `Unser Familientag in ${destination.name}`,
-    text: `Unser Bura-Tagesplan: ${document.querySelector("#plan-name").textContent}`,
+    text: `Unser Bura-Tagesplan für ${family}: ${document.querySelector("#plan-name").textContent}`,
     url: window.location.href
   };
 
@@ -1055,9 +1115,9 @@ document.querySelector("#clear-favorites").addEventListener("click", () => {
   showToast("Favoriten wurden geleert");
 });
 
-document.querySelector(".profile").addEventListener("click", () => {
+profileButton.addEventListener("click", () => {
   const destination = istriaDestinations[destinationSelect.value];
-  showToast(`2 Erwachsene · 2 Kinder · ${destination.name}`);
+  showToast(`${familyDescription()} · ${destination.name}`);
 });
 
 window.addEventListener("beforeinstallprompt", (event) => {
@@ -1151,6 +1211,7 @@ if (initialDestination) {
 
 updateDate();
 syncFavorites();
+updateFamilyUI();
 updateDestinationUI();
 renderPlan();
 refreshLiveWeather({ applyToPlan: true });
