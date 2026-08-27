@@ -506,6 +506,7 @@ let deferredInstallPrompt;
 let weatherManuallySelected = false;
 let lastWeatherRefresh = 0;
 let oneSignalClient;
+let notificationTagSyncTimers = [];
 
 function getPlans() {
   const weather = weatherSelect.value;
@@ -748,8 +749,8 @@ function updateNotificationDialog() {
   disableNotificationsButton.hidden = !active;
 }
 
-async function syncNotificationPreference({ force = false } = {}) {
-  if (!oneSignalClient || (!force && !notificationSubscriptionActive())) return;
+async function syncNotificationPreference() {
+  if (!oneSignalClient) return;
 
   const preference = currentNotificationPreference();
   const topics = preference.weather && preference.news
@@ -760,6 +761,13 @@ async function syncNotificationPreference({ force = false } = {}) {
     destination: preference.key,
     notification_topics: topics
   });
+}
+
+function scheduleNotificationTagSync() {
+  notificationTagSyncTimers.forEach((timer) => clearTimeout(timer));
+  notificationTagSyncTimers = [0, 1500, 5000].map((delay) => setTimeout(() => {
+    syncNotificationPreference().catch(() => undefined);
+  }, delay));
 }
 
 async function saveNotificationPreferences() {
@@ -798,7 +806,8 @@ async function saveNotificationPreferences() {
     }
 
     await oneSignalClient.User.PushSubscription.optIn();
-    await syncNotificationPreference({ force: true });
+    await syncNotificationPreference();
+    scheduleNotificationTagSync();
     updateNotificationButton();
     notificationDialog.close();
     showToast(wasActive
@@ -862,8 +871,8 @@ function initializeOneSignal() {
       OneSignal.Notifications.addEventListener("permissionChange", updateNotificationButton);
       OneSignal.User.PushSubscription.addEventListener("change", (event) => {
         updateNotificationButton();
-        if (event.current.optedIn) {
-          syncNotificationPreference().catch(() => undefined);
+        if (event.current.id || event.current.token || event.current.optedIn) {
+          scheduleNotificationTagSync();
         }
       });
 
@@ -871,9 +880,7 @@ function initializeOneSignal() {
       notificationButton.hidden = !(supported || isIos);
       updateNotificationButton();
 
-      if (notificationSubscriptionActive()) {
-        await syncNotificationPreference();
-      }
+      scheduleNotificationTagSync();
     } catch (error) {
       console.warn("OneSignal konnte nicht initialisiert werden", error);
       oneSignalClient = undefined;
@@ -968,7 +975,7 @@ destinationSelect.addEventListener("change", () => {
   updateDestinationUI();
   renderPlan(true);
   refreshLiveWeather({ applyToPlan: true });
-  syncNotificationPreference();
+  scheduleNotificationTagSync();
   const destination = istriaDestinations[destinationSelect.value];
   showToast(`Euer Tagesplan für ${destination.name} ist bereit`);
 });
@@ -1097,12 +1104,16 @@ initializeOneSignal();
 
 window.addEventListener("online", () => {
   refreshLiveWeather({ applyToPlan: !weatherManuallySelected });
+  scheduleNotificationTagSync();
 });
 
 document.addEventListener("visibilitychange", () => {
   const refreshInterval = 5 * 60 * 1000;
-  if (document.visibilityState === "visible" && Date.now() - lastWeatherRefresh > refreshInterval) {
-    refreshLiveWeather({ applyToPlan: !weatherManuallySelected });
+  if (document.visibilityState === "visible") {
+    scheduleNotificationTagSync();
+    if (Date.now() - lastWeatherRefresh > refreshInterval) {
+      refreshLiveWeather({ applyToPlan: !weatherManuallySelected });
+    }
   }
 });
 
