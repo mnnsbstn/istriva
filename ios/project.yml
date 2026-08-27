@@ -1,0 +1,99 @@
+name: ISTRIVA
+
+options:
+  bundleIdPrefix: de.mnnsbstn
+  deploymentTarget:
+    iOS: "17.0"
+  groupSortPosition: top
+  generateEmptyDirectories: true
+  createIntermediateGroups: true
+
+packages:
+  ISTRIVACore:
+    path: ISTRIVACore
+  OneSignal:
+    url: https://github.com/OneSignal/OneSignal-XCFramework
+    from: 5.4.0
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+
+targets:
+  ISTRIVA:
+    type: application
+    platform: iOS
+    sources:
+      - path: ISTRIVA
+        excludes:
+          - Info.plist
+          - ISTRIVA.entitlements
+    info:
+      path: ISTRIVA/Info.plist
+    entitlements:
+      path: ISTRIVA/ISTRIVA.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.mnnsbstn.istriva
+        PRODUCT_NAME: ISTRIVA
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: false
+    dependencies:
+      - package: ISTRIVACore
+        product: ISTRIVACore
+      - package: OneSignal
+        product: OneSignalFramework
+      - target: OneSignalNotificationServiceExtension
+        embed: true
+    attributes:
+      SystemCapabilities:
+        com.apple.Push:
+          enabled: 1
+        com.apple.BackgroundModes:
+          enabled: 1
+        com.apple.ApplicationGroups.iOS:
+          enabled: 1
+
+  OneSignalNotificationServiceExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: OneSignalNotificationServiceExtension
+        excludes:
+          - Info.plist
+          - OneSignalNotificationServiceExtension.entitlements
+    info:
+      path: OneSignalNotificationServiceExtension/Info.plist
+    entitlements:
+      path: OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.mnnsbstn.istriva.OneSignalNotificationServiceExtension
+        PRODUCT_NAME: OneSignalNotificationServiceExtension
+        APPLICATION_EXTENSION_API_ONLY: true
+        SKIP_INSTALL: true
+    dependencies:
+      - package: OneSignal
+        product: OneSignalExtension
+    attributes:
+      SystemCapabilities:
+        com.apple.ApplicationGroups.iOS:
+          enabled: 1
+
+schemes:
+  ISTRIVA:
+    build:
+      targets:
+        ISTRIVA: all
+        OneSignalNotificationServiceExtension: all
+    run:
+      config: Debug
+    archive:
+      config: Release
