@@ -54,3 +54,17 @@ Diese zwei Tags entsprechen dem Limit des kostenlosen OneSignal-Plans. Damit las
 5. Unter **OneSignal > Audience > Subscriptions** prüfen, ob das Gerät als `Subscribed` erscheint.
 
 Auf iOS/iPadOS 16.4 oder neuer muss die Website zuerst zum Home-Bildschirm hinzugefügt und von dort geöffnet werden. Erst dann kann der Nutzer über den „Updates“-Button die Berechtigung erteilen.
+
+### Automatische Wetter-Updates
+
+Der Workflow `.github/workflows/weather-notifications.yml` sendet täglich um **09:00 Uhr in der Zeitzone Europe/Zagreb** eine regionale Wetterzusammenfassung. Zwei UTC-Startzeiten decken Sommer- und Winterzeit ab; das Python-Skript beendet den jeweils falschen Lauf ohne Versand.
+
+Für den Versand muss unter **Settings > Secrets and variables > Actions** das Repository-Secret `ONESIGNAL_API_KEY` hinterlegt sein. Das Skript:
+
+1. ruft Open-Meteo für alle elf Regionen ab,
+2. erstellt eine kurze Wetterzusammenfassung mit passendem Hinweis,
+3. filtert nach `destination` und `notification_topics`,
+4. verlinkt direkt zum Tagesplan der Region und
+5. verhindert Doppelversand mit einem täglichen Idempotency-Key.
+
+Unter **Actions > Send daily Bura weather updates > Run workflow** kann der Ablauf manuell gestartet werden. `dry_run` ist standardmäßig aktiviert und sendet keine Push-Nachricht. Für einen echten Einzeltest eine Region wählen und `dry_run` deaktivieren.
