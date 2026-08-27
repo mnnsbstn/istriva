@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 ONESIGNAL_APP_ID = "cd00c6cc-ad14-4246-9cde-4de743ce8238"
 ONESIGNAL_API_URL = "https://api.onesignal.com/notifications"
 OPEN_METEO_API_URL = "https://api.open-meteo.com/v1/forecast"
-APP_URL = "https://mnnsbstn.github.io/istria-vacay-planner/"
+APP_URL = "https://mnnsbstn.github.io/istriva/"
 ICON_URL = f"{APP_URL}icon-512.png"
 LOCAL_TIMEZONE = ZoneInfo("Europe/Zagreb")
 SEND_HOUR = 9
