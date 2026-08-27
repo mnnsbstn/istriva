@@ -167,8 +167,41 @@ def build_message(location_name: str, forecast: dict[str, Any]) -> tuple[str, st
     return title, body
 
 
-def idempotency_key(local_date: str, destination: str) -> str:
-    return str(uuid.uuid5(uuid.NAMESPACE_URL, f"bura-weather:{local_date}:{destination}"))
+def idempotency_key(local_date: str, destination: str, context: str = "daily") -> str:
+    return str(
+        uuid.uuid5(
+            uuid.NAMESPACE_URL,
+            f"bura-weather-v2:{context}:{local_date}:{destination}",
+        )
+    )
+
+
+def audience_filters(destination: str) -> list[dict[str, str]]:
+    destination_filter = {
+        "field": "tag",
+        "key": "destination",
+        "relation": "=",
+        "value": destination,
+    }
+    return [
+        destination_filter,
+        {"operator": "AND"},
+        {
+            "field": "tag",
+            "key": "notification_topics",
+            "relation": "=",
+            "value": "weather",
+        },
+        {"operator": "OR"},
+        destination_filter.copy(),
+        {"operator": "AND"},
+        {
+            "field": "tag",
+            "key": "notification_topics",
+            "relation": "=",
+            "value": "weather_news",
+        },
+    ]
 
 
 def build_notification(
@@ -176,6 +209,7 @@ def build_notification(
     location_name: str,
     forecast: dict[str, Any],
     local_date: str,
+    context: str = "daily",
 ) -> dict[str, Any]:
     title, body = build_message(location_name, forecast)
     launch_url = f"{APP_URL}?{urllib.parse.urlencode({'destination': destination})}"
@@ -191,22 +225,8 @@ def build_notification(
         "firefox_icon": ICON_URL,
         "web_push_topic": f"bura-weather-{destination}",
         "ttl": 6 * 60 * 60,
-        "idempotency_key": idempotency_key(local_date, destination),
-        "filters": [
-            {
-                "field": "tag",
-                "key": "destination",
-                "relation": "=",
-                "value": destination,
-            },
-            {"operator": "AND"},
-            {
-                "field": "tag",
-                "key": "notification_topics",
-                "relation": "in_array",
-                "value": "weather,weather_news",
-            },
-        ],
+        "idempotency_key": idempotency_key(local_date, destination, context),
+        "filters": audience_filters(destination),
     }
 
 
@@ -256,12 +276,19 @@ def main() -> int:
         return 2
 
     destinations = LOCATIONS if args.location == "all" else {args.location: LOCATIONS[args.location]}
+    idempotency_context = os.environ.get("BURA_IDEMPOTENCY_CONTEXT", "daily").strip() or "daily"
     failures: list[str] = []
 
     for destination, location in destinations.items():
         try:
             forecast = fetch_forecast(location)
-            payload = build_notification(destination, location["name"], forecast, local_now.date().isoformat())
+            payload = build_notification(
+                destination,
+                location["name"],
+                forecast,
+                local_now.date().isoformat(),
+                idempotency_context,
+            )
 
             if args.dry_run:
                 print(
@@ -271,8 +298,17 @@ def main() -> int:
                 continue
 
             response = send_notification(payload, api_key)
-            notification_id = response.get("id") or "no-id"
+            notification_id = response.get("id")
             recipients = response.get("recipients", 0)
+            if not notification_id:
+                warning = (
+                    f"{destination}: OneSignal matched no recipients "
+                    f"(response={json.dumps(response, ensure_ascii=False)})"
+                )
+                print(f"::warning::{warning}")
+                if args.location != "all":
+                    failures.append(warning)
+                continue
             print(f"Sent {destination}: notification={notification_id}, recipients={recipients}")
         except Exception as error:  # Continue so one region cannot block all others.
             failures.append(f"{destination}: {error}")

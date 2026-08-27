@@ -77,4 +77,5 @@ jobs:
           BURA_FORCE_SEND: ${{ github.event_name == 'workflow_dispatch' }}
           BURA_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
           BURA_LOCATION: ${{ github.event_name == 'workflow_dispatch' && inputs.location || 'all' }}
+          BURA_IDEMPOTENCY_CONTEXT: ${{ github.event_name == 'workflow_dispatch' && github.run_id || 'daily' }}
         run: python scripts/send_weather_updates.py
