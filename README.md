@@ -45,6 +45,8 @@ Beim Aktivieren werden folgende OneSignal-Tags gesetzt:
 
 Diese zwei Tags entsprechen dem Limit des kostenlosen OneSignal-Plans. Damit lassen sich Nachrichten im OneSignal-Dashboard unter **Audience > Segments** nach Region und Thema filtern. Die App ID ist öffentlich und im Frontend hinterlegt. REST API Keys dürfen ausschließlich als Repository-Secrets gespeichert werden.
 
+Die in der App gewählte Region wird lokal gespeichert und bei jedem Start sowie bei jedem Regionswechsel als `destination` mit OneSignal synchronisiert. Dadurch bleibt die Benachrichtigungsregion auch nach dem Schließen der Homescreen-App erhalten.
+
 ### Ersten Empfänger registrieren
 
 1. Den aktuellen Stand auf GitHub Pages veröffentlichen.
@@ -66,6 +68,8 @@ Für den Versand muss unter **Settings > Secrets and variables > Actions** das R
 3. filtert nach `destination` und `notification_topics`,
 4. verlinkt direkt zum Tagesplan der Region und
 5. verhindert Doppelversand mit einem täglichen Idempotency-Key.
+
+Der geplante Lauf verwendet automatisch `all` und verarbeitet somit jeden Standort. Pro Nutzer wird nur die Nachricht zugestellt, deren `destination` seiner zuletzt in der App ausgewählten Region entspricht.
 
 Unter **Actions > Send daily Bura weather updates > Run workflow** kann der Ablauf manuell gestartet werden. `dry_run` ist standardmäßig aktiviert und sendet keine Push-Nachricht. Für einen echten Einzeltest eine Region wählen und `dry_run` deaktivieren.
 
