@@ -11,7 +11,7 @@ const pulaPlanCatalog = {
             type: "GESCHICHTE",
             duration: "1 Std. 30 Min.",
             title: "Arena von Pula",
-            description: "Gladiatoren-Geschichten für die Kids, beeindruckende Architektur für euch – morgens noch angenehm ruhig.",
+            description: "Gladiatoren-Geschichten für die Kinder, beeindruckende Architektur für euch – morgens noch angenehm ruhig.",
             meta: ["★ Familienliebling", "🎟 Eintritt", "☀ wenig Schatten"],
             scene: "#edc17d",
             icon: "🏛️",
@@ -45,7 +45,7 @@ const pulaPlanCatalog = {
             duration: "2 Std.",
             title: "Forum & Abendessen",
             description: "Durch die Gassen zum Augustus-Tempel schlendern und den Tag bei Pasta oder frischem Fisch ausklingen lassen.",
-            meta: ["♿ Kinderwagen-tauglich", "🍝 Viele Optionen", "◒ Sunset-Nähe"],
+            meta: ["♿ Kinderwagen-tauglich", "🍝 Viele Optionen", "◒ Nähe zum Sonnenuntergang"],
             scene: "#df9a74",
             icon: "🍝",
             map: "Forum Pula"
@@ -362,7 +362,7 @@ const istriaDestinations = {
     budget: "€€",
     distances: { balanced: "6,8 km", relaxed: "3 km", active: "10,2 km" },
     stops: [
-      regionalStop("09:00", "KUNST", "1 Std.", "Skulpturenpark Džamonja", "Große moderne Skulpturen unter freiem Himmel – kostenlos und mit viel Platz zum Entdecken.", ["🎨 Open Air", "✓ kostenlos", "☀ wenig Schatten"], "#a7aa8e", "🗿", "Dusan Dzamonja Sculpture Park"),
+      regionalStop("09:00", "KUNST", "1 Std.", "Skulpturenpark Džamonja", "Große moderne Skulpturen unter freiem Himmel – kostenlos und mit viel Platz zum Entdecken.", ["🎨 unter freiem Himmel", "✓ kostenlos", "☀ wenig Schatten"], "#a7aa8e", "🗿", "Dusan Dzamonja Sculpture Park"),
       regionalStop("10:30", "ALTSTADT", "1 Std. 30 Min.", "Historisches Vrsar", "Vom Hafen durch steile mittelalterliche Gassen hinauf zur Kirche St. Martin.", ["↟ steil", "🍦 Eispause", "📷 Gassen"], "#dfac78", "🏘️", "Vrsar Old Town"),
       regionalStop("12:15", "PANORAMA", "45 Min.", "Casanova-Aussichtspunkt", "Über die Inselwelt und bis zur grünen Lim-Bucht schauen.", ["◉ Panoramablick", "☀ Sonnenhut", "✓ kostenlos"], "#e7c06f", "🔭", "Casanova Viewpoint Vrsar"),
       regionalStop("14:00", "BOOTSTOUR", "3 Std.", "Lim-Bucht vom Wasser", "Vorab gebuchte Bootstour mit Badepause – Dauer und Wetterregel beim Anbieter prüfen.", ["⛵ vorab buchen", "🌊 Badepause", "☁ wetterabhängig"], "#67aeb7", "⛵", "Vrsar Harbour")
@@ -370,7 +370,7 @@ const istriaDestinations = {
     rainStops: [
       regionalStop("10:00", "KULTUR", "45 Min.", "Kirche St. Martin", "Die Pfarrkirche und ihre Umgebung in einer Regenpause besuchen.", ["☂ teilweise drinnen", "↟ steiler Weg", "✓ kostenlos"], "#d5b079", "⛪", "Church of St Martin Vrsar"),
       regionalStop("11:15", "GENUSS", "1 Std. 30 Min.", "Mittagspause am Hafen", "In Ruhe essen und den Blick auf die wettergeschützten Boote genießen.", ["🍝 Familienlokale", "☂ drinnen", "€€"], "#dca06f", "🍲", "Vrsar Harbour restaurants"),
-      regionalStop("13:30", "UNESCO-AUSFLUG", "2 Std.", "Euphrasius-Basilika in Poreč", "Bei Dauerregen liegt Poreč nur rund 15 Minuten entfernt und bietet ein starkes Indoor-Programm.", ["🚗 15 Min.", "★ UNESCO", "🎟 Eintritt"], "#c9b178", "✨", "Euphrasian Basilica Porec")
+      regionalStop("13:30", "UNESCO-AUSFLUG", "2 Std.", "Euphrasius-Basilika in Poreč", "Bei Dauerregen liegt Poreč nur rund 15 Minuten entfernt und bietet ein gutes Programm drinnen.", ["🚗 15 Min.", "★ UNESCO", "🎟 Eintritt"], "#c9b178", "✨", "Euphrasian Basilica Porec")
     ]
   },
   fazana: {
@@ -422,7 +422,7 @@ const istriaDestinations = {
       regionalStop("09:00", "ALTSTADT", "1 Std.", "Labin & Fortica-Blick", "Durch das Florustor in die Bergstadt und hinauf zum Aussichtspunkt über Rabac.", ["↟ Kopfsteinpflaster", "◉ Aussicht", "☀ früh starten"], "#dfa36f", "🏘️", "Fortica Viewpoint Labin"),
       regionalStop("10:15", "BERGBAU", "1 Std. 15 Min.", "Nationalmuseum Labin", "Die Bergbaugeschichte inklusive Miniaturstollen macht Industriekultur greifbar.", ["⛏ Kinder spannend", "☂ drinnen", "🎟 Eintritt"], "#8f9690", "⛏️", "Labin National Museum"),
       regionalStop("12:00", "WANDERN", "1 Std. 30 Min.", "Sentona-Weg nach Rabac", "Über Brücken und an Bachläufen bergab; nur mit festen Schuhen und ohne Kinderwagen.", ["🥾 2,5 km", "↘ nur bergab", "🚕 Rückfahrt planen"], "#77a77d", "🥾", "Sentona Trail Labin"),
-      regionalStop("14:30", "BADEN", "3 Std.", "Girandella Beach", "Klares Wasser und gute Infrastruktur für die verdiente Badepause.", ["🏖 Blue Flag", "👟 Badeschuhe", "☕ Infrastruktur"], "#5db3c0", "🏖️", "Girandella Beach Rabac")
+      regionalStop("14:30", "BADEN", "3 Std.", "Girandella Beach", "Klares Wasser und gute Infrastruktur für die verdiente Badepause.", ["🏖 Blaue Flagge", "👟 Badeschuhe", "☕ Infrastruktur"], "#5db3c0", "🏖️", "Girandella Beach Rabac")
     ],
     rainStops: [
       regionalStop("10:00", "BERGBAU", "1 Std. 30 Min.", "Nationalmuseum Labin", "Stadt- und Bergbaugeschichte mit begehbarem Miniaturstollen.", ["☂ drinnen", "⛏ Kinder spannend", "🎟 Eintritt"], "#8f9690", "⛏️", "Labin National Museum"),
@@ -444,7 +444,7 @@ const istriaDestinations = {
       regionalStop("14:30", "PANORAMA", "2 Std.", "Motovuns Stadtmauer", "Die Runde über die Mauern eröffnet den großen Blick über das Mirna-Tal; Anstieg vom Parkplatz einplanen.", ["◉ Panoramablick", "🎟 Eintritt", "↟ steil"], "#dfb66f", "🏰", "Motovun Town Walls")
     ],
     rainStops: [
-      regionalStop("10:00", "DRUCKKUNST", "1 Std.", "Antico in Motovun", "Die Gutenberg-Replik und handwerkliche Drucke sind ein guter Indoor-Auftakt.", ["☂ drinnen", "🎟 Eintritt", "◷ dienstags zu"], "#a99a87", "📜", "Antico Motovun"),
+      regionalStop("10:00", "DRUCKKUNST", "1 Std.", "Antico in Motovun", "Die Gutenberg-Replik und handwerkliche Drucke sind ein guter wettergeschützter Auftakt.", ["☂ drinnen", "🎟 Eintritt", "◷ dienstags zu"], "#a99a87", "📜", "Antico Motovun"),
       regionalStop("11:30", "GENUSS", "1 Std. 30 Min.", "Trüffel-Mittagessen", "Eine warme Pause mit istrischer Pasta; für Kinder eine Variante ohne Trüffel bestellen.", ["🍝 lokale Küche", "☂ drinnen", "€€"], "#d3a06e", "🍝", "Motovun restaurants"),
       regionalStop("14:00", "KLEINSTADT", "1 Std. 30 Min.", "Hum & Aura-Museum", "Bei Dauerregen bietet das kleine interaktive Museum in Hum eine Alternative rund 35 Minuten entfernt.", ["🚗 35 Min.", "☂ drinnen", "🎟 Eintritt"], "#aaa29a", "🏛️", "Aura Museum Hum")
     ]
