@@ -12,37 +12,54 @@ struct ExploreView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 18) {
-                    Map(initialPosition: .region(istriaRegion)) {
-                        ForEach(model.destinations) { destination in
-                            Marker(
-                                destination.shortName,
-                                coordinate: CLLocationCoordinate2D(
-                                    latitude: destination.latitude,
-                                    longitude: destination.longitude
-                                )
-                            )
-                            .tint(
-                                destination.id == model.selectedDestinationID
-                                    ? .istrivaLime
-                                    : .black
-                            )
-                        }
-                    }
-                    .frame(height: 300)
-                    .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-
-                    ForEach(model.destinations) { destination in
-                        destinationCard(destination)
-                    }
-                }
-                .padding()
-            }
+            content
             .navigationTitle("Istrien entdecken")
             .toolbarBackground(Color.istrivaLime, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
+    }
+
+    private var content: some View {
+        ScrollView {
+            LazyVStack(spacing: 18) {
+                destinationMap
+                destinationCards
+            }
+            .padding()
+        }
+    }
+
+    private var destinationMap: some View {
+        Map(initialPosition: .region(istriaRegion)) {
+            ForEach(model.destinations) { destination in
+                destinationMarker(destination)
+            }
+        }
+        .frame(height: 300)
+        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+    }
+
+    @MapContentBuilder
+    private func destinationMarker(_ destination: Destination) -> some MapContent {
+        Marker(
+            destination.shortName,
+            coordinate: CLLocationCoordinate2D(
+                latitude: destination.latitude,
+                longitude: destination.longitude
+            )
+        )
+        .tint(markerColor(for: destination))
+    }
+
+    @ViewBuilder
+    private var destinationCards: some View {
+        ForEach(model.destinations) { destination in
+            destinationCard(destination)
+        }
+    }
+
+    private func markerColor(for destination: Destination) -> Color {
+        destination.id == model.selectedDestinationID ? .istrivaLime : .black
     }
 
     private func destinationCard(_ destination: Destination) -> some View {
