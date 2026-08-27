@@ -32,7 +32,11 @@ public final class PlannerRepository: @unchecked Sendable {
         catalog.destinations
     }
 
-    public init(bundle: Bundle = .module) throws {
+    public convenience init() throws {
+        try self.init(bundle: .module)
+    }
+
+    public init(bundle: Bundle) throws {
         guard let url = bundle.url(forResource: "destinations", withExtension: "json") else {
             throw PlannerRepositoryError.missingCatalog
         }
