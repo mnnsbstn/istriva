@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#E5FF42">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Bura">
+  <meta name="description" content="Bura plant euren perfekten Familientag in ganz Istrien – entspannt, wetterbewusst und kindgerecht.">
+  <title>Bura – Euer Familientag in Istrien</title>
+  <link rel="icon" type="image/png" href="icon-192.png?v=4">
+  <link rel="apple-touch-icon" href="icon-192.png?v=4">
+  <link rel="manifest" href="manifest.webmanifest?v=4">
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="mnn_sbstn Bura Startseite">
+      <img class="brand-logo" src="brand-logo-horizontal.png?v=4" alt="">
+      <span class="brand-product">Bura<small>Istrien-Planer</small></span>
+    </a>
+    <nav aria-label="Hauptnavigation">
+      <a class="active" href="#plan">Tagesplan</a>
+      <a href="#entdecken">Istrien entdecken</a>
+      <a href="#favoriten">Favoriten <span id="favorite-count">0</span></a>
+    </nav>
+    <button class="install-button" id="install-button" type="button" hidden>
+      <span aria-hidden="true">↓</span> App installieren
+    </button>
+    <button class="notification-button" id="notification-button" type="button" aria-pressed="false" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+      <span class="action-label">Wetter-Updates</span>
+    </button>
+    <button class="profile" type="button" aria-label="Profil der Familie öffnen">
+      <span>4</span>
+      <span class="profile-label">Familie<br><strong>in <span id="profile-destination">Pula</span></strong></span>
+      <span aria-hidden="true">⌄</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="welcome" aria-labelledby="welcome-title">
+      <div class="welcome-copy">
+        <p class="eyebrow"><span></span> Dobro jutro, Familie!</p>
+        <h1 id="welcome-title">Euer perfekter Tag<br>in <em id="hero-destination">Pula.</em></h1>
+        <p class="intro">Von Küstenstädten bis zu Bergdörfern – wir planen euren entspannten Familientag überall in Istrien.</p>
+        <label class="destination-switcher" for="destination-select">
+          <span class="destination-icon" aria-hidden="true">⌖</span>
+          <span class="destination-copy"><small>AKTUELLEN ORT AUSWÄHLEN</small>
+            <select id="destination-select">
+              <optgroup label="Südküste">
+                <option value="pula">Pula</option>
+                <option value="fazana">Fažana &amp; Brijuni</option>
+                <option value="medulin">Medulin &amp; Kamenjak</option>
+              </optgroup>
+              <optgroup label="Westküste">
+                <option value="rovinj">Rovinj</option>
+                <option value="porec">Poreč</option>
+                <option value="vrsar">Vrsar &amp; Lim-Bucht</option>
+                <option value="novigrad">Novigrad</option>
+                <option value="umag">Umag &amp; Savudrija</option>
+              </optgroup>
+              <optgroup label="Ostküste &amp; Inland">
+                <option value="labin">Labin &amp; Rabac</option>
+                <option value="motovun">Motovun &amp; Grožnjan</option>
+                <option value="buzet">Buzet, Roč &amp; Hum</option>
+              </optgroup>
+            </select>
+          </span>
+          <span class="destination-total">11 Regionen</span>
+        </label>
+      </div>
+
+      <aside class="weather-card" aria-label="Live-Wettervorschau" aria-live="polite">
+        <div class="weather-head">
+          <div class="sun-icon" id="weather-icon" aria-hidden="true">◌</div>
+          <div>
+            <span class="data-hint" id="weather-data-status">LIVE-WETTER WIRD GELADEN</span>
+            <strong id="weather-temperature">--°</strong>
+            <p id="weather-summary">Aktuelle Daten werden geladen</p>
+          </div>
+        </div>
+        <div class="weather-details">
+          <span><i>💧</i><strong id="weather-rain">--%</strong> Regen</span>
+          <span><i>〰</i><strong id="weather-wind">-- km/h</strong> Wind</span>
+          <span><i>◒</i><strong id="weather-sunset">--:--</strong> Sunset</span>
+        </div>
+        <p class="weather-tip" id="weather-tip"><span>✦</span> Wetterdaten werden live für euren ausgewählten Ort geladen.</p>
+      </aside>
+    </section>
+
+    <section class="planner" id="plan" aria-labelledby="plan-title">
+      <div class="planner-top">
+        <div>
+          <p class="section-kicker"><span id="planner-destination">PULA</span> · <span id="current-date">26. AUGUST</span></p>
+          <h2 id="plan-title">Euer Tagesplan</h2>
+        </div>
+        <div class="plan-actions">
+          <button class="icon-button" id="share-button" type="button" aria-label="Tagesplan teilen" title="Tagesplan teilen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg>
+          </button>
+          <button class="primary-button" id="replan-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5"/><path d="M19 12a7 7 0 1 0-2 5"/></svg>
+            Neu planen
+          </button>
+        </div>
+      </div>
+
+      <div class="filters" aria-label="Plan anpassen">
+        <div class="filter-label">
+          <span>☷</span>
+          <div><small>UNTERWEGS MIT</small><strong>2 Erwachsenen · 2 Kindern</strong></div>
+        </div>
+        <div class="divider"></div>
+        <label class="select-wrap">
+          <span>☀</span>
+          <select id="weather-select" aria-label="Wetter auswählen">
+            <option value="sun">Sonne &amp; 29°</option>
+            <option value="rain">Regenoption</option>
+          </select>
+        </label>
+        <label class="select-wrap">
+          <span>♢</span>
+          <select id="pace-select" aria-label="Tempo auswählen">
+            <option value="balanced">Ausgewogen</option>
+            <option value="relaxed">Ganz entspannt</option>
+            <option value="active">Abenteuerlich</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="plan-summary" aria-live="polite">
+        <span id="plan-name">Kultur, Eis &amp; Meeresluft</span>
+        <span><b id="stop-count">4</b> Stopps</span>
+        <span><b id="distance">5,8 km</b> Wege</span>
+        <span><b id="budget">€€</b> Familienbudget</span>
+      </div>
+
+      <div class="itinerary" id="itinerary"></div>
+    </section>
+
+    <section class="discover" id="entdecken" aria-labelledby="discover-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">QUER DURCH ISTRIEN</p>
+          <h2 id="discover-title">Noch Lust auf mehr?</h2>
+        </div>
+        <a href="https://www.google.com/maps/search/Sehenswürdigkeiten+Istrien" target="_blank" rel="noreferrer">Alles auf der Karte <span>→</span></a>
+      </div>
+      <div class="suggestion-grid">
+        <article class="suggestion suggestion-sunset">
+          <div class="illustration sunset-scene" aria-hidden="true">
+            <div class="scene-sun"></div><div class="scene-island"></div><div class="scene-wave"></div>
+          </div>
+          <div class="suggestion-copy">
+            <span class="tag">GEHEIMTIPP</span>
+            <h3>Sonnenuntergang am Kap Kamenjak</h3>
+            <p>Wilde Küste, kleine Buchten und der schönste Blick aufs Abendrot.</p>
+            <div><span>🚗 25 Min.</span><span>◎ Naturpark</span></div>
+          </div>
+          <button class="favorite" type="button" aria-label="Kap Kamenjak als Favorit markieren">♡</button>
+        </article>
+        <article class="suggestion suggestion-market">
+          <div class="illustration market-scene" aria-hidden="true">
+            <span>🍉</span><span>🍋</span><span>🍑</span>
+          </div>
+          <div class="suggestion-copy">
+            <span class="tag coral">MORGENS SCHÖN</span>
+            <h3>Tržnica – Pulas Markthalle</h3>
+            <p>Frisches Obst, lokale Snacks und echtes istrisches Lebensgefühl.</p>
+            <div><span>🚶 8 Min.</span><span>◷ bis 14 Uhr</span></div>
+          </div>
+          <button class="favorite" type="button" aria-label="Markthalle als Favorit markieren">♡</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="saved-strip" id="favoriten" aria-label="Favoriten">
+      <div><span>♡</span><p><strong>Eure Favoriten</strong><br><small>Tippt auf ein Herz, um Orte für später zu merken.</small></p></div>
+      <button id="clear-favorites" type="button">Alle entfernen</button>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="#" aria-label="mnn_sbstn Bura Startseite">
+      <img class="brand-logo footer-logo" src="brand-logo-horizontal.png?v=4" alt="">
+      <span class="brand-product">Bura<small>Istrien-Planer</small></span>
+    </a>
+    <p>Mit Liebe für entspannte Urlaubstage gemacht. <span>♡</span></p>
+    <p class="prototype-note">Routen und Öffnungszeiten vor Besuch prüfen · Wetterdaten: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js?v=6"></script>
+</body>
+</html>
