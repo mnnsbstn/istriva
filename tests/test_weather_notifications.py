@@ -104,8 +104,22 @@ class NotificationPayloadTests(unittest.TestCase):
                 {
                     "field": "tag",
                     "key": "notification_topics",
-                    "relation": "in_array",
-                    "value": "weather,weather_news",
+                    "relation": "=",
+                    "value": "weather",
+                },
+                {"operator": "OR"},
+                {
+                    "field": "tag",
+                    "key": "destination",
+                    "relation": "=",
+                    "value": "pula",
+                },
+                {"operator": "AND"},
+                {
+                    "field": "tag",
+                    "key": "notification_topics",
+                    "relation": "=",
+                    "value": "weather_news",
                 },
             ],
         )
@@ -117,6 +131,11 @@ class NotificationPayloadTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertNotEqual(first, other)
         self.assertEqual(len(first), 36)
+
+    def test_manual_runs_get_a_distinct_idempotency_key(self):
+        daily = weather.idempotency_key("2026-08-27", "pula", "daily")
+        manual = weather.idempotency_key("2026-08-27", "pula", "33118843266")
+        self.assertNotEqual(daily, manual)
 
     def test_every_location_has_unique_idempotency_key(self):
         keys = {

@@ -68,3 +68,5 @@ Für den Versand muss unter **Settings > Secrets and variables > Actions** das R
 5. verhindert Doppelversand mit einem täglichen Idempotency-Key.
 
 Unter **Actions > Send daily Bura weather updates > Run workflow** kann der Ablauf manuell gestartet werden. `dry_run` ist standardmäßig aktiviert und sendet keine Push-Nachricht. Für einen echten Einzeltest eine Region wählen und `dry_run` deaktivieren.
+
+Manuelle Läufe erhalten einen eigenen Idempotency-Key, damit mehrere Tests am selben Tag möglich sind. Wenn ein Einzeltest keine passenden Empfänger findet, schlägt der Workflow sichtbar fehl und zeigt die OneSignal-Antwort im Log; tägliche Läufe überspringen Regionen ohne Empfänger dagegen erwartungsgemäß.
