@@ -27,10 +27,11 @@ final class NotificationService: UNNotificationServiceExtension {
     }
 
     override func serviceExtensionTimeWillExpire() {
-        guard let receivedRequest, let bestAttemptContent else { return }
+        guard let receivedRequest, let bestAttemptContent, let contentHandler else { return }
         OneSignalExtension.serviceExtensionTimeWillExpireRequest(
             receivedRequest,
             with: bestAttemptContent
         )
+        contentHandler(bestAttemptContent)
     }
 }
