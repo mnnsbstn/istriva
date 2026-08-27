@@ -1,0 +1,80 @@
+name: Send daily Bura weather updates
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/weather-notifications.yml"
+      - "scripts/send_weather_updates.py"
+      - "tests/test_weather_notifications.py"
+  schedule:
+    # 09:00 in Europe/Zagreb: 07:00 UTC in summer, 08:00 UTC in winter.
+    - cron: "0 7,8 * * *"
+  workflow_dispatch:
+    inputs:
+      location:
+        description: Destination to test or send
+        required: true
+        type: choice
+        default: all
+        options:
+          - all
+          - pula
+          - fazana
+          - medulin
+          - rovinj
+          - porec
+          - vrsar
+          - novigrad
+          - umag
+          - labin
+          - motovun
+          - buzet
+      dry_run:
+        description: Fetch and format forecasts without sending push messages
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bura-daily-weather
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Run weather notification tests
+        run: python -m unittest discover -s tests -p "test_*.py"
+
+  send:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Send regional weather notifications
+        env:
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          BURA_FORCE_SEND: ${{ github.event_name == 'workflow_dispatch' }}
+          BURA_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
+          BURA_LOCATION: ${{ github.event_name == 'workflow_dispatch' && inputs.location || 'all' }}
+        run: python scripts/send_weather_updates.py
