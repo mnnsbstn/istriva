@@ -140,6 +140,10 @@ a {
   color: var(--accent);
 }
 
+.site-header nav a {
+  color: #b7bcb7;
+}
+
 .brand-product {
   color: var(--ink);
   font-size: 18px;
