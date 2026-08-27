@@ -1362,8 +1362,14 @@ footer p a {
   }
 
   .notification-dialog {
-    width: calc(100% - 24px);
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
     max-height: calc(100dvh - 24px);
+    margin: 0;
+    inset: auto;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
     border-radius: 18px;
     box-shadow: 6px 6px 0 var(--ink);
   }
@@ -1426,6 +1432,12 @@ footer p a {
     width: 43px;
     padding: 0;
     font-size: 0;
+  }
+
+  .notification-dialog .notification-save {
+    width: auto;
+    padding: 9px 16px;
+    font-size: 12px;
   }
 
   .filters {

@@ -776,6 +776,7 @@ async function saveNotificationPreferences() {
     return;
   }
 
+  const wasActive = notificationSubscriptionActive();
   saveNotificationsButton.disabled = true;
 
   try {
@@ -798,7 +799,9 @@ async function saveNotificationPreferences() {
     await syncNotificationPreference({ force: true });
     updateNotificationButton();
     notificationDialog.close();
-    showToast("Benachrichtigungen sind aktiviert");
+    showToast(wasActive
+      ? "Benachrichtigungseinstellungen wurden gespeichert"
+      : "Benachrichtigungen sind aktiviert");
   } catch {
     showToast("Benachrichtigungen konnten nicht aktiviert werden");
   } finally {
@@ -848,8 +851,7 @@ function initializeOneSignal() {
         notifyButton: { enable: false },
         welcomeNotification: { disable: true },
         notificationClickHandlerMatch: "origin",
-        notificationClickHandlerAction: "navigate",
-        allowLocalhostAsSecureOrigin: ["localhost", "127.0.0.1"].includes(window.location.hostname)
+        notificationClickHandlerAction: "navigate"
       });
 
       oneSignalClient = OneSignal;
@@ -870,9 +872,10 @@ function initializeOneSignal() {
       if (notificationSubscriptionActive()) {
         await syncNotificationPreference();
       }
-    } catch {
+    } catch (error) {
+      console.warn("OneSignal konnte nicht initialisiert werden", error);
       oneSignalClient = undefined;
-      notificationButton.hidden = !isIos;
+      notificationButton.hidden = true;
     }
   });
 }
