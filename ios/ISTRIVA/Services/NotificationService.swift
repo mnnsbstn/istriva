@@ -49,7 +49,7 @@ final class NotificationService: NSObject, ObservableObject {
 
 extension NotificationService: OSPushSubscriptionObserver {
     nonisolated func onPushSubscriptionDidChange(
-        with state: OSPushSubscriptionChangedState
+        state: OSPushSubscriptionChangedState
     ) {
         Task { @MainActor in
             isSubscribed = state.current.optedIn

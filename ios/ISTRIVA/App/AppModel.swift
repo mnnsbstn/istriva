@@ -34,12 +34,11 @@ final class AppModel: ObservableObject {
     init(
         repository: PlannerRepository = .bundled,
         weatherService: any WeatherServicing = OpenMeteoWeatherService(),
-        notificationService: NotificationService = .shared,
         defaults: UserDefaults = .standard
     ) {
         self.repository = repository
         self.weatherService = weatherService
-        self.notificationService = notificationService
+        self.notificationService = .shared
         self.defaults = defaults
         destinations = repository.destinations
 
