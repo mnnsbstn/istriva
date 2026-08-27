@@ -11,7 +11,7 @@ const pulaPlanCatalog = {
             type: "GESCHICHTE",
             duration: "1 Std. 30 Min.",
             title: "Arena von Pula",
-            description: "Gladiatoren-Geschichten für die Kids, beeindruckende Architektur für euch – morgens noch angenehm ruhig.",
+            description: "Gladiatoren-Geschichten für die Kinder, beeindruckende Architektur für euch – morgens noch angenehm ruhig.",
             meta: ["★ Familienliebling", "🎟 Eintritt", "☀ wenig Schatten"],
             scene: "#edc17d",
             icon: "🏛️",
@@ -45,7 +45,7 @@ const pulaPlanCatalog = {
             duration: "2 Std.",
             title: "Forum & Abendessen",
             description: "Durch die Gassen zum Augustus-Tempel schlendern und den Tag bei Pasta oder frischem Fisch ausklingen lassen.",
-            meta: ["♿ Kinderwagen-tauglich", "🍝 Viele Optionen", "◒ Sunset-Nähe"],
+            meta: ["♿ Kinderwagen-tauglich", "🍝 Viele Optionen", "◒ Nähe zum Sonnenuntergang"],
             scene: "#df9a74",
             icon: "🍝",
             map: "Forum Pula"
@@ -362,7 +362,7 @@ const istriaDestinations = {
     budget: "€€",
     distances: { balanced: "6,8 km", relaxed: "3 km", active: "10,2 km" },
     stops: [
-      regionalStop("09:00", "KUNST", "1 Std.", "Skulpturenpark Džamonja", "Große moderne Skulpturen unter freiem Himmel – kostenlos und mit viel Platz zum Entdecken.", ["🎨 Open Air", "✓ kostenlos", "☀ wenig Schatten"], "#a7aa8e", "🗿", "Dusan Dzamonja Sculpture Park"),
+      regionalStop("09:00", "KUNST", "1 Std.", "Skulpturenpark Džamonja", "Große moderne Skulpturen unter freiem Himmel – kostenlos und mit viel Platz zum Entdecken.", ["🎨 unter freiem Himmel", "✓ kostenlos", "☀ wenig Schatten"], "#a7aa8e", "🗿", "Dusan Dzamonja Sculpture Park"),
       regionalStop("10:30", "ALTSTADT", "1 Std. 30 Min.", "Historisches Vrsar", "Vom Hafen durch steile mittelalterliche Gassen hinauf zur Kirche St. Martin.", ["↟ steil", "🍦 Eispause", "📷 Gassen"], "#dfac78", "🏘️", "Vrsar Old Town"),
       regionalStop("12:15", "PANORAMA", "45 Min.", "Casanova-Aussichtspunkt", "Über die Inselwelt und bis zur grünen Lim-Bucht schauen.", ["◉ Panoramablick", "☀ Sonnenhut", "✓ kostenlos"], "#e7c06f", "🔭", "Casanova Viewpoint Vrsar"),
       regionalStop("14:00", "BOOTSTOUR", "3 Std.", "Lim-Bucht vom Wasser", "Vorab gebuchte Bootstour mit Badepause – Dauer und Wetterregel beim Anbieter prüfen.", ["⛵ vorab buchen", "🌊 Badepause", "☁ wetterabhängig"], "#67aeb7", "⛵", "Vrsar Harbour")
@@ -370,7 +370,7 @@ const istriaDestinations = {
     rainStops: [
       regionalStop("10:00", "KULTUR", "45 Min.", "Kirche St. Martin", "Die Pfarrkirche und ihre Umgebung in einer Regenpause besuchen.", ["☂ teilweise drinnen", "↟ steiler Weg", "✓ kostenlos"], "#d5b079", "⛪", "Church of St Martin Vrsar"),
       regionalStop("11:15", "GENUSS", "1 Std. 30 Min.", "Mittagspause am Hafen", "In Ruhe essen und den Blick auf die wettergeschützten Boote genießen.", ["🍝 Familienlokale", "☂ drinnen", "€€"], "#dca06f", "🍲", "Vrsar Harbour restaurants"),
-      regionalStop("13:30", "UNESCO-AUSFLUG", "2 Std.", "Euphrasius-Basilika in Poreč", "Bei Dauerregen liegt Poreč nur rund 15 Minuten entfernt und bietet ein starkes Indoor-Programm.", ["🚗 15 Min.", "★ UNESCO", "🎟 Eintritt"], "#c9b178", "✨", "Euphrasian Basilica Porec")
+      regionalStop("13:30", "UNESCO-AUSFLUG", "2 Std.", "Euphrasius-Basilika in Poreč", "Bei Dauerregen liegt Poreč nur rund 15 Minuten entfernt und bietet ein gutes Programm drinnen.", ["🚗 15 Min.", "★ UNESCO", "🎟 Eintritt"], "#c9b178", "✨", "Euphrasian Basilica Porec")
     ]
   },
   fazana: {
@@ -422,7 +422,7 @@ const istriaDestinations = {
       regionalStop("09:00", "ALTSTADT", "1 Std.", "Labin & Fortica-Blick", "Durch das Florustor in die Bergstadt und hinauf zum Aussichtspunkt über Rabac.", ["↟ Kopfsteinpflaster", "◉ Aussicht", "☀ früh starten"], "#dfa36f", "🏘️", "Fortica Viewpoint Labin"),
       regionalStop("10:15", "BERGBAU", "1 Std. 15 Min.", "Nationalmuseum Labin", "Die Bergbaugeschichte inklusive Miniaturstollen macht Industriekultur greifbar.", ["⛏ Kinder spannend", "☂ drinnen", "🎟 Eintritt"], "#8f9690", "⛏️", "Labin National Museum"),
       regionalStop("12:00", "WANDERN", "1 Std. 30 Min.", "Sentona-Weg nach Rabac", "Über Brücken und an Bachläufen bergab; nur mit festen Schuhen und ohne Kinderwagen.", ["🥾 2,5 km", "↘ nur bergab", "🚕 Rückfahrt planen"], "#77a77d", "🥾", "Sentona Trail Labin"),
-      regionalStop("14:30", "BADEN", "3 Std.", "Girandella Beach", "Klares Wasser und gute Infrastruktur für die verdiente Badepause.", ["🏖 Blue Flag", "👟 Badeschuhe", "☕ Infrastruktur"], "#5db3c0", "🏖️", "Girandella Beach Rabac")
+      regionalStop("14:30", "BADEN", "3 Std.", "Girandella Beach", "Klares Wasser und gute Infrastruktur für die verdiente Badepause.", ["🏖 Blaue Flagge", "👟 Badeschuhe", "☕ Infrastruktur"], "#5db3c0", "🏖️", "Girandella Beach Rabac")
     ],
     rainStops: [
       regionalStop("10:00", "BERGBAU", "1 Std. 30 Min.", "Nationalmuseum Labin", "Stadt- und Bergbaugeschichte mit begehbarem Miniaturstollen.", ["☂ drinnen", "⛏ Kinder spannend", "🎟 Eintritt"], "#8f9690", "⛏️", "Labin National Museum"),
@@ -444,7 +444,7 @@ const istriaDestinations = {
       regionalStop("14:30", "PANORAMA", "2 Std.", "Motovuns Stadtmauer", "Die Runde über die Mauern eröffnet den großen Blick über das Mirna-Tal; Anstieg vom Parkplatz einplanen.", ["◉ Panoramablick", "🎟 Eintritt", "↟ steil"], "#dfb66f", "🏰", "Motovun Town Walls")
     ],
     rainStops: [
-      regionalStop("10:00", "DRUCKKUNST", "1 Std.", "Antico in Motovun", "Die Gutenberg-Replik und handwerkliche Drucke sind ein guter Indoor-Auftakt.", ["☂ drinnen", "🎟 Eintritt", "◷ dienstags zu"], "#a99a87", "📜", "Antico Motovun"),
+      regionalStop("10:00", "DRUCKKUNST", "1 Std.", "Antico in Motovun", "Die Gutenberg-Replik und handwerkliche Drucke sind ein guter wettergeschützter Auftakt.", ["☂ drinnen", "🎟 Eintritt", "◷ dienstags zu"], "#a99a87", "📜", "Antico Motovun"),
       regionalStop("11:30", "GENUSS", "1 Std. 30 Min.", "Trüffel-Mittagessen", "Eine warme Pause mit istrischer Pasta; für Kinder eine Variante ohne Trüffel bestellen.", ["🍝 lokale Küche", "☂ drinnen", "€€"], "#d3a06e", "🍝", "Motovun restaurants"),
       regionalStop("14:00", "KLEINSTADT", "1 Std. 30 Min.", "Hum & Aura-Museum", "Bei Dauerregen bietet das kleine interaktive Museum in Hum eine Alternative rund 35 Minuten entfernt.", ["🚗 35 Min.", "☂ drinnen", "🎟 Eintritt"], "#aaa29a", "🏛️", "Aura Museum Hum")
     ]
@@ -478,6 +478,10 @@ const replanButton = document.querySelector("#replan-button");
 const shareButton = document.querySelector("#share-button");
 const installButton = document.querySelector("#install-button");
 const notificationButton = document.querySelector("#notification-button");
+const profileButton = document.querySelector(".profile");
+const partySize = document.querySelector("#party-size");
+const adultCount = document.querySelector("#adult-count");
+const childCount = document.querySelector("#child-count");
 const notificationDialog = document.querySelector("#notification-dialog");
 const notificationDestination = document.querySelector("#notification-destination");
 const weatherNotifications = document.querySelector("#weather-notifications");
@@ -501,6 +505,7 @@ const ONESIGNAL_APP_ID = "cd00c6cc-ad14-4246-9cde-4de743ce8238";
 const ONESIGNAL_SAFARI_WEB_ID = "web.onesignal.auto.4ed285de-faf5-4c6c-a346-3ff91e5aded6";
 const NOTIFICATION_SETTINGS_KEY = "bura-notification-settings-v1";
 const DESTINATION_STORAGE_KEY = "bura-selected-destination";
+const FAMILY_SETTINGS_KEY = "bura-family-settings-v1";
 let planIndex = 0;
 let toastTimer;
 let deferredInstallPrompt;
@@ -558,6 +563,56 @@ function saveDestination(destination) {
   } catch {
     // The current selection still works when browser storage is unavailable.
   }
+}
+
+function clampCount(value, minimum, maximum, fallback) {
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) ? Math.min(maximum, Math.max(minimum, parsed)) : fallback;
+}
+
+function getFamilySettings() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(FAMILY_SETTINGS_KEY) || "null");
+    return {
+      adults: clampCount(stored?.adults, 1, 8, 2),
+      children: clampCount(stored?.children, 0, 8, 2)
+    };
+  } catch {
+    return { adults: 2, children: 2 };
+  }
+}
+
+function familyDescription(settings = getFamilySettings()) {
+  const adults = settings.adults === 1 ? "1 Erwachsener" : `${settings.adults} Erwachsene`;
+  const children = settings.children === 1 ? "1 Kind" : `${settings.children} Kinder`;
+  return `${adults} · ${children}`;
+}
+
+function updateFamilyUI(settings = getFamilySettings()) {
+  adultCount.value = settings.adults;
+  childCount.value = settings.children;
+  partySize.textContent = settings.adults + settings.children;
+  profileButton.setAttribute(
+    "aria-label",
+    `${familyDescription(settings)} – Familienprofil öffnen`
+  );
+}
+
+function saveFamilySettings() {
+  const current = getFamilySettings();
+  const settings = {
+    adults: clampCount(adultCount.value, 1, 8, current.adults),
+    children: clampCount(childCount.value, 0, 8, current.children)
+  };
+
+  try {
+    localStorage.setItem(FAMILY_SETTINGS_KEY, JSON.stringify(settings));
+  } catch {
+    // The current values still work when browser storage is unavailable.
+  }
+
+  updateFamilyUI(settings);
+  showToast(`Familie angepasst: ${familyDescription(settings)}`);
 }
 
 function describeWeather(code) {
@@ -908,7 +963,7 @@ function initializeOneSignal() {
 }
 
 function mapUrl(place) {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place)}`;
 }
 
 function renderPlan(animate = false) {
@@ -928,13 +983,13 @@ function renderPlan(animate = false) {
           <span class="stop-type">${stop.type}</span>
           <span class="stop-duration">◷ ${stop.duration}</span>
         </div>
-        <h3>${stop.title}</h3>
+        <h3><a class="place-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer">${stop.title}<span aria-hidden="true">↗</span></a></h3>
         <p>${stop.description}</p>
         <div class="stop-meta">${stop.meta.map((item) => `<span>${item}</span>`).join("")}</div>
       </div>
-      <div class="stop-image" aria-hidden="true">
-        <span>${stop.icon}</span>
-        <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noreferrer" aria-label="${stop.title} auf Google Maps öffnen">KARTE ↗</a>
+      <div class="stop-image">
+        <span aria-hidden="true">${stop.icon}</span>
+        <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer" aria-label="Route zu ${stop.title} in Google Maps öffnen">ROUTE ↗</a>
       </div>
     </article>
   `).join("");
@@ -999,6 +1054,10 @@ destinationSelect.addEventListener("change", () => {
   showToast(`Euer Tagesplan für ${destination.name} ist bereit`);
 });
 
+[adultCount, childCount].forEach((input) => {
+  input.addEventListener("change", saveFamilySettings);
+});
+
 weatherSelect.addEventListener("change", () => {
   planIndex = 0;
   weatherManuallySelected = true;
@@ -1021,9 +1080,10 @@ replanButton.addEventListener("click", () => {
 
 shareButton.addEventListener("click", async () => {
   const destination = istriaDestinations[destinationSelect.value];
+  const family = familyDescription();
   const shareData = {
     title: `Unser Familientag in ${destination.name}`,
-    text: `Unser Bura-Tagesplan: ${document.querySelector("#plan-name").textContent}`,
+    text: `Unser Bura-Tagesplan für ${family}: ${document.querySelector("#plan-name").textContent}`,
     url: window.location.href
   };
 
@@ -1055,9 +1115,9 @@ document.querySelector("#clear-favorites").addEventListener("click", () => {
   showToast("Favoriten wurden geleert");
 });
 
-document.querySelector(".profile").addEventListener("click", () => {
+profileButton.addEventListener("click", () => {
   const destination = istriaDestinations[destinationSelect.value];
-  showToast(`2 Erwachsene · 2 Kinder · ${destination.name}`);
+  showToast(`${familyDescription()} · ${destination.name}`);
 });
 
 window.addEventListener("beforeinstallprompt", (event) => {
@@ -1151,6 +1211,7 @@ if (initialDestination) {
 
 updateDate();
 syncFavorites();
+updateFamilyUI();
 updateDestinationUI();
 renderPlan();
 refreshLiveWeather({ applyToPlan: true });

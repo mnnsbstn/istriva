@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" href="icon-192.png?v=4">
   <link rel="apple-touch-icon" href="icon-192.png?v=4">
   <link rel="manifest" href="manifest.webmanifest?v=4">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=9">
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 </head>
 <body>
@@ -38,7 +38,7 @@
       <span class="action-label">Updates</span>
     </button>
     <button class="profile" type="button" aria-label="Profil der Familie öffnen">
-      <span>4</span>
+      <span id="party-size">4</span>
       <span class="profile-label">Familie<br><strong>in <span id="profile-destination">Pula</span></strong></span>
       <span aria-hidden="true">⌄</span>
     </button>
@@ -89,7 +89,7 @@
         <div class="weather-details">
           <span><i>💧</i><strong id="weather-rain">--%</strong> Regen</span>
           <span><i>〰</i><strong id="weather-wind">-- km/h</strong> Wind</span>
-          <span><i>◒</i><strong id="weather-sunset">--:--</strong> Sunset</span>
+          <span><i>◒</i><strong id="weather-sunset">--:--</strong> Sonnenuntergang</span>
         </div>
         <p class="weather-tip" id="weather-tip"><span>✦</span> Wetterdaten werden live für euren ausgewählten Ort geladen.</p>
       </aside>
@@ -113,9 +113,21 @@
       </div>
 
       <div class="filters" aria-label="Plan anpassen">
-        <div class="filter-label">
+        <div class="filter-label family-filter">
           <span>☷</span>
-          <div><small>UNTERWEGS MIT</small><strong>2 Erwachsenen · 2 Kindern</strong></div>
+          <fieldset class="family-controls">
+            <legend>UNTERWEGS MIT</legend>
+            <div class="family-counts">
+              <label>
+                <span>Erwachsene</span>
+                <input id="adult-count" type="number" min="1" max="8" step="1" inputmode="numeric" value="2">
+              </label>
+              <label>
+                <span>Kinder</span>
+                <input id="child-count" type="number" min="0" max="8" step="1" inputmode="numeric" value="2">
+              </label>
+            </div>
+          </fieldset>
         </div>
         <div class="divider"></div>
         <label class="select-wrap">
@@ -160,9 +172,9 @@
           </div>
           <div class="suggestion-copy">
             <span class="tag">GEHEIMTIPP</span>
-            <h3>Sonnenuntergang am Kap Kamenjak</h3>
+            <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">Sonnenuntergang am Kap Kamenjak<span aria-hidden="true">↗</span></a></h3>
             <p>Wilde Küste, kleine Buchten und der schönste Blick aufs Abendrot.</p>
-            <div><span>🚗 25 Min.</span><span>◎ Naturpark</span></div>
+            <div><span>🚗 25 Min.</span><span>◎ Naturpark</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">Route ↗</a></div>
           </div>
           <button class="favorite" type="button" aria-label="Kap Kamenjak als Favorit markieren">♡</button>
         </article>
@@ -172,9 +184,9 @@
           </div>
           <div class="suggestion-copy">
             <span class="tag coral">MORGENS SCHÖN</span>
-            <h3>Tržnica – Pulas Markthalle</h3>
+            <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">Tržnica – Pulas Markthalle<span aria-hidden="true">↗</span></a></h3>
             <p>Frisches Obst, lokale Snacks und echtes istrisches Lebensgefühl.</p>
-            <div><span>🚶 8 Min.</span><span>◷ bis 14 Uhr</span></div>
+            <div><span>🚶 8 Min.</span><span>◷ bis 14 Uhr</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">Route ↗</a></div>
           </div>
           <button class="favorite" type="button" aria-label="Markthalle als Favorit markieren">♡</button>
         </article>
@@ -242,6 +254,6 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=12"></script>
 </body>
 </html>
