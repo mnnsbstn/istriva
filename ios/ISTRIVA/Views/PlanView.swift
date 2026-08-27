@@ -209,9 +209,9 @@ private struct WeatherCard: View {
                 Divider()
 
                 HStack {
-                    weatherMetric("drop.fill", "\(weather.rainProbability.rounded(), specifier: "%.0f") %", "Regen")
+                    weatherMetric("drop.fill", "\(Int(weather.rainProbability.rounded())) %", "Regen")
                     Spacer()
-                    weatherMetric("wind", "\(weather.windSpeed.rounded(), specifier: "%.0f") km/h", "Wind")
+                    weatherMetric("wind", "\(Int(weather.windSpeed.rounded())) km/h", "Wind")
                     Spacer()
                     weatherMetric(
                         "sunset.fill",
