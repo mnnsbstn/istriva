@@ -989,7 +989,7 @@ function renderPlan(animate = false) {
       </div>
       <div class="stop-image">
         <span aria-hidden="true">${stop.icon}</span>
-        <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer" aria-label="Route zu ${stop.title} in Google Maps öffnen">ROUTE ↗</a>
+        <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer" aria-label="${stop.title} in Google Maps öffnen">🗺️ Google Maps</a>
       </div>
     </article>
   `).join("");
