@@ -1,10 +1,10 @@
-const CACHE_NAME = "bura-v7";
+const CACHE_NAME = "bura-v8";
 const USER_DATA_CACHE = "bura-user-data-v1";
 const NOTIFICATION_PREFERENCE_URL = "./__bura-notification-preference";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=5",
+  "./styles.css?v=6",
   "./app.js?v=6",
   "./manifest.webmanifest?v=4",
   "./brand-logo-horizontal.png?v=4",

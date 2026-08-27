@@ -1029,9 +1029,12 @@ footer {
 }
 
 .footer-logo {
-  width: 140px;
-  height: auto;
+  width: 56px;
+  height: 56px;
   display: block;
+  flex: 0 0 auto;
+  object-fit: cover;
+  background: #E5FF42;
 }
 
 footer p span {
