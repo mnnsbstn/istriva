@@ -963,7 +963,7 @@ function initializeOneSignal() {
 }
 
 function mapUrl(place) {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place)}`;
 }
 
 function renderPlan(animate = false) {
@@ -983,13 +983,13 @@ function renderPlan(animate = false) {
           <span class="stop-type">${stop.type}</span>
           <span class="stop-duration">◷ ${stop.duration}</span>
         </div>
-        <h3>${stop.title}</h3>
+        <h3><a class="place-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer">${stop.title}<span aria-hidden="true">↗</span></a></h3>
         <p>${stop.description}</p>
         <div class="stop-meta">${stop.meta.map((item) => `<span>${item}</span>`).join("")}</div>
       </div>
-      <div class="stop-image" aria-hidden="true">
-        <span>${stop.icon}</span>
-        <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noreferrer" aria-label="${stop.title} auf Google Maps öffnen">KARTE ↗</a>
+      <div class="stop-image">
+        <span aria-hidden="true">${stop.icon}</span>
+        <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer" aria-label="Route zu ${stop.title} in Google Maps öffnen">ROUTE ↗</a>
       </div>
     </article>
   `).join("");

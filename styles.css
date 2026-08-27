@@ -971,6 +971,27 @@ h2 {
   font-size: 20px;
 }
 
+.place-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color .2s;
+}
+
+.place-link:hover,
+.place-link:focus-visible {
+  text-decoration-color: var(--accent);
+}
+
+.place-link span {
+  flex: 0 0 auto;
+  font-size: .7em;
+}
+
 .stop p {
   max-width: 610px;
   color: var(--ink-soft);
@@ -1182,11 +1203,21 @@ h2 {
 
 .suggestion-copy > div {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: 12px;
   color: var(--ink-soft);
   font-size: 9px;
   font-weight: 600;
+}
+
+.suggestion-map-link {
+  margin-left: auto;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 }
 
 .favorite {
