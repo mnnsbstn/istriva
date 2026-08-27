@@ -41,11 +41,9 @@ Der Button „Updates“ öffnet die Benachrichtigungseinstellungen. Nutzer kön
 Beim Aktivieren werden folgende OneSignal-Tags gesetzt:
 
 - `destination`: ausgewählte Region, zum Beispiel `pula`
-- `weather_updates`: `enabled` oder `disabled`
-- `travel_news`: `enabled` oder `disabled`
-- `language`: `de`
+- `notification_topics`: `weather`, `news` oder `weather_news`
 
-Damit lassen sich Nachrichten im OneSignal-Dashboard unter **Audience > Segments** nach Region und Thema filtern. Die App ID ist öffentlich und im Frontend hinterlegt. REST API Keys dürfen ausschließlich als Repository-Secrets gespeichert werden.
+Diese zwei Tags entsprechen dem Limit des kostenlosen OneSignal-Plans. Damit lassen sich Nachrichten im OneSignal-Dashboard unter **Audience > Segments** nach Region und Thema filtern. Die App ID ist öffentlich und im Frontend hinterlegt. REST API Keys dürfen ausschließlich als Repository-Secrets gespeichert werden.
 
 ### Ersten Empfänger registrieren
 

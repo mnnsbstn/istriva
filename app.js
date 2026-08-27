@@ -752,11 +752,13 @@ async function syncNotificationPreference({ force = false } = {}) {
   if (!oneSignalClient || (!force && !notificationSubscriptionActive())) return;
 
   const preference = currentNotificationPreference();
+  const topics = preference.weather && preference.news
+    ? "weather_news"
+    : (preference.weather ? "weather" : "news");
+
   await oneSignalClient.User.addTags({
     destination: preference.key,
-    weather_updates: preference.weather ? "enabled" : "disabled",
-    travel_news: preference.news ? "enabled" : "disabled",
-    language: "de"
+    notification_topics: topics
   });
 }
 
