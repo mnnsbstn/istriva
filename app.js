@@ -478,6 +478,12 @@ const replanButton = document.querySelector("#replan-button");
 const shareButton = document.querySelector("#share-button");
 const installButton = document.querySelector("#install-button");
 const notificationButton = document.querySelector("#notification-button");
+const notificationDialog = document.querySelector("#notification-dialog");
+const notificationDestination = document.querySelector("#notification-destination");
+const weatherNotifications = document.querySelector("#weather-notifications");
+const newsNotifications = document.querySelector("#news-notifications");
+const saveNotificationsButton = document.querySelector("#save-notifications");
+const disableNotificationsButton = document.querySelector("#disable-notifications");
 const toast = document.querySelector("#toast");
 const weatherElements = {
   icon: document.querySelector("#weather-icon"),
@@ -491,11 +497,15 @@ const weatherElements = {
 };
 const favoriteButtons = [...document.querySelectorAll(".favorite")];
 const favoriteCount = document.querySelector("#favorite-count");
+const ONESIGNAL_APP_ID = "cd006ccc-ad14-4246-9cde-4de743ce8238";
+const ONESIGNAL_SAFARI_WEB_ID = "web.onesignal.auto.4ed285de-faf5-4c6c-a346-3ff91e5aded6";
+const NOTIFICATION_SETTINGS_KEY = "bura-notification-settings-v1";
 let planIndex = 0;
 let toastTimer;
 let deferredInstallPrompt;
 let weatherManuallySelected = false;
 let lastWeatherRefresh = 0;
+let oneSignalClient;
 
 function getPlans() {
   const weather = weatherSelect.value;
@@ -680,104 +690,194 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
   }
 }
 
-function notificationsEnabled() {
+function getNotificationSettings() {
   try {
-    return localStorage.getItem("bura-weather-notifications") === "enabled";
+    const stored = JSON.parse(localStorage.getItem(NOTIFICATION_SETTINGS_KEY) || "null");
+    return {
+      weather: stored?.weather !== false,
+      news: stored?.news !== false
+    };
   } catch {
-    return false;
+    return { weather: true, news: true };
   }
 }
 
-function setNotificationsEnabled(enabled) {
+function saveNotificationSettings(settings) {
   try {
-    if (enabled) {
-      localStorage.setItem("bura-weather-notifications", "enabled");
-    } else {
-      localStorage.removeItem("bura-weather-notifications");
-    }
+    localStorage.setItem(NOTIFICATION_SETTINGS_KEY, JSON.stringify(settings));
+    localStorage.removeItem("bura-weather-notifications");
   } catch {
-    // Notification permission still works when local storage is unavailable.
+    // Push subscriptions also work when preferences cannot be stored locally.
   }
 }
 
 function currentNotificationPreference() {
   const key = destinationSelect.value;
   const destination = istriaDestinations[key];
+  const settings = getNotificationSettings();
   return {
     key,
     name: destination.name,
-    coordinates: destination.coordinates
+    weather: settings.weather,
+    news: settings.news
   };
 }
 
-function updateNotificationButton() {
-  const active = "Notification" in window
-    && notificationsEnabled()
-    && Notification.permission === "granted";
-  notificationButton.classList.toggle("active", active);
-  notificationButton.setAttribute("aria-pressed", String(active));
-  notificationButton.title = active ? "Wetter-Updates deaktivieren" : "Wetter-Updates aktivieren";
+function notificationSubscriptionActive() {
+  return oneSignalClient?.User.PushSubscription.optedIn === true;
 }
 
-async function syncNotificationPreference() {
-  if (!notificationsEnabled() || !("serviceWorker" in navigator)) return;
-  const registration = await navigator.serviceWorker.ready;
-  const worker = registration.active || registration.waiting;
-  worker?.postMessage({
-    type: "SAVE_NOTIFICATION_PREFERENCE",
-    preference: currentNotificationPreference()
+function updateNotificationButton() {
+  const active = notificationSubscriptionActive();
+  notificationButton.classList.toggle("active", active);
+  notificationButton.setAttribute("aria-pressed", String(active));
+  notificationButton.title = active
+    ? "Benachrichtigungen einstellen"
+    : "Benachrichtigungen aktivieren";
+}
+
+function updateNotificationDialog() {
+  const settings = getNotificationSettings();
+  const destination = istriaDestinations[destinationSelect.value];
+  const active = notificationSubscriptionActive();
+
+  notificationDestination.textContent = destination.name;
+  weatherNotifications.checked = settings.weather;
+  newsNotifications.checked = settings.news;
+  saveNotificationsButton.textContent = active ? "Speichern" : "Aktivieren";
+  disableNotificationsButton.hidden = !active;
+}
+
+async function syncNotificationPreference({ force = false } = {}) {
+  if (!oneSignalClient || (!force && !notificationSubscriptionActive())) return;
+
+  const preference = currentNotificationPreference();
+  await oneSignalClient.User.addTags({
+    destination: preference.key,
+    weather_updates: preference.weather ? "enabled" : "disabled",
+    travel_news: preference.news ? "enabled" : "disabled",
+    language: "de"
   });
 }
 
-async function disableWeatherNotifications() {
-  setNotificationsEnabled(false);
-  const registration = await navigator.serviceWorker.ready;
+async function saveNotificationPreferences() {
+  const settings = {
+    weather: weatherNotifications.checked,
+    news: newsNotifications.checked
+  };
 
-  if ("periodicSync" in registration) {
-    try {
-      await registration.periodicSync.unregister("bura-daily-weather");
-    } catch {
-      // The browser may already have removed the schedule.
-    }
+  if (!settings.weather && !settings.news) {
+    showToast("Bitte mindestens eine Update-Art auswählen");
+    return;
   }
 
-  updateNotificationButton();
-  showToast("Wetter-Updates wurden deaktiviert");
+  if (!oneSignalClient) {
+    showToast("Der Benachrichtigungsdienst wird noch geladen");
+    return;
+  }
+
+  const wasActive = notificationSubscriptionActive();
+  saveNotificationsButton.disabled = true;
+
+  try {
+    saveNotificationSettings(settings);
+
+    if (!oneSignalClient.Notifications.permission) {
+      await oneSignalClient.Notifications.requestPermission();
+    }
+
+    if (!oneSignalClient.Notifications.permission) {
+      const blocked = "Notification" in window && Notification.permission === "denied";
+      showToast(blocked
+        ? "Benachrichtigungen sind in den Geräteeinstellungen blockiert"
+        : "Benachrichtigungen wurden nicht freigegeben");
+      updateNotificationButton();
+      return;
+    }
+
+    await oneSignalClient.User.PushSubscription.optIn();
+    await syncNotificationPreference({ force: true });
+    updateNotificationButton();
+    notificationDialog.close();
+    showToast(wasActive
+      ? "Benachrichtigungseinstellungen wurden gespeichert"
+      : "Benachrichtigungen sind aktiviert");
+  } catch {
+    showToast("Benachrichtigungen konnten nicht aktiviert werden");
+  } finally {
+    saveNotificationsButton.disabled = false;
+  }
 }
 
-async function enableWeatherNotifications() {
-  if (!("Notification" in window) || !("serviceWorker" in navigator)) {
-    showToast("Benachrichtigungen werden von diesem Browser nicht unterstützt");
-    return;
-  }
+async function disableNotifications() {
+  if (!oneSignalClient) return;
 
-  const permission = await Notification.requestPermission();
-  if (permission !== "granted") {
+  disableNotificationsButton.disabled = true;
+
+  try {
+    await oneSignalClient.User.PushSubscription.optOut();
     updateNotificationButton();
-    showToast("Benachrichtigungen wurden nicht freigegeben");
-    return;
+    notificationDialog.close();
+    showToast("Benachrichtigungen wurden deaktiviert");
+  } catch {
+    showToast("Benachrichtigungen konnten nicht deaktiviert werden");
+  } finally {
+    disableNotificationsButton.disabled = false;
   }
+}
 
-  setNotificationsEnabled(true);
-  const registration = await navigator.serviceWorker.ready;
-  const preference = currentNotificationPreference();
-  const worker = registration.active || registration.waiting;
+function getOneSignalWorkerConfig() {
+  const manifestUrl = document.querySelector('link[rel="manifest"]')?.href || window.location.href;
+  const basePath = new URL(".", manifestUrl).pathname;
+  return {
+    path: `${basePath.replace(/^\/+/, "")}push/onesignal/OneSignalSDKWorker.js`,
+    scope: `${basePath}push/onesignal/`
+  };
+}
 
-  worker?.postMessage({ type: "SAVE_NOTIFICATION_PREFERENCE", preference });
+function initializeOneSignal() {
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  window.OneSignalDeferred.push(async (OneSignal) => {
+    const worker = getOneSignalWorkerConfig();
+    const manifestUrl = document.querySelector('link[rel="manifest"]')?.href || window.location.href;
 
-  if ("periodicSync" in registration) {
     try {
-      await registration.periodicSync.register("bura-daily-weather", {
-        minInterval: 24 * 60 * 60 * 1000
+      await OneSignal.init({
+        appId: ONESIGNAL_APP_ID,
+        safari_web_id: ONESIGNAL_SAFARI_WEB_ID,
+        serviceWorkerPath: worker.path,
+        serviceWorkerParam: { scope: worker.scope },
+        autoResubscribe: true,
+        notifyButton: { enable: false },
+        welcomeNotification: { disable: true },
+        notificationClickHandlerMatch: "origin",
+        notificationClickHandlerAction: "navigate"
       });
-    } catch {
-      // Periodic delivery remains browser-controlled and may be unavailable.
-    }
-  }
 
-  worker?.postMessage({ type: "SHOW_WEATHER_NOTIFICATION", preference });
-  updateNotificationButton();
-  showToast("Wetter-Updates sind aktiviert");
+      oneSignalClient = OneSignal;
+      OneSignal.Notifications.setDefaultUrl(new URL(".", manifestUrl).href);
+
+      OneSignal.Notifications.addEventListener("permissionChange", updateNotificationButton);
+      OneSignal.User.PushSubscription.addEventListener("change", (event) => {
+        updateNotificationButton();
+        if (event.current.optedIn) {
+          syncNotificationPreference().catch(() => undefined);
+        }
+      });
+
+      const supported = OneSignal.Notifications.isPushSupported();
+      notificationButton.hidden = !(supported || isIos);
+      updateNotificationButton();
+
+      if (notificationSubscriptionActive()) {
+        await syncNotificationPreference();
+      }
+    } catch (error) {
+      console.warn("OneSignal konnte nicht initialisiert werden", error);
+      oneSignalClient = undefined;
+      notificationButton.hidden = true;
+    }
+  });
 }
 
 function mapUrl(place) {
@@ -957,12 +1057,23 @@ installButton.addEventListener("click", async () => {
 });
 
 notificationButton.addEventListener("click", () => {
-  if (notificationsEnabled() && Notification.permission === "granted") {
-    disableWeatherNotifications();
-  } else {
-    enableWeatherNotifications();
+  if (isIos && !isStandalone) {
+    installButton.hidden = false;
+    showToast("Auf iPhone: App zuerst zum Home-Bildschirm hinzufügen und von dort öffnen");
+    return;
   }
+
+  if (!oneSignalClient) {
+    showToast("Der Benachrichtigungsdienst wird noch geladen");
+    return;
+  }
+
+  updateNotificationDialog();
+  notificationDialog.showModal();
 });
+
+saveNotificationsButton.addEventListener("click", saveNotificationPreferences);
+disableNotificationsButton.addEventListener("click", disableNotifications);
 
 const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
 const isStandalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
@@ -971,20 +1082,16 @@ if (isIos && !isStandalone) {
   installButton.hidden = false;
 }
 
-if ("Notification" in window && "serviceWorker" in navigator) {
-  notificationButton.hidden = false;
-  updateNotificationButton();
-}
-
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js")
-      .then(() => syncNotificationPreference())
       .catch(() => {
         showToast("Offline-Modus konnte nicht aktiviert werden");
       });
   });
 }
+
+initializeOneSignal();
 
 window.addEventListener("online", () => {
   refreshLiveWeather({ applyToPlan: !weatherManuallySelected });

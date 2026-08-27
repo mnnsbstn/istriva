@@ -11,7 +11,7 @@ Ein interaktiver Web-Prototyp, der einen familiengerechten Tagesplan für zwei E
 - Kartenlinks, Favoriten und Teilen-Funktion
 - responsive Darstellung für Desktop und Mobilgeräte
 - installierbare Progressive Web App mit Offline-Grundfunktion
-- Browser-Benachrichtigungen und Web-Push-Unterstützung mit Marken-Icon
+- zuverlässige Web-Push-Benachrichtigungen über OneSignal mit Marken-Icon
 
 Wetterdaten werden bei jedem Öffnen und anschließend alle 15 Minuten aktualisiert. Bei fehlender Verbindung nutzt die App den zuletzt erfolgreichen Wetterabruf. Öffnungszeiten, Eintrittspreise und kurzfristige Ausfälle müssen weiterhin beim jeweiligen Anbieter geprüft werden.
 
@@ -36,4 +36,23 @@ Der Workflow `.github/workflows/deploy-pages.yml` veröffentlicht jeden neuen St
 
 ## Benachrichtigungen
 
-Der Button „Wetter-Updates“ aktiviert eine Testbenachrichtigung und registriert auf unterstützten Chromium-PWAs einen browsergesteuerten täglichen Hintergrundabruf. Garantierte tägliche Zustellung auf Android und iOS benötigt zusätzlich einen Push-Dienst wie OneSignal oder Firebase; der Service Worker kann entsprechende Web-Push-Nachrichten bereits empfangen.
+Der Button „Updates“ öffnet die Benachrichtigungseinstellungen. Nutzer können Wetter-Updates und Istrien-News auswählen. Die Zustellung erfolgt über OneSignal; der bestehende Offline-Service-Worker und der OneSignal-Push-Worker verwenden getrennte Scopes.
+
+Beim Aktivieren werden folgende OneSignal-Tags gesetzt:
+
+- `destination`: ausgewählte Region, zum Beispiel `pula`
+- `weather_updates`: `enabled` oder `disabled`
+- `travel_news`: `enabled` oder `disabled`
+- `language`: `de`
+
+Damit lassen sich Nachrichten im OneSignal-Dashboard unter **Audience > Segments** nach Region und Thema filtern. Die App ID ist öffentlich und im Frontend hinterlegt. REST API Keys dürfen ausschließlich als Repository-Secrets gespeichert werden.
+
+### Ersten Empfänger registrieren
+
+1. Den aktuellen Stand auf GitHub Pages veröffentlichen.
+2. Die App in einem normalen Browserfenster öffnen, nicht im privaten Modus.
+3. Auf „Updates“ klicken, Themen auswählen und „Aktivieren“ bestätigen.
+4. Im nativen Browserdialog Benachrichtigungen erlauben.
+5. Unter **OneSignal > Audience > Subscriptions** prüfen, ob das Gerät als `Subscribed` erscheint.
+
+Auf iOS/iPadOS 16.4 oder neuer muss die Website zuerst zum Home-Bildschirm hinzugefügt und von dort geöffnet werden. Erst dann kann der Nutzer über den „Updates“-Button die Berechtigung erteilen.

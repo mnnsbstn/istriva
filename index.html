@@ -13,7 +13,8 @@
   <link rel="icon" type="image/png" href="icon-192.png?v=4">
   <link rel="apple-touch-icon" href="icon-192.png?v=4">
   <link rel="manifest" href="manifest.webmanifest?v=4">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 </head>
 <body>
   <div class="ambient ambient-one"></div>
@@ -32,9 +33,9 @@
     <button class="install-button" id="install-button" type="button" hidden>
       <span aria-hidden="true">↓</span> App installieren
     </button>
-    <button class="notification-button" id="notification-button" type="button" aria-pressed="false" hidden>
+    <button class="notification-button" id="notification-button" type="button" aria-pressed="false" aria-haspopup="dialog" aria-controls="notification-dialog" hidden>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
-      <span class="action-label">Wetter-Updates</span>
+      <span class="action-label">Updates</span>
     </button>
     <button class="profile" type="button" aria-label="Profil der Familie öffnen">
       <span>4</span>
@@ -195,7 +196,52 @@
     <p class="prototype-note">Routen und Öffnungszeiten vor Besuch prüfen · Wetterdaten: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></p>
   </footer>
 
+  <dialog class="notification-dialog" id="notification-dialog" aria-labelledby="notification-dialog-title">
+    <form method="dialog">
+      <div class="notification-dialog-head">
+        <div>
+          <p class="section-kicker">BURA UPDATES</p>
+          <h2 id="notification-dialog-title">Benachrichtigungen</h2>
+        </div>
+        <button class="dialog-close" type="submit" value="cancel" aria-label="Benachrichtigungen schließen">×</button>
+      </div>
+
+      <p class="notification-dialog-intro">Wählt aus, welche Hinweise ihr für eure aktuelle Urlaubsregion erhalten möchtet.</p>
+
+      <div class="notification-region">
+        <span aria-hidden="true">⌖</span>
+        <div><small>AKTUELLE REGION</small><strong id="notification-destination">Pula</strong></div>
+      </div>
+
+      <fieldset class="notification-options">
+        <legend class="sr-only">Gewünschte Benachrichtigungen</legend>
+        <label class="notification-option">
+          <input id="weather-notifications" type="checkbox" checked>
+          <span>
+            <strong>Wetter-Updates</strong>
+            <small>Regen, Hitze, Wind und die passende Tagesplanung.</small>
+          </span>
+        </label>
+        <label class="notification-option">
+          <input id="news-notifications" type="checkbox" checked>
+          <span>
+            <strong>Istrien-News &amp; Hinweise</strong>
+            <small>Relevante Veranstaltungen, Sperrungen und Ausflugstipps.</small>
+          </span>
+        </label>
+      </fieldset>
+
+      <p class="notification-privacy">Die Zustellung erfolgt über OneSignal. Ihr könnt Benachrichtigungen hier jederzeit wieder deaktivieren.</p>
+
+      <div class="notification-dialog-actions">
+        <button class="secondary-button danger-button" id="disable-notifications" type="button" hidden>Deaktivieren</button>
+        <button class="secondary-button" type="submit" value="cancel">Abbrechen</button>
+        <button class="primary-button notification-save" id="save-notifications" type="button">Aktivieren</button>
+      </div>
+    </form>
+  </dialog>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
