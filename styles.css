@@ -54,6 +54,18 @@ a {
   text-decoration: none;
 }
 
+.sr-only {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .ambient {
   position: absolute;
   z-index: -1;
@@ -254,6 +266,178 @@ nav a span {
 .profile-label strong {
   color: var(--ink);
   font-size: 12px;
+}
+
+.notification-dialog {
+  width: min(560px, calc(100% - 32px));
+  max-height: min(760px, calc(100dvh - 32px));
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--ink);
+  border-radius: 22px;
+  color: var(--ink);
+  background: var(--white);
+  box-shadow: 10px 10px 0 var(--ink);
+  overflow: auto;
+}
+
+.notification-dialog::backdrop {
+  background: rgba(0, 0, 0, .58);
+  backdrop-filter: blur(3px);
+}
+
+.notification-dialog form {
+  padding: 28px;
+}
+
+.notification-dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.notification-dialog-head h2 {
+  margin-top: 4px;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.dialog-close {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--white);
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.notification-dialog-intro {
+  margin: 14px 0 20px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.notification-region {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border: 1px solid var(--ink);
+  border-radius: 14px;
+  background: var(--mint-light);
+}
+
+.notification-region > span {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--accent);
+  font-size: 20px;
+}
+
+.notification-region div {
+  display: grid;
+}
+
+.notification-region small {
+  color: var(--ink-soft);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.notification-region strong {
+  font-size: 15px;
+}
+
+.notification-options {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+  border: 0;
+}
+
+.notification-option {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.notification-option:has(input:checked) {
+  border-color: var(--ink);
+  background: rgba(229, 255, 66, .2);
+}
+
+.notification-option input {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  accent-color: var(--ink);
+}
+
+.notification-option span {
+  display: grid;
+  gap: 3px;
+}
+
+.notification-option strong {
+  font-size: 14px;
+}
+
+.notification-option small,
+.notification-privacy {
+  color: var(--ink-soft);
+  font-size: 11px;
+}
+
+.notification-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.secondary-button,
+.notification-save {
+  min-height: 43px;
+  padding: 9px 16px;
+  border: 1px solid var(--ink);
+  border-radius: 11px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.secondary-button {
+  background: var(--white);
+}
+
+.danger-button {
+  margin-right: auto;
+  color: #8b1616;
+  border-color: #8b1616;
+}
+
+.notification-save {
+  width: auto;
+  background: var(--accent);
+}
+
+.notification-dialog button:disabled {
+  opacity: .55;
+  cursor: wait;
 }
 
 main {
@@ -1175,6 +1359,31 @@ footer p a {
 
   .notification-button .action-label {
     display: none;
+  }
+
+  .notification-dialog {
+    width: calc(100% - 24px);
+    max-height: calc(100dvh - 24px);
+    border-radius: 18px;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  .notification-dialog form {
+    padding: 21px 18px;
+  }
+
+  .notification-dialog-head h2 {
+    font-size: 27px;
+  }
+
+  .notification-dialog-actions {
+    flex-wrap: wrap;
+  }
+
+  .danger-button {
+    width: 100%;
+    margin-right: 0;
+    order: 3;
   }
 
   .welcome {
