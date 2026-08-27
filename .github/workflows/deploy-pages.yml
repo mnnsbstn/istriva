@@ -1,4 +1,4 @@
-name: Deploy Bura to GitHub Pages
+name: Deploy Istriva to GitHub Pages
 
 on:
   push:

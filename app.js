@@ -545,7 +545,7 @@ function updateDestinationUI() {
   document.querySelector("#hero-destination").textContent = `${destination.name}.`;
   document.querySelector("#profile-destination").textContent = destination.shortName;
   document.querySelector("#planner-destination").textContent = destination.name.toLocaleUpperCase("de-DE");
-  document.title = `Bura – Euer Familientag in ${destination.name}`;
+  document.title = `Istriva – Euer Familientag in ${destination.name}`;
 }
 
 function getSavedDestination() {
@@ -1083,7 +1083,7 @@ shareButton.addEventListener("click", async () => {
   const family = familyDescription();
   const shareData = {
     title: `Unser Familientag in ${destination.name}`,
-    text: `Unser Bura-Tagesplan für ${family}: ${document.querySelector("#plan-name").textContent}`,
+    text: `Unser Istriva-Tagesplan für ${family}: ${document.querySelector("#plan-name").textContent}`,
     url: window.location.href
   };
 
@@ -1129,7 +1129,7 @@ window.addEventListener("beforeinstallprompt", (event) => {
 window.addEventListener("appinstalled", () => {
   deferredInstallPrompt = undefined;
   installButton.hidden = true;
-  showToast("Bura wurde erfolgreich installiert");
+  showToast("Istriva wurde erfolgreich installiert");
 });
 
 installButton.addEventListener("click", async () => {

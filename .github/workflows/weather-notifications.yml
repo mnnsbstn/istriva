@@ -1,4 +1,4 @@
-name: Send daily Bura weather updates
+name: Send daily Istriva weather updates
 
 on:
   pull_request:
