@@ -1,14 +1,14 @@
-const CACHE_NAME = "bura-v18";
+const CACHE_NAME = "bura-v19";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=10",
+  "./styles.css?v=11",
   "./app.js?v=14",
-  "./manifest.webmanifest?v=6",
-  "./brand-logo-horizontal.png?v=4",
-  "./icon-192.png?v=4",
-  "./icon-512.png?v=4",
-  "./icon-maskable-512.png?v=4"
+  "./manifest.webmanifest?v=7",
+  "./icon-192.png?v=5",
+  "./icon-512.png?v=5",
+  "./icon-maskable-512.png?v=5",
+  "./icon-1024.png?v=5"
 ];
 
 self.addEventListener("install", (event) => {
