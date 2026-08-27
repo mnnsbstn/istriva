@@ -77,7 +77,7 @@ struct SettingsView: View {
         @ObservedObject var service: NotificationService
 
         var body: some View {
-            Section("Benachrichtigungen") {
+            Section {
                 Toggle(
                     "Wetter-Updates",
                     isOn: Binding(
@@ -124,6 +124,8 @@ struct SettingsView: View {
                     }
                     .disabled(service.isRequestInFlight)
                 }
+            } header: {
+                Text("Benachrichtigungen")
             } footer: {
                 Text("Die Zustellung erfolgt über OneSignal und wird nach Region und Thema gefiltert.")
             }
