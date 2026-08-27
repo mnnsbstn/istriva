@@ -1,4 +1,4 @@
-# Istriva – Familien-Urlaubsplaner für Istrien
+# ISTRIVA – Familien-Urlaubsplaner für Istrien
 
 Ein interaktiver Web-Prototyp, der einen familiengerechten Tagesplan für zwei Erwachsene und zwei Kinder zusammenstellt.
 
@@ -71,6 +71,6 @@ Für den Versand muss unter **Settings > Secrets and variables > Actions** das R
 
 Der geplante Lauf verwendet automatisch `all` und verarbeitet somit jeden Standort. Pro Nutzer wird nur die Nachricht zugestellt, deren `destination` seiner zuletzt in der App ausgewählten Region entspricht.
 
-Unter **Actions > Send daily Istriva weather updates > Run workflow** kann der Ablauf manuell gestartet werden. `dry_run` ist standardmäßig aktiviert und sendet keine Push-Nachricht. Für einen echten Einzeltest eine Region wählen und `dry_run` deaktivieren.
+Unter **Actions > Send daily ISTRIVA weather updates > Run workflow** kann der Ablauf manuell gestartet werden. `dry_run` ist standardmäßig aktiviert und sendet keine Push-Nachricht. Für einen echten Einzeltest eine Region wählen und `dry_run` deaktivieren.
 
 Manuelle Läufe erhalten einen eigenen Idempotency-Key, damit mehrere Tests am selben Tag möglich sind. Wenn ein Einzeltest keine passenden Empfänger findet, schlägt der Workflow sichtbar fehl und zeigt die OneSignal-Antwort im Log; tägliche Läufe überspringen Regionen ohne Empfänger dagegen erwartungsgemäß.
