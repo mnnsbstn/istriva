@@ -500,6 +500,7 @@ const favoriteCount = document.querySelector("#favorite-count");
 const ONESIGNAL_APP_ID = "cd00c6cc-ad14-4246-9cde-4de743ce8238";
 const ONESIGNAL_SAFARI_WEB_ID = "web.onesignal.auto.4ed285de-faf5-4c6c-a346-3ff91e5aded6";
 const NOTIFICATION_SETTINGS_KEY = "bura-notification-settings-v1";
+const DESTINATION_STORAGE_KEY = "bura-selected-destination";
 let planIndex = 0;
 let toastTimer;
 let deferredInstallPrompt;
@@ -540,6 +541,23 @@ function updateDestinationUI() {
   document.querySelector("#profile-destination").textContent = destination.shortName;
   document.querySelector("#planner-destination").textContent = destination.name.toLocaleUpperCase("de-DE");
   document.title = `Bura – Euer Familientag in ${destination.name}`;
+}
+
+function getSavedDestination() {
+  try {
+    const destination = localStorage.getItem(DESTINATION_STORAGE_KEY);
+    return destination && istriaDestinations[destination] ? destination : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveDestination(destination) {
+  try {
+    localStorage.setItem(DESTINATION_STORAGE_KEY, destination);
+  } catch {
+    // The current selection still works when browser storage is unavailable.
+  }
 }
 
 function describeWeather(code) {
@@ -972,6 +990,7 @@ function syncFavorites() {
 destinationSelect.addEventListener("change", () => {
   planIndex = 0;
   weatherManuallySelected = false;
+  saveDestination(destinationSelect.value);
   updateDestinationUI();
   renderPlan(true);
   refreshLiveWeather({ applyToPlan: true });
@@ -1122,8 +1141,12 @@ setInterval(() => {
 }, 15 * 60 * 1000);
 
 const requestedDestination = new URLSearchParams(window.location.search).get("destination");
-if (requestedDestination && istriaDestinations[requestedDestination]) {
-  destinationSelect.value = requestedDestination;
+const initialDestination = requestedDestination && istriaDestinations[requestedDestination]
+  ? requestedDestination
+  : getSavedDestination();
+if (initialDestination) {
+  destinationSelect.value = initialDestination;
+  saveDestination(initialDestination);
 }
 
 updateDate();
