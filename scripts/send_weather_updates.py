@@ -153,7 +153,7 @@ def build_message(location_name: str, forecast: dict[str, Any]) -> tuple[str, st
     elif gusts >= 50 or wind >= 35:
         advice = "Windig – Fähren und Bootstouren bitte prüfen."
     elif rain_probability >= 55:
-        advice = "Die Regenoption ist in Bura vorbereitet."
+        advice = "Die Regenoption ist in Istriva vorbereitet."
     elif maximum >= 30:
         advice = "Mittagshitze meiden und genug Wasser einpacken."
     else:
@@ -217,7 +217,7 @@ def build_notification(
     return {
         "app_id": ONESIGNAL_APP_ID,
         "target_channel": "push",
-        "name": f"Bura Wetter {location_name} {local_date}",
+        "name": f"Istriva Wetter {location_name} {local_date}",
         "headings": {"en": title, "de": title},
         "contents": {"en": body, "de": body},
         "url": launch_url,
