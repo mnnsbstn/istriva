@@ -497,7 +497,7 @@ const weatherElements = {
 };
 const favoriteButtons = [...document.querySelectorAll(".favorite")];
 const favoriteCount = document.querySelector("#favorite-count");
-const ONESIGNAL_APP_ID = "cd006ccc-ad14-4246-9cde-4de743ce8238";
+const ONESIGNAL_APP_ID = "cd00c6cc-ad14-4246-9cde-4de743ce8238";
 const ONESIGNAL_SAFARI_WEB_ID = "web.onesignal.auto.4ed285de-faf5-4c6c-a346-3ff91e5aded6";
 const NOTIFICATION_SETTINGS_KEY = "bura-notification-settings-v1";
 let planIndex = 0;
