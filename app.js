@@ -482,6 +482,17 @@ const profileButton = document.querySelector(".profile");
 const partySize = document.querySelector("#party-size");
 const adultCount = document.querySelector("#adult-count");
 const childCount = document.querySelector("#child-count");
+const childAgeFields = document.querySelector("#child-age-fields");
+const childAgeHint = document.querySelector("#child-age-hint");
+const beachGuideGrid = document.querySelector("#beach-guide-grid");
+const tripGuideGrid = document.querySelector("#trip-guide-grid");
+const foodGuideGrid = document.querySelector("#food-guide-grid");
+const beachGuideMap = document.querySelector("#beach-guide-map");
+const tripGuideMap = document.querySelector("#trip-guide-map");
+const foodGuideMap = document.querySelector("#food-guide-map");
+const beachGuideContext = document.querySelector("#beach-guide-context");
+const tripGuideContext = document.querySelector("#trip-guide-context");
+const foodGuideContext = document.querySelector("#food-guide-context");
 const notificationDialog = document.querySelector("#notification-dialog");
 const notificationDestination = document.querySelector("#notification-destination");
 const weatherNotifications = document.querySelector("#weather-notifications");
@@ -545,7 +556,7 @@ function updateDestinationUI() {
   document.querySelector("#hero-destination").textContent = `${destination.name}.`;
   document.querySelector("#profile-destination").textContent = destination.shortName;
   document.querySelector("#planner-destination").textContent = destination.name.toLocaleUpperCase("de-DE");
-  document.title = `ISTRIVA – Euer Familientag in ${destination.name}`;
+  document.title = "ISTRIVA – Euer Familientag in Istrien";
 }
 
 function getSavedDestination() {
@@ -570,28 +581,68 @@ function clampCount(value, minimum, maximum, fallback) {
   return Number.isFinite(parsed) ? Math.min(maximum, Math.max(minimum, parsed)) : fallback;
 }
 
+function normalizeChildAge(value) {
+  if (value === null || value === undefined || value === "") return null;
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) ? Math.min(17, Math.max(0, parsed)) : null;
+}
+
+function normalizeChildAges(ages, childTotal) {
+  return Array.from(
+    { length: childTotal },
+    (_, index) => normalizeChildAge(Array.isArray(ages) ? ages[index] : null)
+  );
+}
+
 function getFamilySettings() {
   try {
     const stored = JSON.parse(localStorage.getItem(FAMILY_SETTINGS_KEY) || "null");
+    const children = clampCount(stored?.children, 0, 8, 2);
     return {
       adults: clampCount(stored?.adults, 1, 8, 2),
-      children: clampCount(stored?.children, 0, 8, 2)
+      children,
+      childAges: normalizeChildAges(stored?.childAges, children)
     };
   } catch {
-    return { adults: 2, children: 2 };
+    return { adults: 2, children: 2, childAges: [null, null] };
   }
+}
+
+function childAgesComplete(settings = getFamilySettings()) {
+  return settings.children === 0
+    || (settings.childAges.length === settings.children
+      && settings.childAges.every((age) => Number.isInteger(age)));
 }
 
 function familyDescription(settings = getFamilySettings()) {
   const adults = settings.adults === 1 ? "1 Erwachsener" : `${settings.adults} Erwachsene`;
   const children = settings.children === 1 ? "1 Kind" : `${settings.children} Kinder`;
-  return `${adults} · ${children}`;
+  if (!childAgesComplete(settings) || settings.children === 0) {
+    return `${adults} · ${children}`;
+  }
+  const ages = settings.childAges.map((age) => `${age}`).join(", ");
+  return `${adults} · ${children} (${ages} J.)`;
 }
 
 function updateFamilyUI(settings = getFamilySettings()) {
   adultCount.value = settings.adults;
   childCount.value = settings.children;
   partySize.textContent = settings.adults + settings.children;
+  childAgeFields.hidden = settings.children === 0;
+  childAgeFields.innerHTML = settings.childAges.map((age, index) => `
+    <label>
+      <span>Kind ${index + 1}</span>
+      <input class="child-age-input" type="number" min="0" max="17" step="1" inputmode="numeric" value="${age ?? ""}" placeholder="Alter" aria-label="Alter von Kind ${index + 1}" required>
+      <small>Jahre</small>
+    </label>
+  `).join("");
+  childAgeHint.textContent = childAgesComplete(settings)
+    ? (settings.children > 0 ? "Alter wird für passende Familienempfehlungen berücksichtigt." : "")
+    : "Bitte für jedes Kind das Alter angeben.";
+  childAgeHint.classList.toggle("warning", !childAgesComplete(settings));
+  childAgeFields.querySelectorAll(".child-age-input").forEach((input) => {
+    input.addEventListener("change", saveFamilySettings);
+  });
   profileButton.setAttribute(
     "aria-label",
     `${familyDescription(settings)} – Familienprofil öffnen`
@@ -600,9 +651,16 @@ function updateFamilyUI(settings = getFamilySettings()) {
 
 function saveFamilySettings() {
   const current = getFamilySettings();
+  const children = clampCount(childCount.value, 0, 8, current.children);
+  const enteredAges = [...childAgeFields.querySelectorAll(".child-age-input")]
+    .map((input) => normalizeChildAge(input.value));
   const settings = {
     adults: clampCount(adultCount.value, 1, 8, current.adults),
-    children: clampCount(childCount.value, 0, 8, current.children)
+    children,
+    childAges: Array.from(
+      { length: children },
+      (_, index) => enteredAges[index] ?? current.childAges[index] ?? null
+    )
   };
 
   try {
@@ -612,7 +670,10 @@ function saveFamilySettings() {
   }
 
   updateFamilyUI(settings);
-  showToast(`Familie angepasst: ${familyDescription(settings)}`);
+  renderDiscoveryGuides();
+  showToast(childAgesComplete(settings)
+    ? `Familie angepasst: ${familyDescription(settings)}`
+    : "Bitte noch das Alter aller Kinder angeben");
 }
 
 function describeWeather(code) {
@@ -966,6 +1027,103 @@ function mapUrl(place) {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place)}`;
 }
 
+function mapSearchUrl(query) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+function guideItems(destinationKey, category, family) {
+  const catalog = guideCatalog[destinationKey] || guideCatalog.pula;
+  return catalog[category]
+    .map((key) => guidePlaces[category][key])
+    .filter(Boolean)
+    .sort((first, second) => {
+      const hasChildren = family.children > 0;
+      const agesComplete = childAgesComplete(family);
+      const youngestAge = agesComplete && hasChildren ? Math.min(...family.childAges) : 0;
+      const firstEligible = !hasChildren || first.suitability.minAge <= youngestAge;
+      const secondEligible = !hasChildren || second.suitability.minAge <= youngestAge;
+
+      if (firstEligible !== secondEligible) return firstEligible ? -1 : 1;
+
+      const priorityKey = hasChildren ? "family" : "adult";
+      const groupWeight = family.adults + family.children >= 5 ? 2 : 0;
+      const firstScore = first.suitability[priorityKey] * 10
+        + first.suitability.groups * groupWeight;
+      const secondScore = second.suitability[priorityKey] * 10
+        + second.suitability.groups * groupWeight;
+      return secondScore - firstScore;
+    })
+    .slice(0, 4);
+}
+
+function personalizedGuideMeta(item, family) {
+  const meta = [...item.meta];
+  if (family.children > 0) {
+    const agesComplete = childAgesComplete(family);
+    const youngestAge = agesComplete ? Math.min(...family.childAges) : 0;
+    if (item.suitability.minAge > youngestAge) {
+      meta.unshift(`⚠ empfohlen ab ${item.suitability.minAge} Jahren`);
+    } else if (item.suitability.family >= 5) {
+      meta.unshift("✓ besonders familienfreundlich");
+    }
+  }
+  if (family.adults + family.children >= 5 && item.suitability.groups >= 5) {
+    meta.unshift("👥 gut für größere Familien");
+  }
+  if (item.suitability.note) meta.push(`ℹ ${item.suitability.note}`);
+  return meta.slice(0, 4);
+}
+
+function renderGuideCards(grid, destinationKey, category, label, family) {
+  const items = guideItems(destinationKey, category, family);
+  grid.innerHTML = items.map((item) => `
+    <article class="guide-card">
+      <div class="guide-card-icon" aria-hidden="true">${item.icon}</div>
+      <div class="guide-card-copy">
+        <span class="guide-card-label">${label}</span>
+        <h3><a class="place-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">${item.title}<span aria-hidden="true">↗</span></a></h3>
+        <p>${item.description}</p>
+        <div class="guide-card-bottom">
+          <div class="guide-card-meta">${personalizedGuideMeta(item, family).map((entry) => `<span>${entry}</span>`).join("")}</div>
+          <a class="guide-map-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer" aria-label="${item.title} in Google Maps öffnen">🗺️ Google Maps</a>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderDiscoveryGuides() {
+  const destinationKey = destinationSelect.value;
+  const destination = istriaDestinations[destinationKey];
+  const family = getFamilySettings();
+  const destinationLabel = destination.name.toLocaleUpperCase("de-DE");
+
+  document.querySelector("#beach-guide-destination").textContent = destinationLabel;
+  document.querySelector("#trip-guide-destination").textContent = destinationLabel;
+  document.querySelector("#food-guide-destination").textContent = destinationLabel;
+
+  beachGuideMap.href = mapSearchUrl(`Strände ${destination.name} Istrien`);
+  tripGuideMap.href = mapSearchUrl(`Ausflüge ${destination.name} Istrien`);
+  foodGuideMap.href = mapSearchUrl(`Restaurants Bars ${destination.name} Istrien`);
+
+  let familyContext = `${family.adults} ${family.adults === 1 ? "Erwachsener" : "Erwachsene"}`;
+  if (family.children > 0 && childAgesComplete(family)) {
+    familyContext += ` · ${family.children} ${family.children === 1 ? "Kind" : "Kinder"} (${family.childAges.join(", ")} J.)`;
+  } else if (family.children > 0) {
+    familyContext += " · Kinderalter bitte oben ergänzen";
+  } else {
+    familyContext += " · ohne Kinder";
+  }
+  [beachGuideContext, tripGuideContext, foodGuideContext].forEach((element) => {
+    element.textContent = `Persönlich sortiert für: ${familyContext}`;
+    element.classList.toggle("warning", family.children > 0 && !childAgesComplete(family));
+  });
+
+  renderGuideCards(beachGuideGrid, destinationKey, "beaches", "STRAND", family);
+  renderGuideCards(tripGuideGrid, destinationKey, "trips", "TAGESAUSFLUG", family);
+  renderGuideCards(foodGuideGrid, destinationKey, "food", "ESSEN & TRINKEN", family);
+}
+
 function renderPlan(animate = false) {
   const plans = getPlans();
   const plan = plans[planIndex % plans.length];
@@ -1048,6 +1206,7 @@ destinationSelect.addEventListener("change", () => {
   saveDestination(destinationSelect.value);
   updateDestinationUI();
   renderPlan(true);
+  renderDiscoveryGuides();
   refreshLiveWeather({ applyToPlan: true });
   scheduleNotificationTagSync();
   const destination = istriaDestinations[destinationSelect.value];
@@ -1214,4 +1373,5 @@ syncFavorites();
 updateFamilyUI();
 updateDestinationUI();
 renderPlan();
+renderDiscoveryGuides();
 refreshLiveWeather({ applyToPlan: true });

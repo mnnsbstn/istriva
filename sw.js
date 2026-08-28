@@ -1,9 +1,10 @@
-const CACHE_NAME = "bura-v20";
+const CACHE_NAME = "bura-v21";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=12",
-  "./app.js?v=14",
+  "./styles.css?v=13",
+  "./guide-data.js?v=1",
+  "./app.js?v=15",
   "./manifest.webmanifest?v=7",
   "./icon-192.png?v=5",
   "./icon-512.png?v=5",

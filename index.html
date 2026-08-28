@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" href="icon-192.png?v=5">
   <link rel="apple-touch-icon" href="icon-192.png?v=5">
   <link rel="manifest" href="manifest.webmanifest?v=7">
-  <link rel="stylesheet" href="styles.css?v=12">
+  <link rel="stylesheet" href="styles.css?v=13">
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 </head>
 <body>
@@ -127,6 +127,8 @@
                 <input id="child-count" type="number" min="0" max="8" step="1" inputmode="numeric" value="2">
               </label>
             </div>
+            <div class="child-age-fields" id="child-age-fields"></div>
+            <small class="child-age-hint" id="child-age-hint"></small>
           </fieldset>
         </div>
         <div class="divider"></div>
@@ -191,6 +193,50 @@
           <button class="favorite" type="button" aria-label="Markthalle als Favorit markieren">♡</button>
         </article>
       </div>
+      <div class="guide-jump-links" aria-label="Weitere Empfehlungen">
+        <a href="#straende"><span aria-hidden="true">🏖️</span> Strände</a>
+        <a href="#tagesausfluege"><span aria-hidden="true">🧭</span> Tagesausflüge</a>
+        <a href="#essen-trinken"><span aria-hidden="true">🍽️</span> Essen &amp; Trinken</a>
+      </div>
+    </section>
+
+    <section class="guide-section" id="straende" aria-labelledby="beach-guide-title">
+      <div class="guide-heading">
+        <div>
+          <p class="section-kicker">BADEN &amp; MEER · <span id="beach-guide-destination">PULA</span></p>
+          <h2 id="beach-guide-title">Strände für euren Tag</h2>
+          <p>Von geschützten Familienbuchten bis zu wilden Felsküsten.</p>
+          <p class="guide-family-context" id="beach-guide-context"></p>
+        </div>
+        <a id="beach-guide-map" href="https://www.google.com/maps/search/Strände+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alle Strände <span>→</span></a>
+      </div>
+      <div class="guide-grid" id="beach-guide-grid"></div>
+    </section>
+
+    <section class="guide-section" id="tagesausfluege" aria-labelledby="trip-guide-title">
+      <div class="guide-heading">
+        <div>
+          <p class="section-kicker">MEHR ENTDECKEN · <span id="trip-guide-destination">PULA</span></p>
+          <h2 id="trip-guide-title">Tagesausflüge</h2>
+          <p>Natur, Geschichte und besondere Erlebnisse in erreichbarer Nähe.</p>
+          <p class="guide-family-context" id="trip-guide-context"></p>
+        </div>
+        <a id="trip-guide-map" href="https://www.google.com/maps/search/Ausflüge+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alle Ausflüge <span>→</span></a>
+      </div>
+      <div class="guide-grid" id="trip-guide-grid"></div>
+    </section>
+
+    <section class="guide-section" id="essen-trinken" aria-labelledby="food-guide-title">
+      <div class="guide-heading">
+        <div>
+          <p class="section-kicker">GENUSS · <span id="food-guide-destination">PULA</span></p>
+          <h2 id="food-guide-title">Essen &amp; Trinken</h2>
+          <p>Konobas, Restaurants, Märkte, Cafés und Bars für entspannte Pausen.</p>
+          <p class="guide-family-context" id="food-guide-context"></p>
+        </div>
+        <a id="food-guide-map" href="https://www.google.com/maps/search/Restaurants+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alles auf der Karte <span>→</span></a>
+      </div>
+      <div class="guide-grid" id="food-guide-grid"></div>
     </section>
 
     <section class="saved-strip" id="favoriten" aria-label="Favoriten">
@@ -254,6 +300,7 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=14"></script>
+  <script src="guide-data.js?v=1"></script>
+  <script src="app.js?v=15"></script>
 </body>
 </html>
