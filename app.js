@@ -1046,7 +1046,7 @@ function guideItems(destinationKey, category, family) {
       if (firstEligible !== secondEligible) return firstEligible ? -1 : 1;
 
       const priorityKey = hasChildren ? "family" : "adult";
-      const groupWeight = family.adults + family.children >= 5 ? 2 : 1;
+      const groupWeight = family.adults + family.children >= 5 ? 2 : 0;
       const firstScore = first.suitability[priorityKey] * 10
         + first.suitability.groups * groupWeight;
       const secondScore = second.suitability[priorityKey] * 10
