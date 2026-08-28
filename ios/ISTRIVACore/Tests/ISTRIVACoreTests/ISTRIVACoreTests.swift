@@ -86,6 +86,8 @@ final class ISTRIVACoreTests: XCTestCase {
             windSpeed: 12,
             precipitation: 0.4,
             rainProbability: 70,
+            humidity: 68,
+            uvIndex: 5.2,
             sunset: nil,
             observedAt: Date()
         )

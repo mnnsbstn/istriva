@@ -38,7 +38,7 @@ public struct OpenMeteoWeatherService: WeatherServicing {
             URLQueryItem(name: "longitude", value: String(destination.longitude)),
             URLQueryItem(
                 name: "current",
-                value: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation"
+                value: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation,relative_humidity_2m,uv_index"
             ),
             URLQueryItem(
                 name: "daily",
@@ -74,6 +74,8 @@ public struct OpenMeteoWeatherService: WeatherServicing {
             windSpeed: payload.current.windSpeed,
             precipitation: payload.current.precipitation,
             rainProbability: rainProbability,
+            humidity: payload.current.humidity,
+            uvIndex: payload.current.uvIndex,
             sunset: payload.daily.sunset.first.flatMap(Self.parseLocalDate),
             observedAt: Self.parseLocalDate(payload.current.time) ?? Date()
         )
@@ -100,6 +102,8 @@ private struct OpenMeteoResponse: Decodable {
         let weatherCode: Int
         let windSpeed: Double
         let precipitation: Double
+        let humidity: Double
+        let uvIndex: Double
 
         enum CodingKeys: String, CodingKey {
             case time
@@ -108,6 +112,8 @@ private struct OpenMeteoResponse: Decodable {
             case weatherCode = "weather_code"
             case windSpeed = "wind_speed_10m"
             case precipitation
+            case humidity = "relative_humidity_2m"
+            case uvIndex = "uv_index"
         }
     }
 
