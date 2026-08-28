@@ -556,7 +556,7 @@ function updateDestinationUI() {
   document.querySelector("#hero-destination").textContent = `${destination.name}.`;
   document.querySelector("#profile-destination").textContent = destination.shortName;
   document.querySelector("#planner-destination").textContent = destination.name.toLocaleUpperCase("de-DE");
-  document.title = "ISTRIVA – Euer Familientag in Istrien";
+  document.title = "ISTRIVA";
 }
 
 function getSavedDestination() {
@@ -1324,6 +1324,10 @@ disableNotificationsButton.addEventListener("click", disableNotifications);
 
 const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
 const isStandalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+
+if (isStandalone) {
+  document.body.classList.add("standalone");
+}
 
 if (isIos && !isStandalone) {
   installButton.hidden = false;
