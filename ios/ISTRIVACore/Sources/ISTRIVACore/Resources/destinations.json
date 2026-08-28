@@ -1,0 +1,4261 @@
+{
+  "schemaVersion": 1,
+  "destinations": [
+    {
+      "id": "pula",
+      "name": "Pula",
+      "shortName": "Pula",
+      "latitude": 44.8666,
+      "longitude": 13.8496,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Kultur, Eis & Meeresluft",
+          "distance": "5,8 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "GESCHICHTE",
+              "duration": "1 Std. 30 Min.",
+              "title": "Arena von Pula",
+              "description": "Gladiatoren-Geschichten für die Kinder, beeindruckende Architektur für euch – morgens noch angenehm ruhig.",
+              "metadata": [
+                "★ Familienliebling",
+                "🎟 Eintritt",
+                "☀ wenig Schatten"
+              ],
+              "colorHex": "#edc17d",
+              "icon": "🏛️",
+              "mapQuery": "Arena Pula"
+            },
+            {
+              "time": "10:45",
+              "category": "GENUSSPAUSE",
+              "duration": "45 Min.",
+              "title": "Eiszeit bei Aroma",
+              "description": "Hausgemachtes Gelato und ein schattiges Plätzchen. Unsere Wahl: Pistazie und istrische Feige.",
+              "metadata": [
+                "🍦 Kinderfreundlich",
+                "€ günstig",
+                "❄ schattig"
+              ],
+              "colorHex": "#f4ad8d",
+              "icon": "🍦",
+              "mapQuery": "Aroma Gelato Pula"
+            },
+            {
+              "time": "12:00",
+              "category": "MEER & PAUSE",
+              "duration": "3 Std.",
+              "title": "Bucht von Ambrela",
+              "description": "Klares, flaches Wasser und genug Schatten unter Pinien. Ideal für Picknick, Baden und eine lange Pause.",
+              "metadata": [
+                "♒ Flacher Einstieg",
+                "🌲 Naturschatten",
+                "🚗 12 Min."
+              ],
+              "colorHex": "#76c4bd",
+              "icon": "🏖️",
+              "mapQuery": "Ambrela Beach Pula"
+            },
+            {
+              "time": "17:30",
+              "category": "ALTSTADT",
+              "duration": "2 Std.",
+              "title": "Forum & Abendessen",
+              "description": "Durch die Gassen zum Augustus-Tempel schlendern und den Tag bei Pasta oder frischem Fisch ausklingen lassen.",
+              "metadata": [
+                "♿ Kinderwagen-tauglich",
+                "🍝 Viele Optionen",
+                "◒ Nähe zum Sonnenuntergang"
+              ],
+              "colorHex": "#df9a74",
+              "icon": "🍝",
+              "mapQuery": "Forum Pula"
+            }
+          ]
+        },
+        {
+          "id": "sun-balanced-1",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 1,
+          "name": "Unter Pula & über den Wellen",
+          "distance": "6,4 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:15",
+              "category": "ABENTEUER",
+              "duration": "1 Std.",
+              "title": "Zerostrasse-Tunnel",
+              "description": "Ein kühles Abenteuer unter der Altstadt – perfekt, bevor die Straßen voller werden.",
+              "metadata": [
+                "❄ angenehm kühl",
+                "🎟 Eintritt",
+                "★ spannend"
+              ],
+              "colorHex": "#9bb2a4",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            },
+            {
+              "time": "10:30",
+              "category": "AUSSICHT",
+              "duration": "1 Std.",
+              "title": "Kaštel von Pula",
+              "description": "Kurzer Aufstieg, große Aussicht: Von der Festung entdeckt ihr Dächer, Hafen und Arena.",
+              "metadata": [
+                "◉ Panoramablick",
+                "☀ Sonnenhut",
+                "📷 Fotostopp"
+              ],
+              "colorHex": "#efc679",
+              "icon": "🏰",
+              "mapQuery": "Pula Castle Kastel"
+            },
+            {
+              "time": "12:15",
+              "category": "MEER & PAUSE",
+              "duration": "3 Std.",
+              "title": "Hawaiian Beach",
+              "description": "Türkisblaues Wasser auf Verudela. Mit Badeschuhen, Snacks und viel Zeit wird es herrlich entspannt.",
+              "metadata": [
+                "🌊 klares Wasser",
+                "👟 Badeschuhe",
+                "🚗 13 Min."
+              ],
+              "colorHex": "#59b9c0",
+              "icon": "🤿",
+              "mapQuery": "Hawaiian Beach Verudela"
+            },
+            {
+              "time": "18:00",
+              "category": "ABEND",
+              "duration": "1 Std. 30 Min.",
+              "title": "Uljanik-Leuchtkräne",
+              "description": "Frühes Abendessen am Hafen und zum Abschluss die berühmten leuchtenden Kräne bestaunen.",
+              "metadata": [
+                "✨ nach Einbruch der Dunkelheit",
+                "🍕 Familienlokale",
+                "🚶 Promenade"
+              ],
+              "colorHex": "#465e78",
+              "icon": "✨",
+              "mapQuery": "Lighting Giants Pula"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Langsam durch den Urlaub",
+          "distance": "3,2 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MARKT",
+              "duration": "1 Std.",
+              "title": "Frühstück an der Tržnica",
+              "description": "Lokales Obst, Gebäck und Kaffee rund um Pulas historische Markthalle.",
+              "metadata": [
+                "🍉 Frisches Obst",
+                "€ günstig",
+                "♿ gut zugänglich"
+              ],
+              "colorHex": "#f0b66f",
+              "icon": "🥐",
+              "mapQuery": "Pula Market"
+            },
+            {
+              "time": "11:00",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Gassen, Torbögen & Eis",
+              "description": "Ohne Eile durch den Sergierbogen zum Forum – mit spontanen Stopps, wann immer euch danach ist.",
+              "metadata": [
+                "🍦 Eispause",
+                "📷 Fotostopps",
+                "🚶 kurze Wege"
+              ],
+              "colorHex": "#e6b17f",
+              "icon": "📷",
+              "mapQuery": "Arch of the Sergii Pula"
+            },
+            {
+              "time": "13:00",
+              "category": "LANGE PAUSE",
+              "duration": "3 Std. 30 Min.",
+              "title": "Pinien & Meer am Saccorgiana",
+              "description": "Ein schattiger Platz für ein langes Picknick, Planschen und vielleicht sogar ein Nickerchen.",
+              "metadata": [
+                "🌲 viel Schatten",
+                "🌊 Badebucht",
+                "🧺 Picknick"
+              ],
+              "colorHex": "#6dc2ac",
+              "icon": "🌲",
+              "mapQuery": "Saccorgiana Cove Pula"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Pula für kleine Abenteurer",
+          "distance": "12,4 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "08:30",
+              "category": "RADTOUR",
+              "duration": "1 Std. 30 Min.",
+              "title": "Küstenrunde nach Verudela",
+              "description": "Früh starten, Fahrräder leihen und mit Pausen entlang der grünen Küste radeln.",
+              "metadata": [
+                "🚲 Helme einpacken",
+                "☀ früh starten",
+                "💧 Wasser"
+              ],
+              "colorHex": "#93c88e",
+              "icon": "🚲",
+              "mapQuery": "Verudela Pula"
+            },
+            {
+              "time": "10:30",
+              "category": "TIERWELT",
+              "duration": "2 Std.",
+              "title": "Aquarium Pula",
+              "description": "Haie, Seepferdchen und die Schildkrötenstation in einer alten Festung entdecken.",
+              "metadata": [
+                "🐢 Kinderhighlight",
+                "🎟 Eintritt",
+                "❄ drinnen"
+              ],
+              "colorHex": "#65b9bb",
+              "icon": "🐢",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "13:00",
+              "category": "BADEPAUSE",
+              "duration": "2 Std.",
+              "title": "Sprung ins Meer",
+              "description": "Direkt auf Verudela eine Badebucht suchen, Kräfte sammeln und im Schatten picknicken.",
+              "metadata": [
+                "🌊 Baden",
+                "🧺 Picknick",
+                "👟 Badeschuhe"
+              ],
+              "colorHex": "#54b8cf",
+              "icon": "🤿",
+              "mapQuery": "Hawaiian Beach Verudela"
+            },
+            {
+              "time": "16:00",
+              "category": "ENTDECKEN",
+              "duration": "1 Std.",
+              "title": "Zerostrasse",
+              "description": "Durch das kühle Tunnelsystem unter Pula laufen und verborgene Abzweigungen erkunden.",
+              "metadata": [
+                "🔦 spannend",
+                "❄ kühl",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#8fa59c",
+              "icon": "🗺️",
+              "mapQuery": "Zerostrasse Pula"
+            },
+            {
+              "time": "18:00",
+              "category": "FINALE",
+              "duration": "1 Std. 30 Min.",
+              "title": "Pizza nahe der Arena",
+              "description": "Hungrige Abenteurer bekommen Pizza und einen letzten Blick auf Pulas Wahrzeichen.",
+              "metadata": [
+                "🍕 Kinderliebling",
+                "🏛 Arena-Blick",
+                "€€"
+              ],
+              "colorHex": "#e58f69",
+              "icon": "🍕",
+              "mapQuery": "Pizza near Arena Pula"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Pula, auch wenn es regnet",
+          "distance": "4,1 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MEERESWELT",
+              "duration": "2 Std. 30 Min.",
+              "title": "Aquarium Pula",
+              "description": "In der alten Festung warten heimische Meeresbewohner und die beliebte Schildkrötenstation.",
+              "metadata": [
+                "☂ überwiegend drinnen",
+                "🐢 Kinderhighlight",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#65b9bb",
+              "icon": "🐠",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "12:30",
+              "category": "MITTAGESSEN",
+              "duration": "1 Std. 30 Min.",
+              "title": "Warme Pasta in der Altstadt",
+              "description": "Trockene Füße, istrische Pasta und genug Zeit für eine gemütliche Familienpause.",
+              "metadata": [
+                "🍝 Kinderportionen",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#e9a173",
+              "icon": "🍝",
+              "mapQuery": "Family restaurant Pula old town"
+            },
+            {
+              "time": "14:30",
+              "category": "UNTERIRDISCH",
+              "duration": "1 Std. 30 Min.",
+              "title": "Zerostrasse & Kaštel-Lift",
+              "description": "Unterirdisch durch Pula und direkt hinauf zur Festung – ein echtes Regenabenteuer.",
+              "metadata": [
+                "🔦 spannend",
+                "☂ wetterfest",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#859e97",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            },
+            {
+              "time": "16:30",
+              "category": "SÜSSES FINALE",
+              "duration": "1 Std.",
+              "title": "Kakao & Kuchen",
+              "description": "Ein gemütliches Café am Forum ist der perfekte Abschluss für euren Regentag.",
+              "metadata": [
+                "☕ warm & trocken",
+                "🍰 Kuchenauswahl",
+                "🚶 zentral"
+              ],
+              "colorHex": "#c99075",
+              "icon": "☕",
+              "mapQuery": "Cafe Forum Pula"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Pula, auch wenn es regnet",
+          "distance": "4,1 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MEERESWELT",
+              "duration": "2 Std. 30 Min.",
+              "title": "Aquarium Pula",
+              "description": "In der alten Festung warten heimische Meeresbewohner und die beliebte Schildkrötenstation.",
+              "metadata": [
+                "☂ überwiegend drinnen",
+                "🐢 Kinderhighlight",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#65b9bb",
+              "icon": "🐠",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "12:30",
+              "category": "MITTAGESSEN",
+              "duration": "1 Std. 30 Min.",
+              "title": "Warme Pasta in der Altstadt",
+              "description": "Trockene Füße, istrische Pasta und genug Zeit für eine gemütliche Familienpause.",
+              "metadata": [
+                "🍝 Kinderportionen",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#e9a173",
+              "icon": "🍝",
+              "mapQuery": "Family restaurant Pula old town"
+            },
+            {
+              "time": "14:30",
+              "category": "UNTERIRDISCH",
+              "duration": "1 Std. 30 Min.",
+              "title": "Zerostrasse & Kaštel-Lift",
+              "description": "Unterirdisch durch Pula und direkt hinauf zur Festung – ein echtes Regenabenteuer.",
+              "metadata": [
+                "🔦 spannend",
+                "☂ wetterfest",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#859e97",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            },
+            {
+              "time": "16:30",
+              "category": "SÜSSES FINALE",
+              "duration": "1 Std.",
+              "title": "Kakao & Kuchen",
+              "description": "Ein gemütliches Café am Forum ist der perfekte Abschluss für euren Regentag.",
+              "metadata": [
+                "☕ warm & trocken",
+                "🍰 Kuchenauswahl",
+                "🚶 zentral"
+              ],
+              "colorHex": "#c99075",
+              "icon": "☕",
+              "mapQuery": "Cafe Forum Pula"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Pula, auch wenn es regnet",
+          "distance": "4,1 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MEERESWELT",
+              "duration": "2 Std. 30 Min.",
+              "title": "Aquarium Pula",
+              "description": "In der alten Festung warten heimische Meeresbewohner und die beliebte Schildkrötenstation.",
+              "metadata": [
+                "☂ überwiegend drinnen",
+                "🐢 Kinderhighlight",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#65b9bb",
+              "icon": "🐠",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "12:30",
+              "category": "MITTAGESSEN",
+              "duration": "1 Std. 30 Min.",
+              "title": "Warme Pasta in der Altstadt",
+              "description": "Trockene Füße, istrische Pasta und genug Zeit für eine gemütliche Familienpause.",
+              "metadata": [
+                "🍝 Kinderportionen",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#e9a173",
+              "icon": "🍝",
+              "mapQuery": "Family restaurant Pula old town"
+            },
+            {
+              "time": "14:30",
+              "category": "UNTERIRDISCH",
+              "duration": "1 Std. 30 Min.",
+              "title": "Zerostrasse & Kaštel-Lift",
+              "description": "Unterirdisch durch Pula und direkt hinauf zur Festung – ein echtes Regenabenteuer.",
+              "metadata": [
+                "🔦 spannend",
+                "☂ wetterfest",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#859e97",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            },
+            {
+              "time": "16:30",
+              "category": "SÜSSES FINALE",
+              "duration": "1 Std.",
+              "title": "Kakao & Kuchen",
+              "description": "Ein gemütliches Café am Forum ist der perfekte Abschluss für euren Regentag.",
+              "metadata": [
+                "☕ warm & trocken",
+                "🍰 Kuchenauswahl",
+                "🚶 zentral"
+              ],
+              "colorHex": "#c99075",
+              "icon": "☕",
+              "mapQuery": "Cafe Forum Pula"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rovinj",
+      "name": "Rovinj",
+      "shortName": "Rovinj",
+      "latitude": 45.0812,
+      "longitude": 13.6387,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Altstadtgassen & grünes Kap",
+          "distance": "5,2 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "MEERESWELT",
+              "duration": "1 Std.",
+              "title": "Aquarium Rovinj",
+              "description": "Ein kompakter Einstieg in die Tierwelt der Adria – ideal, bevor die Altstadt voller wird.",
+              "metadata": [
+                "🐠 Kinderfreundlich",
+                "🎟 saisonal",
+                "❄ drinnen"
+              ],
+              "colorHex": "#76c4bd",
+              "icon": "🐠",
+              "mapQuery": "Rovinj Aquarium"
+            },
+            {
+              "time": "10:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Balbi-Bogen & Grisia-Gasse",
+              "description": "Durch das autofreie Gassengewirr hinaufspazieren, kleine Ateliers entdecken und am Hafen ein Eis holen.",
+              "metadata": [
+                "🚶 steile Gassen",
+                "🍦 Eispause",
+                "📷 Fotostopps"
+              ],
+              "colorHex": "#edc17d",
+              "icon": "🎨",
+              "mapQuery": "Balbi's Arch Rovinj"
+            },
+            {
+              "time": "12:15",
+              "category": "AUSSICHT",
+              "duration": "45 Min.",
+              "title": "Kirche der Hl. Euphemia",
+              "description": "Rovinjs Wahrzeichen mit weitem Blick über Dächer und Inseln. Der Glockenturm ist optional.",
+              "metadata": [
+                "⛪ Kirche frei",
+                "↟ viele Stufen",
+                "☀ wenig Schatten"
+              ],
+              "colorHex": "#e6b17f",
+              "icon": "⛪",
+              "mapQuery": "Church of Saint Euphemia Rovinj"
+            },
+            {
+              "time": "14:00",
+              "category": "NATUR & BADEN",
+              "duration": "3 Std.",
+              "title": "Zlatni Rt & Lone Bay",
+              "description": "Schattige Wege, Spielplätze und eine Badepause im Waldpark Goldene Kap.",
+              "metadata": [
+                "🌲 viel Schatten",
+                "🏖 Badebucht",
+                "🧺 Picknick"
+              ],
+              "colorHex": "#69b99a",
+              "icon": "🌳",
+              "mapQuery": "Golden Cape Rovinj"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Rovinj",
+          "distance": "3,1 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "MEERESWELT",
+              "duration": "1 Std.",
+              "title": "Aquarium Rovinj",
+              "description": "Ein kompakter Einstieg in die Tierwelt der Adria – ideal, bevor die Altstadt voller wird.",
+              "metadata": [
+                "🐠 Kinderfreundlich",
+                "🎟 saisonal",
+                "❄ drinnen"
+              ],
+              "colorHex": "#76c4bd",
+              "icon": "🐠",
+              "mapQuery": "Rovinj Aquarium"
+            },
+            {
+              "time": "10:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Balbi-Bogen & Grisia-Gasse",
+              "description": "Durch das autofreie Gassengewirr hinaufspazieren, kleine Ateliers entdecken und am Hafen ein Eis holen.",
+              "metadata": [
+                "🚶 steile Gassen",
+                "🍦 Eispause",
+                "📷 Fotostopps"
+              ],
+              "colorHex": "#edc17d",
+              "icon": "🎨",
+              "mapQuery": "Balbi's Arch Rovinj"
+            },
+            {
+              "time": "12:15",
+              "category": "AUSSICHT",
+              "duration": "45 Min.",
+              "title": "Kirche der Hl. Euphemia",
+              "description": "Rovinjs Wahrzeichen mit weitem Blick über Dächer und Inseln. Der Glockenturm ist optional.",
+              "metadata": [
+                "⛪ Kirche frei",
+                "↟ viele Stufen",
+                "☀ wenig Schatten"
+              ],
+              "colorHex": "#e6b17f",
+              "icon": "⛪",
+              "mapQuery": "Church of Saint Euphemia Rovinj"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Rovinj für Entdecker",
+          "distance": "7,8 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "MEERESWELT",
+              "duration": "1 Std.",
+              "title": "Aquarium Rovinj",
+              "description": "Ein kompakter Einstieg in die Tierwelt der Adria – ideal, bevor die Altstadt voller wird.",
+              "metadata": [
+                "🐠 Kinderfreundlich",
+                "🎟 saisonal",
+                "❄ drinnen"
+              ],
+              "colorHex": "#76c4bd",
+              "icon": "🐠",
+              "mapQuery": "Rovinj Aquarium"
+            },
+            {
+              "time": "10:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Balbi-Bogen & Grisia-Gasse",
+              "description": "Durch das autofreie Gassengewirr hinaufspazieren, kleine Ateliers entdecken und am Hafen ein Eis holen.",
+              "metadata": [
+                "🚶 steile Gassen",
+                "🍦 Eispause",
+                "📷 Fotostopps"
+              ],
+              "colorHex": "#edc17d",
+              "icon": "🎨",
+              "mapQuery": "Balbi's Arch Rovinj"
+            },
+            {
+              "time": "12:15",
+              "category": "AUSSICHT",
+              "duration": "45 Min.",
+              "title": "Kirche der Hl. Euphemia",
+              "description": "Rovinjs Wahrzeichen mit weitem Blick über Dächer und Inseln. Der Glockenturm ist optional.",
+              "metadata": [
+                "⛪ Kirche frei",
+                "↟ viele Stufen",
+                "☀ wenig Schatten"
+              ],
+              "colorHex": "#e6b17f",
+              "icon": "⛪",
+              "mapQuery": "Church of Saint Euphemia Rovinj"
+            },
+            {
+              "time": "14:00",
+              "category": "NATUR & BADEN",
+              "duration": "3 Std.",
+              "title": "Zlatni Rt & Lone Bay",
+              "description": "Schattige Wege, Spielplätze und eine Badepause im Waldpark Goldene Kap.",
+              "metadata": [
+                "🌲 viel Schatten",
+                "🏖 Badebucht",
+                "🧺 Picknick"
+              ],
+              "colorHex": "#69b99a",
+              "icon": "🌳",
+              "mapQuery": "Golden Cape Rovinj"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Rovinj bei Regen",
+          "distance": "5,2 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MEERESWELT",
+              "duration": "1 Std.",
+              "title": "Aquarium Rovinj",
+              "description": "Adriatische Fische und Meerestiere in einem kleinen historischen Aquarium entdecken.",
+              "metadata": [
+                "☂ drinnen",
+                "🐠 Kinderfreundlich",
+                "🎟 saisonal"
+              ],
+              "colorHex": "#76c4bd",
+              "icon": "🐠",
+              "mapQuery": "Rovinj Aquarium"
+            },
+            {
+              "time": "11:00",
+              "category": "KULTUR",
+              "duration": "1 Std.",
+              "title": "Batana Eco-Museum",
+              "description": "Die Geschichte der traditionellen Holzboote und des Lebens am Meer kennenlernen.",
+              "metadata": [
+                "☂ drinnen",
+                "⚓ lokal",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#7ba9b8",
+              "icon": "⛵",
+              "mapQuery": "Batana Eco-Museum Rovinj"
+            },
+            {
+              "time": "12:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagspause am Hafen",
+              "description": "Unter Arkaden istrische Pasta essen und auf die nächste trockene Phase warten.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ überdacht",
+                "€€"
+              ],
+              "colorHex": "#e5af79",
+              "icon": "🍝",
+              "mapQuery": "Rovinj harbour restaurants"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Rovinj bei Regen",
+          "distance": "3,1 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MEERESWELT",
+              "duration": "1 Std.",
+              "title": "Aquarium Rovinj",
+              "description": "Adriatische Fische und Meerestiere in einem kleinen historischen Aquarium entdecken.",
+              "metadata": [
+                "☂ drinnen",
+                "🐠 Kinderfreundlich",
+                "🎟 saisonal"
+              ],
+              "colorHex": "#76c4bd",
+              "icon": "🐠",
+              "mapQuery": "Rovinj Aquarium"
+            },
+            {
+              "time": "11:00",
+              "category": "KULTUR",
+              "duration": "1 Std.",
+              "title": "Batana Eco-Museum",
+              "description": "Die Geschichte der traditionellen Holzboote und des Lebens am Meer kennenlernen.",
+              "metadata": [
+                "☂ drinnen",
+                "⚓ lokal",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#7ba9b8",
+              "icon": "⛵",
+              "mapQuery": "Batana Eco-Museum Rovinj"
+            },
+            {
+              "time": "12:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagspause am Hafen",
+              "description": "Unter Arkaden istrische Pasta essen und auf die nächste trockene Phase warten.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ überdacht",
+                "€€"
+              ],
+              "colorHex": "#e5af79",
+              "icon": "🍝",
+              "mapQuery": "Rovinj harbour restaurants"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Rovinj bei Regen",
+          "distance": "7,8 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MEERESWELT",
+              "duration": "1 Std.",
+              "title": "Aquarium Rovinj",
+              "description": "Adriatische Fische und Meerestiere in einem kleinen historischen Aquarium entdecken.",
+              "metadata": [
+                "☂ drinnen",
+                "🐠 Kinderfreundlich",
+                "🎟 saisonal"
+              ],
+              "colorHex": "#76c4bd",
+              "icon": "🐠",
+              "mapQuery": "Rovinj Aquarium"
+            },
+            {
+              "time": "11:00",
+              "category": "KULTUR",
+              "duration": "1 Std.",
+              "title": "Batana Eco-Museum",
+              "description": "Die Geschichte der traditionellen Holzboote und des Lebens am Meer kennenlernen.",
+              "metadata": [
+                "☂ drinnen",
+                "⚓ lokal",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#7ba9b8",
+              "icon": "⛵",
+              "mapQuery": "Batana Eco-Museum Rovinj"
+            },
+            {
+              "time": "12:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagspause am Hafen",
+              "description": "Unter Arkaden istrische Pasta essen und auf die nächste trockene Phase warten.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ überdacht",
+                "€€"
+              ],
+              "colorHex": "#e5af79",
+              "icon": "🍝",
+              "mapQuery": "Rovinj harbour restaurants"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "porec",
+      "name": "Poreč",
+      "shortName": "Poreč",
+      "latitude": 45.2272,
+      "longitude": 13.5958,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "UNESCO-Mosaike & Höhlenluft",
+          "distance": "10,6 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "UNESCO",
+              "duration": "1 Std. 15 Min.",
+              "title": "Euphrasius-Basilika",
+              "description": "Früh die leuchtenden Mosaike und den historischen Komplex erkunden; sonntags geschlossen.",
+              "metadata": [
+                "★ UNESCO",
+                "🎟 Eintritt",
+                "↟ Glockenturm"
+              ],
+              "colorHex": "#d9b473",
+              "icon": "✨",
+              "mapQuery": "Euphrasian Basilica Porec"
+            },
+            {
+              "time": "10:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std.",
+              "title": "Decumanus & Marafor",
+              "description": "Auf römischen Spuren zur Romanischen Hausfassade und weiter an die Uferpromenade.",
+              "metadata": [
+                "🚶 kurze Wege",
+                "🍦 Eispause",
+                "♿ teils eben"
+              ],
+              "colorHex": "#e8a875",
+              "icon": "🏛️",
+              "mapQuery": "Marafor Square Porec"
+            },
+            {
+              "time": "12:30",
+              "category": "HÖHLENABENTEUER",
+              "duration": "1 Std. 30 Min.",
+              "title": "Baredine-Höhle",
+              "description": "Eine geführte Tour durch Tropfsteinhallen bei konstant kühlen 14 Grad – leichte Jacke mitnehmen.",
+              "metadata": [
+                "❄ 14 °C",
+                "🎟 Führung",
+                "🚗 15 Min."
+              ],
+              "colorHex": "#8d9b91",
+              "icon": "🦎",
+              "mapQuery": "Baredine Cave"
+            },
+            {
+              "time": "15:00",
+              "category": "BADEN",
+              "duration": "2 Std. 30 Min.",
+              "title": "Brulo Beach",
+              "description": "Schattige, gut ausgestattete Familienbucht südlich der Altstadt.",
+              "metadata": [
+                "🌲 Pinien",
+                "🏖 flacher Zugang",
+                "☕ Infrastruktur"
+              ],
+              "colorHex": "#64b9bf",
+              "icon": "🏖️",
+              "mapQuery": "Brulo Beach Porec"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Poreč",
+          "distance": "2,8 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "UNESCO",
+              "duration": "1 Std. 15 Min.",
+              "title": "Euphrasius-Basilika",
+              "description": "Früh die leuchtenden Mosaike und den historischen Komplex erkunden; sonntags geschlossen.",
+              "metadata": [
+                "★ UNESCO",
+                "🎟 Eintritt",
+                "↟ Glockenturm"
+              ],
+              "colorHex": "#d9b473",
+              "icon": "✨",
+              "mapQuery": "Euphrasian Basilica Porec"
+            },
+            {
+              "time": "10:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std.",
+              "title": "Decumanus & Marafor",
+              "description": "Auf römischen Spuren zur Romanischen Hausfassade und weiter an die Uferpromenade.",
+              "metadata": [
+                "🚶 kurze Wege",
+                "🍦 Eispause",
+                "♿ teils eben"
+              ],
+              "colorHex": "#e8a875",
+              "icon": "🏛️",
+              "mapQuery": "Marafor Square Porec"
+            },
+            {
+              "time": "12:30",
+              "category": "HÖHLENABENTEUER",
+              "duration": "1 Std. 30 Min.",
+              "title": "Baredine-Höhle",
+              "description": "Eine geführte Tour durch Tropfsteinhallen bei konstant kühlen 14 Grad – leichte Jacke mitnehmen.",
+              "metadata": [
+                "❄ 14 °C",
+                "🎟 Führung",
+                "🚗 15 Min."
+              ],
+              "colorHex": "#8d9b91",
+              "icon": "🦎",
+              "mapQuery": "Baredine Cave"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Poreč für Entdecker",
+          "distance": "13,4 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "UNESCO",
+              "duration": "1 Std. 15 Min.",
+              "title": "Euphrasius-Basilika",
+              "description": "Früh die leuchtenden Mosaike und den historischen Komplex erkunden; sonntags geschlossen.",
+              "metadata": [
+                "★ UNESCO",
+                "🎟 Eintritt",
+                "↟ Glockenturm"
+              ],
+              "colorHex": "#d9b473",
+              "icon": "✨",
+              "mapQuery": "Euphrasian Basilica Porec"
+            },
+            {
+              "time": "10:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std.",
+              "title": "Decumanus & Marafor",
+              "description": "Auf römischen Spuren zur Romanischen Hausfassade und weiter an die Uferpromenade.",
+              "metadata": [
+                "🚶 kurze Wege",
+                "🍦 Eispause",
+                "♿ teils eben"
+              ],
+              "colorHex": "#e8a875",
+              "icon": "🏛️",
+              "mapQuery": "Marafor Square Porec"
+            },
+            {
+              "time": "12:30",
+              "category": "HÖHLENABENTEUER",
+              "duration": "1 Std. 30 Min.",
+              "title": "Baredine-Höhle",
+              "description": "Eine geführte Tour durch Tropfsteinhallen bei konstant kühlen 14 Grad – leichte Jacke mitnehmen.",
+              "metadata": [
+                "❄ 14 °C",
+                "🎟 Führung",
+                "🚗 15 Min."
+              ],
+              "colorHex": "#8d9b91",
+              "icon": "🦎",
+              "mapQuery": "Baredine Cave"
+            },
+            {
+              "time": "15:00",
+              "category": "BADEN",
+              "duration": "2 Std. 30 Min.",
+              "title": "Brulo Beach",
+              "description": "Schattige, gut ausgestattete Familienbucht südlich der Altstadt.",
+              "metadata": [
+                "🌲 Pinien",
+                "🏖 flacher Zugang",
+                "☕ Infrastruktur"
+              ],
+              "colorHex": "#64b9bf",
+              "icon": "🏖️",
+              "mapQuery": "Brulo Beach Porec"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Poreč bei Regen",
+          "distance": "10,6 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "UNESCO",
+              "duration": "1 Std. 30 Min.",
+              "title": "Euphrasius-Basilika",
+              "description": "Mosaike, Sakristei und Museum bilden ein wetterfestes Kulturprogramm.",
+              "metadata": [
+                "☂ überwiegend drinnen",
+                "★ UNESCO",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#d9b473",
+              "icon": "✨",
+              "mapQuery": "Euphrasian Basilica Porec"
+            },
+            {
+              "time": "11:00",
+              "category": "HÖHLE",
+              "duration": "1 Std. 30 Min.",
+              "title": "Baredine-Höhle",
+              "description": "Unter der Erde bleibt das Wetter draußen – feste Schuhe und eine leichte Jacke einpacken.",
+              "metadata": [
+                "❄ 14 °C",
+                "🎟 Führung",
+                "↟ Treppen"
+              ],
+              "colorHex": "#8d9b91",
+              "icon": "🦎",
+              "mapQuery": "Baredine Cave"
+            },
+            {
+              "time": "13:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Traktor Story",
+              "description": "Historische Landmaschinen direkt neben der Höhle – überraschend spannend für kleine Technikfans.",
+              "metadata": [
+                "🚜 Familienhighlight",
+                "☂ drinnen",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#c8a66b",
+              "icon": "🚜",
+              "mapQuery": "Traktor Story Nova Vas"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Poreč bei Regen",
+          "distance": "2,8 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "UNESCO",
+              "duration": "1 Std. 30 Min.",
+              "title": "Euphrasius-Basilika",
+              "description": "Mosaike, Sakristei und Museum bilden ein wetterfestes Kulturprogramm.",
+              "metadata": [
+                "☂ überwiegend drinnen",
+                "★ UNESCO",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#d9b473",
+              "icon": "✨",
+              "mapQuery": "Euphrasian Basilica Porec"
+            },
+            {
+              "time": "11:00",
+              "category": "HÖHLE",
+              "duration": "1 Std. 30 Min.",
+              "title": "Baredine-Höhle",
+              "description": "Unter der Erde bleibt das Wetter draußen – feste Schuhe und eine leichte Jacke einpacken.",
+              "metadata": [
+                "❄ 14 °C",
+                "🎟 Führung",
+                "↟ Treppen"
+              ],
+              "colorHex": "#8d9b91",
+              "icon": "🦎",
+              "mapQuery": "Baredine Cave"
+            },
+            {
+              "time": "13:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Traktor Story",
+              "description": "Historische Landmaschinen direkt neben der Höhle – überraschend spannend für kleine Technikfans.",
+              "metadata": [
+                "🚜 Familienhighlight",
+                "☂ drinnen",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#c8a66b",
+              "icon": "🚜",
+              "mapQuery": "Traktor Story Nova Vas"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Poreč bei Regen",
+          "distance": "13,4 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "UNESCO",
+              "duration": "1 Std. 30 Min.",
+              "title": "Euphrasius-Basilika",
+              "description": "Mosaike, Sakristei und Museum bilden ein wetterfestes Kulturprogramm.",
+              "metadata": [
+                "☂ überwiegend drinnen",
+                "★ UNESCO",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#d9b473",
+              "icon": "✨",
+              "mapQuery": "Euphrasian Basilica Porec"
+            },
+            {
+              "time": "11:00",
+              "category": "HÖHLE",
+              "duration": "1 Std. 30 Min.",
+              "title": "Baredine-Höhle",
+              "description": "Unter der Erde bleibt das Wetter draußen – feste Schuhe und eine leichte Jacke einpacken.",
+              "metadata": [
+                "❄ 14 °C",
+                "🎟 Führung",
+                "↟ Treppen"
+              ],
+              "colorHex": "#8d9b91",
+              "icon": "🦎",
+              "mapQuery": "Baredine Cave"
+            },
+            {
+              "time": "13:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Traktor Story",
+              "description": "Historische Landmaschinen direkt neben der Höhle – überraschend spannend für kleine Technikfans.",
+              "metadata": [
+                "🚜 Familienhighlight",
+                "☂ drinnen",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#c8a66b",
+              "icon": "🚜",
+              "mapQuery": "Traktor Story Nova Vas"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "umag",
+      "name": "Umag & Savudrija",
+      "shortName": "Umag",
+      "latitude": 45.431,
+      "longitude": 13.523,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Leuchtturm, Lagune & Altstadt",
+          "distance": "14,2 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "KÜSTE",
+              "duration": "1 Std.",
+              "title": "Leuchtturm Savudrija",
+              "description": "Den ältesten aktiven Leuchtturm der Adria von außen ansehen und am nahen Strand Muscheln suchen.",
+              "metadata": [
+                "🚗 15 Min.",
+                "◉ Außenbesuch",
+                "🌊 Küste"
+              ],
+              "colorHex": "#e6c26f",
+              "icon": "💡",
+              "mapQuery": "Savudrija Lighthouse"
+            },
+            {
+              "time": "10:30",
+              "category": "BADEPAUSE",
+              "duration": "2 Std.",
+              "title": "Laguna Stella Maris",
+              "description": "Flache Lagune, Pinien und gute Infrastruktur für eine entspannte Familienpause.",
+              "metadata": [
+                "♒ flaches Wasser",
+                "🌲 Schatten",
+                "☕ Infrastruktur"
+              ],
+              "colorHex": "#67bdc4",
+              "icon": "🏖️",
+              "mapQuery": "Stella Maris Beach Umag"
+            },
+            {
+              "time": "13:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Umags venezianische Gassen",
+              "description": "Durch die kleine Altstadt zur Kirche und über die Uferpromenade bis zum Pier schlendern.",
+              "metadata": [
+                "🚶 kompakt",
+                "🍦 Eispause",
+                "📷 Hafenblick"
+              ],
+              "colorHex": "#df9b72",
+              "icon": "🏘️",
+              "mapQuery": "Umag Old Town"
+            },
+            {
+              "time": "15:30",
+              "category": "GESCHICHTE",
+              "duration": "1 Std.",
+              "title": "Stadtmuseum Umag",
+              "description": "Archäologie und Stadtgeschichte im mittelalterlichen Bischofsturm – Öffnung vorher prüfen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Zeiten prüfen",
+                "🏰 Turm"
+              ],
+              "colorHex": "#9ca69d",
+              "icon": "🏺",
+              "mapQuery": "Museum of the City of Umag"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Umag",
+          "distance": "3,5 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "KÜSTE",
+              "duration": "1 Std.",
+              "title": "Leuchtturm Savudrija",
+              "description": "Den ältesten aktiven Leuchtturm der Adria von außen ansehen und am nahen Strand Muscheln suchen.",
+              "metadata": [
+                "🚗 15 Min.",
+                "◉ Außenbesuch",
+                "🌊 Küste"
+              ],
+              "colorHex": "#e6c26f",
+              "icon": "💡",
+              "mapQuery": "Savudrija Lighthouse"
+            },
+            {
+              "time": "10:30",
+              "category": "BADEPAUSE",
+              "duration": "2 Std.",
+              "title": "Laguna Stella Maris",
+              "description": "Flache Lagune, Pinien und gute Infrastruktur für eine entspannte Familienpause.",
+              "metadata": [
+                "♒ flaches Wasser",
+                "🌲 Schatten",
+                "☕ Infrastruktur"
+              ],
+              "colorHex": "#67bdc4",
+              "icon": "🏖️",
+              "mapQuery": "Stella Maris Beach Umag"
+            },
+            {
+              "time": "13:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Umags venezianische Gassen",
+              "description": "Durch die kleine Altstadt zur Kirche und über die Uferpromenade bis zum Pier schlendern.",
+              "metadata": [
+                "🚶 kompakt",
+                "🍦 Eispause",
+                "📷 Hafenblick"
+              ],
+              "colorHex": "#df9b72",
+              "icon": "🏘️",
+              "mapQuery": "Umag Old Town"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Umag für Entdecker",
+          "distance": "19 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "KÜSTE",
+              "duration": "1 Std.",
+              "title": "Leuchtturm Savudrija",
+              "description": "Den ältesten aktiven Leuchtturm der Adria von außen ansehen und am nahen Strand Muscheln suchen.",
+              "metadata": [
+                "🚗 15 Min.",
+                "◉ Außenbesuch",
+                "🌊 Küste"
+              ],
+              "colorHex": "#e6c26f",
+              "icon": "💡",
+              "mapQuery": "Savudrija Lighthouse"
+            },
+            {
+              "time": "10:30",
+              "category": "BADEPAUSE",
+              "duration": "2 Std.",
+              "title": "Laguna Stella Maris",
+              "description": "Flache Lagune, Pinien und gute Infrastruktur für eine entspannte Familienpause.",
+              "metadata": [
+                "♒ flaches Wasser",
+                "🌲 Schatten",
+                "☕ Infrastruktur"
+              ],
+              "colorHex": "#67bdc4",
+              "icon": "🏖️",
+              "mapQuery": "Stella Maris Beach Umag"
+            },
+            {
+              "time": "13:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Umags venezianische Gassen",
+              "description": "Durch die kleine Altstadt zur Kirche und über die Uferpromenade bis zum Pier schlendern.",
+              "metadata": [
+                "🚶 kompakt",
+                "🍦 Eispause",
+                "📷 Hafenblick"
+              ],
+              "colorHex": "#df9b72",
+              "icon": "🏘️",
+              "mapQuery": "Umag Old Town"
+            },
+            {
+              "time": "15:30",
+              "category": "GESCHICHTE",
+              "duration": "1 Std.",
+              "title": "Stadtmuseum Umag",
+              "description": "Archäologie und Stadtgeschichte im mittelalterlichen Bischofsturm – Öffnung vorher prüfen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Zeiten prüfen",
+                "🏰 Turm"
+              ],
+              "colorHex": "#9ca69d",
+              "icon": "🏺",
+              "mapQuery": "Museum of the City of Umag"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Umag bei Regen",
+          "distance": "14,2 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Stadtmuseum Umag",
+              "description": "Ein kompakter Einstieg in Umags Archäologie und Geschichte im alten Wehrturm.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Zeiten prüfen",
+                "🏺 Sammlung"
+              ],
+              "colorHex": "#9ca69d",
+              "icon": "🏺",
+              "mapQuery": "Museum of the City of Umag"
+            },
+            {
+              "time": "11:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Istrische Mittagspause",
+              "description": "Pasta, Suppe und etwas Süßes in der Altstadt – trocken und ohne Zeitdruck.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d7a171",
+              "icon": "🍲",
+              "mapQuery": "Umag Old Town restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KULTUR",
+              "duration": "1 Std.",
+              "title": "Lapidarium Novigrad",
+              "description": "Nur rund 20 Minuten entfernt wartet eine moderne Sammlung historischer Steinfragmente.",
+              "metadata": [
+                "🚗 20 Min.",
+                "☂ drinnen",
+                "🎟 günstig"
+              ],
+              "colorHex": "#b5aaa0",
+              "icon": "🗿",
+              "mapQuery": "Lapidarium Museum Novigrad"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Umag bei Regen",
+          "distance": "3,5 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Stadtmuseum Umag",
+              "description": "Ein kompakter Einstieg in Umags Archäologie und Geschichte im alten Wehrturm.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Zeiten prüfen",
+                "🏺 Sammlung"
+              ],
+              "colorHex": "#9ca69d",
+              "icon": "🏺",
+              "mapQuery": "Museum of the City of Umag"
+            },
+            {
+              "time": "11:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Istrische Mittagspause",
+              "description": "Pasta, Suppe und etwas Süßes in der Altstadt – trocken und ohne Zeitdruck.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d7a171",
+              "icon": "🍲",
+              "mapQuery": "Umag Old Town restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KULTUR",
+              "duration": "1 Std.",
+              "title": "Lapidarium Novigrad",
+              "description": "Nur rund 20 Minuten entfernt wartet eine moderne Sammlung historischer Steinfragmente.",
+              "metadata": [
+                "🚗 20 Min.",
+                "☂ drinnen",
+                "🎟 günstig"
+              ],
+              "colorHex": "#b5aaa0",
+              "icon": "🗿",
+              "mapQuery": "Lapidarium Museum Novigrad"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Umag bei Regen",
+          "distance": "19 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Stadtmuseum Umag",
+              "description": "Ein kompakter Einstieg in Umags Archäologie und Geschichte im alten Wehrturm.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Zeiten prüfen",
+                "🏺 Sammlung"
+              ],
+              "colorHex": "#9ca69d",
+              "icon": "🏺",
+              "mapQuery": "Museum of the City of Umag"
+            },
+            {
+              "time": "11:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Istrische Mittagspause",
+              "description": "Pasta, Suppe und etwas Süßes in der Altstadt – trocken und ohne Zeitdruck.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d7a171",
+              "icon": "🍲",
+              "mapQuery": "Umag Old Town restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KULTUR",
+              "duration": "1 Std.",
+              "title": "Lapidarium Novigrad",
+              "description": "Nur rund 20 Minuten entfernt wartet eine moderne Sammlung historischer Steinfragmente.",
+              "metadata": [
+                "🚗 20 Min.",
+                "☂ drinnen",
+                "🎟 günstig"
+              ],
+              "colorHex": "#b5aaa0",
+              "icon": "🗿",
+              "mapQuery": "Lapidarium Museum Novigrad"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "novigrad",
+      "name": "Novigrad",
+      "shortName": "Novigrad",
+      "latitude": 45.316,
+      "longitude": 13.561,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Hafenleben & Familienstrand",
+          "distance": "4,4 km",
+          "budget": "€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "HAFEN",
+              "duration": "1 Std.",
+              "title": "Mandrač & Stadtmauer",
+              "description": "Rund um den Fischerhafen und entlang der mittelalterlichen Mauern in den Tag starten.",
+              "metadata": [
+                "🚶 ebene Runde",
+                "⚓ Fischerboote",
+                "📷 Fotostopp"
+              ],
+              "colorHex": "#75aeb8",
+              "icon": "⚓",
+              "mapQuery": "Mandrac Novigrad"
+            },
+            {
+              "time": "10:45",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Lapidarium",
+              "description": "Eine kleine, modern präsentierte Sammlung historischer Steinmonumente neben der Pfarrkirche.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 günstig",
+                "◷ sonntags zu"
+              ],
+              "colorHex": "#aaa49a",
+              "icon": "🗿",
+              "mapQuery": "Lapidarium Museum Novigrad"
+            },
+            {
+              "time": "12:15",
+              "category": "ENTDECKEN",
+              "duration": "45 Min.",
+              "title": "Zentrum der Fischereitradition",
+              "description": "Multimedial erfahren, wie Fischfang und Bootsbau Novigrad geprägt haben – Zeiten vorher prüfen.",
+              "metadata": [
+                "⚓ kostenlos",
+                "☂ drinnen",
+                "◷ begrenzte Zeiten"
+              ],
+              "colorHex": "#7aa4ae",
+              "icon": "🐟",
+              "mapQuery": "Fishing Tradition Centre Novigrad"
+            },
+            {
+              "time": "14:00",
+              "category": "BADEN",
+              "duration": "3 Std.",
+              "title": "Karpinjan Beach",
+              "description": "Flacher Einstieg, Pinien und genug Platz für einen langen Familiennachmittag.",
+              "metadata": [
+                "♒ flacher Einstieg",
+                "🌲 Schatten",
+                "🚶 zentrumsnah"
+              ],
+              "colorHex": "#67bec2",
+              "icon": "🏖️",
+              "mapQuery": "Karpinjan Beach Novigrad"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Novigrad",
+          "distance": "2,6 km",
+          "budget": "€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "HAFEN",
+              "duration": "1 Std.",
+              "title": "Mandrač & Stadtmauer",
+              "description": "Rund um den Fischerhafen und entlang der mittelalterlichen Mauern in den Tag starten.",
+              "metadata": [
+                "🚶 ebene Runde",
+                "⚓ Fischerboote",
+                "📷 Fotostopp"
+              ],
+              "colorHex": "#75aeb8",
+              "icon": "⚓",
+              "mapQuery": "Mandrac Novigrad"
+            },
+            {
+              "time": "10:45",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Lapidarium",
+              "description": "Eine kleine, modern präsentierte Sammlung historischer Steinmonumente neben der Pfarrkirche.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 günstig",
+                "◷ sonntags zu"
+              ],
+              "colorHex": "#aaa49a",
+              "icon": "🗿",
+              "mapQuery": "Lapidarium Museum Novigrad"
+            },
+            {
+              "time": "12:15",
+              "category": "ENTDECKEN",
+              "duration": "45 Min.",
+              "title": "Zentrum der Fischereitradition",
+              "description": "Multimedial erfahren, wie Fischfang und Bootsbau Novigrad geprägt haben – Zeiten vorher prüfen.",
+              "metadata": [
+                "⚓ kostenlos",
+                "☂ drinnen",
+                "◷ begrenzte Zeiten"
+              ],
+              "colorHex": "#7aa4ae",
+              "icon": "🐟",
+              "mapQuery": "Fishing Tradition Centre Novigrad"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Novigrad für Entdecker",
+          "distance": "7 km",
+          "budget": "€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "HAFEN",
+              "duration": "1 Std.",
+              "title": "Mandrač & Stadtmauer",
+              "description": "Rund um den Fischerhafen und entlang der mittelalterlichen Mauern in den Tag starten.",
+              "metadata": [
+                "🚶 ebene Runde",
+                "⚓ Fischerboote",
+                "📷 Fotostopp"
+              ],
+              "colorHex": "#75aeb8",
+              "icon": "⚓",
+              "mapQuery": "Mandrac Novigrad"
+            },
+            {
+              "time": "10:45",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Lapidarium",
+              "description": "Eine kleine, modern präsentierte Sammlung historischer Steinmonumente neben der Pfarrkirche.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 günstig",
+                "◷ sonntags zu"
+              ],
+              "colorHex": "#aaa49a",
+              "icon": "🗿",
+              "mapQuery": "Lapidarium Museum Novigrad"
+            },
+            {
+              "time": "12:15",
+              "category": "ENTDECKEN",
+              "duration": "45 Min.",
+              "title": "Zentrum der Fischereitradition",
+              "description": "Multimedial erfahren, wie Fischfang und Bootsbau Novigrad geprägt haben – Zeiten vorher prüfen.",
+              "metadata": [
+                "⚓ kostenlos",
+                "☂ drinnen",
+                "◷ begrenzte Zeiten"
+              ],
+              "colorHex": "#7aa4ae",
+              "icon": "🐟",
+              "mapQuery": "Fishing Tradition Centre Novigrad"
+            },
+            {
+              "time": "14:00",
+              "category": "BADEN",
+              "duration": "3 Std.",
+              "title": "Karpinjan Beach",
+              "description": "Flacher Einstieg, Pinien und genug Platz für einen langen Familiennachmittag.",
+              "metadata": [
+                "♒ flacher Einstieg",
+                "🌲 Schatten",
+                "🚶 zentrumsnah"
+              ],
+              "colorHex": "#67bec2",
+              "icon": "🏖️",
+              "mapQuery": "Karpinjan Beach Novigrad"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Novigrad bei Regen",
+          "distance": "4,4 km",
+          "budget": "€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Lapidarium",
+              "description": "Historische Steinfragmente in moderner Architektur entdecken.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 günstig",
+                "◷ sonntags zu"
+              ],
+              "colorHex": "#aaa49a",
+              "icon": "🗿",
+              "mapQuery": "Lapidarium Museum Novigrad"
+            },
+            {
+              "time": "11:30",
+              "category": "FISCHEREI",
+              "duration": "1 Std.",
+              "title": "Zentrum der Fischereitradition",
+              "description": "Ein multimedialer Blick auf Boote, Netze und das Leben der Fischer.",
+              "metadata": [
+                "☂ drinnen",
+                "⚓ kostenlos",
+                "◷ Zeiten prüfen"
+              ],
+              "colorHex": "#7aa4ae",
+              "icon": "🐟",
+              "mapQuery": "Fishing Tradition Centre Novigrad"
+            },
+            {
+              "time": "13:00",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagessen am Mandrač",
+              "description": "Mit Blick auf die Boote eine warme Pause einlegen und Regenlücken für einen Hafenrundgang nutzen.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#dba675",
+              "icon": "🍝",
+              "mapQuery": "Mandrac Novigrad restaurants"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Novigrad bei Regen",
+          "distance": "2,6 km",
+          "budget": "€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Lapidarium",
+              "description": "Historische Steinfragmente in moderner Architektur entdecken.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 günstig",
+                "◷ sonntags zu"
+              ],
+              "colorHex": "#aaa49a",
+              "icon": "🗿",
+              "mapQuery": "Lapidarium Museum Novigrad"
+            },
+            {
+              "time": "11:30",
+              "category": "FISCHEREI",
+              "duration": "1 Std.",
+              "title": "Zentrum der Fischereitradition",
+              "description": "Ein multimedialer Blick auf Boote, Netze und das Leben der Fischer.",
+              "metadata": [
+                "☂ drinnen",
+                "⚓ kostenlos",
+                "◷ Zeiten prüfen"
+              ],
+              "colorHex": "#7aa4ae",
+              "icon": "🐟",
+              "mapQuery": "Fishing Tradition Centre Novigrad"
+            },
+            {
+              "time": "13:00",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagessen am Mandrač",
+              "description": "Mit Blick auf die Boote eine warme Pause einlegen und Regenlücken für einen Hafenrundgang nutzen.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#dba675",
+              "icon": "🍝",
+              "mapQuery": "Mandrac Novigrad restaurants"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Novigrad bei Regen",
+          "distance": "7 km",
+          "budget": "€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Lapidarium",
+              "description": "Historische Steinfragmente in moderner Architektur entdecken.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 günstig",
+                "◷ sonntags zu"
+              ],
+              "colorHex": "#aaa49a",
+              "icon": "🗿",
+              "mapQuery": "Lapidarium Museum Novigrad"
+            },
+            {
+              "time": "11:30",
+              "category": "FISCHEREI",
+              "duration": "1 Std.",
+              "title": "Zentrum der Fischereitradition",
+              "description": "Ein multimedialer Blick auf Boote, Netze und das Leben der Fischer.",
+              "metadata": [
+                "☂ drinnen",
+                "⚓ kostenlos",
+                "◷ Zeiten prüfen"
+              ],
+              "colorHex": "#7aa4ae",
+              "icon": "🐟",
+              "mapQuery": "Fishing Tradition Centre Novigrad"
+            },
+            {
+              "time": "13:00",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagessen am Mandrač",
+              "description": "Mit Blick auf die Boote eine warme Pause einlegen und Regenlücken für einen Hafenrundgang nutzen.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#dba675",
+              "icon": "🍝",
+              "mapQuery": "Mandrac Novigrad restaurants"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vrsar",
+      "name": "Vrsar & Lim-Bucht",
+      "shortName": "Vrsar",
+      "latitude": 45.149,
+      "longitude": 13.605,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Kunst, Aussicht & Lim-Bucht",
+          "distance": "6,8 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "KUNST",
+              "duration": "1 Std.",
+              "title": "Skulpturenpark Džamonja",
+              "description": "Große moderne Skulpturen unter freiem Himmel – kostenlos und mit viel Platz zum Entdecken.",
+              "metadata": [
+                "🎨 unter freiem Himmel",
+                "✓ kostenlos",
+                "☀ wenig Schatten"
+              ],
+              "colorHex": "#a7aa8e",
+              "icon": "🗿",
+              "mapQuery": "Dusan Dzamonja Sculpture Park"
+            },
+            {
+              "time": "10:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Historisches Vrsar",
+              "description": "Vom Hafen durch steile mittelalterliche Gassen hinauf zur Kirche St. Martin.",
+              "metadata": [
+                "↟ steil",
+                "🍦 Eispause",
+                "📷 Gassen"
+              ],
+              "colorHex": "#dfac78",
+              "icon": "🏘️",
+              "mapQuery": "Vrsar Old Town"
+            },
+            {
+              "time": "12:15",
+              "category": "PANORAMA",
+              "duration": "45 Min.",
+              "title": "Casanova-Aussichtspunkt",
+              "description": "Über die Inselwelt und bis zur grünen Lim-Bucht schauen.",
+              "metadata": [
+                "◉ Panoramablick",
+                "☀ Sonnenhut",
+                "✓ kostenlos"
+              ],
+              "colorHex": "#e7c06f",
+              "icon": "🔭",
+              "mapQuery": "Casanova Viewpoint Vrsar"
+            },
+            {
+              "time": "14:00",
+              "category": "BOOTSTOUR",
+              "duration": "3 Std.",
+              "title": "Lim-Bucht vom Wasser",
+              "description": "Vorab gebuchte Bootstour mit Badepause – Dauer und Wetterregel beim Anbieter prüfen.",
+              "metadata": [
+                "⛵ vorab buchen",
+                "🌊 Badepause",
+                "☁ wetterabhängig"
+              ],
+              "colorHex": "#67aeb7",
+              "icon": "⛵",
+              "mapQuery": "Vrsar Harbour"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Vrsar",
+          "distance": "3 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "KUNST",
+              "duration": "1 Std.",
+              "title": "Skulpturenpark Džamonja",
+              "description": "Große moderne Skulpturen unter freiem Himmel – kostenlos und mit viel Platz zum Entdecken.",
+              "metadata": [
+                "🎨 unter freiem Himmel",
+                "✓ kostenlos",
+                "☀ wenig Schatten"
+              ],
+              "colorHex": "#a7aa8e",
+              "icon": "🗿",
+              "mapQuery": "Dusan Dzamonja Sculpture Park"
+            },
+            {
+              "time": "10:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Historisches Vrsar",
+              "description": "Vom Hafen durch steile mittelalterliche Gassen hinauf zur Kirche St. Martin.",
+              "metadata": [
+                "↟ steil",
+                "🍦 Eispause",
+                "📷 Gassen"
+              ],
+              "colorHex": "#dfac78",
+              "icon": "🏘️",
+              "mapQuery": "Vrsar Old Town"
+            },
+            {
+              "time": "12:15",
+              "category": "PANORAMA",
+              "duration": "45 Min.",
+              "title": "Casanova-Aussichtspunkt",
+              "description": "Über die Inselwelt und bis zur grünen Lim-Bucht schauen.",
+              "metadata": [
+                "◉ Panoramablick",
+                "☀ Sonnenhut",
+                "✓ kostenlos"
+              ],
+              "colorHex": "#e7c06f",
+              "icon": "🔭",
+              "mapQuery": "Casanova Viewpoint Vrsar"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Vrsar für Entdecker",
+          "distance": "10,2 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "KUNST",
+              "duration": "1 Std.",
+              "title": "Skulpturenpark Džamonja",
+              "description": "Große moderne Skulpturen unter freiem Himmel – kostenlos und mit viel Platz zum Entdecken.",
+              "metadata": [
+                "🎨 unter freiem Himmel",
+                "✓ kostenlos",
+                "☀ wenig Schatten"
+              ],
+              "colorHex": "#a7aa8e",
+              "icon": "🗿",
+              "mapQuery": "Dusan Dzamonja Sculpture Park"
+            },
+            {
+              "time": "10:30",
+              "category": "ALTSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Historisches Vrsar",
+              "description": "Vom Hafen durch steile mittelalterliche Gassen hinauf zur Kirche St. Martin.",
+              "metadata": [
+                "↟ steil",
+                "🍦 Eispause",
+                "📷 Gassen"
+              ],
+              "colorHex": "#dfac78",
+              "icon": "🏘️",
+              "mapQuery": "Vrsar Old Town"
+            },
+            {
+              "time": "12:15",
+              "category": "PANORAMA",
+              "duration": "45 Min.",
+              "title": "Casanova-Aussichtspunkt",
+              "description": "Über die Inselwelt und bis zur grünen Lim-Bucht schauen.",
+              "metadata": [
+                "◉ Panoramablick",
+                "☀ Sonnenhut",
+                "✓ kostenlos"
+              ],
+              "colorHex": "#e7c06f",
+              "icon": "🔭",
+              "mapQuery": "Casanova Viewpoint Vrsar"
+            },
+            {
+              "time": "14:00",
+              "category": "BOOTSTOUR",
+              "duration": "3 Std.",
+              "title": "Lim-Bucht vom Wasser",
+              "description": "Vorab gebuchte Bootstour mit Badepause – Dauer und Wetterregel beim Anbieter prüfen.",
+              "metadata": [
+                "⛵ vorab buchen",
+                "🌊 Badepause",
+                "☁ wetterabhängig"
+              ],
+              "colorHex": "#67aeb7",
+              "icon": "⛵",
+              "mapQuery": "Vrsar Harbour"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Vrsar bei Regen",
+          "distance": "6,8 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "KULTUR",
+              "duration": "45 Min.",
+              "title": "Kirche St. Martin",
+              "description": "Die Pfarrkirche und ihre Umgebung in einer Regenpause besuchen.",
+              "metadata": [
+                "☂ teilweise drinnen",
+                "↟ steiler Weg",
+                "✓ kostenlos"
+              ],
+              "colorHex": "#d5b079",
+              "icon": "⛪",
+              "mapQuery": "Church of St Martin Vrsar"
+            },
+            {
+              "time": "11:15",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagspause am Hafen",
+              "description": "In Ruhe essen und den Blick auf die wettergeschützten Boote genießen.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#dca06f",
+              "icon": "🍲",
+              "mapQuery": "Vrsar Harbour restaurants"
+            },
+            {
+              "time": "13:30",
+              "category": "UNESCO-AUSFLUG",
+              "duration": "2 Std.",
+              "title": "Euphrasius-Basilika in Poreč",
+              "description": "Bei Dauerregen liegt Poreč nur rund 15 Minuten entfernt und bietet ein gutes Programm drinnen.",
+              "metadata": [
+                "🚗 15 Min.",
+                "★ UNESCO",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#c9b178",
+              "icon": "✨",
+              "mapQuery": "Euphrasian Basilica Porec"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Vrsar bei Regen",
+          "distance": "3 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "KULTUR",
+              "duration": "45 Min.",
+              "title": "Kirche St. Martin",
+              "description": "Die Pfarrkirche und ihre Umgebung in einer Regenpause besuchen.",
+              "metadata": [
+                "☂ teilweise drinnen",
+                "↟ steiler Weg",
+                "✓ kostenlos"
+              ],
+              "colorHex": "#d5b079",
+              "icon": "⛪",
+              "mapQuery": "Church of St Martin Vrsar"
+            },
+            {
+              "time": "11:15",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagspause am Hafen",
+              "description": "In Ruhe essen und den Blick auf die wettergeschützten Boote genießen.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#dca06f",
+              "icon": "🍲",
+              "mapQuery": "Vrsar Harbour restaurants"
+            },
+            {
+              "time": "13:30",
+              "category": "UNESCO-AUSFLUG",
+              "duration": "2 Std.",
+              "title": "Euphrasius-Basilika in Poreč",
+              "description": "Bei Dauerregen liegt Poreč nur rund 15 Minuten entfernt und bietet ein gutes Programm drinnen.",
+              "metadata": [
+                "🚗 15 Min.",
+                "★ UNESCO",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#c9b178",
+              "icon": "✨",
+              "mapQuery": "Euphrasian Basilica Porec"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Vrsar bei Regen",
+          "distance": "10,2 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "KULTUR",
+              "duration": "45 Min.",
+              "title": "Kirche St. Martin",
+              "description": "Die Pfarrkirche und ihre Umgebung in einer Regenpause besuchen.",
+              "metadata": [
+                "☂ teilweise drinnen",
+                "↟ steiler Weg",
+                "✓ kostenlos"
+              ],
+              "colorHex": "#d5b079",
+              "icon": "⛪",
+              "mapQuery": "Church of St Martin Vrsar"
+            },
+            {
+              "time": "11:15",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagspause am Hafen",
+              "description": "In Ruhe essen und den Blick auf die wettergeschützten Boote genießen.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#dca06f",
+              "icon": "🍲",
+              "mapQuery": "Vrsar Harbour restaurants"
+            },
+            {
+              "time": "13:30",
+              "category": "UNESCO-AUSFLUG",
+              "duration": "2 Std.",
+              "title": "Euphrasius-Basilika in Poreč",
+              "description": "Bei Dauerregen liegt Poreč nur rund 15 Minuten entfernt und bietet ein gutes Programm drinnen.",
+              "metadata": [
+                "🚗 15 Min.",
+                "★ UNESCO",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#c9b178",
+              "icon": "✨",
+              "mapQuery": "Euphrasian Basilica Porec"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fazana",
+      "name": "Fažana & Brijuni",
+      "shortName": "Fažana",
+      "latitude": 44.927,
+      "longitude": 13.803,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Inselabenteuer im Nationalpark",
+          "distance": "6 km",
+          "budget": "€€€",
+          "stops": [
+            {
+              "time": "08:45",
+              "category": "HAFEN",
+              "duration": "45 Min.",
+              "title": "Früher Start in Fažana",
+              "description": "Tickets abholen, durch die alten Gassen schlendern und rechtzeitig am Anleger sein.",
+              "metadata": [
+                "⛴ feste Abfahrt",
+                "🎟 vorab buchen",
+                "☕ Frühstück"
+              ],
+              "colorHex": "#dfa36f",
+              "icon": "⚓",
+              "mapQuery": "Fazana Harbour"
+            },
+            {
+              "time": "10:00",
+              "category": "NATIONALPARK",
+              "duration": "1 Std.",
+              "title": "Veliki Brijun mit Inselbahn",
+              "description": "Die geführte Rundfahrt verbindet Landschaft, Geschichte und entspannte Wege.",
+              "metadata": [
+                "🚂 im Ticket",
+                "⛴ Fährfahrt",
+                "★ Nationalpark"
+              ],
+              "colorHex": "#8db88a",
+              "icon": "🚂",
+              "mapQuery": "Brijuni National Park"
+            },
+            {
+              "time": "11:30",
+              "category": "TIERWELT",
+              "duration": "1 Std.",
+              "title": "Safari Park Brijuni",
+              "description": "Zebras, Lamas und weitere Tiere auf der Inselroute beobachten.",
+              "metadata": [
+                "🦓 Kinderhighlight",
+                "✓ Standardtour",
+                "☀ Sonnenhut"
+              ],
+              "colorHex": "#a6bd7f",
+              "icon": "🦓",
+              "mapQuery": "Safari Park Brijuni"
+            },
+            {
+              "time": "15:30",
+              "category": "BADEN",
+              "duration": "2 Std.",
+              "title": "Fažana Nordstrand",
+              "description": "Nach der Rückfahrt am flachen Kiesstrand baden und über die Promenade zurücklaufen.",
+              "metadata": [
+                "🏖 Familienstrand",
+                "🌲 etwas Schatten",
+                "🍦 Promenade"
+              ],
+              "colorHex": "#67bdc2",
+              "icon": "🏖️",
+              "mapQuery": "Fazana North Beach"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Fažana",
+          "distance": "3 km",
+          "budget": "€€€",
+          "stops": [
+            {
+              "time": "08:45",
+              "category": "HAFEN",
+              "duration": "45 Min.",
+              "title": "Früher Start in Fažana",
+              "description": "Tickets abholen, durch die alten Gassen schlendern und rechtzeitig am Anleger sein.",
+              "metadata": [
+                "⛴ feste Abfahrt",
+                "🎟 vorab buchen",
+                "☕ Frühstück"
+              ],
+              "colorHex": "#dfa36f",
+              "icon": "⚓",
+              "mapQuery": "Fazana Harbour"
+            },
+            {
+              "time": "10:00",
+              "category": "NATIONALPARK",
+              "duration": "1 Std.",
+              "title": "Veliki Brijun mit Inselbahn",
+              "description": "Die geführte Rundfahrt verbindet Landschaft, Geschichte und entspannte Wege.",
+              "metadata": [
+                "🚂 im Ticket",
+                "⛴ Fährfahrt",
+                "★ Nationalpark"
+              ],
+              "colorHex": "#8db88a",
+              "icon": "🚂",
+              "mapQuery": "Brijuni National Park"
+            },
+            {
+              "time": "11:30",
+              "category": "TIERWELT",
+              "duration": "1 Std.",
+              "title": "Safari Park Brijuni",
+              "description": "Zebras, Lamas und weitere Tiere auf der Inselroute beobachten.",
+              "metadata": [
+                "🦓 Kinderhighlight",
+                "✓ Standardtour",
+                "☀ Sonnenhut"
+              ],
+              "colorHex": "#a6bd7f",
+              "icon": "🦓",
+              "mapQuery": "Safari Park Brijuni"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Fažana für Entdecker",
+          "distance": "9 km",
+          "budget": "€€€",
+          "stops": [
+            {
+              "time": "08:45",
+              "category": "HAFEN",
+              "duration": "45 Min.",
+              "title": "Früher Start in Fažana",
+              "description": "Tickets abholen, durch die alten Gassen schlendern und rechtzeitig am Anleger sein.",
+              "metadata": [
+                "⛴ feste Abfahrt",
+                "🎟 vorab buchen",
+                "☕ Frühstück"
+              ],
+              "colorHex": "#dfa36f",
+              "icon": "⚓",
+              "mapQuery": "Fazana Harbour"
+            },
+            {
+              "time": "10:00",
+              "category": "NATIONALPARK",
+              "duration": "1 Std.",
+              "title": "Veliki Brijun mit Inselbahn",
+              "description": "Die geführte Rundfahrt verbindet Landschaft, Geschichte und entspannte Wege.",
+              "metadata": [
+                "🚂 im Ticket",
+                "⛴ Fährfahrt",
+                "★ Nationalpark"
+              ],
+              "colorHex": "#8db88a",
+              "icon": "🚂",
+              "mapQuery": "Brijuni National Park"
+            },
+            {
+              "time": "11:30",
+              "category": "TIERWELT",
+              "duration": "1 Std.",
+              "title": "Safari Park Brijuni",
+              "description": "Zebras, Lamas und weitere Tiere auf der Inselroute beobachten.",
+              "metadata": [
+                "🦓 Kinderhighlight",
+                "✓ Standardtour",
+                "☀ Sonnenhut"
+              ],
+              "colorHex": "#a6bd7f",
+              "icon": "🦓",
+              "mapQuery": "Safari Park Brijuni"
+            },
+            {
+              "time": "15:30",
+              "category": "BADEN",
+              "duration": "2 Std.",
+              "title": "Fažana Nordstrand",
+              "description": "Nach der Rückfahrt am flachen Kiesstrand baden und über die Promenade zurücklaufen.",
+              "metadata": [
+                "🏖 Familienstrand",
+                "🌲 etwas Schatten",
+                "🍦 Promenade"
+              ],
+              "colorHex": "#67bdc2",
+              "icon": "🏖️",
+              "mapQuery": "Fazana North Beach"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Fažana bei Regen",
+          "distance": "6 km",
+          "budget": "€€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "WICHTIG",
+              "duration": "30 Min.",
+              "title": "Fährstatus prüfen",
+              "description": "Bei Regen fahren Touren oft, bei starkem Wind können sie ausfallen. Vor Abfahrt beim Nationalpark nachfragen.",
+              "metadata": [
+                "⛴ wetterabhängig",
+                "☎ vorher prüfen",
+                "🎟 feste Zeit"
+              ],
+              "colorHex": "#c9c56b",
+              "icon": "⛴",
+              "mapQuery": "Brijuni National Park Office Fazana"
+            },
+            {
+              "time": "10:30",
+              "category": "MEERESWELT",
+              "duration": "2 Std.",
+              "title": "Aquarium Pula",
+              "description": "Falls die Fähre ausfällt: In rund 20 Minuten erreicht ihr das Aquarium in der Festung Verudela.",
+              "metadata": [
+                "🚗 20 Min.",
+                "☂ drinnen",
+                "🐢 Kinderhighlight"
+              ],
+              "colorHex": "#67b4b8",
+              "icon": "🐢",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "13:30",
+              "category": "UNTERIRDISCH",
+              "duration": "1 Std. 30 Min.",
+              "title": "Zerostrasse Pula",
+              "description": "Das Tunnelsystem unter Pulas Altstadt ist eine wetterfeste zweite Etappe.",
+              "metadata": [
+                "🚗 15 Min.",
+                "❄ kühl",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#909d96",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Fažana bei Regen",
+          "distance": "3 km",
+          "budget": "€€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "WICHTIG",
+              "duration": "30 Min.",
+              "title": "Fährstatus prüfen",
+              "description": "Bei Regen fahren Touren oft, bei starkem Wind können sie ausfallen. Vor Abfahrt beim Nationalpark nachfragen.",
+              "metadata": [
+                "⛴ wetterabhängig",
+                "☎ vorher prüfen",
+                "🎟 feste Zeit"
+              ],
+              "colorHex": "#c9c56b",
+              "icon": "⛴",
+              "mapQuery": "Brijuni National Park Office Fazana"
+            },
+            {
+              "time": "10:30",
+              "category": "MEERESWELT",
+              "duration": "2 Std.",
+              "title": "Aquarium Pula",
+              "description": "Falls die Fähre ausfällt: In rund 20 Minuten erreicht ihr das Aquarium in der Festung Verudela.",
+              "metadata": [
+                "🚗 20 Min.",
+                "☂ drinnen",
+                "🐢 Kinderhighlight"
+              ],
+              "colorHex": "#67b4b8",
+              "icon": "🐢",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "13:30",
+              "category": "UNTERIRDISCH",
+              "duration": "1 Std. 30 Min.",
+              "title": "Zerostrasse Pula",
+              "description": "Das Tunnelsystem unter Pulas Altstadt ist eine wetterfeste zweite Etappe.",
+              "metadata": [
+                "🚗 15 Min.",
+                "❄ kühl",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#909d96",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Fažana bei Regen",
+          "distance": "9 km",
+          "budget": "€€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "WICHTIG",
+              "duration": "30 Min.",
+              "title": "Fährstatus prüfen",
+              "description": "Bei Regen fahren Touren oft, bei starkem Wind können sie ausfallen. Vor Abfahrt beim Nationalpark nachfragen.",
+              "metadata": [
+                "⛴ wetterabhängig",
+                "☎ vorher prüfen",
+                "🎟 feste Zeit"
+              ],
+              "colorHex": "#c9c56b",
+              "icon": "⛴",
+              "mapQuery": "Brijuni National Park Office Fazana"
+            },
+            {
+              "time": "10:30",
+              "category": "MEERESWELT",
+              "duration": "2 Std.",
+              "title": "Aquarium Pula",
+              "description": "Falls die Fähre ausfällt: In rund 20 Minuten erreicht ihr das Aquarium in der Festung Verudela.",
+              "metadata": [
+                "🚗 20 Min.",
+                "☂ drinnen",
+                "🐢 Kinderhighlight"
+              ],
+              "colorHex": "#67b4b8",
+              "icon": "🐢",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "13:30",
+              "category": "UNTERIRDISCH",
+              "duration": "1 Std. 30 Min.",
+              "title": "Zerostrasse Pula",
+              "description": "Das Tunnelsystem unter Pulas Altstadt ist eine wetterfeste zweite Etappe.",
+              "metadata": [
+                "🚗 15 Min.",
+                "❄ kühl",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#909d96",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "medulin",
+      "name": "Medulin & Kamenjak",
+      "shortName": "Medulin",
+      "latitude": 44.8225,
+      "longitude": 13.935,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Dinosaurier & wilde Buchten",
+          "distance": "18 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "08:30",
+              "category": "DINOSAURIER",
+              "duration": "1 Std.",
+              "title": "Dinosaurierpfad Grakalovac",
+              "description": "Früh auf Spurensuche am Kap Kamenjak gehen, bevor Wege und Felsen heiß werden.",
+              "metadata": [
+                "🦕 Kinderhighlight",
+                "☀ früh starten",
+                "👟 feste Schuhe"
+              ],
+              "colorHex": "#b8b37d",
+              "icon": "🦕",
+              "mapQuery": "Dinosaur Trail Kamenjak"
+            },
+            {
+              "time": "10:00",
+              "category": "WILDE KÜSTE",
+              "duration": "3 Std.",
+              "title": "Bucht Pinižule",
+              "description": "Felsen, klares Wasser und ein langer Badestopp – Wasser, Snacks und Badeschuhe mitbringen.",
+              "metadata": [
+                "🌊 Naturbucht",
+                "👟 Badeschuhe",
+                "💧 Wasser mitnehmen"
+              ],
+              "colorHex": "#58b4bc",
+              "icon": "🤿",
+              "mapQuery": "Pinizule Beach Kamenjak"
+            },
+            {
+              "time": "14:30",
+              "category": "RÖMERSPUREN",
+              "duration": "1 Std. 30 Min.",
+              "title": "Archäologiepark Vižula",
+              "description": "Zwischen römischen Villenresten spazieren; Spielbereiche machen den Stopp familientauglich.",
+              "metadata": [
+                "✓ Eintritt frei",
+                "♿ Hauptwege",
+                "☀ Sonnenhut"
+              ],
+              "colorHex": "#c8aa77",
+              "icon": "🏺",
+              "mapQuery": "Vizula Archaeological Park"
+            },
+            {
+              "time": "17:00",
+              "category": "SAND & ABEND",
+              "duration": "2 Std.",
+              "title": "Bijeca & Windmühle Malin",
+              "description": "Am flachen Sandstrand ausklingen lassen und später zur Windmühle an der Promenade laufen.",
+              "metadata": [
+                "🏖 Sandstrand",
+                "♒ flach",
+                "🌅 Abendrunde"
+              ],
+              "colorHex": "#68bdc4",
+              "icon": "🌅",
+              "mapQuery": "Bijeca Beach Medulin"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Medulin",
+          "distance": "7 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "08:30",
+              "category": "DINOSAURIER",
+              "duration": "1 Std.",
+              "title": "Dinosaurierpfad Grakalovac",
+              "description": "Früh auf Spurensuche am Kap Kamenjak gehen, bevor Wege und Felsen heiß werden.",
+              "metadata": [
+                "🦕 Kinderhighlight",
+                "☀ früh starten",
+                "👟 feste Schuhe"
+              ],
+              "colorHex": "#b8b37d",
+              "icon": "🦕",
+              "mapQuery": "Dinosaur Trail Kamenjak"
+            },
+            {
+              "time": "10:00",
+              "category": "WILDE KÜSTE",
+              "duration": "3 Std.",
+              "title": "Bucht Pinižule",
+              "description": "Felsen, klares Wasser und ein langer Badestopp – Wasser, Snacks und Badeschuhe mitbringen.",
+              "metadata": [
+                "🌊 Naturbucht",
+                "👟 Badeschuhe",
+                "💧 Wasser mitnehmen"
+              ],
+              "colorHex": "#58b4bc",
+              "icon": "🤿",
+              "mapQuery": "Pinizule Beach Kamenjak"
+            },
+            {
+              "time": "14:30",
+              "category": "RÖMERSPUREN",
+              "duration": "1 Std. 30 Min.",
+              "title": "Archäologiepark Vižula",
+              "description": "Zwischen römischen Villenresten spazieren; Spielbereiche machen den Stopp familientauglich.",
+              "metadata": [
+                "✓ Eintritt frei",
+                "♿ Hauptwege",
+                "☀ Sonnenhut"
+              ],
+              "colorHex": "#c8aa77",
+              "icon": "🏺",
+              "mapQuery": "Vizula Archaeological Park"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Medulin für Entdecker",
+          "distance": "24 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "08:30",
+              "category": "DINOSAURIER",
+              "duration": "1 Std.",
+              "title": "Dinosaurierpfad Grakalovac",
+              "description": "Früh auf Spurensuche am Kap Kamenjak gehen, bevor Wege und Felsen heiß werden.",
+              "metadata": [
+                "🦕 Kinderhighlight",
+                "☀ früh starten",
+                "👟 feste Schuhe"
+              ],
+              "colorHex": "#b8b37d",
+              "icon": "🦕",
+              "mapQuery": "Dinosaur Trail Kamenjak"
+            },
+            {
+              "time": "10:00",
+              "category": "WILDE KÜSTE",
+              "duration": "3 Std.",
+              "title": "Bucht Pinižule",
+              "description": "Felsen, klares Wasser und ein langer Badestopp – Wasser, Snacks und Badeschuhe mitbringen.",
+              "metadata": [
+                "🌊 Naturbucht",
+                "👟 Badeschuhe",
+                "💧 Wasser mitnehmen"
+              ],
+              "colorHex": "#58b4bc",
+              "icon": "🤿",
+              "mapQuery": "Pinizule Beach Kamenjak"
+            },
+            {
+              "time": "14:30",
+              "category": "RÖMERSPUREN",
+              "duration": "1 Std. 30 Min.",
+              "title": "Archäologiepark Vižula",
+              "description": "Zwischen römischen Villenresten spazieren; Spielbereiche machen den Stopp familientauglich.",
+              "metadata": [
+                "✓ Eintritt frei",
+                "♿ Hauptwege",
+                "☀ Sonnenhut"
+              ],
+              "colorHex": "#c8aa77",
+              "icon": "🏺",
+              "mapQuery": "Vizula Archaeological Park"
+            },
+            {
+              "time": "17:00",
+              "category": "SAND & ABEND",
+              "duration": "2 Std.",
+              "title": "Bijeca & Windmühle Malin",
+              "description": "Am flachen Sandstrand ausklingen lassen und später zur Windmühle an der Promenade laufen.",
+              "metadata": [
+                "🏖 Sandstrand",
+                "♒ flach",
+                "🌅 Abendrunde"
+              ],
+              "colorHex": "#68bdc4",
+              "icon": "🌅",
+              "mapQuery": "Bijeca Beach Medulin"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Medulin bei Regen",
+          "distance": "18 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MEERESWELT",
+              "duration": "2 Std. 30 Min.",
+              "title": "Aquarium Pula",
+              "description": "Die Festung Verudela mit Aquarien und Schildkrötenstation liegt rund 15 Minuten entfernt.",
+              "metadata": [
+                "🚗 15 Min.",
+                "☂ drinnen",
+                "🐢 Kinderhighlight"
+              ],
+              "colorHex": "#67b4b8",
+              "icon": "🐢",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "12:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagessen in Medulin",
+              "description": "Warme Pasta und eine Pause mit Blick auf den Hafen.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d7a272",
+              "icon": "🍝",
+              "mapQuery": "Medulin Harbour restaurants"
+            },
+            {
+              "time": "14:30",
+              "category": "UNTERIRDISCH",
+              "duration": "1 Std. 30 Min.",
+              "title": "Zerostrasse Pula",
+              "description": "Ein kühles Tunnelabenteuer unter Pulas Altstadt als wetterfester Abschluss.",
+              "metadata": [
+                "🚗 20 Min.",
+                "🔦 spannend",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#909d96",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Medulin bei Regen",
+          "distance": "7 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MEERESWELT",
+              "duration": "2 Std. 30 Min.",
+              "title": "Aquarium Pula",
+              "description": "Die Festung Verudela mit Aquarien und Schildkrötenstation liegt rund 15 Minuten entfernt.",
+              "metadata": [
+                "🚗 15 Min.",
+                "☂ drinnen",
+                "🐢 Kinderhighlight"
+              ],
+              "colorHex": "#67b4b8",
+              "icon": "🐢",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "12:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagessen in Medulin",
+              "description": "Warme Pasta und eine Pause mit Blick auf den Hafen.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d7a272",
+              "icon": "🍝",
+              "mapQuery": "Medulin Harbour restaurants"
+            },
+            {
+              "time": "14:30",
+              "category": "UNTERIRDISCH",
+              "duration": "1 Std. 30 Min.",
+              "title": "Zerostrasse Pula",
+              "description": "Ein kühles Tunnelabenteuer unter Pulas Altstadt als wetterfester Abschluss.",
+              "metadata": [
+                "🚗 20 Min.",
+                "🔦 spannend",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#909d96",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Medulin bei Regen",
+          "distance": "24 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:30",
+              "category": "MEERESWELT",
+              "duration": "2 Std. 30 Min.",
+              "title": "Aquarium Pula",
+              "description": "Die Festung Verudela mit Aquarien und Schildkrötenstation liegt rund 15 Minuten entfernt.",
+              "metadata": [
+                "🚗 15 Min.",
+                "☂ drinnen",
+                "🐢 Kinderhighlight"
+              ],
+              "colorHex": "#67b4b8",
+              "icon": "🐢",
+              "mapQuery": "Aquarium Pula"
+            },
+            {
+              "time": "12:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagessen in Medulin",
+              "description": "Warme Pasta und eine Pause mit Blick auf den Hafen.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d7a272",
+              "icon": "🍝",
+              "mapQuery": "Medulin Harbour restaurants"
+            },
+            {
+              "time": "14:30",
+              "category": "UNTERIRDISCH",
+              "duration": "1 Std. 30 Min.",
+              "title": "Zerostrasse Pula",
+              "description": "Ein kühles Tunnelabenteuer unter Pulas Altstadt als wetterfester Abschluss.",
+              "metadata": [
+                "🚗 20 Min.",
+                "🔦 spannend",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#909d96",
+              "icon": "🔦",
+              "mapQuery": "Zerostrasse Pula"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "labin",
+      "name": "Labin & Rabac",
+      "shortName": "Labin",
+      "latitude": 45.095,
+      "longitude": 14.123,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Bergstadt, Bergbau & Badebucht",
+          "distance": "9,6 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "ALTSTADT",
+              "duration": "1 Std.",
+              "title": "Labin & Fortica-Blick",
+              "description": "Durch das Florustor in die Bergstadt und hinauf zum Aussichtspunkt über Rabac.",
+              "metadata": [
+                "↟ Kopfsteinpflaster",
+                "◉ Aussicht",
+                "☀ früh starten"
+              ],
+              "colorHex": "#dfa36f",
+              "icon": "🏘️",
+              "mapQuery": "Fortica Viewpoint Labin"
+            },
+            {
+              "time": "10:15",
+              "category": "BERGBAU",
+              "duration": "1 Std. 15 Min.",
+              "title": "Nationalmuseum Labin",
+              "description": "Die Bergbaugeschichte inklusive Miniaturstollen macht Industriekultur greifbar.",
+              "metadata": [
+                "⛏ Kinder spannend",
+                "☂ drinnen",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#8f9690",
+              "icon": "⛏️",
+              "mapQuery": "Labin National Museum"
+            },
+            {
+              "time": "12:00",
+              "category": "WANDERN",
+              "duration": "1 Std. 30 Min.",
+              "title": "Sentona-Weg nach Rabac",
+              "description": "Über Brücken und an Bachläufen bergab; nur mit festen Schuhen und ohne Kinderwagen.",
+              "metadata": [
+                "🥾 2,5 km",
+                "↘ nur bergab",
+                "🚕 Rückfahrt planen"
+              ],
+              "colorHex": "#77a77d",
+              "icon": "🥾",
+              "mapQuery": "Sentona Trail Labin"
+            },
+            {
+              "time": "14:30",
+              "category": "BADEN",
+              "duration": "3 Std.",
+              "title": "Girandella Beach",
+              "description": "Klares Wasser und gute Infrastruktur für die verdiente Badepause.",
+              "metadata": [
+                "🏖 Blaue Flagge",
+                "👟 Badeschuhe",
+                "☕ Infrastruktur"
+              ],
+              "colorHex": "#5db3c0",
+              "icon": "🏖️",
+              "mapQuery": "Girandella Beach Rabac"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Labin",
+          "distance": "3,2 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "ALTSTADT",
+              "duration": "1 Std.",
+              "title": "Labin & Fortica-Blick",
+              "description": "Durch das Florustor in die Bergstadt und hinauf zum Aussichtspunkt über Rabac.",
+              "metadata": [
+                "↟ Kopfsteinpflaster",
+                "◉ Aussicht",
+                "☀ früh starten"
+              ],
+              "colorHex": "#dfa36f",
+              "icon": "🏘️",
+              "mapQuery": "Fortica Viewpoint Labin"
+            },
+            {
+              "time": "10:15",
+              "category": "BERGBAU",
+              "duration": "1 Std. 15 Min.",
+              "title": "Nationalmuseum Labin",
+              "description": "Die Bergbaugeschichte inklusive Miniaturstollen macht Industriekultur greifbar.",
+              "metadata": [
+                "⛏ Kinder spannend",
+                "☂ drinnen",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#8f9690",
+              "icon": "⛏️",
+              "mapQuery": "Labin National Museum"
+            },
+            {
+              "time": "12:00",
+              "category": "WANDERN",
+              "duration": "1 Std. 30 Min.",
+              "title": "Sentona-Weg nach Rabac",
+              "description": "Über Brücken und an Bachläufen bergab; nur mit festen Schuhen und ohne Kinderwagen.",
+              "metadata": [
+                "🥾 2,5 km",
+                "↘ nur bergab",
+                "🚕 Rückfahrt planen"
+              ],
+              "colorHex": "#77a77d",
+              "icon": "🥾",
+              "mapQuery": "Sentona Trail Labin"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Labin für Entdecker",
+          "distance": "13 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "ALTSTADT",
+              "duration": "1 Std.",
+              "title": "Labin & Fortica-Blick",
+              "description": "Durch das Florustor in die Bergstadt und hinauf zum Aussichtspunkt über Rabac.",
+              "metadata": [
+                "↟ Kopfsteinpflaster",
+                "◉ Aussicht",
+                "☀ früh starten"
+              ],
+              "colorHex": "#dfa36f",
+              "icon": "🏘️",
+              "mapQuery": "Fortica Viewpoint Labin"
+            },
+            {
+              "time": "10:15",
+              "category": "BERGBAU",
+              "duration": "1 Std. 15 Min.",
+              "title": "Nationalmuseum Labin",
+              "description": "Die Bergbaugeschichte inklusive Miniaturstollen macht Industriekultur greifbar.",
+              "metadata": [
+                "⛏ Kinder spannend",
+                "☂ drinnen",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#8f9690",
+              "icon": "⛏️",
+              "mapQuery": "Labin National Museum"
+            },
+            {
+              "time": "12:00",
+              "category": "WANDERN",
+              "duration": "1 Std. 30 Min.",
+              "title": "Sentona-Weg nach Rabac",
+              "description": "Über Brücken und an Bachläufen bergab; nur mit festen Schuhen und ohne Kinderwagen.",
+              "metadata": [
+                "🥾 2,5 km",
+                "↘ nur bergab",
+                "🚕 Rückfahrt planen"
+              ],
+              "colorHex": "#77a77d",
+              "icon": "🥾",
+              "mapQuery": "Sentona Trail Labin"
+            },
+            {
+              "time": "14:30",
+              "category": "BADEN",
+              "duration": "3 Std.",
+              "title": "Girandella Beach",
+              "description": "Klares Wasser und gute Infrastruktur für die verdiente Badepause.",
+              "metadata": [
+                "🏖 Blaue Flagge",
+                "👟 Badeschuhe",
+                "☕ Infrastruktur"
+              ],
+              "colorHex": "#5db3c0",
+              "icon": "🏖️",
+              "mapQuery": "Girandella Beach Rabac"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Labin bei Regen",
+          "distance": "9,6 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "BERGBAU",
+              "duration": "1 Std. 30 Min.",
+              "title": "Nationalmuseum Labin",
+              "description": "Stadt- und Bergbaugeschichte mit begehbarem Miniaturstollen.",
+              "metadata": [
+                "☂ drinnen",
+                "⛏ Kinder spannend",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#8f9690",
+              "icon": "⛏️",
+              "mapQuery": "Labin National Museum"
+            },
+            {
+              "time": "12:00",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagspause in Labin",
+              "description": "Istrische Küche in der Altstadt und Zeit für eine trockene Pause.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d5a172",
+              "icon": "🍲",
+              "mapQuery": "Labin Old Town restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KUNST",
+              "duration": "1 Std.",
+              "title": "Stadtgalerie Labin",
+              "description": "Eine kleine Dosis zeitgenössische Kunst – aktuelle Ausstellung und Zeiten vorher prüfen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎨 Ausstellung",
+                "◷ Zeiten prüfen"
+              ],
+              "colorHex": "#aaa49b",
+              "icon": "🎨",
+              "mapQuery": "Labin City Gallery"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Labin bei Regen",
+          "distance": "3,2 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "BERGBAU",
+              "duration": "1 Std. 30 Min.",
+              "title": "Nationalmuseum Labin",
+              "description": "Stadt- und Bergbaugeschichte mit begehbarem Miniaturstollen.",
+              "metadata": [
+                "☂ drinnen",
+                "⛏ Kinder spannend",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#8f9690",
+              "icon": "⛏️",
+              "mapQuery": "Labin National Museum"
+            },
+            {
+              "time": "12:00",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagspause in Labin",
+              "description": "Istrische Küche in der Altstadt und Zeit für eine trockene Pause.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d5a172",
+              "icon": "🍲",
+              "mapQuery": "Labin Old Town restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KUNST",
+              "duration": "1 Std.",
+              "title": "Stadtgalerie Labin",
+              "description": "Eine kleine Dosis zeitgenössische Kunst – aktuelle Ausstellung und Zeiten vorher prüfen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎨 Ausstellung",
+                "◷ Zeiten prüfen"
+              ],
+              "colorHex": "#aaa49b",
+              "icon": "🎨",
+              "mapQuery": "Labin City Gallery"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Labin bei Regen",
+          "distance": "13 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "BERGBAU",
+              "duration": "1 Std. 30 Min.",
+              "title": "Nationalmuseum Labin",
+              "description": "Stadt- und Bergbaugeschichte mit begehbarem Miniaturstollen.",
+              "metadata": [
+                "☂ drinnen",
+                "⛏ Kinder spannend",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#8f9690",
+              "icon": "⛏️",
+              "mapQuery": "Labin National Museum"
+            },
+            {
+              "time": "12:00",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagspause in Labin",
+              "description": "Istrische Küche in der Altstadt und Zeit für eine trockene Pause.",
+              "metadata": [
+                "🍝 Familienlokale",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d5a172",
+              "icon": "🍲",
+              "mapQuery": "Labin Old Town restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KUNST",
+              "duration": "1 Std.",
+              "title": "Stadtgalerie Labin",
+              "description": "Eine kleine Dosis zeitgenössische Kunst – aktuelle Ausstellung und Zeiten vorher prüfen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎨 Ausstellung",
+                "◷ Zeiten prüfen"
+              ],
+              "colorHex": "#aaa49b",
+              "icon": "🎨",
+              "mapQuery": "Labin City Gallery"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "motovun",
+      "name": "Motovun & Grožnjan",
+      "shortName": "Motovun",
+      "latitude": 45.336,
+      "longitude": 13.829,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Künstlerdörfer & Mirna-Blick",
+          "distance": "28 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "KÜNSTLERDORF",
+              "duration": "1 Std. 30 Min.",
+              "title": "Grožnjan",
+              "description": "Galerien, Werkstätten und stille Gassen im morgendlichen Künstlerdorf entdecken.",
+              "metadata": [
+                "🎨 viele Ateliers",
+                "↟ Kopfsteinpflaster",
+                "☀ früh starten"
+              ],
+              "colorHex": "#dfa273",
+              "icon": "🎨",
+              "mapQuery": "Groznjan Old Town"
+            },
+            {
+              "time": "11:00",
+              "category": "BAHNTRASSE",
+              "duration": "1 Std.",
+              "title": "Parenzana bei Završje",
+              "description": "Ein kurzes Teilstück zu Viadukt und Tunneln laufen – Taschenlampe und Wasser einpacken.",
+              "metadata": [
+                "🥾 kurze Runde",
+                "🔦 Tunnel",
+                "⚠ Hinweise prüfen"
+              ],
+              "colorHex": "#87a684",
+              "icon": "🚂",
+              "mapQuery": "Parenzana Zavrsje"
+            },
+            {
+              "time": "13:00",
+              "category": "DRUCKWERKSTATT",
+              "duration": "1 Std.",
+              "title": "Antico in Motovun",
+              "description": "Eine historische Druckerpresse erleben und handgemachte Drucke ansehen; dienstags geschlossen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Eintritt",
+                "◷ dienstags zu"
+              ],
+              "colorHex": "#a99a87",
+              "icon": "📜",
+              "mapQuery": "Antico Motovun"
+            },
+            {
+              "time": "14:30",
+              "category": "PANORAMA",
+              "duration": "2 Std.",
+              "title": "Motovuns Stadtmauer",
+              "description": "Die Runde über die Mauern eröffnet den großen Blick über das Mirna-Tal; Anstieg vom Parkplatz einplanen.",
+              "metadata": [
+                "◉ Panoramablick",
+                "🎟 Eintritt",
+                "↟ steil"
+              ],
+              "colorHex": "#dfb66f",
+              "icon": "🏰",
+              "mapQuery": "Motovun Town Walls"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Motovun",
+          "distance": "5 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "KÜNSTLERDORF",
+              "duration": "1 Std. 30 Min.",
+              "title": "Grožnjan",
+              "description": "Galerien, Werkstätten und stille Gassen im morgendlichen Künstlerdorf entdecken.",
+              "metadata": [
+                "🎨 viele Ateliers",
+                "↟ Kopfsteinpflaster",
+                "☀ früh starten"
+              ],
+              "colorHex": "#dfa273",
+              "icon": "🎨",
+              "mapQuery": "Groznjan Old Town"
+            },
+            {
+              "time": "11:00",
+              "category": "BAHNTRASSE",
+              "duration": "1 Std.",
+              "title": "Parenzana bei Završje",
+              "description": "Ein kurzes Teilstück zu Viadukt und Tunneln laufen – Taschenlampe und Wasser einpacken.",
+              "metadata": [
+                "🥾 kurze Runde",
+                "🔦 Tunnel",
+                "⚠ Hinweise prüfen"
+              ],
+              "colorHex": "#87a684",
+              "icon": "🚂",
+              "mapQuery": "Parenzana Zavrsje"
+            },
+            {
+              "time": "13:00",
+              "category": "DRUCKWERKSTATT",
+              "duration": "1 Std.",
+              "title": "Antico in Motovun",
+              "description": "Eine historische Druckerpresse erleben und handgemachte Drucke ansehen; dienstags geschlossen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Eintritt",
+                "◷ dienstags zu"
+              ],
+              "colorHex": "#a99a87",
+              "icon": "📜",
+              "mapQuery": "Antico Motovun"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Motovun für Entdecker",
+          "distance": "34 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "KÜNSTLERDORF",
+              "duration": "1 Std. 30 Min.",
+              "title": "Grožnjan",
+              "description": "Galerien, Werkstätten und stille Gassen im morgendlichen Künstlerdorf entdecken.",
+              "metadata": [
+                "🎨 viele Ateliers",
+                "↟ Kopfsteinpflaster",
+                "☀ früh starten"
+              ],
+              "colorHex": "#dfa273",
+              "icon": "🎨",
+              "mapQuery": "Groznjan Old Town"
+            },
+            {
+              "time": "11:00",
+              "category": "BAHNTRASSE",
+              "duration": "1 Std.",
+              "title": "Parenzana bei Završje",
+              "description": "Ein kurzes Teilstück zu Viadukt und Tunneln laufen – Taschenlampe und Wasser einpacken.",
+              "metadata": [
+                "🥾 kurze Runde",
+                "🔦 Tunnel",
+                "⚠ Hinweise prüfen"
+              ],
+              "colorHex": "#87a684",
+              "icon": "🚂",
+              "mapQuery": "Parenzana Zavrsje"
+            },
+            {
+              "time": "13:00",
+              "category": "DRUCKWERKSTATT",
+              "duration": "1 Std.",
+              "title": "Antico in Motovun",
+              "description": "Eine historische Druckerpresse erleben und handgemachte Drucke ansehen; dienstags geschlossen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Eintritt",
+                "◷ dienstags zu"
+              ],
+              "colorHex": "#a99a87",
+              "icon": "📜",
+              "mapQuery": "Antico Motovun"
+            },
+            {
+              "time": "14:30",
+              "category": "PANORAMA",
+              "duration": "2 Std.",
+              "title": "Motovuns Stadtmauer",
+              "description": "Die Runde über die Mauern eröffnet den großen Blick über das Mirna-Tal; Anstieg vom Parkplatz einplanen.",
+              "metadata": [
+                "◉ Panoramablick",
+                "🎟 Eintritt",
+                "↟ steil"
+              ],
+              "colorHex": "#dfb66f",
+              "icon": "🏰",
+              "mapQuery": "Motovun Town Walls"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Motovun bei Regen",
+          "distance": "28 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "DRUCKKUNST",
+              "duration": "1 Std.",
+              "title": "Antico in Motovun",
+              "description": "Die Gutenberg-Replik und handwerkliche Drucke sind ein guter wettergeschützter Auftakt.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Eintritt",
+                "◷ dienstags zu"
+              ],
+              "colorHex": "#a99a87",
+              "icon": "📜",
+              "mapQuery": "Antico Motovun"
+            },
+            {
+              "time": "11:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Trüffel-Mittagessen",
+              "description": "Eine warme Pause mit istrischer Pasta; für Kinder eine Variante ohne Trüffel bestellen.",
+              "metadata": [
+                "🍝 lokale Küche",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d3a06e",
+              "icon": "🍝",
+              "mapQuery": "Motovun restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KLEINSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Hum & Aura-Museum",
+              "description": "Bei Dauerregen bietet das kleine interaktive Museum in Hum eine Alternative rund 35 Minuten entfernt.",
+              "metadata": [
+                "🚗 35 Min.",
+                "☂ drinnen",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#aaa29a",
+              "icon": "🏛️",
+              "mapQuery": "Aura Museum Hum"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Motovun bei Regen",
+          "distance": "5 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "DRUCKKUNST",
+              "duration": "1 Std.",
+              "title": "Antico in Motovun",
+              "description": "Die Gutenberg-Replik und handwerkliche Drucke sind ein guter wettergeschützter Auftakt.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Eintritt",
+                "◷ dienstags zu"
+              ],
+              "colorHex": "#a99a87",
+              "icon": "📜",
+              "mapQuery": "Antico Motovun"
+            },
+            {
+              "time": "11:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Trüffel-Mittagessen",
+              "description": "Eine warme Pause mit istrischer Pasta; für Kinder eine Variante ohne Trüffel bestellen.",
+              "metadata": [
+                "🍝 lokale Küche",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d3a06e",
+              "icon": "🍝",
+              "mapQuery": "Motovun restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KLEINSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Hum & Aura-Museum",
+              "description": "Bei Dauerregen bietet das kleine interaktive Museum in Hum eine Alternative rund 35 Minuten entfernt.",
+              "metadata": [
+                "🚗 35 Min.",
+                "☂ drinnen",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#aaa29a",
+              "icon": "🏛️",
+              "mapQuery": "Aura Museum Hum"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Motovun bei Regen",
+          "distance": "34 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "DRUCKKUNST",
+              "duration": "1 Std.",
+              "title": "Antico in Motovun",
+              "description": "Die Gutenberg-Replik und handwerkliche Drucke sind ein guter wettergeschützter Auftakt.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Eintritt",
+                "◷ dienstags zu"
+              ],
+              "colorHex": "#a99a87",
+              "icon": "📜",
+              "mapQuery": "Antico Motovun"
+            },
+            {
+              "time": "11:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Trüffel-Mittagessen",
+              "description": "Eine warme Pause mit istrischer Pasta; für Kinder eine Variante ohne Trüffel bestellen.",
+              "metadata": [
+                "🍝 lokale Küche",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d3a06e",
+              "icon": "🍝",
+              "mapQuery": "Motovun restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KLEINSTADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Hum & Aura-Museum",
+              "description": "Bei Dauerregen bietet das kleine interaktive Museum in Hum eine Alternative rund 35 Minuten entfernt.",
+              "metadata": [
+                "🚗 35 Min.",
+                "☂ drinnen",
+                "🎟 Eintritt"
+              ],
+              "colorHex": "#aaa29a",
+              "icon": "🏛️",
+              "mapQuery": "Aura Museum Hum"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "buzet",
+      "name": "Buzet, Roč & Hum",
+      "shortName": "Buzet",
+      "latitude": 45.409,
+      "longitude": 13.966,
+      "plans": [
+        {
+          "id": "sun-balanced-0",
+          "weather": "sun",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Glagolitische Spuren & Mühlendorf",
+          "distance": "30 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "BERGSTADT",
+              "duration": "1 Std.",
+              "title": "Altstadt von Buzet",
+              "description": "Durch Tore und kleine Plätze der ruhigen Oberstadt laufen, bevor es heiß wird.",
+              "metadata": [
+                "↟ Kopfsteinpflaster",
+                "◉ Aussicht",
+                "☀ früh starten"
+              ],
+              "colorHex": "#dfa16f",
+              "icon": "🏘️",
+              "mapQuery": "Buzet Old Town"
+            },
+            {
+              "time": "10:30",
+              "category": "MITTELALTER",
+              "duration": "1 Std.",
+              "title": "Roč",
+              "description": "Die kompakte befestigte Stadt und ihre glagolitische Geschichte entdecken.",
+              "metadata": [
+                "📜 Kulturerbe",
+                "🚗 15 Min.",
+                "✓ frei zugänglich"
+              ],
+              "colorHex": "#c3a574",
+              "icon": "🏰",
+              "mapQuery": "Roc Istria"
+            },
+            {
+              "time": "12:00",
+              "category": "KLEINSTE STADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Glagolitische Allee & Hum",
+              "description": "Entlang der elf Denkmäler nach Hum fahren, durch das Stadttor gehen und Mittag essen.",
+              "metadata": [
+                "🚗 7 km Route",
+                "📜 11 Denkmäler",
+                "🍝 Mittagspause"
+              ],
+              "colorHex": "#c9ae78",
+              "icon": "🔤",
+              "mapQuery": "Hum Croatia"
+            },
+            {
+              "time": "15:00",
+              "category": "NATURORT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Kotli",
+              "description": "Alte Wassermühlen und ausgewaschene Kalksteinbecken ansehen; bei Nässe besonders vorsichtig sein.",
+              "metadata": [
+                "🌿 Naturdenkmal",
+                "👟 feste Schuhe",
+                "⚠ Felsen rutschig"
+              ],
+              "colorHex": "#73a696",
+              "icon": "💧",
+              "mapQuery": "Kotli Istria"
+            }
+          ]
+        },
+        {
+          "id": "sun-relaxed-0",
+          "weather": "sun",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Ganz entspannt durch Buzet",
+          "distance": "8 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "BERGSTADT",
+              "duration": "1 Std.",
+              "title": "Altstadt von Buzet",
+              "description": "Durch Tore und kleine Plätze der ruhigen Oberstadt laufen, bevor es heiß wird.",
+              "metadata": [
+                "↟ Kopfsteinpflaster",
+                "◉ Aussicht",
+                "☀ früh starten"
+              ],
+              "colorHex": "#dfa16f",
+              "icon": "🏘️",
+              "mapQuery": "Buzet Old Town"
+            },
+            {
+              "time": "10:30",
+              "category": "MITTELALTER",
+              "duration": "1 Std.",
+              "title": "Roč",
+              "description": "Die kompakte befestigte Stadt und ihre glagolitische Geschichte entdecken.",
+              "metadata": [
+                "📜 Kulturerbe",
+                "🚗 15 Min.",
+                "✓ frei zugänglich"
+              ],
+              "colorHex": "#c3a574",
+              "icon": "🏰",
+              "mapQuery": "Roc Istria"
+            },
+            {
+              "time": "12:00",
+              "category": "KLEINSTE STADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Glagolitische Allee & Hum",
+              "description": "Entlang der elf Denkmäler nach Hum fahren, durch das Stadttor gehen und Mittag essen.",
+              "metadata": [
+                "🚗 7 km Route",
+                "📜 11 Denkmäler",
+                "🍝 Mittagspause"
+              ],
+              "colorHex": "#c9ae78",
+              "icon": "🔤",
+              "mapQuery": "Hum Croatia"
+            }
+          ]
+        },
+        {
+          "id": "sun-active-0",
+          "weather": "sun",
+          "pace": "active",
+          "variant": 0,
+          "name": "Buzet für Entdecker",
+          "distance": "36 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "09:00",
+              "category": "BERGSTADT",
+              "duration": "1 Std.",
+              "title": "Altstadt von Buzet",
+              "description": "Durch Tore und kleine Plätze der ruhigen Oberstadt laufen, bevor es heiß wird.",
+              "metadata": [
+                "↟ Kopfsteinpflaster",
+                "◉ Aussicht",
+                "☀ früh starten"
+              ],
+              "colorHex": "#dfa16f",
+              "icon": "🏘️",
+              "mapQuery": "Buzet Old Town"
+            },
+            {
+              "time": "10:30",
+              "category": "MITTELALTER",
+              "duration": "1 Std.",
+              "title": "Roč",
+              "description": "Die kompakte befestigte Stadt und ihre glagolitische Geschichte entdecken.",
+              "metadata": [
+                "📜 Kulturerbe",
+                "🚗 15 Min.",
+                "✓ frei zugänglich"
+              ],
+              "colorHex": "#c3a574",
+              "icon": "🏰",
+              "mapQuery": "Roc Istria"
+            },
+            {
+              "time": "12:00",
+              "category": "KLEINSTE STADT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Glagolitische Allee & Hum",
+              "description": "Entlang der elf Denkmäler nach Hum fahren, durch das Stadttor gehen und Mittag essen.",
+              "metadata": [
+                "🚗 7 km Route",
+                "📜 11 Denkmäler",
+                "🍝 Mittagspause"
+              ],
+              "colorHex": "#c9ae78",
+              "icon": "🔤",
+              "mapQuery": "Hum Croatia"
+            },
+            {
+              "time": "15:00",
+              "category": "NATURORT",
+              "duration": "1 Std. 30 Min.",
+              "title": "Kotli",
+              "description": "Alte Wassermühlen und ausgewaschene Kalksteinbecken ansehen; bei Nässe besonders vorsichtig sein.",
+              "metadata": [
+                "🌿 Naturdenkmal",
+                "👟 feste Schuhe",
+                "⚠ Felsen rutschig"
+              ],
+              "colorHex": "#73a696",
+              "icon": "💧",
+              "mapQuery": "Kotli Istria"
+            }
+          ]
+        },
+        {
+          "id": "rain-balanced-0",
+          "weather": "rain",
+          "pace": "balanced",
+          "variant": 0,
+          "name": "Buzet bei Regen",
+          "distance": "30 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Aura-Museum Hum",
+              "description": "Interaktive Einblicke in alte Berufe und istrische Traditionen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Eintritt",
+                "👨‍👩‍👧 Familie"
+              ],
+              "colorHex": "#aaa29a",
+              "icon": "🏛️",
+              "mapQuery": "Aura Museum Hum"
+            },
+            {
+              "time": "11:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagessen in Hum",
+              "description": "Eine warme Pause in der kleinen Stadt und regionale Küche probieren.",
+              "metadata": [
+                "🍝 lokale Küche",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d1a170",
+              "icon": "🍲",
+              "mapQuery": "Hum Croatia restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KULTUR",
+              "duration": "1 Std.",
+              "title": "Roč in einer Regenpause",
+              "description": "Stadttor, Kirchen und glagolitische Spuren auf einer kompakten Runde ansehen.",
+              "metadata": [
+                "🚗 10 Min.",
+                "☂ teils draußen",
+                "📜 Kulturerbe"
+              ],
+              "colorHex": "#c3a574",
+              "icon": "🏰",
+              "mapQuery": "Roc Istria"
+            }
+          ]
+        },
+        {
+          "id": "rain-relaxed-0",
+          "weather": "rain",
+          "pace": "relaxed",
+          "variant": 0,
+          "name": "Buzet bei Regen",
+          "distance": "8 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Aura-Museum Hum",
+              "description": "Interaktive Einblicke in alte Berufe und istrische Traditionen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Eintritt",
+                "👨‍👩‍👧 Familie"
+              ],
+              "colorHex": "#aaa29a",
+              "icon": "🏛️",
+              "mapQuery": "Aura Museum Hum"
+            },
+            {
+              "time": "11:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagessen in Hum",
+              "description": "Eine warme Pause in der kleinen Stadt und regionale Küche probieren.",
+              "metadata": [
+                "🍝 lokale Küche",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d1a170",
+              "icon": "🍲",
+              "mapQuery": "Hum Croatia restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KULTUR",
+              "duration": "1 Std.",
+              "title": "Roč in einer Regenpause",
+              "description": "Stadttor, Kirchen und glagolitische Spuren auf einer kompakten Runde ansehen.",
+              "metadata": [
+                "🚗 10 Min.",
+                "☂ teils draußen",
+                "📜 Kulturerbe"
+              ],
+              "colorHex": "#c3a574",
+              "icon": "🏰",
+              "mapQuery": "Roc Istria"
+            }
+          ]
+        },
+        {
+          "id": "rain-active-0",
+          "weather": "rain",
+          "pace": "active",
+          "variant": 0,
+          "name": "Buzet bei Regen",
+          "distance": "36 km",
+          "budget": "€€",
+          "stops": [
+            {
+              "time": "10:00",
+              "category": "MUSEUM",
+              "duration": "1 Std.",
+              "title": "Aura-Museum Hum",
+              "description": "Interaktive Einblicke in alte Berufe und istrische Traditionen.",
+              "metadata": [
+                "☂ drinnen",
+                "🎟 Eintritt",
+                "👨‍👩‍👧 Familie"
+              ],
+              "colorHex": "#aaa29a",
+              "icon": "🏛️",
+              "mapQuery": "Aura Museum Hum"
+            },
+            {
+              "time": "11:30",
+              "category": "GENUSS",
+              "duration": "1 Std. 30 Min.",
+              "title": "Mittagessen in Hum",
+              "description": "Eine warme Pause in der kleinen Stadt und regionale Küche probieren.",
+              "metadata": [
+                "🍝 lokale Küche",
+                "☂ drinnen",
+                "€€"
+              ],
+              "colorHex": "#d1a170",
+              "icon": "🍲",
+              "mapQuery": "Hum Croatia restaurants"
+            },
+            {
+              "time": "14:00",
+              "category": "KULTUR",
+              "duration": "1 Std.",
+              "title": "Roč in einer Regenpause",
+              "description": "Stadttor, Kirchen und glagolitische Spuren auf einer kompakten Runde ansehen.",
+              "metadata": [
+                "🚗 10 Min.",
+                "☂ teils draußen",
+                "📜 Kulturerbe"
+              ],
+              "colorHex": "#c3a574",
+              "icon": "🏰",
+              "mapQuery": "Roc Istria"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
