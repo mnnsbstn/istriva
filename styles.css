@@ -1042,6 +1042,13 @@ h2 {
   font-size: 9px;
 }
 
+.stop-favorite {
+  width: 27px;
+  height: 27px;
+  margin-left: auto;
+  font-size: 15px;
+}
+
 .stop h3 {
   margin-bottom: 4px;
   font-size: 20px;
@@ -1312,11 +1319,29 @@ h2 {
   transition: transform .2s, color .2s, background .2s;
 }
 
-.favorite:hover {
+.location-favorite {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  z-index: 3;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--white);
+  cursor: pointer;
+  font-size: 17px;
+  transition: transform .2s, color .2s, background .2s;
+}
+
+.favorite:hover,
+.location-favorite:hover {
   transform: scale(1.08);
 }
 
-.favorite.selected {
+.favorite.selected,
+.location-favorite.selected {
   color: var(--ink);
   background: var(--accent);
   border-color: var(--ink);
@@ -1401,6 +1426,7 @@ h2 {
 
 .guide-card {
   min-width: 0;
+  position: relative;
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
   border: 1px solid var(--line);
@@ -1408,6 +1434,12 @@ h2 {
   background: var(--white);
   box-shadow: 0 12px 34px rgba(0, 0, 0, .06);
   overflow: hidden;
+}
+
+.guide-card > .location-favorite {
+  position: absolute;
+  top: 12px;
+  right: 12px;
 }
 
 .guide-card-icon {
@@ -1449,6 +1481,7 @@ h2 {
 
 .guide-card h3 {
   margin: 9px 0 6px;
+  padding-right: 24px;
   font-size: 17px;
   line-height: 1.2;
 }
@@ -1489,6 +1522,133 @@ h2 {
   text-underline-offset: 2px;
   font-size: 9px;
   font-weight: 700;
+}
+
+.favorites-section {
+  margin: 64px 0 34px;
+  padding: 28px;
+  border-radius: 24px;
+  color: var(--white);
+  background: var(--ink);
+  scroll-margin-top: 24px;
+}
+
+.favorites-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
+}
+
+.favorites-heading .section-kicker,
+.favorites-heading h2 {
+  color: var(--white);
+}
+
+.favorites-heading > div > p:last-child {
+  margin-top: 6px;
+  color: #b7bcb7;
+  font-size: 12px;
+}
+
+.favorites-heading button {
+  flex: 0 0 auto;
+  padding: 8px 11px;
+  border: 1px solid var(--accent);
+  border-radius: 9px;
+  color: var(--accent);
+  background: transparent;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.favorites-heading button:disabled {
+  opacity: .4;
+  cursor: default;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.favorite-place-card {
+  min-width: 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 48px 14px 14px;
+  border-radius: 14px;
+  color: var(--ink);
+  background: var(--white);
+}
+
+.favorite-place-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--accent);
+  font-size: 26px;
+}
+
+.favorite-place-card > div:nth-child(2) > span {
+  color: var(--ink-soft);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.favorite-place-card h3 {
+  margin: 3px 0 5px;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.favorite-place-card p {
+  color: var(--ink-soft);
+  font-size: 9px;
+}
+
+.favorite-place-card a:last-child {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.favorite-place-card > .location-favorite {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.favorites-empty {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 18px;
+  color: #c9cdc9;
+  font-size: 12px;
+}
+
+.favorites-empty[hidden] {
+  display: none;
+}
+
+.favorites-empty span {
+  color: var(--accent);
+  font-size: 24px;
 }
 
 .saved-strip {
@@ -1921,6 +2081,32 @@ footer p a {
 
   .guide-map-link {
     font-size: 10px;
+  }
+
+  .favorites-section {
+    margin: 46px -5px 28px;
+    padding: 21px 18px;
+    border-radius: 20px;
+  }
+
+  .favorites-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .favorite-place-card {
+    grid-template-columns: 50px minmax(0, 1fr);
+  }
+
+  .favorite-place-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 23px;
   }
 
   .saved-strip {

@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" href="icon-192.png?v=5">
   <link rel="apple-touch-icon" href="icon-192.png?v=5">
   <link rel="manifest" href="manifest.webmanifest?v=7">
-  <link rel="stylesheet" href="styles.css?v=13">
+  <link rel="stylesheet" href="styles.css?v=14">
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 </head>
 <body>
@@ -159,6 +159,19 @@
       <div class="itinerary" id="itinerary"></div>
     </section>
 
+    <section class="favorites-section" id="favoriten" aria-labelledby="favorites-title">
+      <div class="favorites-heading">
+        <div>
+          <p class="section-kicker">FÜR SPÄTER MERKEN</p>
+          <h2 id="favorites-title">Eure Favoriten</h2>
+          <p>Alle gemerkten Strände, Ausflüge, Lokale und Planstopps an einem Ort.</p>
+        </div>
+        <button id="clear-favorites" type="button">Alle entfernen</button>
+      </div>
+      <div class="favorites-grid" id="favorites-grid"></div>
+      <p class="favorites-empty" id="favorites-empty"><span>♡</span> Tippt bei einer Location auf das Herz, um sie hier zu speichern.</p>
+    </section>
+
     <div class="guide-jump-links" aria-label="Empfehlungskategorien">
       <a href="#straende"><span aria-hidden="true">🏖️</span> Strände</a>
       <a href="#tagesausfluege"><span aria-hidden="true">🧭</span> Tagesausflüge</a>
@@ -223,7 +236,7 @@
             <p>Wilde Küste, kleine Buchten und der schönste Blick aufs Abendrot.</p>
             <div><span>🚗 25 Min.</span><span>◎ Naturpark</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
           </div>
-          <button class="favorite" type="button" aria-label="Kap Kamenjak als Favorit markieren">♡</button>
+          <button class="favorite" type="button" data-favorite-id="guide:trips:kamenjak" aria-label="Kap Kamenjak als Favorit markieren" aria-pressed="false">♡</button>
         </article>
         <article class="suggestion suggestion-market">
           <div class="illustration market-scene" aria-hidden="true">
@@ -235,15 +248,11 @@
             <p>Frisches Obst, lokale Snacks und echtes istrisches Lebensgefühl.</p>
             <div><span>🚶 8 Min.</span><span>◷ bis 14 Uhr</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
           </div>
-          <button class="favorite" type="button" aria-label="Markthalle als Favorit markieren">♡</button>
+          <button class="favorite" type="button" data-favorite-id="guide:food:pulaMarket" aria-label="Markthalle als Favorit markieren" aria-pressed="false">♡</button>
         </article>
       </div>
     </section>
 
-    <section class="saved-strip" id="favoriten" aria-label="Favoriten">
-      <div><span>♡</span><p><strong>Eure Favoriten</strong><br><small>Tippt auf ein Herz, um Orte für später zu merken.</small></p></div>
-      <button id="clear-favorites" type="button">Alle entfernen</button>
-    </section>
   </main>
 
   <footer>
@@ -301,7 +310,7 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="guide-data.js?v=1"></script>
-  <script src="app.js?v=15"></script>
+  <script src="guide-data.js?v=2"></script>
+  <script src="app.js?v=16"></script>
 </body>
 </html>
