@@ -27,7 +27,7 @@
     </a>
     <nav aria-label="Hauptnavigation">
       <a class="active" href="#plan">Tagesplan</a>
-      <a href="#entdecken">Istrien entdecken</a>
+      <a href="#straende">Istrien entdecken</a>
       <a href="#favoriten">Favoriten <span id="favorite-count">0</span></a>
     </nav>
     <button class="install-button" id="install-button" type="button" hidden>
@@ -159,46 +159,11 @@
       <div class="itinerary" id="itinerary"></div>
     </section>
 
-    <section class="discover" id="entdecken" aria-labelledby="discover-title">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">QUER DURCH ISTRIEN</p>
-          <h2 id="discover-title">Noch Lust auf mehr?</h2>
-        </div>
-        <a href="https://www.google.com/maps/search/Sehenswürdigkeiten+Istrien" target="_blank" rel="noreferrer">Alles auf der Karte <span>→</span></a>
-      </div>
-      <div class="suggestion-grid">
-        <article class="suggestion suggestion-sunset">
-          <div class="illustration sunset-scene" aria-hidden="true">
-            <div class="scene-sun"></div><div class="scene-island"></div><div class="scene-wave"></div>
-          </div>
-          <div class="suggestion-copy">
-            <span class="tag">GEHEIMTIPP</span>
-            <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">Sonnenuntergang am Kap Kamenjak<span aria-hidden="true">↗</span></a></h3>
-            <p>Wilde Küste, kleine Buchten und der schönste Blick aufs Abendrot.</p>
-            <div><span>🚗 25 Min.</span><span>◎ Naturpark</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
-          </div>
-          <button class="favorite" type="button" aria-label="Kap Kamenjak als Favorit markieren">♡</button>
-        </article>
-        <article class="suggestion suggestion-market">
-          <div class="illustration market-scene" aria-hidden="true">
-            <span>🍉</span><span>🍋</span><span>🍑</span>
-          </div>
-          <div class="suggestion-copy">
-            <span class="tag coral">MORGENS SCHÖN</span>
-            <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">Tržnica – Pulas Markthalle<span aria-hidden="true">↗</span></a></h3>
-            <p>Frisches Obst, lokale Snacks und echtes istrisches Lebensgefühl.</p>
-            <div><span>🚶 8 Min.</span><span>◷ bis 14 Uhr</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
-          </div>
-          <button class="favorite" type="button" aria-label="Markthalle als Favorit markieren">♡</button>
-        </article>
-      </div>
-      <div class="guide-jump-links" aria-label="Weitere Empfehlungen">
-        <a href="#straende"><span aria-hidden="true">🏖️</span> Strände</a>
-        <a href="#tagesausfluege"><span aria-hidden="true">🧭</span> Tagesausflüge</a>
-        <a href="#essen-trinken"><span aria-hidden="true">🍽️</span> Essen &amp; Trinken</a>
-      </div>
-    </section>
+    <div class="guide-jump-links" aria-label="Empfehlungskategorien">
+      <a href="#straende"><span aria-hidden="true">🏖️</span> Strände</a>
+      <a href="#tagesausfluege"><span aria-hidden="true">🧭</span> Tagesausflüge</a>
+      <a href="#essen-trinken"><span aria-hidden="true">🍽️</span> Essen &amp; Trinken</a>
+    </div>
 
     <section class="guide-section" id="straende" aria-labelledby="beach-guide-title">
       <div class="guide-heading">
@@ -237,6 +202,42 @@
         <a id="food-guide-map" href="https://www.google.com/maps/search/Restaurants+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alles auf der Karte <span>→</span></a>
       </div>
       <div class="guide-grid" id="food-guide-grid"></div>
+    </section>
+
+    <section class="discover" id="entdecken" aria-labelledby="discover-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">QUER DURCH ISTRIEN</p>
+          <h2 id="discover-title">Noch Lust auf mehr?</h2>
+        </div>
+        <a href="https://www.google.com/maps/search/Sehenswürdigkeiten+Istrien" target="_blank" rel="noreferrer">Alles auf der Karte <span>→</span></a>
+      </div>
+      <div class="suggestion-grid">
+        <article class="suggestion suggestion-sunset">
+          <div class="illustration sunset-scene" aria-hidden="true">
+            <div class="scene-sun"></div><div class="scene-island"></div><div class="scene-wave"></div>
+          </div>
+          <div class="suggestion-copy">
+            <span class="tag">GEHEIMTIPP</span>
+            <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">Sonnenuntergang am Kap Kamenjak<span aria-hidden="true">↗</span></a></h3>
+            <p>Wilde Küste, kleine Buchten und der schönste Blick aufs Abendrot.</p>
+            <div><span>🚗 25 Min.</span><span>◎ Naturpark</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
+          </div>
+          <button class="favorite" type="button" aria-label="Kap Kamenjak als Favorit markieren">♡</button>
+        </article>
+        <article class="suggestion suggestion-market">
+          <div class="illustration market-scene" aria-hidden="true">
+            <span>🍉</span><span>🍋</span><span>🍑</span>
+          </div>
+          <div class="suggestion-copy">
+            <span class="tag coral">MORGENS SCHÖN</span>
+            <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">Tržnica – Pulas Markthalle<span aria-hidden="true">↗</span></a></h3>
+            <p>Frisches Obst, lokale Snacks und echtes istrisches Lebensgefühl.</p>
+            <div><span>🚶 8 Min.</span><span>◷ bis 14 Uhr</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
+          </div>
+          <button class="favorite" type="button" aria-label="Markthalle als Favorit markieren">♡</button>
+        </article>
+      </div>
     </section>
 
     <section class="saved-strip" id="favoriten" aria-label="Favoriten">
