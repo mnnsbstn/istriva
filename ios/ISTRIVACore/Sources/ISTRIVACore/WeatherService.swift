@@ -32,6 +32,30 @@ public struct OpenMeteoWeatherService: WeatherServicing {
     }
 
     public func fetchWeather(for destination: Destination) async throws -> WeatherSnapshot {
+        async let forecastPayload = fetchForecast(for: destination)
+        async let seaSurfaceTemperature = fetchSeaSurfaceTemperature(for: destination)
+        let payload = try await forecastPayload
+
+        guard let rainProbability = payload.daily.precipitationProbabilityMax.first else {
+            throw WeatherServiceError.incompleteForecast
+        }
+
+        return WeatherSnapshot(
+            temperature: payload.current.temperature,
+            apparentTemperature: payload.current.apparentTemperature,
+            weatherCode: payload.current.weatherCode,
+            windSpeed: payload.current.windSpeed,
+            precipitation: payload.current.precipitation,
+            rainProbability: rainProbability,
+            humidity: payload.current.humidity,
+            uvIndex: payload.current.uvIndex,
+            seaSurfaceTemperature: await seaSurfaceTemperature,
+            sunset: payload.daily.sunset.first.flatMap(Self.parseLocalDate),
+            observedAt: Self.parseLocalDate(payload.current.time) ?? Date()
+        )
+    }
+
+    private func fetchForecast(for destination: Destination) async throws -> OpenMeteoResponse {
         var components = URLComponents(string: "https://api.open-meteo.com/v1/forecast")
         components?.queryItems = [
             URLQueryItem(name: "latitude", value: String(destination.latitude)),
@@ -62,23 +86,35 @@ public struct OpenMeteoWeatherService: WeatherServicing {
             throw WeatherServiceError.invalidResponse
         }
 
-        let payload = try JSONDecoder().decode(OpenMeteoResponse.self, from: data)
-        guard let rainProbability = payload.daily.precipitationProbabilityMax.first else {
-            throw WeatherServiceError.incompleteForecast
-        }
+        return try JSONDecoder().decode(OpenMeteoResponse.self, from: data)
+    }
 
-        return WeatherSnapshot(
-            temperature: payload.current.temperature,
-            apparentTemperature: payload.current.apparentTemperature,
-            weatherCode: payload.current.weatherCode,
-            windSpeed: payload.current.windSpeed,
-            precipitation: payload.current.precipitation,
-            rainProbability: rainProbability,
-            humidity: payload.current.humidity,
-            uvIndex: payload.current.uvIndex,
-            sunset: payload.daily.sunset.first.flatMap(Self.parseLocalDate),
-            observedAt: Self.parseLocalDate(payload.current.time) ?? Date()
-        )
+    private func fetchSeaSurfaceTemperature(for destination: Destination) async -> Double? {
+        var components = URLComponents(string: "https://marine-api.open-meteo.com/v1/marine")
+        components?.queryItems = [
+            URLQueryItem(name: "latitude", value: String(destination.latitude)),
+            URLQueryItem(name: "longitude", value: String(destination.longitude)),
+            URLQueryItem(name: "current", value: "sea_surface_temperature"),
+            URLQueryItem(name: "timezone", value: "Europe/Zagreb")
+        ]
+
+        guard let url = components?.url else { return nil }
+
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 20
+
+        do {
+            let (data, response) = try await session.data(for: request)
+            guard let httpResponse = response as? HTTPURLResponse,
+                  200..<300 ~= httpResponse.statusCode else {
+                return nil
+            }
+            let payload = try JSONDecoder().decode(MarineResponse.self, from: data)
+            return payload.current.seaSurfaceTemperature
+        } catch {
+            return nil
+        }
     }
 
     private static func parseLocalDate(_ value: String) -> Date? {
@@ -124,6 +160,18 @@ private struct OpenMeteoResponse: Decodable {
         enum CodingKeys: String, CodingKey {
             case precipitationProbabilityMax = "precipitation_probability_max"
             case sunset
+        }
+    }
+}
+
+private struct MarineResponse: Decodable {
+    let current: Current
+
+    struct Current: Decodable {
+        let seaSurfaceTemperature: Double
+
+        enum CodingKeys: String, CodingKey {
+            case seaSurfaceTemperature = "sea_surface_temperature"
         }
     }
 }
