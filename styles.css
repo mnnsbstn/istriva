@@ -1586,26 +1586,33 @@ footer p a {
   }
 
   .itinerary::before {
-    left: 34px;
+    left: 48px;
   }
 
   .stop {
-    grid-template-columns: 33px 1fr;
-    gap: 21px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding-left: 64px;
   }
 
   .stop-content::before {
-    left: -27px;
+    left: -24px;
   }
 
   .time {
-    font-size: 11px;
+    width: 38px;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    padding-top: 0;
+    font-size: 10px;
+    white-space: nowrap;
   }
 
   .stop-image {
     width: 100%;
     height: 112px;
-    grid-column: 2;
+    grid-column: 1;
     margin-top: -9px;
   }
 
