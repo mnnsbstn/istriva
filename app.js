@@ -512,8 +512,9 @@ const weatherElements = {
   humidity: document.querySelector("#weather-humidity"),
   tip: document.querySelector("#weather-tip")
 };
-const favoriteButtons = [...document.querySelectorAll(".favorite")];
 const favoriteCount = document.querySelector("#favorite-count");
+const favoritesGrid = document.querySelector("#favorites-grid");
+const favoritesEmpty = document.querySelector("#favorites-empty");
 const ONESIGNAL_APP_ID = "cd00c6cc-ad14-4246-9cde-4de743ce8238";
 const ONESIGNAL_SAFARI_WEB_ID = "web.onesignal.auto.4ed285de-faf5-4c6c-a346-3ff91e5aded6";
 const NOTIFICATION_SETTINGS_KEY = "bura-notification-settings-v1";
@@ -526,6 +527,7 @@ let weatherManuallySelected = false;
 let lastWeatherRefresh = 0;
 let oneSignalClient;
 let notificationTagSyncTimers = [];
+const favoriteRegistry = new Map();
 
 function getPlans() {
   const weather = weatherSelect.value;
@@ -1086,20 +1088,33 @@ function personalizedGuideMeta(item, family) {
 
 function renderGuideCards(grid, destinationKey, category, label, family) {
   const items = guideItems(destinationKey, category, family);
-  grid.innerHTML = items.map((item) => `
-    <article class="guide-card">
-      <div class="guide-card-icon" aria-hidden="true">${item.icon}</div>
-      <div class="guide-card-copy">
-        <span class="guide-card-label">${label}</span>
-        <h3><a class="place-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">${item.title}<span aria-hidden="true">↗</span></a></h3>
-        <p>${item.description}</p>
-        <div class="guide-card-bottom">
-          <div class="guide-card-meta">${personalizedGuideMeta(item, family).map((entry) => `<span>${entry}</span>`).join("")}</div>
-          <a class="guide-map-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer" aria-label="${item.title} in Google Maps öffnen">🗺️ Google Maps</a>
+  grid.innerHTML = items.map((item) => {
+    const favorite = {
+      id: `guide:${category}:${item.key}`,
+      title: item.title,
+      description: item.description,
+      icon: item.icon,
+      map: item.map,
+      category: label
+    };
+    registerFavorite(favorite);
+    return `
+      <article class="guide-card">
+        <button class="location-favorite" type="button" data-favorite-id="${favorite.id}" aria-label="${item.title} als Favorit markieren" aria-pressed="false">♡</button>
+        <div class="guide-card-icon" aria-hidden="true">${item.icon}</div>
+        <div class="guide-card-copy">
+          <span class="guide-card-label">${label}</span>
+          <h3><a class="place-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">${item.title}<span aria-hidden="true">↗</span></a></h3>
+          <p>${item.description}</p>
+          <div class="guide-card-bottom">
+            <div class="guide-card-meta">${personalizedGuideMeta(item, family).map((entry) => `<span>${entry}</span>`).join("")}</div>
+            <a class="guide-map-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer" aria-label="${item.title} in Google Maps öffnen">🗺️ Google Maps</a>
+          </div>
         </div>
-      </div>
-    </article>
-  `).join("");
+      </article>
+    `;
+  }).join("");
+  syncFavoriteButtons();
 }
 
 function renderDiscoveryGuides() {
@@ -1143,24 +1158,37 @@ function renderPlan(animate = false) {
   document.querySelector("#distance").textContent = plan.distance;
   document.querySelector("#budget").textContent = plan.budget;
 
-  itinerary.innerHTML = plan.stops.map((stop) => `
-    <article class="stop">
-      <time class="time">${stop.time}</time>
-      <div class="stop-content">
-        <div class="stop-top">
-          <span class="stop-type">${stop.type}</span>
-          <span class="stop-duration">◷ ${stop.duration}</span>
+  itinerary.innerHTML = plan.stops.map((stop) => {
+    const favorite = {
+      id: `stop:${encodeURIComponent(stop.map)}`,
+      title: stop.title,
+      description: stop.description,
+      icon: stop.icon,
+      map: stop.map,
+      category: stop.type
+    };
+    registerFavorite(favorite);
+    return `
+      <article class="stop">
+        <time class="time">${stop.time}</time>
+        <div class="stop-content">
+          <div class="stop-top">
+            <span class="stop-type">${stop.type}</span>
+            <span class="stop-duration">◷ ${stop.duration}</span>
+            <button class="location-favorite stop-favorite" type="button" data-favorite-id="${favorite.id}" aria-label="${stop.title} als Favorit markieren" aria-pressed="false">♡</button>
+          </div>
+          <h3><a class="place-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer">${stop.title}<span aria-hidden="true">↗</span></a></h3>
+          <p>${stop.description}</p>
+          <div class="stop-meta">${stop.meta.map((item) => `<span>${item}</span>`).join("")}</div>
         </div>
-        <h3><a class="place-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer">${stop.title}<span aria-hidden="true">↗</span></a></h3>
-        <p>${stop.description}</p>
-        <div class="stop-meta">${stop.meta.map((item) => `<span>${item}</span>`).join("")}</div>
-      </div>
-      <div class="stop-image">
-        <span aria-hidden="true">${stop.icon}</span>
-        <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer" aria-label="${stop.title} in Google Maps öffnen">🗺️ Google Maps</a>
-      </div>
-    </article>
-  `).join("");
+        <div class="stop-image">
+          <span aria-hidden="true">${stop.icon}</span>
+          <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer" aria-label="${stop.title} in Google Maps öffnen">🗺️ Google Maps</a>
+        </div>
+      </article>
+    `;
+  }).join("");
+  syncFavoriteButtons();
 
   if (animate) {
     itinerary.classList.remove("replanning");
@@ -1183,9 +1211,48 @@ function updateDate() {
   document.querySelector("#current-date").textContent = formatted.toLocaleUpperCase("de-DE");
 }
 
+const featuredFavoriteItems = [
+  {
+    id: "guide:trips:kamenjak",
+    title: "Sonnenuntergang am Kap Kamenjak",
+    description: "Wilde Küste, kleine Buchten und der schönste Blick aufs Abendrot.",
+    icon: "🌅",
+    map: "Cape Kamenjak Croatia",
+    category: "GEHEIMTIPP"
+  },
+  {
+    id: "guide:food:pulaMarket",
+    title: "Tržnica – Pulas Markthalle",
+    description: "Frisches Obst, lokale Snacks und echtes istrisches Lebensgefühl.",
+    icon: "🍅",
+    map: "Pula Market Croatia",
+    category: "MARKT"
+  }
+];
+
+function registerFavorite(item) {
+  favoriteRegistry.set(item.id, item);
+}
+
+featuredFavoriteItems.forEach(registerFavorite);
+
+function normalizeFavorite(item) {
+  if (!item || typeof item !== "object") return null;
+  const required = ["id", "title", "description", "icon", "map", "category"];
+  if (!required.every((key) => typeof item[key] === "string" && item[key])) return null;
+  return Object.fromEntries(required.map((key) => [key, item[key]]));
+}
+
 function getSavedFavorites() {
   try {
-    return JSON.parse(localStorage.getItem("bura-favorites") || "[]");
+    const parsed = JSON.parse(localStorage.getItem("bura-favorites") || "[]");
+    if (!Array.isArray(parsed)) return [];
+    if (parsed.every((item) => Number.isInteger(item))) {
+      return parsed
+        .map((index) => featuredFavoriteItems[index])
+        .filter(Boolean);
+    }
+    return parsed.map(normalizeFavorite).filter(Boolean);
   } catch {
     return [];
   }
@@ -1199,15 +1266,69 @@ function saveFavorites(favorites) {
   }
 }
 
-function syncFavorites() {
+function escapeHTML(value) {
+  return value.replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[character]);
+}
+
+function renderFavorites() {
   const saved = getSavedFavorites();
-  favoriteButtons.forEach((button, index) => {
-    const selected = saved.includes(index);
+  favoritesEmpty.hidden = saved.length > 0;
+  document.querySelector("#clear-favorites").disabled = saved.length === 0;
+  favoritesGrid.innerHTML = saved.map((item) => `
+    <article class="favorite-place-card">
+      <div class="favorite-place-icon" aria-hidden="true">${escapeHTML(item.icon)}</div>
+      <div>
+        <span>${escapeHTML(item.category)}</span>
+        <h3><a class="place-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">${escapeHTML(item.title)}<span aria-hidden="true">↗</span></a></h3>
+        <p>${escapeHTML(item.description)}</p>
+        <a href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a>
+      </div>
+      <button class="location-favorite selected" type="button" data-favorite-id="${escapeHTML(item.id)}" aria-label="${escapeHTML(item.title)} aus Favoriten entfernen" aria-pressed="true">♥</button>
+    </article>
+  `).join("");
+}
+
+function syncFavoriteButtons() {
+  const savedIDs = new Set(getSavedFavorites().map((item) => item.id));
+  document.querySelectorAll("[data-favorite-id]").forEach((button) => {
+    const selected = savedIDs.has(button.dataset.favoriteId);
     button.classList.toggle("selected", selected);
     button.textContent = selected ? "♥" : "♡";
     button.setAttribute("aria-pressed", String(selected));
+    const item = favoriteRegistry.get(button.dataset.favoriteId);
+    if (item) {
+      button.setAttribute(
+        "aria-label",
+        selected
+          ? `${item.title} aus Favoriten entfernen`
+          : `${item.title} als Favorit markieren`
+      );
+    }
   });
+}
+
+function syncFavorites() {
+  const saved = getSavedFavorites();
   favoriteCount.textContent = saved.length;
+  renderFavorites();
+  syncFavoriteButtons();
+}
+
+function toggleFavorite(favoriteID) {
+  const saved = getSavedFavorites();
+  const selected = saved.some((item) => item.id === favoriteID);
+  const next = selected
+    ? saved.filter((item) => item.id !== favoriteID)
+    : [...saved, favoriteRegistry.get(favoriteID)].filter(Boolean);
+  saveFavorites(next);
+  syncFavorites();
+  showToast(selected ? "Aus Favoriten entfernt" : "Für später gemerkt ♥");
 }
 
 destinationSelect.addEventListener("change", () => {
@@ -1268,14 +1389,10 @@ shareButton.addEventListener("click", async () => {
   }
 });
 
-favoriteButtons.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    const saved = getSavedFavorites();
-    const next = saved.includes(index) ? saved.filter((item) => item !== index) : [...saved, index];
-    saveFavorites(next);
-    syncFavorites();
-    showToast(next.includes(index) ? "Für später gemerkt ♥" : "Aus Favoriten entfernt");
-  });
+document.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-favorite-id]");
+  if (!button) return;
+  toggleFavorite(button.dataset.favoriteId);
 });
 
 document.querySelector("#clear-favorites").addEventListener("click", () => {
