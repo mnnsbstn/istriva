@@ -1,14 +1,16 @@
 # ISTRIVA – Familien-Urlaubsplaner für Istrien
 
-Ein interaktiver Web-Prototyp, der einen familiengerechten Tagesplan für zwei Erwachsene und zwei Kinder zusammenstellt.
+Ein interaktiver Web-Prototyp, der familiengerechte Tagespläne passend zu Gruppengröße und Kinderalter zusammenstellt.
 
 ## Funktionen
 
 - kuratierte Tagesrouten für elf Städte und Urlaubsregionen in Istrien
 - Ortsauswahl von Umag bis Kamenjak sowie für zentrale Ziele im Inland
 - Live-Wetter von Open-Meteo mit automatischer Regen-/Outdoorplanung
+- frei wählbare Erwachsenen- und Kinderzahl mit Altersangaben je Kind
 - alternative Planung per Klick
 - Kartenlinks, Favoriten und Teilen-Funktion
+- personalisierte Empfehlungen mit jeweils mindestens vier Stränden, Tagesausflügen sowie Genusszielen pro Region
 - responsive Darstellung für Desktop und Mobilgeräte
 - installierbare Progressive Web App mit Offline-Grundfunktion
 - zuverlässige Web-Push-Benachrichtigungen über OneSignal mit Marken-Icon
