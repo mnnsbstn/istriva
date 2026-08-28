@@ -208,16 +208,34 @@ private struct WeatherCard: View {
 
                 Divider()
 
-                HStack {
-                    weatherMetric("drop.fill", "\(Int(weather.rainProbability.rounded())) %", "Regen")
-                    Spacer()
-                    weatherMetric("wind", "\(Int(weather.windSpeed.rounded())) km/h", "Wind")
-                    Spacer()
-                    weatherMetric(
-                        "sunset.fill",
-                        weather.sunset?.formatted(date: .omitted, time: .shortened) ?? "–",
-                        "Sonnenuntergang"
-                    )
+                VStack(spacing: 12) {
+                    HStack {
+                        weatherMetric("drop.fill", "\(Int(weather.rainProbability.rounded())) %", "Regen")
+                        Spacer()
+                        weatherMetric("wind", "\(Int(weather.windSpeed.rounded())) km/h", "Wind")
+                        Spacer()
+                        weatherMetric(
+                            "sunset.fill",
+                            weather.sunset?.formatted(date: .omitted, time: .shortened) ?? "–",
+                            "Sonnenuntergang"
+                        )
+                    }
+
+                    HStack {
+                        weatherMetric(
+                            "sun.max.fill",
+                            weather.uvIndex.formatted(.number.precision(.fractionLength(0...1))),
+                            "UV-Index"
+                        )
+                        Spacer()
+                        weatherMetric(
+                            "humidity.fill",
+                            "\(Int(weather.humidity.rounded())) %",
+                            "Luftfeuchtigkeit"
+                        )
+                        Spacer()
+                        Color.clear.frame(maxWidth: .infinity)
+                    }
                 }
             } else if model.isLoadingWeather {
                 HStack {

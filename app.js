@@ -508,6 +508,8 @@ const weatherElements = {
   rain: document.querySelector("#weather-rain"),
   wind: document.querySelector("#weather-wind"),
   sunset: document.querySelector("#weather-sunset"),
+  uvIndex: document.querySelector("#weather-uv"),
+  humidity: document.querySelector("#weather-humidity"),
   tip: document.querySelector("#weather-tip")
 };
 const favoriteCount = document.querySelector("#favorite-count");
@@ -745,6 +747,12 @@ function applyWeatherData(data, { isLive, applyToPlan }) {
   weatherElements.rain.textContent = `${Math.round(data.rainProbability)}%`;
   weatherElements.wind.textContent = `${Math.round(data.windSpeed)} km/h`;
   weatherElements.sunset.textContent = data.sunset?.slice(11, 16) || "--:--";
+  weatherElements.uvIndex.textContent = Number.isFinite(data.uvIndex)
+    ? data.uvIndex.toFixed(1).replace(".0", "")
+    : "--";
+  weatherElements.humidity.textContent = Number.isFinite(data.humidity)
+    ? `${Math.round(data.humidity)}%`
+    : "--%";
   weatherElements.tip.innerHTML = `<span>✦</span> ${getWeatherTip(data, destination)}`;
 
   weatherSelect.options[0].textContent = `Outdoorplan · ${temperature}°`;
@@ -766,7 +774,7 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
   endpoint.search = new URLSearchParams({
     latitude,
     longitude,
-    current: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation",
+    current: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation,relative_humidity_2m,uv_index",
     daily: "precipitation_probability_max,sunset",
     timezone: "auto",
     forecast_days: "1"
@@ -799,6 +807,8 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
       weatherCode: payload.current.weather_code,
       windSpeed: payload.current.wind_speed_10m,
       precipitation: payload.current.precipitation,
+      humidity: payload.current.relative_humidity_2m,
+      uvIndex: payload.current.uv_index,
       rainProbability: payload.daily.precipitation_probability_max[0],
       sunset: payload.daily.sunset[0],
       observedAt: payload.current.time,
