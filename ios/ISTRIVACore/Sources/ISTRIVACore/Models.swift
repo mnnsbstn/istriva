@@ -206,6 +206,7 @@ public struct WeatherSnapshot: Codable, Equatable, Sendable {
     public let rainProbability: Double
     public let humidity: Double
     public let uvIndex: Double
+    public let seaSurfaceTemperature: Double?
     public let sunset: Date?
     public let observedAt: Date
 
@@ -218,6 +219,7 @@ public struct WeatherSnapshot: Codable, Equatable, Sendable {
         rainProbability: Double,
         humidity: Double,
         uvIndex: Double,
+        seaSurfaceTemperature: Double? = nil,
         sunset: Date?,
         observedAt: Date
     ) {
@@ -229,6 +231,7 @@ public struct WeatherSnapshot: Codable, Equatable, Sendable {
         self.rainProbability = rainProbability
         self.humidity = humidity
         self.uvIndex = uvIndex
+        self.seaSurfaceTemperature = seaSurfaceTemperature
         self.sunset = sunset
         self.observedAt = observedAt
     }

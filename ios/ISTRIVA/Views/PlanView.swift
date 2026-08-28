@@ -234,7 +234,11 @@ private struct WeatherCard: View {
                             "Luftfeuchtigkeit"
                         )
                         Spacer()
-                        Color.clear.frame(maxWidth: .infinity)
+                        weatherMetric(
+                            "water.waves",
+                            weather.seaSurfaceTemperature.map { "\(Int($0.rounded()))°" } ?? "–",
+                            "Wassertemperatur"
+                        )
                     }
                 }
             } else if model.isLoadingWeather {

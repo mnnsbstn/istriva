@@ -510,6 +510,7 @@ const weatherElements = {
   sunset: document.querySelector("#weather-sunset"),
   uvIndex: document.querySelector("#weather-uv"),
   humidity: document.querySelector("#weather-humidity"),
+  waterTemperature: document.querySelector("#weather-water"),
   tip: document.querySelector("#weather-tip")
 };
 const favoriteCount = document.querySelector("#favorite-count");
@@ -753,6 +754,9 @@ function applyWeatherData(data, { isLive, applyToPlan }) {
   weatherElements.humidity.textContent = Number.isFinite(data.humidity)
     ? `${Math.round(data.humidity)}%`
     : "--%";
+  weatherElements.waterTemperature.textContent = Number.isFinite(data.waterTemperature)
+    ? `${Math.round(data.waterTemperature)}°`
+    : "--°";
   weatherElements.tip.innerHTML = `<span>✦</span> ${getWeatherTip(data, destination)}`;
 
   weatherSelect.options[0].textContent = `Outdoorplan · ${temperature}°`;
@@ -762,6 +766,26 @@ function applyWeatherData(data, { isLive, applyToPlan }) {
     weatherSelect.value = shouldUseRainPlan(data) ? "rain" : "sun";
     planIndex = 0;
     renderPlan(true);
+  }
+}
+
+async function fetchSeaSurfaceTemperature(latitude, longitude) {
+  const endpoint = new URL("https://marine-api.open-meteo.com/v1/marine");
+  endpoint.search = new URLSearchParams({
+    latitude,
+    longitude,
+    current: "sea_surface_temperature",
+    timezone: "auto"
+  });
+
+  try {
+    const response = await fetch(endpoint, { cache: "no-store" });
+    if (!response.ok) return null;
+    const payload = await response.json();
+    const value = payload.current?.sea_surface_temperature;
+    return Number.isFinite(value) ? value : null;
+  } catch {
+    return null;
   }
 }
 
@@ -797,7 +821,10 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
   }
 
   try {
-    const response = await fetch(endpoint, { cache: "no-store" });
+    const [response, waterTemperature] = await Promise.all([
+      fetch(endpoint, { cache: "no-store" }),
+      fetchSeaSurfaceTemperature(latitude, longitude)
+    ]);
     if (!response.ok) throw new Error(`Weather request failed with ${response.status}`);
 
     const payload = await response.json();
@@ -809,6 +836,7 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
       precipitation: payload.current.precipitation,
       humidity: payload.current.relative_humidity_2m,
       uvIndex: payload.current.uv_index,
+      waterTemperature,
       rainProbability: payload.daily.precipitation_probability_max[0],
       sunset: payload.daily.sunset[0],
       observedAt: payload.current.time,
