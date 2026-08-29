@@ -508,6 +508,7 @@ const weatherElements = {
   summary: document.querySelector("#weather-summary"),
   rain: document.querySelector("#weather-rain"),
   wind: document.querySelector("#weather-wind"),
+  sunrise: document.querySelector("#weather-sunrise"),
   sunset: document.querySelector("#weather-sunset"),
   uvIndex: document.querySelector("#weather-uv"),
   humidity: document.querySelector("#weather-humidity"),
@@ -754,6 +755,10 @@ function getWeatherTip(data, destination) {
   return `Gute Bedingungen für euren Familientag in ${destination.shortName}.`;
 }
 
+function formatWeatherTime(value) {
+  return value?.slice(11, 16) || "--:--";
+}
+
 function applyWeatherData(data, { isLive, applyToPlan }) {
   const destination = istriaDestinations[destinationSelect.value];
   const condition = describeWeather(data.weatherCode);
@@ -771,7 +776,8 @@ function applyWeatherData(data, { isLive, applyToPlan }) {
   weatherElements.summary.textContent = `${condition.label} · gefühlt ${apparentTemperature}°`;
   weatherElements.rain.textContent = `${Math.round(data.rainProbability)}%`;
   weatherElements.wind.textContent = `${Math.round(data.windSpeed)} km/h`;
-  weatherElements.sunset.textContent = data.sunset?.slice(11, 16) || "--:--";
+  weatherElements.sunrise.textContent = formatWeatherTime(data.sunrise);
+  weatherElements.sunset.textContent = formatWeatherTime(data.sunset);
   weatherElements.uvIndex.textContent = Number.isFinite(data.uvIndex)
     ? data.uvIndex.toFixed(1).replace(".0", "")
     : "--";
@@ -823,7 +829,7 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
     latitude,
     longitude,
     current: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation,relative_humidity_2m,uv_index",
-    daily: "temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunset",
+    daily: "temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset",
     timezone: "auto",
     forecast_days: "1"
   });
@@ -864,6 +870,7 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
       temperatureMin: payload.daily.temperature_2m_min[0],
       temperatureMax: payload.daily.temperature_2m_max[0],
       rainProbability: payload.daily.precipitation_probability_max[0],
+      sunrise: payload.daily.sunrise[0],
       sunset: payload.daily.sunset[0],
       observedAt: payload.current.time,
       fetchedAt: Date.now()
