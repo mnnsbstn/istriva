@@ -713,8 +713,8 @@ const weatherIcons = {
   variable: "◌",
   wind: "〰",
   water: "∿",
-  sunrise: "▴",
-  sunset: "▾",
+  sunrise: "",
+  sunset: "",
   uv: "◎"
 };
 
