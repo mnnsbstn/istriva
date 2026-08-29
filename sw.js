@@ -1,18 +1,19 @@
-const CACHE_NAME = "bura-v43";
+const CACHE_NAME = "bura-v44";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=35",
-  "./i18n.js?v=1",
+  "./styles.css?v=41",
+  "./i18n.js?v=5",
   "./guide-data.js?v=1",
   "./tripadvisor-data.js?v=2",
-  "./app.js?v=30",
-  "./manifest.webmanifest?v=10",
-  "./favicon.ico?v=7",
-  "./icon-192.png?v=7",
-  "./icon-512.png?v=7",
-  "./icon-maskable-512.png?v=7",
-  "./icon-1024.png?v=7"
+  "./app.js?v=32",
+  "./manifest.webmanifest?v=11",
+  "./favicon.ico?v=8",
+  "./apple-touch-icon.png?v=8",
+  "./icon-192.png?v=8",
+  "./icon-512.png?v=8",
+  "./icon-maskable-512.png?v=8",
+  "./icon-1024.png?v=8"
 ];
 
 self.addEventListener("install", (event) => {
