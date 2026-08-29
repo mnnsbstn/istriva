@@ -303,23 +303,23 @@ nav a span {
 .profile-party {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 11px;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 12px;
   border-radius: 999px;
   color: #E5FF42;
   background: var(--ink);
+  font-size: 12px;
   font-weight: 700;
   line-height: 1;
   flex: 0 0 auto;
 }
 
-.profile-party-count {
-  font-size: 12px;
-}
-
+.profile-party-count,
 .profile-party-label {
-  font-size: 10px;
-  letter-spacing: .01em;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1;
 }
 
 .profile-label {
@@ -599,7 +599,7 @@ main {
 
 .header-divider {
   width: 1px;
-  height: 28px;
+  height: 40px;
   flex: 0 0 auto;
   background: #E5FF42;
 }
@@ -2302,7 +2302,7 @@ footer p a {
   }
 
   .header-divider {
-    height: 24px;
+    height: 40px;
   }
 
   .profile-label,
