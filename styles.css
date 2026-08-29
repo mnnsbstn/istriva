@@ -225,7 +225,6 @@ nav a span {
   font-size: 10px;
 }
 
-.install-button,
 .notification-button {
   min-height: 38px;
   display: inline-flex;
@@ -245,20 +244,13 @@ nav a span {
   flex: 0 0 auto;
 }
 
-.install-button:hover,
 .notification-button:hover {
   transform: translate(1px, 1px);
   box-shadow: 2px 2px 0 var(--accent);
 }
 
-.install-button[hidden],
 .notification-button[hidden] {
   display: none;
-}
-
-.install-button span {
-  font-size: 17px;
-  line-height: 1;
 }
 
 .notification-button svg {
@@ -1314,9 +1306,16 @@ h2 {
   text-decoration-color: var(--accent);
 }
 
-.place-link span {
+.place-link-label {
+  min-width: 0;
+}
+
+.place-link-icon,
+.place-link span[aria-hidden="true"] {
   flex: 0 0 auto;
+  margin-inline-start: .35em;
   font-size: .7em;
+  line-height: 1;
 }
 
 .stop p {
@@ -1848,7 +1847,7 @@ h2 {
 }
 
 .favorites-section {
-  margin: clamp(42px, 6vw, 64px) 0 clamp(24px, 4vw, 34px);
+  margin: clamp(28px, 4vw, 42px) 0 clamp(22px, 3vw, 32px);
   padding: clamp(20px, 3vw, 28px);
   border-radius: clamp(18px, 3vw, 24px);
   color: var(--white);
@@ -1935,6 +1934,37 @@ h2 {
   line-height: 1.2;
 }
 
+.favorite-place-card .favorite-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-top: 8px;
+}
+
+.favorite-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.favorite-map-link span[aria-hidden="true"] {
+  flex: 0 0 auto;
+  margin-inline-end: 2px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.favorite-place-card .favorite-card-footer .tripadvisor-badge {
+  margin-top: 0;
+}
+
 .favorite-place-card p {
   color: var(--ink-soft);
   font-size: 9px;
@@ -1956,22 +1986,43 @@ h2 {
   right: 12px;
 }
 
+.favorite-place-card a:last-child:not(.favorite-map-link) {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
 .favorites-empty {
   display: flex;
-  align-items: center;
-  gap: 11px;
-  margin-top: 18px;
-  color: #c9cdc9;
-  font-size: 12px;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .04);
 }
 
 .favorites-empty[hidden] {
   display: none;
 }
 
-.favorites-empty span {
+.favorites-empty-icon {
+  flex: 0 0 auto;
+  margin-top: 1px;
   color: var(--accent);
-  font-size: 24px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.favorites-empty-copy {
+  color: #b7bcb7;
+  font-size: 11px;
+  line-height: 1.45;
 }
 
 .saved-strip {
@@ -2217,17 +2268,12 @@ footer p a {
     background: var(--accent);
   }
 
-  .install-button,
   .notification-button {
     width: 38px;
     min-height: 38px;
     padding: 0;
     font-size: 0;
     box-shadow: 2px 2px 0 var(--accent);
-  }
-
-  .install-button span {
-    font-size: 18px;
   }
 
   .notification-button .action-label {

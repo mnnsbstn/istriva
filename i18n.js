@@ -32,7 +32,6 @@
         in: "in",
         open: "Profil der Familie öffnen"
       },
-      install: { button: "App installieren" },
       notifications: {
         button: "Updates",
         kicker: "ISTRIVA UPDATES",
@@ -127,7 +126,8 @@
         empty: "Tippt bei einer Location auf das Herz, um sie hier zu speichern.",
         removed: "Aus Favoriten entfernt",
         saved: "Für später gemerkt ♥",
-        cleared: "Favoriten wurden geleert"
+        cleared: "Favoriten wurden geleert",
+        removeItem: "{title} aus Favoriten entfernen"
       },
       guides: {
         beaches: "Strände",
@@ -188,8 +188,6 @@
         shareCopied: "Tagesplan wurde in die Zwischenablage kopiert",
         shareUnavailable: "Teilen ist in diesem Browser nicht verfügbar",
         profileSummary: "{family} · {region}",
-        installed: "ISTRIVA wurde erfolgreich installiert",
-        iosInstall: "Auf iPhone: Teilen antippen und „Zum Home-Bildschirm“ wählen",
         iosStandalone: "Auf iPhone: App zuerst zum Home-Bildschirm hinzufügen und von dort öffnen",
         notifySelect: "Bitte mindestens eine Update-Art auswählen",
         notifyLoading: "Der Benachrichtigungsdienst wird noch geladen",
@@ -232,7 +230,6 @@
         in: "in",
         open: "Open family profile"
       },
-      install: { button: "Install app" },
       notifications: {
         button: "Updates",
         kicker: "ISTRIVA UPDATES",
@@ -327,7 +324,8 @@
         empty: "Tap the heart on a place to save it here.",
         removed: "Removed from favorites",
         saved: "Saved for later ♥",
-        cleared: "Favorites cleared"
+        cleared: "Favorites cleared",
+        removeItem: "Remove {title} from favorites"
       },
       guides: {
         beaches: "Beaches",
@@ -388,8 +386,6 @@
         shareCopied: "Day plan copied to clipboard",
         shareUnavailable: "Sharing is not available in this browser",
         profileSummary: "{family} · {region}",
-        installed: "ISTRIVA installed successfully",
-        iosInstall: "On iPhone: tap Share and choose “Add to Home Screen”",
         iosStandalone: "On iPhone: add the app to your home screen first, then open it from there",
         notifySelect: "Please select at least one update type",
         notifyLoading: "Notification service is still loading",
