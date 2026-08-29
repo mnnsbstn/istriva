@@ -729,10 +729,17 @@ function describeWeather(code) {
   return { label: "Wechselhaft", icon: weatherIcons.variable };
 }
 
+function monoWeatherIcon(icon) {
+  if (!icon) return icon;
+  const code = icon.codePointAt(0);
+  if (code >= 0x2600 && code <= 0x27BF) return `${icon}\uFE0E`;
+  return icon;
+}
+
 function initWeatherDetailIcons() {
   document.querySelectorAll(".weather-detail-icon[data-icon]").forEach((element) => {
     const key = element.dataset.icon;
-    if (key === "sunrise" || key === "sunset") {
+    if (key === "sunrise" || key === "sunset" || key === "rain") {
       element.textContent = "";
       return;
     }
@@ -816,9 +823,9 @@ function renderWeatherForecast(days = []) {
     return `
       <article class="weather-forecast-day${index === 0 ? " is-today" : ""}">
         <span class="weather-forecast-label">${formatForecastDayLabel(day.date, index)}</span>
-        <span class="weather-forecast-icon" aria-hidden="true">${condition.icon}</span>
+        <span class="weather-forecast-icon" aria-hidden="true">${monoWeatherIcon(condition.icon)}</span>
         <strong class="weather-forecast-temps">${min}°–${max}°</strong>
-        <span class="weather-forecast-rain"><span class="weather-glyph" aria-hidden="true">${weatherIcons.rain}</span> ${rain}%</span>
+        <span class="weather-forecast-rain"><i class="weather-glyph weather-glyph-rain" aria-hidden="true"></i> ${rain}%</span>
       </article>
     `;
   }).join("");
