@@ -1,4 +1,4 @@
-const CACHE_NAME = "bura-v39";
+const CACHE_NAME = "bura-v40";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -6,12 +6,12 @@ const APP_SHELL = [
   "./guide-data.js?v=1",
   "./tripadvisor-data.js?v=2",
   "./app.js?v=26",
-  "./manifest.webmanifest?v=9",
-  "./favicon.ico?v=6",
-  "./icon-192.png?v=6",
-  "./icon-512.png?v=6",
-  "./icon-maskable-512.png?v=6",
-  "./icon-1024.png?v=6"
+  "./manifest.webmanifest?v=10",
+  "./favicon.ico?v=7",
+  "./icon-192.png?v=7",
+  "./icon-512.png?v=7",
+  "./icon-maskable-512.png?v=7",
+  "./icon-1024.png?v=7"
 ];
 
 self.addEventListener("install", (event) => {
