@@ -717,7 +717,7 @@ h1 em {
 
 .weather-details {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 92px), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(14px, 2.5vw, 20px) clamp(10px, 2vw, 18px);
   margin: var(--space-md) 0 15px;
   padding: clamp(14px, 2.5vw, 18px) 0;
@@ -745,8 +745,19 @@ h1 em {
 }
 
 .weather-detail-icon[data-icon="sunrise"],
-.weather-detail-icon[data-icon="sunset"] {
+.weather-detail-icon[data-icon="sunset"],
+.weather-detail-icon[data-icon="rain"] {
   font-size: 0;
+  line-height: 0;
+}
+
+.weather-detail-icon[data-icon="rain"]::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 2px auto 0;
+  background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 13v8M5 13a7 7 0 0 1 14 0'/%3E%3C/svg%3E");
 }
 
 .weather-detail-icon[data-icon="sunrise"]::before,
@@ -770,6 +781,15 @@ h1 em {
 
 .weather-glyph {
   font-style: normal;
+  color: var(--ink);
+}
+
+.weather-glyph-rain {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+  background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 13v8M5 13a7 7 0 0 1 14 0'/%3E%3C/svg%3E");
 }
 
 .weather-details strong {
@@ -831,6 +851,7 @@ h1 em {
   color: var(--ink);
   font-size: 18px;
   line-height: 1;
+  font-style: normal;
 }
 
 .weather-forecast-temps {
