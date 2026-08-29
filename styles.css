@@ -818,6 +818,7 @@ h1 em {
   display: flex;
   align-items: flex-start;
   gap: 9px;
+  margin-top: var(--space-md);
   color: var(--teal-dark);
   font-size: 11px;
   font-weight: 600;
