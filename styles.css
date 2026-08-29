@@ -744,6 +744,11 @@ h1 em {
   line-height: 1;
 }
 
+.weather-detail-icon[data-icon="sunrise"],
+.weather-detail-icon[data-icon="sunset"] {
+  font-size: 0;
+}
+
 .weather-detail-icon[data-icon="sunrise"]::before,
 .weather-detail-icon[data-icon="sunset"]::before {
   content: "";
