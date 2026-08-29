@@ -279,15 +279,31 @@ nav a span {
   flex: 0 0 auto;
 }
 
-.profile > span:first-child {
-  width: 32px;
-  height: 32px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
+.profile-party {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: 999px;
   color: #E5FF42;
   background: var(--ink);
   font-weight: 700;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.profile-party-count {
+  font-size: 12px;
+}
+
+.profile-party-label {
+  font-size: 10px;
+  letter-spacing: .01em;
+  text-transform: lowercase;
+}
+
+.profile-party-label::first-letter {
+  text-transform: uppercase;
 }
 
 .profile-label {
@@ -2263,7 +2279,7 @@ footer p a {
     background: transparent;
   }
 
-  .profile > span:first-child {
+  .profile-party {
     color: var(--ink);
     background: var(--accent);
   }

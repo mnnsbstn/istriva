@@ -17,7 +17,7 @@
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png?v=7">
   <link rel="apple-touch-icon" href="icon-192.png?v=7">
   <link rel="manifest" href="manifest.webmanifest?v=10">
-  <link rel="stylesheet" href="styles.css?v=36">
+  <link rel="stylesheet" href="styles.css?v=37">
   <script>
     if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone) {
       document.documentElement.classList.add("standalone");
@@ -49,7 +49,10 @@
       <span class="action-label" data-i18n="notifications.button">Updates</span>
     </button>
     <button class="profile" type="button" data-i18n-attr="aria-label" data-i18n="profile.open">
-      <span id="party-size">4</span>
+      <span class="profile-party">
+        <span class="profile-party-count" id="party-size">4</span>
+        <span class="profile-party-label" id="party-size-label" data-i18n="profile.people">Personen</span>
+      </span>
       <span class="profile-label"><span data-i18n="profile.family">Familie</span><br><strong><span data-i18n="profile.in">in</span> <span id="profile-destination">Pula</span></strong></span>
       <span aria-hidden="true">⌄</span>
     </button>
@@ -349,9 +352,9 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="i18n.js?v=3"></script>
+  <script src="i18n.js?v=5"></script>
   <script src="guide-data.js?v=1"></script>
   <script src="tripadvisor-data.js?v=2"></script>
-  <script src="app.js?v=31"></script>
+  <script src="app.js?v=32"></script>
 </body>
 </html>
