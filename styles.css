@@ -154,11 +154,27 @@ a {
 }
 
 .site-header .brand-product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
   color: var(--white);
 }
 
-.site-header .brand small {
+.site-header .brand-name {
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: .02em;
+}
+
+.site-header .brand-tagline {
+  display: block;
+  margin-top: 4px;
   color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .site-header nav a {
@@ -299,11 +315,6 @@ nav a span {
 .profile-party-label {
   font-size: 10px;
   letter-spacing: .01em;
-  text-transform: lowercase;
-}
-
-.profile-party-label::first-letter {
-  text-transform: uppercase;
 }
 
 .profile-label {
