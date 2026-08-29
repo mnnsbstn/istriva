@@ -1278,14 +1278,33 @@ function tripAdvisorSearchUrl(title) {
   return `https://www.tripadvisor.de/Search?q=${encodeURIComponent(`${title} Istrien Kroatien`)}`;
 }
 
+function isBrokenTripAdvisorEntry(entry) {
+  if (!entry?.url) return true;
+  if (/Search\?q=\d+%20Std\.|Search\?q=\d+%20Min\./.test(entry.url)) return true;
+  try {
+    const query = decodeURIComponent(new URL(entry.url).searchParams.get("q") || "");
+    return /^\d+\s*(Std\.|Min\.)/.test(query);
+  } catch {
+    return true;
+  }
+}
+
 function getTripAdvisorInfo({ map, title, key } = {}) {
   if (key && tripAdvisorByKey[key]) return tripAdvisorByKey[key];
   const normalizedMap = normalizeTripAdvisorKey(map);
-  if (normalizedMap && tripAdvisorByMap[normalizedMap]) return tripAdvisorByMap[normalizedMap];
+  const mapEntry = normalizedMap ? tripAdvisorByMap[normalizedMap] : null;
+  if (mapEntry && !isBrokenTripAdvisorEntry(mapEntry)) return mapEntry;
   if (title) {
+    const isGenericGroup = /^(konobas|restaurants|bars|beach bars|seafood restaurants)\b/i.test(title);
+    if (isGenericGroup) {
+      return { rating: null, reviews: null, url: tripAdvisorSearchUrl(title) };
+    }
+    if (mapEntry?.rating && !isBrokenTripAdvisorEntry(mapEntry)) {
+      return { ...mapEntry, url: tripAdvisorSearchUrl(title) };
+    }
     return { rating: null, reviews: null, url: tripAdvisorSearchUrl(title) };
   }
-  return null;
+  return mapEntry && !isBrokenTripAdvisorEntry(mapEntry) ? mapEntry : null;
 }
 
 function formatTripAdvisorReviews(count) {
