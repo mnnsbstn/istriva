@@ -1172,15 +1172,15 @@ h2 {
   position: absolute;
   top: 46px;
   bottom: 78px;
-  left: 47px;
+  left: 54px;
   width: 1px;
   background: repeating-linear-gradient(to bottom, var(--line) 0, var(--line) 5px, transparent 5px, transparent 10px);
 }
 
 .stop {
   display: grid;
-  grid-template-columns: minmax(38px, 46px) minmax(0, 1fr) auto;
-  gap: clamp(14px, 3vw, 26px);
+  grid-template-columns: minmax(48px, 56px) minmax(0, 1fr) auto;
+  gap: clamp(18px, 3vw, 28px);
   position: relative;
   padding: 18px 0 20px;
   min-width: 0;
@@ -1188,11 +1188,13 @@ h2 {
 
 .time {
   padding-top: 7px;
+  padding-right: 10px;
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
   font-weight: 700;
   text-align: right;
+  box-sizing: border-box;
 }
 
 .stop-content {
@@ -1206,7 +1208,7 @@ h2 {
   width: 11px;
   height: 11px;
   top: 10px;
-  left: -32px;
+  left: -36px;
   border: 3px solid var(--white);
   border-radius: 50%;
   background: var(--accent);
@@ -2094,27 +2096,30 @@ footer p a {
 
 @media (max-width: 780px) {
   .itinerary::before {
-    left: 48px;
+    left: 56px;
   }
 
   .stop {
     grid-template-columns: minmax(0, 1fr);
     gap: 14px;
-    padding-left: 64px;
+    padding-left: 76px;
   }
 
   .stop-content::before {
-    left: -24px;
+    left: -20px;
   }
 
   .time {
-    width: 38px;
+    width: 42px;
     position: absolute;
     top: 25px;
     left: 0;
     padding-top: 0;
+    padding-right: 12px;
     font-size: 10px;
     white-space: nowrap;
+    text-align: right;
+    box-sizing: content-box;
   }
 
   .stop-image {
