@@ -17,7 +17,7 @@
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png?v=7">
   <link rel="apple-touch-icon" href="icon-192.png?v=7">
   <link rel="manifest" href="manifest.webmanifest?v=10">
-  <link rel="stylesheet" href="styles.css?v=35">
+  <link rel="stylesheet" href="styles.css?v=36">
   <script>
     if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone) {
       document.documentElement.classList.add("standalone");
@@ -44,9 +44,6 @@
       <span aria-hidden="true">|</span>
       <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
     </div>
-    <button class="install-button" id="install-button" type="button" hidden>
-      <span aria-hidden="true">↓</span> <span data-i18n="install.button">App installieren</span>
-    </button>
     <button class="notification-button" id="notification-button" type="button" aria-pressed="false" aria-haspopup="dialog" aria-controls="notification-dialog" hidden>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
       <span class="action-label" data-i18n="notifications.button">Updates</span>
@@ -133,6 +130,22 @@
       </div>
     </section>
 
+    <section class="favorites-section" id="favoriten" aria-labelledby="favorites-title">
+      <div class="favorites-heading">
+        <div>
+          <p class="section-kicker" data-i18n="favorites.kicker">FÜR SPÄTER MERKEN</p>
+          <h2 id="favorites-title" data-i18n="favorites.title">Eure Favoriten</h2>
+          <p data-i18n="favorites.desc">Alle gemerkten Strände, Ausflüge, Lokale und Planstopps an einem Ort.</p>
+        </div>
+        <button id="clear-favorites" type="button" data-i18n="favorites.clear">Alle entfernen</button>
+      </div>
+      <div class="favorites-grid" id="favorites-grid"></div>
+      <p class="favorites-empty" id="favorites-empty">
+        <span class="favorites-empty-icon" aria-hidden="true">♡</span>
+        <span class="favorites-empty-copy" data-i18n="favorites.empty">Tippt bei einer Location auf das Herz, um sie hier zu speichern.</span>
+      </p>
+    </section>
+
     <section class="planner" id="plan" aria-labelledby="plan-title">
       <div class="planner-top">
         <div>
@@ -195,19 +208,6 @@
       </div>
 
       <div class="itinerary" id="itinerary"></div>
-    </section>
-
-    <section class="favorites-section" id="favoriten" aria-labelledby="favorites-title">
-      <div class="favorites-heading">
-        <div>
-          <p class="section-kicker" data-i18n="favorites.kicker">FÜR SPÄTER MERKEN</p>
-          <h2 id="favorites-title" data-i18n="favorites.title">Eure Favoriten</h2>
-          <p data-i18n="favorites.desc">Alle gemerkten Strände, Ausflüge, Lokale und Planstopps an einem Ort.</p>
-        </div>
-        <button id="clear-favorites" type="button" data-i18n="favorites.clear">Alle entfernen</button>
-      </div>
-      <div class="favorites-grid" id="favorites-grid"></div>
-      <p class="favorites-empty" id="favorites-empty"><span>♡</span> <span data-i18n="favorites.empty">Tippt bei einer Location auf das Herz, um sie hier zu speichern.</span></p>
     </section>
 
     <div class="guide-jump-links" data-i18n-attr="aria-label" data-i18n="guides.jumpAria">
@@ -349,9 +349,9 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="i18n.js?v=1"></script>
+  <script src="i18n.js?v=2"></script>
   <script src="guide-data.js?v=1"></script>
   <script src="tripadvisor-data.js?v=2"></script>
-  <script src="app.js?v=30"></script>
+  <script src="app.js?v=31"></script>
 </body>
 </html>

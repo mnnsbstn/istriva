@@ -476,7 +476,6 @@ const weatherSelect = document.querySelector("#weather-select");
 const paceSelect = document.querySelector("#pace-select");
 const replanButton = document.querySelector("#replan-button");
 const shareButton = document.querySelector("#share-button");
-const installButton = document.querySelector("#install-button");
 const notificationButton = document.querySelector("#notification-button");
 const profileButton = document.querySelector(".profile");
 const partySize = document.querySelector("#party-size");
@@ -524,7 +523,6 @@ const DESTINATION_STORAGE_KEY = "bura-selected-destination";
 const FAMILY_SETTINGS_KEY = "bura-family-settings-v1";
 let planIndex = 0;
 let toastTimer;
-let deferredInstallPrompt;
 let weatherManuallySelected = false;
 let lastWeatherRefresh = 0;
 let oneSignalClient;
@@ -1506,12 +1504,14 @@ function renderFavorites() {
       <div class="favorite-place-icon" aria-hidden="true">${escapeHTML(item.icon)}</div>
       <div>
         <span>${escapeHTML(item.category)}</span>
-        <h3><a class="place-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">${escapeHTML(item.title)}<span aria-hidden="true">↗</span></a></h3>
+        <h3><a class="place-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer"><span class="place-link-label">${escapeHTML(item.title)}</span><span class="place-link-icon" aria-hidden="true">↗</span></a></h3>
         <p>${escapeHTML(item.description)}</p>
-        ${renderTripAdvisorBadge({ map: item.map, title: item.title })}
-        <a href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a>
+        <div class="favorite-card-footer">
+          ${renderTripAdvisorBadge({ map: item.map, title: item.title })}
+          <a class="favorite-map-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer" aria-label="${t("plan.openMaps", { title: item.title })}"><span aria-hidden="true">🗺️</span><span>${t("plan.mapsLink")}</span></a>
+        </div>
       </div>
-      <button class="location-favorite selected" type="button" data-favorite-id="${escapeHTML(item.id)}" aria-label="${escapeHTML(item.title)} aus Favoriten entfernen" aria-pressed="true">♥</button>
+      <button class="location-favorite selected" type="button" data-favorite-id="${escapeHTML(item.id)}" aria-label="${t("favorites.removeItem", { title: item.title })}" aria-pressed="true">♥</button>
     </article>
   `).join("");
 }
@@ -1628,33 +1628,8 @@ profileButton.addEventListener("click", () => {
   showToast(t("toast.profileSummary", { family: familyDescription(), region: destination.name }));
 });
 
-window.addEventListener("beforeinstallprompt", (event) => {
-  event.preventDefault();
-  deferredInstallPrompt = event;
-  installButton.hidden = false;
-});
-
-window.addEventListener("appinstalled", () => {
-  deferredInstallPrompt = undefined;
-  installButton.hidden = true;
-  showToast(t("toast.installed"));
-});
-
-installButton.addEventListener("click", async () => {
-  if (deferredInstallPrompt) {
-    deferredInstallPrompt.prompt();
-    await deferredInstallPrompt.userChoice;
-    deferredInstallPrompt = undefined;
-    installButton.hidden = true;
-    return;
-  }
-
-  showToast(t("toast.iosInstall"));
-});
-
 notificationButton.addEventListener("click", () => {
   if (isIos && !isStandalone) {
-    installButton.hidden = false;
     showToast(t("toast.iosStandalone"));
     return;
   }
@@ -1676,10 +1651,6 @@ const isStandalone = window.matchMedia("(display-mode: standalone)").matches || 
 
 if (isStandalone) {
   document.body.classList.add("standalone");
-}
-
-if (isIos && !isStandalone) {
-  installButton.hidden = false;
 }
 
 if ("serviceWorker" in navigator) {
