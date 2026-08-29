@@ -744,6 +744,25 @@ h1 em {
   line-height: 1;
 }
 
+.weather-detail-icon[data-icon="sunrise"]::before,
+.weather-detail-icon[data-icon="sunset"]::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  margin: 4px auto 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+}
+
+.weather-detail-icon[data-icon="sunrise"]::before {
+  border-bottom: 10px solid var(--ink);
+}
+
+.weather-detail-icon[data-icon="sunset"]::before {
+  border-top: 10px solid var(--ink);
+}
+
 .weather-glyph {
   font-style: normal;
 }
