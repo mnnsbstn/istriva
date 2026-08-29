@@ -1114,7 +1114,26 @@ function initStaticTripAdvisorBadges() {
   });
 }
 
-function guideItems(destinationKey, category, family) {
+const MOBILE_GUIDE_BREAKPOINT = 620;
+const MOBILE_GUIDE_LIMIT = 4;
+const GUIDE_GRID_MIN_COLUMN = 320;
+const GUIDE_GRID_GAP = 16;
+
+function getGuideGridColumns(grid) {
+  const width = grid?.clientWidth || document.querySelector("main")?.clientWidth || window.innerWidth;
+  return Math.max(1, Math.floor((width + GUIDE_GRID_GAP) / (GUIDE_GRID_MIN_COLUMN + GUIDE_GRID_GAP)));
+}
+
+function guideDisplayLimit(grid) {
+  if (window.matchMedia(`(max-width: ${MOBILE_GUIDE_BREAKPOINT}px)`).matches) {
+    return MOBILE_GUIDE_LIMIT;
+  }
+
+  const columns = getGuideGridColumns(grid);
+  return Math.ceil(MOBILE_GUIDE_LIMIT / columns) * columns;
+}
+
+function guideItems(destinationKey, category, family, limit = MOBILE_GUIDE_LIMIT) {
   const catalog = guideCatalog[destinationKey] || guideCatalog.pula;
   return catalog[category]
     .map((key) => guidePlaces[category][key])
@@ -1136,7 +1155,7 @@ function guideItems(destinationKey, category, family) {
         + second.suitability.groups * groupWeight;
       return secondScore - firstScore;
     })
-    .slice(0, 4);
+    .slice(0, limit);
 }
 
 function personalizedGuideMeta(item, family) {
@@ -1158,7 +1177,8 @@ function personalizedGuideMeta(item, family) {
 }
 
 function renderGuideCards(grid, destinationKey, category, label, family) {
-  const items = guideItems(destinationKey, category, family);
+  const limit = guideDisplayLimit(grid);
+  const items = guideItems(destinationKey, category, family, limit);
   grid.innerHTML = items.map((item) => {
     const favorite = {
       id: `guide:${category}:${item.key}`,
@@ -1563,6 +1583,12 @@ document.addEventListener("visibilitychange", () => {
 setInterval(() => {
   refreshLiveWeather({ applyToPlan: !weatherManuallySelected });
 }, 15 * 60 * 1000);
+
+let guideResizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(guideResizeTimer);
+  guideResizeTimer = setTimeout(() => renderDiscoveryGuides(), 150);
+});
 
 const requestedDestination = new URLSearchParams(window.location.search).get("destination");
 const initialDestination = requestedDestination && istriaDestinations[requestedDestination]
