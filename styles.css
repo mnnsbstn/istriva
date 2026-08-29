@@ -16,6 +16,10 @@
   --shadow: 0 18px 55px rgba(0, 0, 0, .08);
   --page-max: 1080px;
   --page-gutter: clamp(14px, 4vw, 24px);
+  --space-sm: clamp(12px, 2vw, 16px);
+  --space-md: clamp(18px, 3vw, 24px);
+  --space-lg: clamp(28px, 4vw, 40px);
+  --space-xl: clamp(36px, 5vw, 48px);
 }
 
 * {
@@ -693,10 +697,10 @@ h1 em {
 
 .weather-details {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 6px;
-  margin: 18px 0 15px;
-  padding: 14px 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.5vw, 20px) clamp(10px, 2vw, 18px);
+  margin: var(--space-md) 0 15px;
+  padding: clamp(14px, 2.5vw, 18px) 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -704,12 +708,15 @@ h1 em {
 .weather-details span {
   color: var(--ink-soft);
   font-size: 9px;
+  line-height: 1.4;
   text-align: center;
+  padding-inline: 2px;
 }
 
 .weather-details i {
   display: block;
   height: 22px;
+  margin-bottom: 2px;
   color: var(--teal);
   font-size: 14px;
   font-style: normal;
@@ -717,8 +724,10 @@ h1 em {
 
 .weather-details strong {
   display: block;
+  margin-bottom: 3px;
   color: var(--ink);
   font-size: 11px;
+  line-height: 1.2;
 }
 
 .weather-tip {
@@ -1399,15 +1408,16 @@ h2 {
 .guide-jump-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 24px;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-lg);
 }
 
 .guide-jump-links a {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 9px 13px;
+  padding: 10px 15px;
   border: 1px solid var(--ink);
   border-radius: 999px;
   background: var(--white);
@@ -1422,22 +1432,26 @@ h2 {
 }
 
 .guide-section {
-  padding: 54px 0 64px;
+  padding: var(--space-xl) 0 clamp(40px, 6vw, 56px);
   border-top: 1px solid var(--line);
   scroll-margin-top: 24px;
+}
+
+.guide-jump-links + .guide-section {
+  padding-top: var(--space-xl);
 }
 
 .guide-heading {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 22px;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
   flex-wrap: wrap;
 }
 
 .guide-heading h2 {
-  margin: 4px 0 7px;
+  margin: var(--space-sm) 0 var(--space-sm);
 }
 
 .guide-heading > div > p:not(.section-kicker, .guide-family-context) {
@@ -1459,8 +1473,8 @@ h2 {
 
 .guide-family-context {
   display: inline-flex;
-  margin-top: 10px;
-  padding: 5px 9px;
+  margin-top: var(--space-sm);
+  padding: 6px 10px;
   border-radius: 7px;
   color: var(--ink);
   background: var(--mint-light);
@@ -1471,7 +1485,7 @@ h2 {
 .guide-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 16px;
+  gap: var(--space-md);
 }
 
 .guide-card {
@@ -1660,8 +1674,8 @@ h2 {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 20px;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
   border-bottom: 1px solid rgba(255, 255, 255, .2);
 }
 
@@ -1671,7 +1685,7 @@ h2 {
 }
 
 .favorites-heading > div > p:last-child {
-  margin-top: 6px;
+  margin-top: var(--space-sm);
   color: #b7bcb7;
   font-size: 12px;
 }
@@ -1696,8 +1710,8 @@ h2 {
 .favorites-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: 12px;
-  margin-top: 18px;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
 }
 
 .favorite-place-card {
@@ -1923,10 +1937,6 @@ footer p a {
     max-width: none;
   }
 
-  .weather-details {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .filters {
     grid-template-columns: 1fr 1fr;
   }
@@ -2093,8 +2103,7 @@ footer p a {
   }
 
   .weather-details {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2px;
+    gap: 16px 12px;
   }
 
   .planner {
