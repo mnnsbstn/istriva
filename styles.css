@@ -537,11 +537,18 @@ main {
   gap: 10px;
 }
 
-.eyebrow span {
+.eyebrow > span[aria-hidden="true"] {
   width: 28px;
   height: 2px;
   display: inline-block;
+  flex: 0 0 auto;
   background: var(--accent);
+}
+
+#hero-eyebrow {
+  width: auto;
+  height: auto;
+  background: none;
 }
 
 h1,
@@ -747,6 +754,13 @@ h1 em {
 .weather-detail-icon[data-icon="sunrise"],
 .weather-detail-icon[data-icon="sunset"] {
   font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.weather-detail-icon[data-icon="sunrise"]::after,
+.weather-detail-icon[data-icon="sunset"]::after {
+  content: none;
 }
 
 .weather-detail-icon[data-icon="sunrise"]::before,
@@ -1113,10 +1127,18 @@ h2 {
   border: 0;
   outline: none;
   color: var(--ink);
-  background: transparent;
+  background-color: transparent;
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 12px 8px;
 }
 
 .plan-summary {
@@ -2286,7 +2308,7 @@ footer p a {
     align-items: flex-start;
   }
 
-  .primary-button {
+  .primary-button.icon-only {
     width: 43px;
     padding: 0;
     font-size: 0;
@@ -2471,7 +2493,8 @@ footer p a {
 .lang-btn.active { background: var(--accent); border-color: #000; }
 
 .compact-hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: var(--space-md); align-items: start; }
-.compact-hero .welcome-copy h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); }
+.compact-hero .welcome-copy h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin: 10px 0 14px; line-height: 1.08; }
+.compact-hero .eyebrow { margin-bottom: 4px; }
 .weather-card.compact .weather-details { grid-template-columns: repeat(3, 1fr); }
 .weather-forecast.collapsed { display: none; }
 .text-button { min-height: 44px; border: 0; background: transparent; text-decoration: underline; cursor: pointer; color: inherit; }
@@ -2482,12 +2505,38 @@ footer p a {
 }
 .context-bar small { display: block; color: var(--ink-soft); font-size: 10px; text-transform: uppercase; }
 
-.plan-note { color: var(--ink-soft); font-size: 13px; margin-top: 4px; }
-.plan-summary { display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 12px 0; font-size: 13px; }
+.plan-summary-extra { display: none; }
+
+.site-header {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.site-header .brand {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.site-header .desktop-nav {
+  flex: 1 1 auto;
+  justify-content: center;
+  min-width: 0;
+}
+
+.site-header .lang-switch,
+.site-header .install-button,
+.site-header .notification-button,
+.site-header .profile {
+  flex: 0 0 auto;
+}
 .plan-warning { color: #8a2b2b; background: #fff4f4; border: 1px solid #f0c8c8; padding: 10px 12px; border-radius: 12px; margin-bottom: 10px; }
 
 .stop-actions { display: inline-flex; gap: 4px; flex-wrap: wrap; }
-.stop-actions .icon-button, .location-favorite, .icon-button, .primary-button, .secondary-button { min-width: 44px; min-height: 44px; }
+.stop-actions .icon-button,
+.stop-actions .location-favorite {
+  min-width: 44px;
+  min-height: 44px;
+}
 .stop-locked { font-size: 10px; font-weight: 700; color: var(--ink-soft); }
 .stop.highlight { outline: 2px solid var(--accent); outline-offset: 4px; }
 
