@@ -672,16 +672,36 @@ h1 em {
   font-size: 39px;
 }
 
+.weather-temp-block {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 10px;
+  margin-bottom: 4px;
+}
+
 .weather-head strong {
   display: inline-block;
-  margin-right: 8px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 38px;
   line-height: 1;
 }
 
+.weather-day-range {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--sand);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
 .weather-head p {
-  display: inline;
+  display: block;
+  margin-top: 2px;
   color: var(--ink-soft);
   font-size: 12px;
 }
@@ -717,9 +737,9 @@ h1 em {
   display: block;
   height: 22px;
   margin-bottom: 2px;
-  color: var(--teal);
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
+  line-height: 1;
 }
 
 .weather-details strong {
@@ -2190,7 +2210,16 @@ footer p a {
   }
 
   .guide-section {
-    padding: 42px 0 48px;
+    padding: var(--space-lg) 0 clamp(32px, 5vw, 42px);
+  }
+
+  .guide-jump-links {
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .guide-jump-links a {
+    padding: 9px 13px;
   }
 
   .guide-heading {
