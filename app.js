@@ -758,6 +758,46 @@ function formatWeatherTime(value) {
   return value?.slice(11, 16) || "--:--";
 }
 
+function buildDailyForecast(payload) {
+  const daily = payload.daily;
+  if (!daily?.time?.length) return [];
+
+  return daily.time.map((date, index) => ({
+    date,
+    weatherCode: daily.weather_code?.[index],
+    min: daily.temperature_2m_min?.[index],
+    max: daily.temperature_2m_max?.[index],
+    rainProbability: daily.precipitation_probability_max?.[index]
+  }));
+}
+
+function formatForecastDayLabel(dateString, index) {
+  if (index === 0) return "Heute";
+  const date = new Date(`${dateString}T12:00:00`);
+  return date.toLocaleDateString("de-DE", { weekday: "short" }).replace(".", "");
+}
+
+function renderWeatherForecast(days = []) {
+  const grid = document.querySelector("#weather-forecast");
+  if (!grid) return;
+
+  grid.innerHTML = days.slice(0, 7).map((day, index) => {
+    const condition = describeWeather(Number.isFinite(day.weatherCode) ? day.weatherCode : 0);
+    const min = Number.isFinite(day.min) ? Math.round(day.min) : "--";
+    const max = Number.isFinite(day.max) ? Math.round(day.max) : "--";
+    const rain = Number.isFinite(day.rainProbability) ? Math.round(day.rainProbability) : "--";
+
+    return `
+      <article class="weather-forecast-day${index === 0 ? " is-today" : ""}">
+        <span class="weather-forecast-label">${formatForecastDayLabel(day.date, index)}</span>
+        <span class="weather-forecast-icon" aria-hidden="true">${condition.icon}</span>
+        <strong class="weather-forecast-temps">${min}°–${max}°</strong>
+        <span class="weather-forecast-rain">🌧️ ${rain}%</span>
+      </article>
+    `;
+  }).join("");
+}
+
 function applyWeatherData(data, { isLive, applyToPlan }) {
   const destination = istriaDestinations[destinationSelect.value];
   const condition = describeWeather(data.weatherCode);
@@ -783,6 +823,7 @@ function applyWeatherData(data, { isLive, applyToPlan }) {
   weatherElements.waterTemperature.textContent = Number.isFinite(data.waterTemperature)
     ? `${Math.round(data.waterTemperature)}°`
     : "--°";
+  renderWeatherForecast(data.forecast);
   weatherElements.tip.innerHTML = `<span>✦</span> ${getWeatherTip(data, destination)}`;
 
   weatherSelect.options[0].textContent = `Outdoorplan · ${temperature}°`;
@@ -825,9 +866,9 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
     latitude,
     longitude,
     current: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation,uv_index",
-    daily: "temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset",
+    daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset",
     timezone: "auto",
-    forecast_days: "1"
+    forecast_days: "7"
   });
   endpoint.searchParams.set("cache_bust", String(Date.now()));
 
@@ -867,6 +908,7 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
       rainProbability: payload.daily.precipitation_probability_max[0],
       sunrise: payload.daily.sunrise[0],
       sunset: payload.daily.sunset[0],
+      forecast: buildDailyForecast(payload),
       observedAt: payload.current.time,
       fetchedAt: Date.now()
     };
