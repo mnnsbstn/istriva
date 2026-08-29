@@ -21,7 +21,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=7">
   <link rel="apple-touch-icon" href="icon-192.png?v=7">
   <link rel="manifest" href="manifest.webmanifest?v=10">
-  <link rel="stylesheet" href="styles.css?v=41">
+  <link rel="stylesheet" href="styles.css?v=42">
   <script>
     if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone) {
       document.documentElement.classList.add("standalone");
@@ -69,8 +69,8 @@
     <div data-section-panel="today">
       <section class="welcome compact-hero" aria-labelledby="welcome-title">
         <div class="welcome-copy">
-          <p class="eyebrow"><span></span> <span data-i18n="hero.eyebrow">Dobro jutro, Familie!</span></p>
-          <h1 id="welcome-title"><span data-i18n="hero.title" data-i18n-vars='{"region":""}'>Euer perfekter Tag in <em id="hero-destination">Pula.</em></span></h1>
+          <p class="eyebrow"><span aria-hidden="true"></span><span id="hero-eyebrow">Dobro jutro, Familie!</span></p>
+          <h1 id="welcome-title">Euer perfekter Tag<br>in <em id="hero-destination">Pula.</em></h1>
           <p class="intro" data-i18n="hero.intro">Von Küstenstädten bis zu Bergdörfern – wir planen euren entspannten Familientag überall in Istrien.</p>
           <label class="destination-switcher" for="destination-select">
             <span class="destination-icon" aria-hidden="true">⌖</span>
@@ -144,7 +144,7 @@
           <div class="plan-actions">
             <button class="icon-button" id="share-button" type="button" aria-label="Teilen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg></button>
             <button class="secondary-button" id="save-plan-button" type="button" data-i18n="saved.savePlan">Plan speichern</button>
-            <button class="primary-button" id="replan-button" type="button" data-i18n="plan.replan">Alternative anzeigen</button>
+            <button class="primary-button" id="replan-button" type="button"><span id="replan-button-label">Alternative anzeigen</span></button>
           </div>
         </div>
         <div class="filters" aria-label="Plan anpassen">
@@ -162,9 +162,13 @@
           <label class="select-wrap"><span>☀</span><select id="weather-select"><option value="sun" data-i18n="plan.weatherSun">Sonne</option><option value="rain" data-i18n="plan.weatherRain">Regenoption</option></select></label>
           <label class="select-wrap"><span>♢</span><select id="pace-select"><option value="balanced" data-i18n="plan.paceBalanced">Ausgewogen</option><option value="relaxed" data-i18n="plan.paceRelaxed">Ganz entspannt</option><option value="active" data-i18n="plan.paceActive">Abenteuerlich</option></select></label>
         </div>
-        <div class="plan-summary" id="plan-summary-details" aria-live="polite"></div>
+        <div class="plan-summary plan-summary-legacy" aria-live="polite">
+          <span id="plan-name">Kultur, Eis &amp; Meeresluft</span>
+          <span><b id="stop-count">4</b> Stopps</span>
+          <span><b id="distance">5,8 km</b> Wege</span>
+          <span><b id="budget">€€</b> Familienbudget</span>
+        </div>
         <p class="plan-warning" id="plan-time-warning" hidden></p>
-        <p class="sr-only" id="plan-name"></p>
         <div class="itinerary" id="itinerary"></div>
       </section>
     </div>
@@ -173,27 +177,89 @@
     <div data-section-panel="explore" hidden>
       <section class="explore-section">
         <div class="explore-toolbar">
-          <input id="explore-search" type="search" data-i18n="explore.searchPlaceholder" placeholder="Strände, Ausflüge, Essen …">
-          <button type="button" id="filter-drawer-open" data-i18n="explore.filters">Filter</button>
+          <input id="explore-search" type="search" placeholder="Strände, Ausflüge, Essen …">
+          <button type="button" id="filter-drawer-open">Filter</button>
           <span id="filter-count" class="filter-count">0</span>
-          <button type="button" id="filter-reset" data-i18n="explore.resetFilters">Zurücksetzen</button>
+          <button type="button" id="filter-reset">Alle zurücksetzen</button>
         </div>
-        <div class="filter-chips" id="filter-chips"></div>
-        <section class="guide-section" id="straende"><h2 data-i18n="explore.beaches">Strände</h2><div class="guide-grid" id="explore-grid-beach"></div></section>
-        <section class="guide-section" id="tagesausfluege"><h2 data-i18n="explore.trips">Tagesausflüge</h2><div class="guide-grid" id="explore-grid-trip"></div></section>
-        <section class="guide-section" id="essen-trinken"><h2 data-i18n="explore.food">Essen & Trinken</h2><div class="guide-grid" id="explore-grid-food"></div></section>
-        <div class="guide-grid legacy-guide-fallback" id="beach-guide-grid" hidden></div>
-        <div class="guide-grid legacy-guide-fallback" id="trip-guide-grid" hidden></div>
-        <div class="guide-grid legacy-guide-fallback" id="food-guide-grid" hidden></div>
-        <p class="guide-family-context" id="beach-guide-context" hidden></p>
-        <p class="guide-family-context" id="trip-guide-context" hidden></p>
-        <p class="guide-family-context" id="food-guide-context" hidden></p>
-        <a id="beach-guide-map" hidden href="#"></a>
-        <a id="trip-guide-map" hidden href="#"></a>
-        <a id="food-guide-map" hidden href="#"></a>
-        <span id="beach-guide-destination" hidden></span>
-        <span id="trip-guide-destination" hidden></span>
-        <span id="food-guide-destination" hidden></span>
+        <div class="guide-jump-links" aria-label="Empfehlungskategorien">
+          <a href="#straende"><span aria-hidden="true">🏖️</span> Strände</a>
+          <a href="#tagesausfluege"><span aria-hidden="true">🧭</span> Tagesausflüge</a>
+          <a href="#essen-trinken"><span aria-hidden="true">🍽️</span> Essen &amp; Trinken</a>
+        </div>
+        <section class="guide-section" id="straende" aria-labelledby="beach-guide-title">
+          <div class="guide-heading">
+            <div>
+              <p class="section-kicker">BADEN &amp; MEER · <span id="beach-guide-destination">PULA</span></p>
+              <h2 id="beach-guide-title">Strände für euren Tag</h2>
+              <p>Von geschützten Familienbuchten bis zu wilden Felsküsten.</p>
+              <p class="guide-family-context" id="beach-guide-context"></p>
+            </div>
+            <a id="beach-guide-map" href="https://www.google.com/maps/search/Strände+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alle Strände <span>→</span></a>
+          </div>
+          <div class="guide-grid" id="beach-guide-grid"></div>
+        </section>
+        <section class="guide-section" id="tagesausfluege" aria-labelledby="trip-guide-title">
+          <div class="guide-heading">
+            <div>
+              <p class="section-kicker">MEHR ENTDECKEN · <span id="trip-guide-destination">PULA</span></p>
+              <h2 id="trip-guide-title">Tagesausflüge</h2>
+              <p>Natur, Geschichte und besondere Erlebnisse in erreichbarer Nähe.</p>
+              <p class="guide-family-context" id="trip-guide-context"></p>
+            </div>
+            <a id="trip-guide-map" href="https://www.google.com/maps/search/Ausflüge+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alle Ausflüge <span>→</span></a>
+          </div>
+          <div class="guide-grid" id="trip-guide-grid"></div>
+        </section>
+        <section class="guide-section" id="essen-trinken" aria-labelledby="food-guide-title">
+          <div class="guide-heading">
+            <div>
+              <p class="section-kicker">GENUSS · <span id="food-guide-destination">PULA</span></p>
+              <h2 id="food-guide-title">Essen &amp; Trinken</h2>
+              <p>Konobas, Restaurants, Märkte, Cafés und Bars für entspannte Pausen.</p>
+              <p class="guide-family-context" id="food-guide-context"></p>
+            </div>
+            <a id="food-guide-map" href="https://www.google.com/maps/search/Restaurants+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alles auf der Karte <span>→</span></a>
+          </div>
+          <div class="guide-grid" id="food-guide-grid"></div>
+        </section>
+        <section class="discover" id="entdecken" aria-labelledby="discover-title">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">QUER DURCH ISTRIEN</p>
+              <h2 id="discover-title">Noch Lust auf mehr?</h2>
+            </div>
+            <a href="https://www.google.com/maps/search/Sehenswürdigkeiten+Istrien" target="_blank" rel="noopener noreferrer">Alles auf der Karte <span>→</span></a>
+          </div>
+          <div class="suggestion-grid">
+            <article class="suggestion suggestion-sunset">
+              <div class="illustration sunset-scene" aria-hidden="true">
+                <div class="scene-sun"></div><div class="scene-island"></div><div class="scene-wave"></div>
+              </div>
+              <div class="suggestion-copy">
+                <span class="tag">GEHEIMTIPP</span>
+                <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">Sonnenuntergang am Kap Kamenjak<span aria-hidden="true">↗</span></a></h3>
+                <p>Wilde Küste, kleine Buchten und der schönste Blick aufs Abendrot.</p>
+                <div class="tripadvisor-slot" data-tripadvisor-map="Cape Kamenjak Croatia" data-tripadvisor-title="Sonnenuntergang am Kap Kamenjak" data-tripadvisor-key="trips:kamenjak"></div>
+                <div><span>🚗 25 Min.</span><span>◎ Naturpark</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
+              </div>
+              <button class="favorite location-favorite" type="button" data-favorite-id="guide:trips:kamenjak" aria-label="Kap Kamenjak als Favorit markieren" aria-pressed="false">♡</button>
+            </article>
+            <article class="suggestion suggestion-market">
+              <div class="illustration market-scene" aria-hidden="true">
+                <span>🍉</span><span>🍋</span><span>🍑</span>
+              </div>
+              <div class="suggestion-copy">
+                <span class="tag coral">MORGENS SCHÖN</span>
+                <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">Tržnica – Pulas Markthalle<span aria-hidden="true">↗</span></a></h3>
+                <p>Frisches Obst, lokale Snacks und echtes istrisches Lebensgefühl.</p>
+                <div class="tripadvisor-slot" data-tripadvisor-map="Pula Market Croatia" data-tripadvisor-title="Tržnica – Pulas Markthalle" data-tripadvisor-key="food:pulaMarket"></div>
+                <div><span>🚶 8 Min.</span><span>◷ bis 14 Uhr</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
+              </div>
+              <button class="favorite location-favorite" type="button" data-favorite-id="guide:food:pulaMarket" aria-label="Markthalle als Favorit markieren" aria-pressed="false">♡</button>
+            </article>
+          </div>
+        </section>
       </section>
     </div>
 
@@ -313,7 +379,7 @@
   <script src="js/core/feature-flags.js?v=1"></script>
   <script src="js/i18n/de.js?v=1"></script>
   <script src="js/i18n/en.js?v=1"></script>
-  <script src="js/i18n/index.js?v=1"></script>
+  <script src="js/i18n/index.js?v=2"></script>
   <script src="js/core/storage.js?v=1"></script>
   <script src="js/core/share.js?v=1"></script>
   <script src="js/data/poi-registry.js?v=1"></script>
@@ -324,6 +390,6 @@
   <script src="js/ui/onboarding.js?v=1"></script>
   <script src="js/ui/search.js?v=1"></script>
   <script src="js/ui/map.js?v=1"></script>
-  <script src="js/bootstrap.js?v=1"></script>
+  <script src="js/bootstrap.js?v=2"></script>
 </body>
 </html>
