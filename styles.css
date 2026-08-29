@@ -733,13 +733,19 @@ h1 em {
   padding-inline: 2px;
 }
 
-.weather-details i {
+.weather-details i,
+.weather-detail-icon {
   display: block;
   height: 22px;
   margin-bottom: 2px;
-  font-size: 16px;
+  color: var(--ink);
+  font-size: 18px;
   font-style: normal;
   line-height: 1;
+}
+
+.weather-glyph {
+  font-style: normal;
 }
 
 .weather-details strong {
@@ -796,7 +802,9 @@ h1 em {
   text-transform: uppercase;
 }
 
-.weather-forecast-icon {
+.weather-forecast-icon,
+.weather-forecast-rain .weather-glyph {
+  color: var(--ink);
   font-size: 18px;
   line-height: 1;
 }
