@@ -556,12 +556,32 @@ function getPlans() {
   }];
 }
 
+function buildDestinationMapUrl(coordinates) {
+  const { latitude, longitude } = coordinates;
+  const query = encodeURIComponent(`${latitude},${longitude}`);
+  return `https://www.google.com/maps?q=${query}&hl=de&z=12&output=embed`;
+}
+
+function updateDestinationMap() {
+  const destination = istriaDestinations[destinationSelect.value];
+  const mapFrame = document.querySelector("#destination-map");
+  if (!destination?.coordinates || !mapFrame) return;
+
+  const mapKey = `${destinationSelect.value}:${destination.coordinates.latitude},${destination.coordinates.longitude}`;
+  if (mapFrame.dataset.mapKey === mapKey) return;
+
+  mapFrame.dataset.mapKey = mapKey;
+  mapFrame.src = buildDestinationMapUrl(destination.coordinates);
+  mapFrame.title = `Google Maps: ${destination.name}`;
+}
+
 function updateDestinationUI() {
   const destination = istriaDestinations[destinationSelect.value];
   document.querySelector("#hero-destination").textContent = `${destination.name}.`;
   document.querySelector("#profile-destination").textContent = destination.shortName;
   document.querySelector("#planner-destination").textContent = destination.name.toLocaleUpperCase("de-DE");
   document.title = "ISTRIVA";
+  updateDestinationMap();
 }
 
 function getSavedDestination() {
