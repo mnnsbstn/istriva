@@ -1536,51 +1536,54 @@ h2 {
   width: fit-content;
   max-width: 100%;
   margin-top: 8px;
-  padding: 5px 8px;
-  border: 1px solid #d5e8df;
+  padding: 6px 10px;
+  border: 1px solid #e5ff42;
   border-radius: 999px;
-  color: var(--ink);
-  background: #f3fbf7;
+  color: #e5ff42;
+  background: #000000;
   font-size: 9px;
   font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
-  transition: transform .2s, background .2s, border-color .2s;
+  transition: transform .2s, box-shadow .2s;
 }
 
 .tripadvisor-badge:hover,
 .tripadvisor-badge:focus-visible {
   transform: translateY(-1px);
-  border-color: #34e0a1;
-  background: #e8faf2;
+  color: #e5ff42;
+  background: #000000;
+  box-shadow: 0 0 0 1px #e5ff42;
 }
 
 .tripadvisor-brand {
-  padding: 2px 6px;
-  border-radius: 999px;
-  color: #053023;
-  background: #34e0a1;
+  color: #e5ff42;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
   font-size: 8px;
-  letter-spacing: .02em;
+  letter-spacing: .04em;
+  text-transform: uppercase;
 }
 
 .tripadvisor-badge strong {
+  color: #e5ff42;
   font-size: 11px;
 }
 
 .tripadvisor-bubbles {
-  color: #34a36b;
+  color: #e5ff42;
   font-size: 8px;
   letter-spacing: .08em;
 }
 
 .tripadvisor-count {
-  color: var(--ink-soft);
+  color: #c9cd9a;
   font-weight: 600;
 }
 
 .tripadvisor-cta {
-  color: var(--ink-soft);
+  color: #e5ff42;
   font-weight: 600;
 }
 
@@ -1592,7 +1595,9 @@ h2 {
 }
 
 .favorites-section .tripadvisor-badge {
-  background: rgba(255, 255, 255, .95);
+  background: #000000;
+  border-color: #e5ff42;
+  color: #e5ff42;
 }
 
 .favorites-section {
