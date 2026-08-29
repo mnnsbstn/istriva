@@ -702,17 +702,40 @@ function saveFamilySettings() {
     : "Bitte noch das Alter aller Kinder angeben");
 }
 
+const weatherIcons = {
+  clear: "☀",
+  partlyCloudy: "◒",
+  cloudy: "☁",
+  fog: "≋",
+  rain: "☂",
+  snow: "❄",
+  thunder: "ϟ",
+  variable: "◌",
+  wind: "〰",
+  water: "∿",
+  sunrise: "▴",
+  sunset: "▾",
+  uv: "◎"
+};
+
 function describeWeather(code) {
-  if (code === 0) return { label: "Klar", icon: "☀" };
-  if (code <= 2) return { label: "Leicht bewölkt", icon: "◒" };
-  if (code === 3) return { label: "Bedeckt", icon: "☁" };
-  if (code === 45 || code === 48) return { label: "Nebelig", icon: "≋" };
-  if (code >= 51 && code <= 57) return { label: "Nieselregen", icon: "☂" };
-  if (code >= 61 && code <= 67) return { label: "Regen", icon: "☂" };
-  if (code >= 71 && code <= 77) return { label: "Schnee", icon: "❄" };
-  if (code >= 80 && code <= 82) return { label: "Regenschauer", icon: "☂" };
-  if (code >= 95) return { label: "Gewitter", icon: "ϟ" };
-  return { label: "Wechselhaft", icon: "◌" };
+  if (code === 0) return { label: "Klar", icon: weatherIcons.clear };
+  if (code <= 2) return { label: "Leicht bewölkt", icon: weatherIcons.partlyCloudy };
+  if (code === 3) return { label: "Bedeckt", icon: weatherIcons.cloudy };
+  if (code === 45 || code === 48) return { label: "Nebelig", icon: weatherIcons.fog };
+  if (code >= 51 && code <= 57) return { label: "Nieselregen", icon: weatherIcons.rain };
+  if (code >= 61 && code <= 67) return { label: "Regen", icon: weatherIcons.rain };
+  if (code >= 71 && code <= 77) return { label: "Schnee", icon: weatherIcons.snow };
+  if (code >= 80 && code <= 82) return { label: "Regenschauer", icon: weatherIcons.rain };
+  if (code >= 95) return { label: "Gewitter", icon: weatherIcons.thunder };
+  return { label: "Wechselhaft", icon: weatherIcons.variable };
+}
+
+function initWeatherDetailIcons() {
+  document.querySelectorAll(".weather-detail-icon[data-icon]").forEach((element) => {
+    const icon = weatherIcons[element.dataset.icon];
+    if (icon) element.textContent = icon;
+  });
 }
 
 function weatherCacheKey(destinationKey) {
@@ -792,7 +815,7 @@ function renderWeatherForecast(days = []) {
         <span class="weather-forecast-label">${formatForecastDayLabel(day.date, index)}</span>
         <span class="weather-forecast-icon" aria-hidden="true">${condition.icon}</span>
         <strong class="weather-forecast-temps">${min}°–${max}°</strong>
-        <span class="weather-forecast-rain">🌧️ ${rain}%</span>
+        <span class="weather-forecast-rain"><span class="weather-glyph" aria-hidden="true">${weatherIcons.rain}</span> ${rain}%</span>
       </article>
     `;
   }).join("");
@@ -1654,6 +1677,7 @@ syncFavorites();
 updateFamilyUI();
 updateDestinationUI();
 initStaticTripAdvisorBadges();
+initWeatherDetailIcons();
 renderPlan();
 renderDiscoveryGuides();
 refreshLiveWeather({ applyToPlan: true });
