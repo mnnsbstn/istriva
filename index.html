@@ -3,25 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="dark light">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="ISTRIVA">
   <meta name="description" content="ISTRIVA plant euren perfekten Familientag in ganz Istrien – entspannt, wetterbewusst und kindgerecht.">
-  <meta property="og:title" content="ISTRIVA – Mehr erleben. Weniger planen.">
-  <meta property="og:description" content="Familiengerechte Tagespläne für elf Regionen in Istrien.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mnnsbstn.github.io/istriva/">
-  <meta property="og:image" content="https://mnnsbstn.github.io/istriva/icon-512.png">
-  <link rel="canonical" href="https://mnnsbstn.github.io/istriva/">
   <title>ISTRIVA</title>
   <link rel="icon" href="favicon.ico?v=7" sizes="any">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=7">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png?v=7">
   <link rel="apple-touch-icon" href="icon-192.png?v=7">
   <link rel="manifest" href="manifest.webmanifest?v=10">
-  <link rel="stylesheet" href="styles.css?v=42">
+  <link rel="stylesheet" href="styles.css?v=31">
   <script>
     if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone) {
       document.documentElement.classList.add("standalone");
@@ -29,367 +25,325 @@
   </script>
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 </head>
-<body class="app-shell" data-section="today">
-  <a class="skip-link" href="#main-content">Skip to content</a>
+<body class="app-shell">
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
 
   <header class="site-header">
-    <a class="brand" href="#" aria-label="ISTRIVA Startseite">
+    <a class="brand" href="#" aria-label="mnn_sbstn ISTRIVA Startseite">
       <img class="brand-logo" src="icon-512.png?v=7" alt="">
-      <span class="brand-product">ISTRIVA<small data-i18n="brand.tagline">Mehr erleben. Weniger planen.</small></span>
+      <span class="brand-product">ISTRIVA<small>Mehr erleben. Weniger planen.</small></span>
     </a>
-    <nav class="desktop-nav" aria-label="Hauptnavigation">
-      <a href="#today" data-nav-section="today" class="active" data-i18n="nav.today">Heute</a>
-      <a href="#explore" data-nav-section="explore" data-i18n="nav.explore">Entdecken</a>
-      <a href="#map" data-nav-section="map" data-i18n="nav.map">Karte</a>
-      <a href="#saved" data-nav-section="saved" data-i18n="nav.saved">Gespeichert</a>
+    <nav aria-label="Hauptnavigation">
+      <a class="active" href="#plan">Tagesplan</a>
+      <a href="#straende">Istrien entdecken</a>
+      <a href="#favoriten">Favoriten <span id="favorite-count">0</span></a>
     </nav>
-    <div class="lang-switch" role="group" aria-label="Sprache">
-      <button type="button" class="lang-btn active" data-set-lang="de" aria-pressed="true">DE</button>
-      <span aria-hidden="true">|</span>
-      <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
-    </div>
-    <button class="install-button" id="install-button" type="button" hidden data-i18n="install.button">App installieren</button>
-    <button class="notification-button" id="notification-button" type="button" aria-haspopup="dialog" aria-controls="notification-explainer-dialog" hidden>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
-      <span class="action-label" data-i18n="notifications.button">Updates</span>
+    <button class="install-button" id="install-button" type="button" hidden>
+      <span aria-hidden="true">↓</span> App installieren
     </button>
-    <button class="profile" id="profile-open" type="button" data-i18n-attr="aria-label" data-i18n="profile.open">
+    <button class="notification-button" id="notification-button" type="button" aria-pressed="false" aria-haspopup="dialog" aria-controls="notification-dialog" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+      <span class="action-label">Updates</span>
+    </button>
+    <button class="profile" type="button" aria-label="Profil der Familie öffnen">
       <span id="party-size">4</span>
       <span class="profile-label">Familie<br><strong>in <span id="profile-destination">Pula</span></strong></span>
       <span aria-hidden="true">⌄</span>
     </button>
   </header>
 
-  <div id="shared-banner" class="shared-banner" hidden role="status"></div>
+  <main>
+    <section class="welcome" aria-labelledby="welcome-title">
+      <div class="welcome-copy">
+        <p class="eyebrow"><span></span> Dobro jutro, Familie!</p>
+        <h1 id="welcome-title">Euer perfekter Tag<br>in <em id="hero-destination">Pula.</em></h1>
+        <p class="intro">Von Küstenstädten bis zu Bergdörfern – wir planen euren entspannten Familientag überall in Istrien.</p>
+        <label class="destination-switcher" for="destination-select">
+          <span class="destination-icon" aria-hidden="true">⌖</span>
+          <span class="destination-copy"><small>AKTUELLEN ORT AUSWÄHLEN</small>
+            <select id="destination-select">
+              <optgroup label="Südküste">
+                <option value="pula">Pula</option>
+                <option value="fazana">Fažana &amp; Brijuni</option>
+                <option value="medulin">Medulin &amp; Kamenjak</option>
+              </optgroup>
+              <optgroup label="Westküste">
+                <option value="rovinj">Rovinj</option>
+                <option value="porec">Poreč</option>
+                <option value="vrsar">Vrsar &amp; Lim-Bucht</option>
+                <option value="novigrad">Novigrad</option>
+                <option value="umag">Umag &amp; Savudrija</option>
+              </optgroup>
+              <optgroup label="Ostküste &amp; Inland">
+                <option value="labin">Labin &amp; Rabac</option>
+                <option value="motovun">Motovun &amp; Grožnjan</option>
+                <option value="buzet">Buzet, Roč &amp; Hum</option>
+              </optgroup>
+            </select>
+          </span>
+          <span class="destination-total">11 Regionen</span>
+        </label>
+      </div>
 
-  <main id="main-content">
-    <!-- TODAY -->
-    <div data-section-panel="today">
-      <section class="welcome compact-hero" aria-labelledby="welcome-title">
-        <div class="welcome-copy">
-          <p class="eyebrow"><span aria-hidden="true"></span><span id="hero-eyebrow">Dobro jutro, Familie!</span></p>
-          <h1 id="welcome-title">Euer perfekter Tag<br>in <em id="hero-destination">Pula.</em></h1>
-          <p class="intro" data-i18n="hero.intro">Von Küstenstädten bis zu Bergdörfern – wir planen euren entspannten Familientag überall in Istrien.</p>
-          <label class="destination-switcher" for="destination-select">
-            <span class="destination-icon" aria-hidden="true">⌖</span>
-            <span class="destination-copy"><small data-i18n="hero.regionLabel">Region auswählen</small>
-              <select id="destination-select" aria-label="Region auswählen">
-                <optgroup label="Südküste" data-i18n-attr="label" data-i18n="hero.coastSouth">
-                  <option value="pula">Pula</option>
-                  <option value="fazana">Fažana &amp; Brijuni</option>
-                  <option value="medulin">Medulin &amp; Kamenjak</option>
-                </optgroup>
-                <optgroup label="Westküste" data-i18n-attr="label" data-i18n="hero.coastWest">
-                  <option value="rovinj">Rovinj</option>
-                  <option value="porec">Poreč</option>
-                  <option value="vrsar">Vrsar &amp; Lim-Bucht</option>
-                  <option value="novigrad">Novigrad</option>
-                  <option value="umag">Umag &amp; Savudrija</option>
-                </optgroup>
-                <optgroup label="Ostküste & Inland" data-i18n-attr="label" data-i18n="hero.coastEast">
-                  <option value="labin">Labin &amp; Rabac</option>
-                  <option value="motovun">Motovun &amp; Grožnjan</option>
-                  <option value="buzet">Buzet, Roč &amp; Hum</option>
-                </optgroup>
-              </select>
-            </span>
-            <span class="destination-total" data-i18n="hero.regionCount" data-i18n-vars='{"count":"11"}'>11 Regionen</span>
-          </label>
-        </div>
-        <aside class="weather-card compact" aria-label="Live-Wetter" aria-live="polite">
-          <div class="weather-head">
-            <div class="sun-icon" id="weather-icon" aria-hidden="true">◌</div>
-            <div>
-              <span class="data-hint" id="weather-data-status">LIVE-WETTER WIRD GELADEN</span>
-              <div class="weather-temp-block">
-                <strong id="weather-temperature">--°</strong>
-                <span class="weather-day-range" id="weather-day-range">--° – --°</span>
-              </div>
-              <p id="weather-summary">Aktuelle Daten werden geladen</p>
-            </div>
-          </div>
-          <div class="weather-details">
-            <span><i class="weather-detail-icon" data-icon="rain"></i><strong id="weather-rain">--%</strong> <span data-i18n="weather.rain">Regen</span></span>
-            <span><i class="weather-detail-icon" data-icon="wind"></i><strong id="weather-wind">-- km/h</strong> <span data-i18n="weather.wind">Wind</span></span>
-            <span><i class="weather-detail-icon" data-icon="water"></i><strong id="weather-water">--°</strong> <span data-i18n="weather.waterTemp">Wassertemperatur</span></span>
-            <span><i class="weather-detail-icon" data-icon="sunrise"></i><strong id="weather-sunrise">--:--</strong> <span data-i18n="weather.sunrise">Sonnenaufgang</span></span>
-            <span><i class="weather-detail-icon" data-icon="sunset"></i><strong id="weather-sunset">--:--</strong> <span data-i18n="weather.sunset">Sonnenuntergang</span></span>
-            <span><i class="weather-detail-icon" data-icon="uv"></i><strong id="weather-uv">--</strong> <span data-i18n="weather.uv">UV-Index</span></span>
-          </div>
-          <button type="button" class="text-button" id="weather-forecast-toggle" data-i18n="weather.forecastToggle">Vorhersage anzeigen</button>
-          <div class="weather-forecast collapsed" aria-label="7-Tage-Vorschau">
-            <p class="weather-forecast-title" data-i18n="weather.forecastTitle">7-Tage-Vorschau</p>
-            <div class="weather-forecast-grid" id="weather-forecast"></div>
-          </div>
-          <p class="weather-tip" id="weather-tip"><span>✦</span> <span>Wetterdaten werden live geladen.</span></p>
-        </aside>
-      </section>
-
-      <section class="context-bar" aria-label="Kontext">
-        <span><small data-i18n="context.region">Region</small><strong id="context-region">Pula</strong></span>
-        <span><small data-i18n="context.date">Datum</small><strong id="context-date">–</strong></span>
-        <span><small data-i18n="context.family">Familie</small><strong id="context-family">–</strong></span>
-        <span><small data-i18n="context.weather">Wetter</small><strong id="context-weather">☀</strong></span>
-      </section>
-
-      <section class="planner" id="plan" aria-labelledby="plan-title">
-        <div class="planner-top">
+      <aside class="weather-card" aria-label="Live-Wettervorschau" aria-live="polite">
+        <div class="weather-head">
+          <div class="sun-icon" id="weather-icon" aria-hidden="true">◌</div>
           <div>
-            <p class="section-kicker"><span id="planner-destination">PULA</span> · <span id="current-date">–</span></p>
-            <h2 id="plan-title" data-i18n="plan.title">Euer Tagesplan</h2>
-            <p class="plan-note" data-i18n="plan.curatedNote">Kuratierter Vorschlag – Zeiten sind Schätzungen.</p>
-          </div>
-          <div class="plan-actions">
-            <button class="icon-button" id="share-button" type="button" aria-label="Teilen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg></button>
-            <button class="secondary-button" id="save-plan-button" type="button" data-i18n="saved.savePlan">Plan speichern</button>
-            <button class="primary-button" id="replan-button" type="button"><span id="replan-button-label">Alternative anzeigen</span></button>
+            <span class="data-hint" id="weather-data-status">LIVE-WETTER WIRD GELADEN</span>
+            <div class="weather-temp-block">
+              <strong id="weather-temperature">--°</strong>
+              <span class="weather-day-range" id="weather-day-range">--° – --°</span>
+            </div>
+            <p id="weather-summary">Aktuelle Daten werden geladen</p>
           </div>
         </div>
-        <div class="filters" aria-label="Plan anpassen">
-          <div class="filter-label family-filter">
-            <fieldset class="family-controls">
-              <legend data-i18n="plan.withFamily">Unterwegs mit</legend>
-              <div class="family-counts">
-                <label><span data-i18n="plan.adults">Erwachsene</span><input id="adult-count" type="number" min="1" max="8" value="2"></label>
-                <label><span data-i18n="plan.children">Kinder</span><input id="child-count" type="number" min="0" max="8" value="2"></label>
-              </div>
-              <div class="child-age-fields" id="child-age-fields"></div>
-              <small class="child-age-hint" id="child-age-hint"></small>
-            </fieldset>
-          </div>
-          <label class="select-wrap"><span>☀</span><select id="weather-select"><option value="sun" data-i18n="plan.weatherSun">Sonne</option><option value="rain" data-i18n="plan.weatherRain">Regenoption</option></select></label>
-          <label class="select-wrap"><span>♢</span><select id="pace-select"><option value="balanced" data-i18n="plan.paceBalanced">Ausgewogen</option><option value="relaxed" data-i18n="plan.paceRelaxed">Ganz entspannt</option><option value="active" data-i18n="plan.paceActive">Abenteuerlich</option></select></label>
+        <div class="weather-details">
+          <span><i class="weather-detail-icon" data-icon="rain" aria-hidden="true"></i><strong id="weather-rain">--%</strong> Regen</span>
+          <span><i class="weather-detail-icon" data-icon="wind" aria-hidden="true"></i><strong id="weather-wind">-- km/h</strong> Wind</span>
+          <span><i class="weather-detail-icon" data-icon="water" aria-hidden="true"></i><strong id="weather-water">--°</strong> Wassertemperatur</span>
+          <span><i class="weather-detail-icon" data-icon="sunrise" aria-hidden="true"></i><strong id="weather-sunrise">--:--</strong> Sonnenaufgang</span>
+          <span><i class="weather-detail-icon" data-icon="sunset" aria-hidden="true"></i><strong id="weather-sunset">--:--</strong> Sonnenuntergang</span>
+          <span><i class="weather-detail-icon" data-icon="uv" aria-hidden="true"></i><strong id="weather-uv">--</strong> UV-Index</span>
         </div>
-        <div class="plan-summary plan-summary-legacy" aria-live="polite">
-          <span id="plan-name">Kultur, Eis &amp; Meeresluft</span>
-          <span><b id="stop-count">4</b> Stopps</span>
-          <span><b id="distance">5,8 km</b> Wege</span>
-          <span><b id="budget">€€</b> Familienbudget</span>
+        <div class="weather-forecast" aria-label="7-Tage-Vorschau">
+          <p class="weather-forecast-title">7-Tage-Vorschau</p>
+          <div class="weather-forecast-grid" id="weather-forecast"></div>
         </div>
-        <p class="plan-warning" id="plan-time-warning" hidden></p>
-        <div class="itinerary" id="itinerary"></div>
-      </section>
+        <p class="weather-tip" id="weather-tip"><span>✦</span> Wetterdaten werden live für euren ausgewählten Ort geladen.</p>
+      </aside>
+    </section>
+
+    <section class="destination-map" aria-label="Karte eures aktuellen Ortes">
+      <div class="destination-map-frame">
+        <iframe
+          id="destination-map"
+          title="Google Maps: Pula"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
+
+    <section class="planner" id="plan" aria-labelledby="plan-title">
+      <div class="planner-top">
+        <div>
+          <p class="section-kicker"><span id="planner-destination">PULA</span> · <span id="current-date">26. AUGUST</span></p>
+          <h2 id="plan-title">Euer Tagesplan</h2>
+        </div>
+        <div class="plan-actions">
+          <button class="icon-button" id="share-button" type="button" aria-label="Tagesplan teilen" title="Tagesplan teilen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg>
+          </button>
+          <button class="primary-button" id="replan-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5"/><path d="M19 12a7 7 0 1 0-2 5"/></svg>
+            Neu planen
+          </button>
+        </div>
+      </div>
+
+      <div class="filters" aria-label="Plan anpassen">
+        <div class="filter-label family-filter">
+          <span>☷</span>
+          <fieldset class="family-controls">
+            <legend>UNTERWEGS MIT</legend>
+            <div class="family-counts">
+              <label>
+                <span>Erwachsene</span>
+                <input id="adult-count" type="number" min="1" max="8" step="1" inputmode="numeric" value="2">
+              </label>
+              <label>
+                <span>Kinder</span>
+                <input id="child-count" type="number" min="0" max="8" step="1" inputmode="numeric" value="2">
+              </label>
+            </div>
+            <div class="child-age-fields" id="child-age-fields"></div>
+            <small class="child-age-hint" id="child-age-hint"></small>
+          </fieldset>
+        </div>
+        <div class="divider"></div>
+        <label class="select-wrap">
+          <span>☀</span>
+          <select id="weather-select" aria-label="Wetter auswählen">
+            <option value="sun">Sonne &amp; 29°</option>
+            <option value="rain">Regenoption</option>
+          </select>
+        </label>
+        <label class="select-wrap">
+          <span>♢</span>
+          <select id="pace-select" aria-label="Tempo auswählen">
+            <option value="balanced">Ausgewogen</option>
+            <option value="relaxed">Ganz entspannt</option>
+            <option value="active">Abenteuerlich</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="plan-summary" aria-live="polite">
+        <span id="plan-name">Kultur, Eis &amp; Meeresluft</span>
+        <span><b id="stop-count">4</b> Stopps</span>
+        <span><b id="distance">5,8 km</b> Wege</span>
+        <span><b id="budget">€€</b> Familienbudget</span>
+      </div>
+
+      <div class="itinerary" id="itinerary"></div>
+    </section>
+
+    <section class="favorites-section" id="favoriten" aria-labelledby="favorites-title">
+      <div class="favorites-heading">
+        <div>
+          <p class="section-kicker">FÜR SPÄTER MERKEN</p>
+          <h2 id="favorites-title">Eure Favoriten</h2>
+          <p>Alle gemerkten Strände, Ausflüge, Lokale und Planstopps an einem Ort.</p>
+        </div>
+        <button id="clear-favorites" type="button">Alle entfernen</button>
+      </div>
+      <div class="favorites-grid" id="favorites-grid"></div>
+      <p class="favorites-empty" id="favorites-empty"><span>♡</span> Tippt bei einer Location auf das Herz, um sie hier zu speichern.</p>
+    </section>
+
+    <div class="guide-jump-links" aria-label="Empfehlungskategorien">
+      <a href="#straende"><span aria-hidden="true">🏖️</span> Strände</a>
+      <a href="#tagesausfluege"><span aria-hidden="true">🧭</span> Tagesausflüge</a>
+      <a href="#essen-trinken"><span aria-hidden="true">🍽️</span> Essen &amp; Trinken</a>
     </div>
 
-    <!-- EXPLORE -->
-    <div data-section-panel="explore" hidden>
-      <section class="explore-section">
-        <div class="explore-toolbar">
-          <input id="explore-search" type="search" placeholder="Strände, Ausflüge, Essen …">
-          <button type="button" id="filter-drawer-open">Filter</button>
-          <span id="filter-count" class="filter-count">0</span>
-          <button type="button" id="filter-reset">Alle zurücksetzen</button>
+    <section class="guide-section" id="straende" aria-labelledby="beach-guide-title">
+      <div class="guide-heading">
+        <div>
+          <p class="section-kicker">BADEN &amp; MEER · <span id="beach-guide-destination">PULA</span></p>
+          <h2 id="beach-guide-title">Strände für euren Tag</h2>
+          <p>Von geschützten Familienbuchten bis zu wilden Felsküsten.</p>
+          <p class="guide-family-context" id="beach-guide-context"></p>
         </div>
-        <div class="guide-jump-links" aria-label="Empfehlungskategorien">
-          <a href="#straende"><span aria-hidden="true">🏖️</span> Strände</a>
-          <a href="#tagesausfluege"><span aria-hidden="true">🧭</span> Tagesausflüge</a>
-          <a href="#essen-trinken"><span aria-hidden="true">🍽️</span> Essen &amp; Trinken</a>
-        </div>
-        <section class="guide-section" id="straende" aria-labelledby="beach-guide-title">
-          <div class="guide-heading">
-            <div>
-              <p class="section-kicker">BADEN &amp; MEER · <span id="beach-guide-destination">PULA</span></p>
-              <h2 id="beach-guide-title">Strände für euren Tag</h2>
-              <p>Von geschützten Familienbuchten bis zu wilden Felsküsten.</p>
-              <p class="guide-family-context" id="beach-guide-context"></p>
-            </div>
-            <a id="beach-guide-map" href="https://www.google.com/maps/search/Strände+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alle Strände <span>→</span></a>
-          </div>
-          <div class="guide-grid" id="beach-guide-grid"></div>
-        </section>
-        <section class="guide-section" id="tagesausfluege" aria-labelledby="trip-guide-title">
-          <div class="guide-heading">
-            <div>
-              <p class="section-kicker">MEHR ENTDECKEN · <span id="trip-guide-destination">PULA</span></p>
-              <h2 id="trip-guide-title">Tagesausflüge</h2>
-              <p>Natur, Geschichte und besondere Erlebnisse in erreichbarer Nähe.</p>
-              <p class="guide-family-context" id="trip-guide-context"></p>
-            </div>
-            <a id="trip-guide-map" href="https://www.google.com/maps/search/Ausflüge+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alle Ausflüge <span>→</span></a>
-          </div>
-          <div class="guide-grid" id="trip-guide-grid"></div>
-        </section>
-        <section class="guide-section" id="essen-trinken" aria-labelledby="food-guide-title">
-          <div class="guide-heading">
-            <div>
-              <p class="section-kicker">GENUSS · <span id="food-guide-destination">PULA</span></p>
-              <h2 id="food-guide-title">Essen &amp; Trinken</h2>
-              <p>Konobas, Restaurants, Märkte, Cafés und Bars für entspannte Pausen.</p>
-              <p class="guide-family-context" id="food-guide-context"></p>
-            </div>
-            <a id="food-guide-map" href="https://www.google.com/maps/search/Restaurants+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alles auf der Karte <span>→</span></a>
-          </div>
-          <div class="guide-grid" id="food-guide-grid"></div>
-        </section>
-        <section class="discover" id="entdecken" aria-labelledby="discover-title">
-          <div class="section-heading">
-            <div>
-              <p class="section-kicker">QUER DURCH ISTRIEN</p>
-              <h2 id="discover-title">Noch Lust auf mehr?</h2>
-            </div>
-            <a href="https://www.google.com/maps/search/Sehenswürdigkeiten+Istrien" target="_blank" rel="noopener noreferrer">Alles auf der Karte <span>→</span></a>
-          </div>
-          <div class="suggestion-grid">
-            <article class="suggestion suggestion-sunset">
-              <div class="illustration sunset-scene" aria-hidden="true">
-                <div class="scene-sun"></div><div class="scene-island"></div><div class="scene-wave"></div>
-              </div>
-              <div class="suggestion-copy">
-                <span class="tag">GEHEIMTIPP</span>
-                <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">Sonnenuntergang am Kap Kamenjak<span aria-hidden="true">↗</span></a></h3>
-                <p>Wilde Küste, kleine Buchten und der schönste Blick aufs Abendrot.</p>
-                <div class="tripadvisor-slot" data-tripadvisor-map="Cape Kamenjak Croatia" data-tripadvisor-title="Sonnenuntergang am Kap Kamenjak" data-tripadvisor-key="trips:kamenjak"></div>
-                <div><span>🚗 25 Min.</span><span>◎ Naturpark</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
-              </div>
-              <button class="favorite location-favorite" type="button" data-favorite-id="guide:trips:kamenjak" aria-label="Kap Kamenjak als Favorit markieren" aria-pressed="false">♡</button>
-            </article>
-            <article class="suggestion suggestion-market">
-              <div class="illustration market-scene" aria-hidden="true">
-                <span>🍉</span><span>🍋</span><span>🍑</span>
-              </div>
-              <div class="suggestion-copy">
-                <span class="tag coral">MORGENS SCHÖN</span>
-                <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">Tržnica – Pulas Markthalle<span aria-hidden="true">↗</span></a></h3>
-                <p>Frisches Obst, lokale Snacks und echtes istrisches Lebensgefühl.</p>
-                <div class="tripadvisor-slot" data-tripadvisor-map="Pula Market Croatia" data-tripadvisor-title="Tržnica – Pulas Markthalle" data-tripadvisor-key="food:pulaMarket"></div>
-                <div><span>🚶 8 Min.</span><span>◷ bis 14 Uhr</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
-              </div>
-              <button class="favorite location-favorite" type="button" data-favorite-id="guide:food:pulaMarket" aria-label="Markthalle als Favorit markieren" aria-pressed="false">♡</button>
-            </article>
-          </div>
-        </section>
-      </section>
-    </div>
+        <a id="beach-guide-map" href="https://www.google.com/maps/search/Strände+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alle Strände <span>→</span></a>
+      </div>
+      <div class="guide-grid" id="beach-guide-grid"></div>
+    </section>
 
-    <!-- MAP -->
-    <div data-section-panel="map" hidden>
-      <section class="map-section" id="map-panel">
-        <div class="map-toolbar">
-          <h2 data-i18n="map.title">Karte</h2>
-          <button type="button" data-map-mode="plan" class="active" data-i18n="map.planView">Tagesplan</button>
-          <button type="button" data-map-mode="explore" data-i18n="map.exploreView">Entdecken</button>
-          <button type="button" id="map-fullscreen" data-i18n="map.fullscreen">Vollbild</button>
+    <section class="guide-section" id="tagesausfluege" aria-labelledby="trip-guide-title">
+      <div class="guide-heading">
+        <div>
+          <p class="section-kicker">MEHR ENTDECKEN · <span id="trip-guide-destination">PULA</span></p>
+          <h2 id="trip-guide-title">Tagesausflüge</h2>
+          <p>Natur, Geschichte und besondere Erlebnisse in erreichbarer Nähe.</p>
+          <p class="guide-family-context" id="trip-guide-context"></p>
         </div>
-        <div id="leaflet-map" class="leaflet-map" role="application" aria-label="Karte"></div>
-        <iframe id="destination-map" title="Google Maps" hidden loading="lazy"></iframe>
-      </section>
-    </div>
+        <a id="trip-guide-map" href="https://www.google.com/maps/search/Ausflüge+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alle Ausflüge <span>→</span></a>
+      </div>
+      <div class="guide-grid" id="trip-guide-grid"></div>
+    </section>
 
-    <!-- SAVED -->
-    <div data-section-panel="saved" hidden>
-      <section class="favorites-section" id="favoriten">
-        <h2 data-i18n="saved.favorites">Favoriten</h2>
-        <button id="clear-favorites" type="button" data-i18n="saved.clearFavorites">Alle entfernen</button>
-        <div class="favorites-grid" id="favorites-grid"></div>
-        <p class="favorites-empty" id="favorites-empty" data-i18n="saved.emptyFavorites">Noch keine Favoriten.</p>
-        <span id="favorite-count" hidden>0</span>
-      </section>
-      <section class="saved-plans-section">
-        <h2 data-i18n="saved.plans">Gespeicherte Pläne</h2>
-        <div id="saved-plans-grid" class="saved-plans-grid"></div>
-      </section>
-    </div>
+    <section class="guide-section" id="essen-trinken" aria-labelledby="food-guide-title">
+      <div class="guide-heading">
+        <div>
+          <p class="section-kicker">GENUSS · <span id="food-guide-destination">PULA</span></p>
+          <h2 id="food-guide-title">Essen &amp; Trinken</h2>
+          <p>Konobas, Restaurants, Märkte, Cafés und Bars für entspannte Pausen.</p>
+          <p class="guide-family-context" id="food-guide-context"></p>
+        </div>
+        <a id="food-guide-map" href="https://www.google.com/maps/search/Restaurants+Pula+Istrien" target="_blank" rel="noopener noreferrer">Alles auf der Karte <span>→</span></a>
+      </div>
+      <div class="guide-grid" id="food-guide-grid"></div>
+    </section>
+
+    <section class="discover" id="entdecken" aria-labelledby="discover-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">QUER DURCH ISTRIEN</p>
+          <h2 id="discover-title">Noch Lust auf mehr?</h2>
+        </div>
+        <a href="https://www.google.com/maps/search/Sehenswürdigkeiten+Istrien" target="_blank" rel="noreferrer">Alles auf der Karte <span>→</span></a>
+      </div>
+      <div class="suggestion-grid">
+        <article class="suggestion suggestion-sunset">
+          <div class="illustration sunset-scene" aria-hidden="true">
+            <div class="scene-sun"></div><div class="scene-island"></div><div class="scene-wave"></div>
+          </div>
+          <div class="suggestion-copy">
+            <span class="tag">GEHEIMTIPP</span>
+            <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">Sonnenuntergang am Kap Kamenjak<span aria-hidden="true">↗</span></a></h3>
+            <p>Wilde Küste, kleine Buchten und der schönste Blick aufs Abendrot.</p>
+            <div class="tripadvisor-slot" data-tripadvisor-map="Cape Kamenjak Croatia" data-tripadvisor-title="Sonnenuntergang am Kap Kamenjak" data-tripadvisor-key="trips:kamenjak"></div>
+            <div><span>🚗 25 Min.</span><span>◎ Naturpark</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Cape%20Kamenjak%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
+          </div>
+          <button class="favorite location-favorite" type="button" data-favorite-id="guide:trips:kamenjak" aria-label="Kap Kamenjak als Favorit markieren" aria-pressed="false">♡</button>
+        </article>
+        <article class="suggestion suggestion-market">
+          <div class="illustration market-scene" aria-hidden="true">
+            <span>🍉</span><span>🍋</span><span>🍑</span>
+          </div>
+          <div class="suggestion-copy">
+            <span class="tag coral">MORGENS SCHÖN</span>
+            <h3><a class="place-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">Tržnica – Pulas Markthalle<span aria-hidden="true">↗</span></a></h3>
+            <p>Frisches Obst, lokale Snacks und echtes istrisches Lebensgefühl.</p>
+            <div class="tripadvisor-slot" data-tripadvisor-map="Pula Market Croatia" data-tripadvisor-title="Tržnica – Pulas Markthalle" data-tripadvisor-key="food:pulaMarket"></div>
+            <div><span>🚶 8 Min.</span><span>◷ bis 14 Uhr</span><a class="suggestion-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pula%20Market%20Croatia" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a></div>
+          </div>
+          <button class="favorite location-favorite" type="button" data-favorite-id="guide:food:pulaMarket" aria-label="Markthalle als Favorit markieren" aria-pressed="false">♡</button>
+        </article>
+      </div>
+    </section>
   </main>
 
-  <nav class="bottom-nav" aria-label="Mobile Navigation">
-    <a href="#today" data-nav-section="today" class="active"><span>☀</span><span data-i18n="nav.today">Heute</span></a>
-    <a href="#explore" data-nav-section="explore"><span>🧭</span><span data-i18n="nav.explore">Entdecken</span></a>
-    <a href="#map" data-nav-section="map"><span>🗺️</span><span data-i18n="nav.map">Karte</span></a>
-    <a href="#saved" data-nav-section="saved"><span>♥</span><span data-i18n="nav.saved">Gespeichert</span></a>
-  </nav>
-
   <footer>
-    <a class="brand footer-brand" href="#"><img class="footer-logo" src="icon-512.png?v=7" alt=""><span class="brand-product">ISTRIVA</span></a>
-    <p data-i18n="footer.madeWith">Mit Liebe für entspannte Urlaubstage gemacht.</p>
-    <p class="footer-links">
-      <a href="privacy.html" data-i18n="footer.privacy">Datenschutz</a> ·
-      <a href="legal.html" data-i18n="footer.legal">Impressum</a> ·
-      <a href="sources.html" data-i18n="footer.sources">Datenquellen</a>
-    </p>
-    <p class="prototype-note"><span data-i18n="footer.disclaimer">Routen prüfen · Wetter:</span> <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a></p>
+    <a class="brand footer-brand" href="#" aria-label="mnn_sbstn ISTRIVA Startseite">
+      <img class="footer-logo" src="icon-512.png?v=7" alt="">
+      <span class="brand-product">ISTRIVA<small>Mehr erleben. Weniger planen.</small></span>
+    </a>
+    <p>Mit Liebe für entspannte Urlaubstage gemacht. <span>♡</span></p>
+    <p class="prototype-note">Routen und Öffnungszeiten vor Besuch prüfen · Wetterdaten: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></p>
   </footer>
-
-  <dialog id="profile-dialog" class="profile-dialog" aria-labelledby="profile-dialog-title">
-    <form method="dialog" class="dialog-form">
-      <header><h2 id="profile-dialog-title" data-i18n="profile.title">Familienprofil</h2>
-        <button type="button" class="dialog-close" id="profile-cancel" aria-label="Schließen">×</button></header>
-      <div id="profile-form"></div>
-      <footer class="dialog-actions">
-        <button type="button" class="secondary-button" id="profile-cancel-2" data-i18n="profile.cancel">Abbrechen</button>
-        <button type="button" class="primary-button" id="profile-save" data-i18n="profile.save">Profil speichern</button>
-      </footer>
-    </form>
-  </dialog>
-
-  <dialog id="onboarding-dialog" class="onboarding-dialog" aria-labelledby="onboarding-title">
-    <h2 id="onboarding-title" data-i18n="onboarding.title">Willkommen bei ISTRIVA</h2>
-    <p data-i18n="onboarding.intro">In wenigen Schritten passen wir euren Familientag an.</p>
-    <h3 id="onboarding-step-title"></h3>
-    <div id="onboarding-body"></div>
-    <footer class="dialog-actions">
-      <button type="button" id="onboarding-skip" data-i18n="onboarding.skip">Überspringen</button>
-      <button type="button" id="onboarding-back" hidden data-i18n="onboarding.back">Zurück</button>
-      <button type="button" class="primary-button" id="onboarding-next" data-i18n="onboarding.next">Weiter</button>
-    </footer>
-  </dialog>
-
-  <dialog id="filter-drawer" class="filter-drawer">
-    <form id="filter-form">
-      <h2 data-i18n="explore.filters">Filter</h2>
-      <label>Kategorie<select name="category"><option value="">Alle</option><option value="beach">Strand</option><option value="trip">Ausflug</option><option value="food">Essen</option></select></label>
-      <label>Budget<select name="budget"><option value="">Alle</option><option value="low">Günstig</option><option value="medium">Mittel</option><option value="flexible">Flexibel</option></select></label>
-      <label><input type="checkbox" name="familyFriendly"> Familienfreundlich</label>
-      <button type="button" id="filter-apply" data-i18n="explore.filters">Anwenden</button>
-    </form>
-  </dialog>
-
-  <dialog class="notification-dialog" id="notification-explainer-dialog">
-    <h2 data-i18n="notifications.explainerTitle">Bleibt informiert</h2>
-    <p data-i18n="notifications.explainerIntro">Erhalte hilfreiche Hinweise für euren Familienurlaub.</p>
-    <ul class="notification-benefits">
-      <li data-i18n="notifications.weather">Wetteränderungen</li>
-      <li data-i18n="notifications.tomorrowPlan">Morgiger Tagesplan</li>
-      <li data-i18n="notifications.reminders">Reservierungs- & Abfahrterinnerungen</li>
-    </ul>
-    <button type="button" class="primary-button" id="notification-explainer-continue" data-i18n="notifications.continue">Weiter</button>
-  </dialog>
 
   <dialog class="notification-dialog" id="notification-dialog" aria-labelledby="notification-dialog-title">
     <form method="dialog">
-      <h2 id="notification-dialog-title" data-i18n="notifications.button">Benachrichtigungen</h2>
-      <p id="notification-dialog-intro">Wählt Hinweise für eure Region.</p>
-      <div class="notification-region"><strong id="notification-destination">Pula</strong></div>
-      <label><input id="weather-notifications" type="checkbox" checked> <span data-i18n="notifications.weather">Wetter-Updates</span></label>
-      <label><input id="news-notifications" type="checkbox" checked> <span data-i18n="notifications.news">Istrien-News</span></label>
-      <p class="notification-privacy" data-i18n="notifications.privacy">Zustellung über OneSignal.</p>
-      <button class="secondary-button" id="disable-notifications" type="button" hidden data-i18n="notifications.disable">Deaktivieren</button>
-      <button class="primary-button" id="save-notifications" type="button" data-i18n="notifications.enable">Aktivieren</button>
+      <div class="notification-dialog-head">
+        <div>
+          <p class="section-kicker">ISTRIVA UPDATES</p>
+          <h2 id="notification-dialog-title">Benachrichtigungen</h2>
+        </div>
+        <button class="dialog-close" type="submit" value="cancel" aria-label="Benachrichtigungen schließen">×</button>
+      </div>
+
+      <p class="notification-dialog-intro">Wählt aus, welche Hinweise ihr für eure aktuelle Urlaubsregion erhalten möchtet.</p>
+
+      <div class="notification-region">
+        <span aria-hidden="true">⌖</span>
+        <div><small>AKTUELLE REGION</small><strong id="notification-destination">Pula</strong></div>
+      </div>
+
+      <fieldset class="notification-options">
+        <legend class="sr-only">Gewünschte Benachrichtigungen</legend>
+        <label class="notification-option">
+          <input id="weather-notifications" type="checkbox" checked>
+          <span>
+            <strong>Wetter-Updates</strong>
+            <small>Regen, Hitze, Wind und Tagesplanung – Updates um 9, 12, 15, 18 und 21 Uhr.</small>
+          </span>
+        </label>
+        <label class="notification-option">
+          <input id="news-notifications" type="checkbox" checked>
+          <span>
+            <strong>Istrien-News &amp; Hinweise</strong>
+            <small>Relevante Veranstaltungen, Sperrungen und Ausflugstipps.</small>
+          </span>
+        </label>
+      </fieldset>
+
+      <p class="notification-privacy">Die Zustellung erfolgt über OneSignal. Ihr könnt Benachrichtigungen hier jederzeit wieder deaktivieren.</p>
+
+      <div class="notification-dialog-actions">
+        <button class="secondary-button danger-button" id="disable-notifications" type="button" hidden>Deaktivieren</button>
+        <button class="secondary-button" type="submit" value="cancel">Abbrechen</button>
+        <button class="primary-button notification-save" id="save-notifications" type="button">Aktivieren</button>
+      </div>
     </form>
   </dialog>
 
-  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="guide-data.js?v=1"></script>
-  <script src="tripadvisor-data.js?v=3"></script>
-  <script src="app.js?v=29"></script>
-  <script src="js/core/constants.js?v=1"></script>
-  <script src="js/core/analytics.js?v=1"></script>
-  <script src="js/core/feature-flags.js?v=1"></script>
-  <script src="js/i18n/de.js?v=1"></script>
-  <script src="js/i18n/en.js?v=1"></script>
-  <script src="js/i18n/index.js?v=2"></script>
-  <script src="js/core/storage.js?v=1"></script>
-  <script src="js/core/share.js?v=1"></script>
-  <script src="js/data/poi-registry.js?v=1"></script>
-  <script src="js/planner/schedule.js?v=1"></script>
-  <script src="js/planner/engine.js?v=1"></script>
-  <script src="js/ui/navigation.js?v=1"></script>
-  <script src="js/ui/profile.js?v=1"></script>
-  <script src="js/ui/onboarding.js?v=1"></script>
-  <script src="js/ui/search.js?v=1"></script>
-  <script src="js/ui/map.js?v=1"></script>
-  <script src="js/bootstrap.js?v=2"></script>
+  <script src="tripadvisor-data.js?v=2"></script>
+  <script src="app.js?v=28"></script>
 </body>
 </html>

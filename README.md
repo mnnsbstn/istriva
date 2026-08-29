@@ -1,6 +1,21 @@
 # ISTRIVA – Familien-Urlaubsplaner für Istrien
 
-Interaktiver, bilingualer Web-Prototyp (DE/EN) für familiengerechte Tagespläne in elf Istrien-Regionen – inkl. editierbarem Planer, Suche, Karte, Share-Links und PWA.
+Ein interaktiver Web-Prototyp, der familiengerechte Tagespläne passend zu Gruppengröße und Kinderalter zusammenstellt.
+
+## Funktionen
+
+- kuratierte Tagesrouten für elf Städte und Urlaubsregionen in Istrien
+- Ortsauswahl von Umag bis Kamenjak sowie für zentrale Ziele im Inland
+- Live-Wetter von Open-Meteo mit automatischer Regen-/Outdoorplanung
+- frei wählbare Erwachsenen- und Kinderzahl mit Altersangaben je Kind
+- alternative Planung per Klick
+- Kartenlinks, Favoriten und Teilen-Funktion
+- personalisierte Empfehlungen mit jeweils mindestens vier Stränden, Tagesausflügen sowie Genusszielen pro Region
+- responsive Darstellung für Desktop und Mobilgeräte
+- installierbare Progressive Web App mit Offline-Grundfunktion
+- zuverlässige Web-Push-Benachrichtigungen über OneSignal mit Marken-Icon
+
+Wetterdaten werden bei jedem Öffnen und anschließend alle 15 Minuten aktualisiert. Bei fehlender Verbindung nutzt die App den zuletzt erfolgreichen Wetterabruf. Öffnungszeiten, Eintrittspreise und kurzfristige Ausfälle müssen weiterhin beim jeweiligen Anbieter geprüft werden.
 
 ## Lokal starten
 
@@ -8,86 +23,56 @@ Interaktiver, bilingualer Web-Prototyp (DE/EN) für familiengerechte Tagespläne
 python3 -m http.server 8000
 ```
 
-Dann `http://localhost:8000` öffnen.
+Danach `http://localhost:8000` im Browser öffnen.
 
-## Tests
+## Auf dem Smartphone installieren
 
-```bash
-# JavaScript (i18n, Share, Planner, POI, TripAdvisor)
-node tests/test_istriva.js
+- Android/Chrome: In der App auf „App installieren“ tippen.
+- iPhone/Safari: „Teilen“ und anschließend „Zum Home-Bildschirm“ wählen.
 
-# Python (Wetter-Push-Workflow)
-python3 -m unittest discover -s tests -v
-```
+Nach dem ersten vollständigen Laden bleiben Oberfläche und gespeicherte Planungsdaten auch ohne Verbindung verfügbar. Externe Kartenlinks benötigen weiterhin Internet.
 
-## Deployment (GitHub Pages)
+## Dauerhaft veröffentlichen
 
-Workflow: `.github/workflows/deploy-pages.yml` – veröffentlicht `main` automatisch.
+Der Workflow `.github/workflows/deploy-pages.yml` veröffentlicht jeden neuen Stand von `main` automatisch über GitHub Pages. Im Repository muss einmalig unter **Settings → Pages → Source** die Option **GitHub Actions** aktiviert werden.
 
-Einmalig im Repository: **Settings → Pages → Source → GitHub Actions**.
+## Benachrichtigungen
 
-## Architektur (v2)
+Der Button „Updates“ öffnet die Benachrichtigungseinstellungen. Nutzer können Wetter-Updates und Istrien-News auswählen. Die Zustellung erfolgt über OneSignal; der bestehende Offline-Service-Worker und der OneSignal-Push-Worker verwenden getrennte Scopes.
 
-Statische Multi-File-App ohne Bundler:
+Beim Aktivieren werden folgende OneSignal-Tags gesetzt:
 
-| Pfad | Zweck |
-|------|--------|
-| `app.js` | Legacy-Daten (Regionen, Pula-Katalog), Wetter, Favoriten, OneSignal |
-| `guide-data.js` / `tripadvisor-data.js` | Kuratierte POI-Listen & Review-Links |
-| `js/i18n/` | Übersetzungen DE/EN + `i18n.t()` |
-| `js/core/` | Storage-Migration, Share-Encoding, Analytics (No-op), Feature Flags |
-| `js/data/poi-registry.js` | Zentrales POI-Modell mit IDs & Validierung |
-| `js/planner/` | Deterministische Planerzeugung & Zeitplan |
-| `js/ui/` | Navigation, Profil, Onboarding, Suche, Leaflet-Karte |
-| `js/bootstrap.js` | App-Orchestrierung & neues UX-Layout |
-| `sw.js` | Offline App-Shell + JS-Module |
+- `destination`: ausgewählte Region, zum Beispiel `pula`
+- `notification_topics`: `weather`, `news` oder `weather_news`
 
-## Übersetzungen
+Diese zwei Tags entsprechen dem Limit des kostenlosen OneSignal-Plans. Damit lassen sich Nachrichten im OneSignal-Dashboard unter **Audience > Segments** nach Region und Thema filtern. Die App ID ist öffentlich und im Frontend hinterlegt. REST API Keys dürfen ausschließlich als Repository-Secrets gespeichert werden.
 
-- Sprachumschalter im Header (DE \| EN)
-- URL-Parameter: `?lang=en`
-- Local Storage: `istriva-lang-v1`
-- Fehlende Keys: `ISTRIVA.i18n.validateTranslations()` (automatisiert getestet)
+Die in der App gewählte Region wird lokal gespeichert und bei jedem Start sowie bei jedem Regionswechsel als `destination` mit OneSignal synchronisiert. Dadurch bleibt die Benachrichtigungsregion auch nach dem Schließen der Homescreen-App erhalten.
 
-## Planerzeugung
+### Ersten Empfänger registrieren
 
-- Kuratierte Pula-Routen bleiben erhalten (mehrere echte Varianten)
-- Andere Regionen: POI-basierte Generierung nach Alter, Interessen, Wetter, Tempo, Budget
-- Stopps: sperren, ersetzen, entfernen, umsortieren
-- Zeiten werden aus Start-/Endzeit neu berechnet (Schätzung, transparent gekennzeichnet)
-- „Alternative anzeigen“ nur bei mindestens zwei unterschiedlichen Varianten
+1. Den aktuellen Stand auf GitHub Pages veröffentlichen.
+2. Die App in einem normalen Browserfenster öffnen, nicht im privaten Modus.
+3. Auf „Updates“ klicken, Themen auswählen und „Aktivieren“ bestätigen.
+4. Im nativen Browserdialog Benachrichtigungen erlauben.
+5. Unter **OneSignal > Audience > Subscriptions** prüfen, ob das Gerät als `Subscribed` erscheint.
 
-## Share-Links
+Auf iOS/iPadOS 16.4 oder neuer muss die Website zuerst zum Home-Bildschirm hinzugefügt und von dort geöffnet werden. Erst dann kann der Nutzer über den „Updates“-Button die Berechtigung erteilen.
 
-Versioniertes Payload in `?plan=…` (Base64-URL-safe) inkl. Sprache, Region, Profil, Stopps, gesperrte Stopps.
+### Automatische Wetter-Updates
 
-Geteilte Pläne öffnen schreibgeschützt; „Als eigenen Plan übernehmen“ möglich.
+Der Workflow `.github/workflows/weather-notifications.yml` sendet täglich um **09:00, 12:00, 15:00, 18:00 und 21:00 Uhr in der Zeitzone Europe/Zagreb** regionale Wetterzusammenfassungen. Zwei UTC-Startzeiten pro lokaler Uhrzeit decken Sommer- und Winterzeit ab; das Python-Skript beendet die jeweils falschen Läufe ohne Versand.
 
-## Offline & PWA
+Für den Versand muss unter **Settings > Secrets and variables > Actions** das Repository-Secret `ONESIGNAL_API_KEY` hinterlegt sein. Das Skript:
 
-Service Worker `bura-v41` cached App-Shell, Module, POI-Quellen und Legal-Seiten. Wetter mit Cache-Fallback und Zeitstempel.
+1. ruft Open-Meteo für alle elf Regionen ab,
+2. erstellt eine kurze Wetterzusammenfassung mit passendem Hinweis,
+3. filtert nach `destination` und `notification_topics`,
+4. verlinkt direkt zum Tagesplan der Region und
+5. verhindert Doppelversand mit einem Idempotency-Key pro Region, Tag und Sendezeit.
 
-## Analytics
+Der geplante Lauf verwendet automatisch `all` und verarbeitet somit jeden Standort. Pro Nutzer wird nur die Nachricht zugestellt, deren `destination` seiner zuletzt in der App ausgewählten Region entspricht.
 
-`js/core/analytics.js` – Event-Hooks (`plan_generated`, `share_started`, …). Ohne konfigurierten Provider: No-op.
+Unter **Actions > Send scheduled ISTRIVA weather updates > Run workflow** kann der Ablauf manuell gestartet werden. `dry_run` ist standardmäßig aktiviert und sendet keine Push-Nachricht. Für einen echten Einzeltest eine Region wählen und `dry_run` deaktivieren.
 
-## Feature Flags
-
-`js/core/feature-flags.js` – Premium/Partner-Funktionen vorbereitet, standardmäßig deaktiviert.
-
-## Rechtliches
-
-- `privacy.html`, `legal.html`, `sources.html` – technische Platzhalter
-- **`LEGAL_TODO.md`** – Pflichtangaben vor Release (Release-Blocker)
-
-## Bekannte Abhängigkeiten
-
-- [Open-Meteo](https://open-meteo.com/) – Wetter
-- [Leaflet](https://leafletjs.com/) + OpenStreetMap – Karte (lazy)
-- Google Maps – externe Links
-- TripAdvisor – Suchlinks (keine erfundenen Ratings)
-- OneSignal – Push (optional)
-
-## iOS
-
-Native SwiftUI-App unter `ios/` – parallel, unabhängig von der Web-App.
+Manuelle Läufe erhalten einen eigenen Idempotency-Key, damit mehrere Tests am selben Tag möglich sind. Wenn ein Einzeltest keine passenden Empfänger findet, schlägt der Workflow sichtbar fehl und zeigt die OneSignal-Antwort im Log; geplante Läufe überspringen Regionen ohne Empfänger dagegen erwartungsgemäß.
