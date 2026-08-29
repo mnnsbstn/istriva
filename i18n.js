@@ -88,7 +88,7 @@
         rainOption: "Regenoption · {pct}%"
       },
       plan: {
-        title: "Euer Tagesplan",
+        title: "Tagesplan",
         share: "Tagesplan teilen",
         replan: "Neu planen",
         filters: "Plan anpassen",
@@ -120,7 +120,7 @@
       },
       favorites: {
         kicker: "FÜR SPÄTER MERKEN",
-        title: "Eure Favoriten",
+        title: "Favoriten",
         desc: "Alle gemerkten Strände, Ausflüge, Lokale und Planstopps an einem Ort.",
         clear: "Alle entfernen",
         empty: "Tippt bei einer Location auf das Herz, um sie hier zu speichern.",
@@ -286,7 +286,7 @@
         rainOption: "Rain option · {pct}%"
       },
       plan: {
-        title: "Your day plan",
+        title: "Day plan",
         share: "Share day plan",
         replan: "Replan",
         filters: "Adjust plan",
@@ -318,7 +318,7 @@
       },
       favorites: {
         kicker: "SAVE FOR LATER",
-        title: "Your favorites",
+        title: "Favorites",
         desc: "All saved beaches, trips, places and plan stops in one place.",
         clear: "Remove all",
         empty: "Tap the heart on a place to save it here.",
