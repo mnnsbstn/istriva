@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" href="icon-192.png?v=5">
   <link rel="apple-touch-icon" href="icon-192.png?v=5">
   <link rel="manifest" href="manifest.webmanifest?v=8">
-  <link rel="stylesheet" href="styles.css?v=21">
+  <link rel="stylesheet" href="styles.css?v=22">
   <script>
     if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone) {
       document.documentElement.classList.add("standalone");
@@ -52,6 +52,18 @@
   </header>
 
   <main>
+    <section class="destination-map" aria-label="Karte eures aktuellen Ortes">
+      <div class="destination-map-frame">
+        <iframe
+          id="destination-map"
+          title="Google Maps: Pula"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
+
     <section class="welcome" aria-labelledby="welcome-title">
       <div class="welcome-copy">
         <p class="eyebrow"><span></span> Dobro jutro, Familie!</p>
@@ -323,6 +335,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="guide-data.js?v=1"></script>
   <script src="tripadvisor-data.js?v=2"></script>
-  <script src="app.js?v=20"></script>
+  <script src="app.js?v=21"></script>
 </body>
 </html>
