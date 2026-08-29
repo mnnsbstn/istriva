@@ -530,6 +530,39 @@ let lastWeatherRefresh = 0;
 let oneSignalClient;
 let notificationTagSyncTimers = [];
 const favoriteRegistry = new Map();
+let lastWeatherPayload = null;
+
+function t(key, vars) {
+  return window.I18N?.t(key, vars) ?? key;
+}
+
+function appLocale() {
+  return window.I18N?.getLocale() ?? "de-DE";
+}
+
+function refreshAppLanguage() {
+  window.I18N?.applyToDOM();
+  updateDestinationUI();
+  updateDate();
+  updateFamilyUI();
+  updateNotificationDialogUI();
+  renderDiscoveryGuides();
+  renderPlan(false);
+  if (lastWeatherPayload) {
+    applyWeatherData(lastWeatherPayload.data, {
+      isLive: lastWeatherPayload.isLive,
+      applyToPlan: false
+    });
+  }
+  syncFavorites();
+}
+
+function updateNotificationDialogUI() {
+  const active = notificationSubscriptionActive?.();
+  if (saveNotificationsButton) {
+    saveNotificationsButton.textContent = active ? t("notifications.save") : t("notifications.enable");
+  }
+}
 
 function getPlans() {
   const weather = weatherSelect.value;
@@ -545,12 +578,12 @@ function getPlans() {
   const stops = pace === "relaxed" ? availableStops.slice(0, 3) : availableStops;
   const paceLabel = {
     balanced: destination.route,
-    relaxed: `Ganz entspannt durch ${destination.shortName}`,
-    active: `${destination.shortName} für Entdecker`
+    relaxed: t("plan.paceRelaxedRoute", { region: destination.shortName }),
+    active: t("plan.paceActiveRoute", { region: destination.shortName })
   };
 
   return [{
-    name: weather === "rain" ? `${destination.shortName} bei Regen` : paceLabel[pace],
+    name: weather === "rain" ? t("plan.rainRoute", { region: destination.shortName }) : paceLabel[pace],
     distance: destination.distances[pace],
     budget: destination.budget,
     stops
@@ -573,15 +606,21 @@ function updateDestinationMap() {
 
   mapFrame.dataset.mapKey = mapKey;
   mapFrame.src = buildDestinationMapUrl(destination.coordinates);
-  mapFrame.title = `Google Maps: ${destination.name}`;
+  mapFrame.title = t("map.title", { region: destination.name });
+}
+
+function updateHeroTitle(destination) {
+  const title = document.querySelector("#welcome-title");
+  if (!title) return;
+  title.innerHTML = `${t("hero.titleBefore")}<br>${t("hero.titleAfter")} <em id="hero-destination">${destination.name}.</em>`;
 }
 
 function updateDestinationUI() {
   const destination = istriaDestinations[destinationSelect.value];
-  document.querySelector("#hero-destination").textContent = `${destination.name}.`;
+  updateHeroTitle(destination);
   document.querySelector("#profile-destination").textContent = destination.shortName;
-  document.querySelector("#planner-destination").textContent = destination.name.toLocaleUpperCase("de-DE");
-  document.title = "ISTRIVA";
+  document.querySelector("#planner-destination").textContent = destination.name.toLocaleUpperCase(appLocale());
+  document.title = t("meta.title");
   updateDestinationMap();
 }
 
@@ -641,13 +680,13 @@ function childAgesComplete(settings = getFamilySettings()) {
 }
 
 function familyDescription(settings = getFamilySettings()) {
-  const adults = settings.adults === 1 ? "1 Erwachsener" : `${settings.adults} Erwachsene`;
-  const children = settings.children === 1 ? "1 Kind" : `${settings.children} Kinder`;
+  const adults = settings.adults === 1 ? t("guides.adultOne") : t("guides.adultsN", { n: settings.adults });
+  const children = settings.children === 1 ? t("guides.childOne") : t("guides.childrenN", { n: settings.children });
   if (!childAgesComplete(settings) || settings.children === 0) {
     return `${adults} · ${children}`;
   }
   const ages = settings.childAges.map((age) => `${age}`).join(", ");
-  return `${adults} · ${children} (${ages} J.)`;
+  return `${adults} · ${children} ${t("guides.childAgesSuffix", { ages })}`;
 }
 
 function updateFamilyUI(settings = getFamilySettings()) {
@@ -657,22 +696,19 @@ function updateFamilyUI(settings = getFamilySettings()) {
   childAgeFields.hidden = settings.children === 0;
   childAgeFields.innerHTML = settings.childAges.map((age, index) => `
     <label>
-      <span>Kind ${index + 1}</span>
-      <input class="child-age-input" type="number" min="0" max="17" step="1" inputmode="numeric" value="${age ?? ""}" placeholder="Alter" aria-label="Alter von Kind ${index + 1}" required>
-      <small>Jahre</small>
+      <span>${t("plan.childN", { n: index + 1 })}</span>
+      <input class="child-age-input" type="number" min="0" max="17" step="1" inputmode="numeric" value="${age ?? ""}" placeholder="${t("plan.agePlaceholder")}" aria-label="${t("plan.childAgeAria", { n: index + 1 })}" required>
+      <small>${t("plan.years")}</small>
     </label>
   `).join("");
   childAgeHint.textContent = childAgesComplete(settings)
-    ? (settings.children > 0 ? "Alter wird für passende Familienempfehlungen berücksichtigt." : "")
-    : "Bitte für jedes Kind das Alter angeben.";
+    ? (settings.children > 0 ? t("plan.childAgeHint") : "")
+    : t("plan.childAgeRequired");
   childAgeHint.classList.toggle("warning", !childAgesComplete(settings));
   childAgeFields.querySelectorAll(".child-age-input").forEach((input) => {
     input.addEventListener("change", saveFamilySettings);
   });
-  profileButton.setAttribute(
-    "aria-label",
-    `${familyDescription(settings)} – Familienprofil öffnen`
-  );
+  profileButton.setAttribute("aria-label", `${familyDescription(settings)} – ${t("profile.open")}`);
 }
 
 function saveFamilySettings() {
@@ -698,8 +734,8 @@ function saveFamilySettings() {
   updateFamilyUI(settings);
   renderDiscoveryGuides();
   showToast(childAgesComplete(settings)
-    ? `Familie angepasst: ${familyDescription(settings)}`
-    : "Bitte noch das Alter aller Kinder angeben");
+    ? t("toast.familyUpdated", { family: familyDescription(settings) })
+    : t("toast.childAgesRequired"));
 }
 
 const weatherIcons = {
@@ -717,16 +753,16 @@ const weatherIcons = {
 };
 
 function describeWeather(code) {
-  if (code === 0) return { label: "Klar", icon: weatherIcons.clear };
-  if (code <= 2) return { label: "Leicht bewölkt", icon: weatherIcons.partlyCloudy };
-  if (code === 3) return { label: "Bedeckt", icon: weatherIcons.cloudy };
-  if (code === 45 || code === 48) return { label: "Nebelig", icon: weatherIcons.fog };
-  if (code >= 51 && code <= 57) return { label: "Nieselregen", icon: weatherIcons.rain };
-  if (code >= 61 && code <= 67) return { label: "Regen", icon: weatherIcons.rain };
-  if (code >= 71 && code <= 77) return { label: "Schnee", icon: weatherIcons.snow };
-  if (code >= 80 && code <= 82) return { label: "Regenschauer", icon: weatherIcons.rain };
-  if (code >= 95) return { label: "Gewitter", icon: weatherIcons.thunder };
-  return { label: "Wechselhaft", icon: weatherIcons.variable };
+  if (code === 0) return { label: t("weather.clear"), icon: weatherIcons.clear };
+  if (code <= 2) return { label: t("weather.partlyCloudy"), icon: weatherIcons.partlyCloudy };
+  if (code === 3) return { label: t("weather.cloudy"), icon: weatherIcons.cloudy };
+  if (code === 45 || code === 48) return { label: t("weather.fog"), icon: weatherIcons.fog };
+  if (code >= 51 && code <= 57) return { label: t("weather.drizzle"), icon: weatherIcons.rain };
+  if (code >= 61 && code <= 67) return { label: t("weather.rainLabel"), icon: weatherIcons.rain };
+  if (code >= 71 && code <= 77) return { label: t("weather.snow"), icon: weatherIcons.snow };
+  if (code >= 80 && code <= 82) return { label: t("weather.showers"), icon: weatherIcons.rain };
+  if (code >= 95) return { label: t("weather.thunder"), icon: weatherIcons.thunder };
+  return { label: t("weather.variable"), icon: weatherIcons.variable };
 }
 
 function monoWeatherIcon(icon) {
@@ -776,15 +812,15 @@ function shouldUseRainPlan(data) {
 
 function getWeatherTip(data, destination) {
   if (shouldUseRainPlan(data)) {
-    return `Für ${destination.shortName} ist die Regenoption automatisch vorbereitet.`;
+    return t("weather.rainPlan", { region: destination.shortName });
   }
   if (data.temperature >= 28) {
-    return `In ${destination.shortName} wird es warm – die längste Pause liegt in der Mittagshitze.`;
+    return t("weather.hotPlan", { region: destination.shortName });
   }
   if (data.windSpeed >= 30) {
-    return `Heute ist es windig – Bootsfahrten und Fährverbindungen bitte nochmals prüfen.`;
+    return t("weather.windyPlan");
   }
-  return `Gute Bedingungen für euren Familientag in ${destination.shortName}.`;
+  return t("weather.goodPlan", { region: destination.shortName });
 }
 
 function formatWeatherTime(value) {
@@ -805,9 +841,9 @@ function buildDailyForecast(payload) {
 }
 
 function formatForecastDayLabel(dateString, index) {
-  if (index === 0) return "Heute";
+  if (index === 0) return t("weather.today");
   const date = new Date(`${dateString}T12:00:00`);
-  return date.toLocaleDateString("de-DE", { weekday: "short" }).replace(".", "");
+  return date.toLocaleDateString(appLocale(), { weekday: "short" }).replace(".", "");
 }
 
 function renderWeatherForecast(days = []) {
@@ -832,20 +868,21 @@ function renderWeatherForecast(days = []) {
 }
 
 function applyWeatherData(data, { isLive, applyToPlan }) {
+  lastWeatherPayload = { data, isLive };
   const destination = istriaDestinations[destinationSelect.value];
   const condition = describeWeather(data.weatherCode);
   const temperature = Math.round(data.temperature);
   const apparentTemperature = Math.round(data.apparentTemperature);
   const updateTime = data.observedAt?.slice(11, 16)
-    || new Date(data.fetchedAt).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+    || new Date(data.fetchedAt).toLocaleTimeString(appLocale(), { hour: "2-digit", minute: "2-digit" });
 
   weatherElements.icon.textContent = condition.icon;
-  weatherElements.status.textContent = `${isLive ? "LIVE" : "ZWISCHENGESPEICHERT"} · ${updateTime}`;
+  weatherElements.status.textContent = `${isLive ? t("weather.live") : t("weather.cached")} · ${updateTime}`;
   weatherElements.temperature.textContent = `${temperature}°`;
   weatherElements.dayRange.textContent = Number.isFinite(data.temperatureMin) && Number.isFinite(data.temperatureMax)
     ? `${Math.round(data.temperatureMin)}° – ${Math.round(data.temperatureMax)}°`
     : "--° – --°";
-  weatherElements.summary.textContent = `${condition.label} · gefühlt ${apparentTemperature}°`;
+  weatherElements.summary.textContent = `${condition.label} · ${t("weather.feelsLike", { temp: apparentTemperature })}`;
   weatherElements.rain.textContent = `${Math.round(data.rainProbability)}%`;
   weatherElements.wind.textContent = `${Math.round(data.windSpeed)} km/h`;
   weatherElements.sunrise.textContent = formatWeatherTime(data.sunrise);
@@ -859,8 +896,8 @@ function applyWeatherData(data, { isLive, applyToPlan }) {
   renderWeatherForecast(data.forecast);
   weatherElements.tip.innerHTML = `<span>✦</span> ${getWeatherTip(data, destination)}`;
 
-  weatherSelect.options[0].textContent = `Outdoorplan · ${temperature}°`;
-  weatherSelect.options[1].textContent = `Regenoption · ${Math.round(data.rainProbability)}%`;
+  weatherSelect.options[0].textContent = t("weather.outdoorPlan", { temp: temperature });
+  weatherSelect.options[1].textContent = t("weather.rainOption", { pct: Math.round(data.rainProbability) });
 
   if (applyToPlan && !weatherManuallySelected) {
     weatherSelect.value = shouldUseRainPlan(data) ? "rain" : "sun";
@@ -905,7 +942,7 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
   });
   endpoint.searchParams.set("cache_bust", String(Date.now()));
 
-  weatherElements.status.textContent = "LIVE-WETTER WIRD AKTUALISIERT";
+  weatherElements.status.textContent = t("weather.loadingUpdate");
 
   if (!navigator.onLine) {
     const cached = readCachedWeather(destinationKey);
@@ -913,9 +950,9 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
     if (cached) {
       applyWeatherData(cached, { isLive: false, applyToPlan });
     } else {
-      weatherElements.status.textContent = "OFFLINE · KEINE LIVE-DATEN";
-      weatherElements.summary.textContent = "Wetter momentan nicht verfügbar";
-      weatherElements.tip.innerHTML = `<span>✦</span> Der Tagesplan bleibt nutzbar; Wetter bitte vor dem Start prüfen.`;
+      weatherElements.status.textContent = t("weather.offline");
+      weatherElements.summary.textContent = t("weather.unavailable");
+      weatherElements.tip.innerHTML = `<span>✦</span> ${t("weather.tipOffline")}`;
     }
     return;
   }
@@ -962,9 +999,9 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
       return;
     }
 
-    weatherElements.status.textContent = "OFFLINE · KEINE LIVE-DATEN";
-    weatherElements.summary.textContent = "Wetter momentan nicht verfügbar";
-    weatherElements.tip.innerHTML = `<span>✦</span> Der Tagesplan bleibt nutzbar; Wetter bitte vor dem Start prüfen.`;
+    weatherElements.status.textContent = t("weather.offline");
+    weatherElements.summary.textContent = t("weather.unavailable");
+    weatherElements.tip.innerHTML = `<span>✦</span> ${t("weather.tipOffline")}`;
   }
 }
 
@@ -1022,7 +1059,7 @@ function updateNotificationDialog() {
   notificationDestination.textContent = destination.name;
   weatherNotifications.checked = settings.weather;
   newsNotifications.checked = settings.news;
-  saveNotificationsButton.textContent = active ? "Speichern" : "Aktivieren";
+  saveNotificationsButton.textContent = active ? t("notifications.save") : t("notifications.enable");
   disableNotificationsButton.hidden = !active;
 }
 
@@ -1054,12 +1091,12 @@ async function saveNotificationPreferences() {
   };
 
   if (!settings.weather && !settings.news) {
-    showToast("Bitte mindestens eine Update-Art auswählen");
+    showToast(t("toast.notifySelect"));
     return;
   }
 
   if (!oneSignalClient) {
-    showToast("Der Benachrichtigungsdienst wird noch geladen");
+    showToast(t("toast.notifyLoading"));
     return;
   }
 
@@ -1075,9 +1112,7 @@ async function saveNotificationPreferences() {
 
     if (!oneSignalClient.Notifications.permission) {
       const blocked = "Notification" in window && Notification.permission === "denied";
-      showToast(blocked
-        ? "Benachrichtigungen sind in den Geräteeinstellungen blockiert"
-        : "Benachrichtigungen wurden nicht freigegeben");
+      showToast(blocked ? t("toast.notifyBlocked") : t("toast.notifyDenied"));
       updateNotificationButton();
       return;
     }
@@ -1087,11 +1122,9 @@ async function saveNotificationPreferences() {
     scheduleNotificationTagSync();
     updateNotificationButton();
     notificationDialog.close();
-    showToast(wasActive
-      ? "Benachrichtigungseinstellungen wurden gespeichert"
-      : "Benachrichtigungen sind aktiviert");
+    showToast(wasActive ? t("toast.notifySaved") : t("toast.notifyEnabled"));
   } catch {
-    showToast("Benachrichtigungen konnten nicht aktiviert werden");
+    showToast(t("toast.notifyFailed"));
   } finally {
     saveNotificationsButton.disabled = false;
   }
@@ -1106,9 +1139,9 @@ async function disableNotifications() {
     await oneSignalClient.User.PushSubscription.optOut();
     updateNotificationButton();
     notificationDialog.close();
-    showToast("Benachrichtigungen wurden deaktiviert");
+    showToast(t("toast.notifyDisabled"));
   } catch {
-    showToast("Benachrichtigungen konnten nicht deaktiviert werden");
+    showToast(t("toast.notifyDisableFailed"));
   } finally {
     disableNotificationsButton.disabled = false;
   }
@@ -1259,7 +1292,26 @@ function personalizedGuideMeta(item, family) {
   return meta.slice(0, 4);
 }
 
-function renderGuideCards(grid, destinationKey, category, label, family) {
+function buildFamilyContext(family) {
+  let context = family.adults === 1 ? t("guides.adultOne") : t("guides.adultsN", { n: family.adults });
+  if (family.children > 0 && childAgesComplete(family)) {
+    context += ` · ${family.children === 1 ? t("guides.childOne") : t("guides.childrenN", { n: family.children })} ${t("guides.childAgesSuffix", { ages: family.childAges.join(", ") })}`;
+  } else if (family.children > 0) {
+    context += ` · ${t("guides.addChildAges")}`;
+  } else {
+    context += ` · ${t("guides.noChildren")}`;
+  }
+  return context;
+}
+
+function guideCategoryLabel(category) {
+  if (category === "beaches") return t("guides.labelBeach");
+  if (category === "trips") return t("guides.labelTrip");
+  return t("guides.labelFood");
+}
+
+function renderGuideCards(grid, destinationKey, category, family) {
+  const label = guideCategoryLabel(category);
   const limit = guideDisplayLimit(grid);
   const items = guideItems(destinationKey, category, family, limit);
   grid.innerHTML = items.map((item) => {
@@ -1274,7 +1326,7 @@ function renderGuideCards(grid, destinationKey, category, label, family) {
     registerFavorite(favorite);
     return `
       <article class="guide-card">
-        <button class="location-favorite" type="button" data-favorite-id="${favorite.id}" aria-label="${item.title} als Favorit markieren" aria-pressed="false">♡</button>
+        <button class="location-favorite" type="button" data-favorite-id="${favorite.id}" aria-label="${t("plan.favoriteStop", { title: item.title })}" aria-pressed="false">♡</button>
         <div class="guide-card-icon" aria-hidden="true">${item.icon}</div>
         <div class="guide-card-copy">
           <span class="guide-card-label">${label}</span>
@@ -1283,7 +1335,7 @@ function renderGuideCards(grid, destinationKey, category, label, family) {
           ${renderTripAdvisorBadge({ map: item.map, title: item.title, key: `${category}:${item.key}` })}
           <div class="guide-card-bottom">
             <div class="guide-card-meta">${personalizedGuideMeta(item, family).map((entry) => `<span>${entry}</span>`).join("")}</div>
-            <a class="guide-map-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer" aria-label="${item.title} in Google Maps öffnen">🗺️ Google Maps</a>
+            <a class="guide-map-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer" aria-label="${t("plan.openMaps", { title: item.title })}">🗺️ ${t("plan.mapsLink")}</a>
           </div>
         </div>
       </article>
@@ -1296,7 +1348,7 @@ function renderDiscoveryGuides() {
   const destinationKey = destinationSelect.value;
   const destination = istriaDestinations[destinationKey];
   const family = getFamilySettings();
-  const destinationLabel = destination.name.toLocaleUpperCase("de-DE");
+  const destinationLabel = destination.name.toLocaleUpperCase(appLocale());
 
   document.querySelector("#beach-guide-destination").textContent = destinationLabel;
   document.querySelector("#trip-guide-destination").textContent = destinationLabel;
@@ -1306,22 +1358,15 @@ function renderDiscoveryGuides() {
   tripGuideMap.href = mapSearchUrl(`Ausflüge ${destination.name} Istrien`);
   foodGuideMap.href = mapSearchUrl(`Restaurants Bars ${destination.name} Istrien`);
 
-  let familyContext = `${family.adults} ${family.adults === 1 ? "Erwachsener" : "Erwachsene"}`;
-  if (family.children > 0 && childAgesComplete(family)) {
-    familyContext += ` · ${family.children} ${family.children === 1 ? "Kind" : "Kinder"} (${family.childAges.join(", ")} J.)`;
-  } else if (family.children > 0) {
-    familyContext += " · Kinderalter bitte oben ergänzen";
-  } else {
-    familyContext += " · ohne Kinder";
-  }
+  const familyContext = buildFamilyContext(family);
   [beachGuideContext, tripGuideContext, foodGuideContext].forEach((element) => {
-    element.textContent = `Persönlich sortiert für: ${familyContext}`;
+    element.textContent = t("guides.sortedFor", { context: familyContext });
     element.classList.toggle("warning", family.children > 0 && !childAgesComplete(family));
   });
 
-  renderGuideCards(beachGuideGrid, destinationKey, "beaches", "STRAND", family);
-  renderGuideCards(tripGuideGrid, destinationKey, "trips", "TAGESAUSFLUG", family);
-  renderGuideCards(foodGuideGrid, destinationKey, "food", "ESSEN & TRINKEN", family);
+  renderGuideCards(beachGuideGrid, destinationKey, "beaches", family);
+  renderGuideCards(tripGuideGrid, destinationKey, "trips", family);
+  renderGuideCards(foodGuideGrid, destinationKey, "food", family);
 }
 
 function renderPlan(animate = false) {
@@ -1350,7 +1395,7 @@ function renderPlan(animate = false) {
           <div class="stop-top">
             <span class="stop-type">${stop.type}</span>
             <span class="stop-duration">◷ ${stop.duration}</span>
-            <button class="location-favorite stop-favorite" type="button" data-favorite-id="${favorite.id}" aria-label="${stop.title} als Favorit markieren" aria-pressed="false">♡</button>
+            <button class="location-favorite stop-favorite" type="button" data-favorite-id="${favorite.id}" aria-label="${t("plan.favoriteStop", { title: stop.title })}" aria-pressed="false">♡</button>
           </div>
           <h3><a class="place-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer">${stop.title}<span aria-hidden="true">↗</span></a></h3>
           <p>${stop.description}</p>
@@ -1359,7 +1404,7 @@ function renderPlan(animate = false) {
         </div>
         <div class="stop-image">
           <span aria-hidden="true">${stop.icon}</span>
-          <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer" aria-label="${stop.title} in Google Maps öffnen">🗺️ Google Maps</a>
+          <a class="map-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer" aria-label="${t("plan.openMaps", { title: stop.title })}">🗺️ ${t("plan.mapsLink")}</a>
         </div>
       </article>
     `;
@@ -1384,7 +1429,7 @@ function updateDate() {
     day: "numeric",
     month: "long"
   }).format(new Date());
-  document.querySelector("#current-date").textContent = formatted.toLocaleUpperCase("de-DE");
+  document.querySelector("#current-date").textContent = formatted.toLocaleUpperCase(appLocale());
 }
 
 const featuredFavoriteItems = [
@@ -1505,7 +1550,7 @@ function toggleFavorite(favoriteID) {
     : [...saved, favoriteRegistry.get(favoriteID)].filter(Boolean);
   saveFavorites(next);
   syncFavorites();
-  showToast(selected ? "Aus Favoriten entfernt" : "Für später gemerkt ♥");
+  showToast(selected ? t("favorites.removed") : t("favorites.saved"));
 }
 
 destinationSelect.addEventListener("change", () => {
@@ -1518,7 +1563,7 @@ destinationSelect.addEventListener("change", () => {
   refreshLiveWeather({ applyToPlan: true });
   scheduleNotificationTagSync();
   const destination = istriaDestinations[destinationSelect.value];
-  showToast(`Euer Tagesplan für ${destination.name} ist bereit`);
+  showToast(t("toast.destinationReady", { region: destination.name }));
 });
 
 [adultCount, childCount].forEach((input) => {
@@ -1529,20 +1574,20 @@ weatherSelect.addEventListener("change", () => {
   planIndex = 0;
   weatherManuallySelected = true;
   renderPlan(true);
-  showToast(weatherSelect.value === "rain" ? "Regenoption ist eingeplant ☂" : "Sonnenplan ist zurück ☀");
+  showToast(weatherSelect.value === "rain" ? t("toast.rainPlan") : t("toast.sunPlan"));
 });
 
 paceSelect.addEventListener("change", () => {
   planIndex = 0;
   renderPlan(true);
-  showToast(`Tempo auf „${paceSelect.options[paceSelect.selectedIndex].text}“ angepasst`);
+  showToast(t("toast.paceUpdated", { pace: paceSelect.options[paceSelect.selectedIndex].text }));
 });
 
 replanButton.addEventListener("click", () => {
   const plans = getPlans();
   planIndex = (planIndex + 1) % plans.length;
   renderPlan(true);
-  showToast(plans.length > 1 ? "Eine neue Route ist bereit ✦" : "Das ist aktuell unsere beste Route für eure Auswahl");
+  showToast(plans.length > 1 ? t("toast.replanReady") : t("toast.replanBest"));
 });
 
 shareButton.addEventListener("click", async () => {
@@ -1559,10 +1604,10 @@ shareButton.addEventListener("click", async () => {
       await navigator.share(shareData);
     } else {
       await navigator.clipboard.writeText(`${shareData.text} – ${shareData.url}`);
-      showToast("Tagesplan wurde in die Zwischenablage kopiert");
+      showToast(t("toast.shareCopied"));
     }
   } catch (error) {
-    if (error.name !== "AbortError") showToast("Teilen ist in diesem Browser nicht verfügbar");
+    if (error.name !== "AbortError") showToast(t("toast.shareUnavailable"));
   }
 });
 
@@ -1575,12 +1620,12 @@ document.addEventListener("click", (event) => {
 document.querySelector("#clear-favorites").addEventListener("click", () => {
   saveFavorites([]);
   syncFavorites();
-  showToast("Favoriten wurden geleert");
+  showToast(t("favorites.cleared"));
 });
 
 profileButton.addEventListener("click", () => {
   const destination = istriaDestinations[destinationSelect.value];
-  showToast(`${familyDescription()} · ${destination.name}`);
+  showToast(t("toast.profileSummary", { family: familyDescription(), region: destination.name }));
 });
 
 window.addEventListener("beforeinstallprompt", (event) => {
@@ -1592,7 +1637,7 @@ window.addEventListener("beforeinstallprompt", (event) => {
 window.addEventListener("appinstalled", () => {
   deferredInstallPrompt = undefined;
   installButton.hidden = true;
-  showToast("ISTRIVA wurde erfolgreich installiert");
+  showToast(t("toast.installed"));
 });
 
 installButton.addEventListener("click", async () => {
@@ -1604,18 +1649,18 @@ installButton.addEventListener("click", async () => {
     return;
   }
 
-  showToast("Auf iPhone: Teilen antippen und „Zum Home-Bildschirm“ wählen");
+  showToast(t("toast.iosInstall"));
 });
 
 notificationButton.addEventListener("click", () => {
   if (isIos && !isStandalone) {
     installButton.hidden = false;
-    showToast("Auf iPhone: App zuerst zum Home-Bildschirm hinzufügen und von dort öffnen");
+    showToast(t("toast.iosStandalone"));
     return;
   }
 
   if (!oneSignalClient) {
-    showToast("Der Benachrichtigungsdienst wird noch geladen");
+    showToast(t("toast.notifyLoading"));
     return;
   }
 
@@ -1641,7 +1686,7 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js")
       .catch(() => {
-        showToast("Offline-Modus konnte nicht aktiviert werden");
+        showToast(t("toast.offlineFailed"));
       });
   });
 }
@@ -1681,6 +1726,9 @@ if (initialDestination) {
   destinationSelect.value = initialDestination;
   saveDestination(initialDestination);
 }
+
+window.I18N?.init();
+window.I18N?.onChange(() => refreshAppLanguage());
 
 updateDate();
 syncFavorites();

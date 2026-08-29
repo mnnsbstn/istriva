@@ -491,7 +491,19 @@ main {
 }
 
 .destination-map {
-  padding: 0 0 clamp(18px, 3vw, 28px);
+  padding: 0;
+}
+
+.welcome-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 3vw, 24px);
+  min-width: 0;
+  align-self: start;
+}
+
+.welcome-sidebar .destination-map-frame {
+  max-height: clamp(160px, 28vw, 240px);
 }
 
 .destination-map-frame {
@@ -537,11 +549,45 @@ main {
   gap: 10px;
 }
 
-.eyebrow span {
+.eyebrow > span[aria-hidden="true"] {
   width: 28px;
   height: 2px;
   display: inline-block;
+  flex: 0 0 auto;
   background: var(--accent);
+}
+
+.site-header .lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  color: var(--white);
+}
+
+.site-header .lang-btn {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  background: transparent;
+  color: var(--white);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.site-header .lang-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+}
+
+@media (max-width: 620px) {
+  .site-header .lang-switch {
+    order: 2;
+  }
 }
 
 h1,
