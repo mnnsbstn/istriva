@@ -584,7 +584,7 @@ main {
 .site-header .lang-switch {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   flex: 0 0 auto;
   color: var(--white);
 }
@@ -598,7 +598,7 @@ main {
 }
 
 .header-divider {
-  width: 1px;
+  width: 2px;
   height: 40px;
   flex: 0 0 auto;
   background: #E5FF42;
