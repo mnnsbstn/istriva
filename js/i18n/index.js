@@ -118,8 +118,6 @@ window.ISTRIVA = window.ISTRIVA || {};
 
     applyToDOM(root = document) {
       root.querySelectorAll("[data-i18n]").forEach((el) => {
-        if (el.closest("#welcome-title") || el.id === "hero-eyebrow") return;
-        if (el.children.length > 0 && el.tagName !== "OPTION") return;
         const key = el.dataset.i18n;
         const text = this.t(key);
         if (el.dataset.i18nAttr) {
@@ -133,15 +131,6 @@ window.ISTRIVA = window.ISTRIVA || {};
       document.title = this.t("meta.title");
       const desc = document.querySelector('meta[name="description"]');
       if (desc) desc.content = this.t("meta.description");
-    },
-
-    updateDynamicContent() {
-      const regionKey = window.ISTRIVA.storage?.getDestination?.() || "pula";
-      const regionName = this.regionName(regionKey);
-      const eyebrow = document.querySelector("#hero-eyebrow");
-      const heroDestination = document.querySelector("#hero-destination");
-      if (eyebrow) eyebrow.textContent = this.t("hero.eyebrow");
-      if (heroDestination) heroDestination.textContent = `${regionName}.`;
     },
 
     validateTranslations() {

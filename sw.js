@@ -1,8 +1,8 @@
-const CACHE_NAME = "bura-v42";
+const CACHE_NAME = "bura-v41";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=42",
+  "./styles.css?v=41",
   "./guide-data.js?v=1",
   "./tripadvisor-data.js?v=3",
   "./app.js?v=29",
@@ -14,7 +14,7 @@ const APP_SHELL = [
   "./js/core/share.js?v=1",
   "./js/i18n/de.js?v=1",
   "./js/i18n/en.js?v=1",
-  "./js/i18n/index.js?v=2",
+  "./js/i18n/index.js?v=1",
   "./js/data/poi-registry.js?v=1",
   "./js/planner/schedule.js?v=1",
   "./js/planner/engine.js?v=1",
@@ -23,7 +23,7 @@ const APP_SHELL = [
   "./js/ui/onboarding.js?v=1",
   "./js/ui/search.js?v=1",
   "./js/ui/map.js?v=1",
-  "./js/bootstrap.js?v=2",
+  "./js/bootstrap.js?v=1",
   "./privacy.html",
   "./legal.html",
   "./sources.html",
