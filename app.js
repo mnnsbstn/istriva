@@ -713,8 +713,6 @@ const weatherIcons = {
   variable: "◌",
   wind: "〰",
   water: "∿",
-  sunrise: "",
-  sunset: "",
   uv: "◎"
 };
 
@@ -733,7 +731,12 @@ function describeWeather(code) {
 
 function initWeatherDetailIcons() {
   document.querySelectorAll(".weather-detail-icon[data-icon]").forEach((element) => {
-    const icon = weatherIcons[element.dataset.icon];
+    const key = element.dataset.icon;
+    if (key === "sunrise" || key === "sunset") {
+      element.textContent = "";
+      return;
+    }
+    const icon = weatherIcons[key];
     if (icon) element.textContent = icon;
   });
 }
