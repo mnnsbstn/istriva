@@ -30,6 +30,8 @@
       profile: {
         family: "Familie",
         in: "in",
+        person: "Person",
+        people: "Personen",
         open: "Profil der Familie öffnen"
       },
       notifications: {
@@ -228,6 +230,8 @@
       profile: {
         family: "Family",
         in: "in",
+        person: "person",
+        people: "people",
         open: "Open family profile"
       },
       notifications: {
@@ -332,7 +336,7 @@
         trips: "Day trips",
         food: "Food & drink",
         beachesKicker: "SWIM & SEA ·",
-        beachesTitle: "Beaches for your day",
+        beachesTitle: "Beaches",
         beachesDesc: "From sheltered family coves to wild rocky shores.",
         beachesLink: "All beaches",
         tripsKicker: "EXPLORE MORE ·",

@@ -479,6 +479,7 @@ const shareButton = document.querySelector("#share-button");
 const notificationButton = document.querySelector("#notification-button");
 const profileButton = document.querySelector(".profile");
 const partySize = document.querySelector("#party-size");
+const partySizeLabel = document.querySelector("#party-size-label");
 const adultCount = document.querySelector("#adult-count");
 const childCount = document.querySelector("#child-count");
 const childAgeFields = document.querySelector("#child-age-fields");
@@ -691,6 +692,10 @@ function updateFamilyUI(settings = getFamilySettings()) {
   adultCount.value = settings.adults;
   childCount.value = settings.children;
   partySize.textContent = settings.adults + settings.children;
+  if (partySizeLabel) {
+    const total = settings.adults + settings.children;
+    partySizeLabel.textContent = total === 1 ? t("profile.person") : t("profile.people");
+  }
   childAgeFields.hidden = settings.children === 0;
   childAgeFields.innerHTML = settings.childAges.map((age, index) => `
     <label>
