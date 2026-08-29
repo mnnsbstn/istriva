@@ -1572,7 +1572,6 @@ document.querySelector("#clear-favorites").addEventListener("click", () => {
 });
 
 profileButton.addEventListener("click", () => {
-  if (window.ISTRIVA?.profileUI) return;
   const destination = istriaDestinations[destinationSelect.value];
   showToast(`${familyDescription()} · ${destination.name}`);
 });
@@ -1604,33 +1603,17 @@ installButton.addEventListener("click", async () => {
 notificationButton.addEventListener("click", () => {
   if (isIos && !isStandalone) {
     installButton.hidden = false;
-    showToast(window.ISTRIVA?.i18n?.t("notifications.iosHint") || "Auf iPhone: App zuerst zum Home-Bildschirm hinzufügen und von dort öffnen");
+    showToast("Auf iPhone: App zuerst zum Home-Bildschirm hinzufügen und von dort öffnen");
     return;
   }
 
-  const explainer = document.querySelector("#notification-explainer-dialog");
-  if (explainer && !localStorage.getItem("istriva-notification-explainer-seen")) {
-    window.ISTRIVA?.analytics?.track("notification_explainer_opened");
-    explainer.showModal();
-    return;
-  }
-
-  openNotificationSettings();
-});
-
-function openNotificationSettings() {
   if (!oneSignalClient) {
-    showToast(window.ISTRIVA?.i18n?.t("notifications.loading") || "Der Benachrichtigungsdienst wird noch geladen");
+    showToast("Der Benachrichtigungsdienst wird noch geladen");
     return;
   }
+
   updateNotificationDialog();
   notificationDialog.showModal();
-}
-
-document.querySelector("#notification-explainer-continue")?.addEventListener("click", () => {
-  try { localStorage.setItem("istriva-notification-explainer-seen", "1"); } catch { /* ignore */ }
-  document.querySelector("#notification-explainer-dialog")?.close();
-  openNotificationSettings();
 });
 
 saveNotificationsButton.addEventListener("click", saveNotificationPreferences);
@@ -1698,12 +1681,6 @@ updateFamilyUI();
 updateDestinationUI();
 initStaticTripAdvisorBadges();
 initWeatherDetailIcons();
-
-if (window.ISTRIVA?.app) {
-  window.ISTRIVA.app.init();
-} else {
-  renderPlan();
-  renderDiscoveryGuides();
-}
-
+renderPlan();
+renderDiscoveryGuides();
 refreshLiveWeather({ applyToPlan: true });
