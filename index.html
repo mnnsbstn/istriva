@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" href="icon-192.png?v=5">
   <link rel="apple-touch-icon" href="icon-192.png?v=5">
   <link rel="manifest" href="manifest.webmanifest?v=8">
-  <link rel="stylesheet" href="styles.css?v=25">
+  <link rel="stylesheet" href="styles.css?v=26">
   <script>
     if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone) {
       document.documentElement.classList.add("standalone");
@@ -99,6 +99,7 @@
         <div class="weather-details">
           <span><i aria-hidden="true">🌧️</i><strong id="weather-rain">--%</strong> Regen</span>
           <span><i aria-hidden="true">🍃</i><strong id="weather-wind">-- km/h</strong> Wind</span>
+          <span><i aria-hidden="true">🌄</i><strong id="weather-sunrise">--:--</strong> Sonnenaufgang</span>
           <span><i aria-hidden="true">🌅</i><strong id="weather-sunset">--:--</strong> Sonnenuntergang</span>
           <span><i aria-hidden="true">🔆</i><strong id="weather-uv">--</strong> UV-Index</span>
           <span><i aria-hidden="true">💧</i><strong id="weather-humidity">--%</strong> Luftfeuchtigkeit</span>
@@ -338,6 +339,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="guide-data.js?v=1"></script>
   <script src="tripadvisor-data.js?v=2"></script>
-  <script src="app.js?v=23"></script>
+  <script src="app.js?v=24"></script>
 </body>
 </html>
