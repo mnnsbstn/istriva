@@ -23,7 +23,7 @@ OPEN_METEO_API_URL = "https://api.open-meteo.com/v1/forecast"
 APP_URL = "https://mnnsbstn.github.io/istriva/"
 ICON_URL = f"{APP_URL}icon-512.png"
 LOCAL_TIMEZONE = ZoneInfo("Europe/Zagreb")
-SEND_HOUR = 9
+SEND_HOURS = (9, 12, 15, 18, 21)
 
 LOCATIONS: dict[str, dict[str, Any]] = {
     "pula": {"name": "Pula", "latitude": 44.8666, "longitude": 13.8496},
@@ -47,7 +47,7 @@ def env_flag(name: str) -> bool:
 def should_send_now(now: datetime, force: bool = False) -> bool:
     if force:
         return True
-    return now.astimezone(LOCAL_TIMEZONE).hour == SEND_HOUR
+    return now.astimezone(LOCAL_TIMEZONE).hour in SEND_HOURS
 
 
 def request_json(
@@ -167,11 +167,16 @@ def build_message(location_name: str, forecast: dict[str, Any]) -> tuple[str, st
     return title, body
 
 
-def idempotency_key(local_date: str, destination: str, context: str = "daily") -> str:
+def idempotency_key(
+    local_date: str,
+    destination: str,
+    send_hour: int,
+    context: str = "daily",
+) -> str:
     return str(
         uuid.uuid5(
             uuid.NAMESPACE_URL,
-            f"bura-weather-v2:{context}:{local_date}:{destination}",
+            f"bura-weather-v3:{context}:{local_date}:{send_hour:02d}:{destination}",
         )
     )
 
@@ -209,6 +214,7 @@ def build_notification(
     location_name: str,
     forecast: dict[str, Any],
     local_date: str,
+    send_hour: int,
     context: str = "daily",
 ) -> dict[str, Any]:
     title, body = build_message(location_name, forecast)
@@ -217,15 +223,15 @@ def build_notification(
     return {
         "app_id": ONESIGNAL_APP_ID,
         "target_channel": "push",
-        "name": f"ISTRIVA Wetter {location_name} {local_date}",
+        "name": f"ISTRIVA Wetter {location_name} {local_date} {send_hour:02d}:00",
         "headings": {"en": title, "de": title},
         "contents": {"en": body, "de": body},
         "url": launch_url,
         "chrome_web_icon": ICON_URL,
         "firefox_icon": ICON_URL,
         "web_push_topic": f"bura-weather-{destination}",
-        "ttl": 6 * 60 * 60,
-        "idempotency_key": idempotency_key(local_date, destination, context),
+        "ttl": 3 * 60 * 60,
+        "idempotency_key": idempotency_key(local_date, destination, send_hour, context),
         "filters": audience_filters(destination),
     }
 
@@ -267,7 +273,11 @@ def main() -> int:
     local_now = now.astimezone(LOCAL_TIMEZONE)
 
     if not should_send_now(now, args.force):
-        print(f"Skipping: local time is {local_now:%H:%M}; configured send hour is {SEND_HOUR:02d}:00.")
+        send_hours = ", ".join(f"{hour:02d}:00" for hour in SEND_HOURS)
+        print(
+            f"Skipping: local time is {local_now:%H:%M}; "
+            f"configured send hours are {send_hours} ({LOCAL_TIMEZONE.key})."
+        )
         return 0
 
     api_key = os.environ.get("ONESIGNAL_API_KEY", "").strip()
@@ -277,6 +287,7 @@ def main() -> int:
 
     destinations = LOCATIONS if args.location == "all" else {args.location: LOCATIONS[args.location]}
     idempotency_context = os.environ.get("BURA_IDEMPOTENCY_CONTEXT", "daily").strip() or "daily"
+    send_hour = local_now.hour
     failures: list[str] = []
 
     for destination, location in destinations.items():
@@ -287,6 +298,7 @@ def main() -> int:
                 location["name"],
                 forecast,
                 local_now.date().isoformat(),
+                send_hour,
                 idempotency_context,
             )
 

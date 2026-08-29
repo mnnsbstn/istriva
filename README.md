@@ -61,7 +61,7 @@ Auf iOS/iPadOS 16.4 oder neuer muss die Website zuerst zum Home-Bildschirm hinzu
 
 ### Automatische Wetter-Updates
 
-Der Workflow `.github/workflows/weather-notifications.yml` sendet täglich um **09:00 Uhr in der Zeitzone Europe/Zagreb** eine regionale Wetterzusammenfassung. Zwei UTC-Startzeiten decken Sommer- und Winterzeit ab; das Python-Skript beendet den jeweils falschen Lauf ohne Versand.
+Der Workflow `.github/workflows/weather-notifications.yml` sendet täglich um **09:00, 12:00, 15:00, 18:00 und 21:00 Uhr in der Zeitzone Europe/Zagreb** regionale Wetterzusammenfassungen. Zwei UTC-Startzeiten pro lokaler Uhrzeit decken Sommer- und Winterzeit ab; das Python-Skript beendet die jeweils falschen Läufe ohne Versand.
 
 Für den Versand muss unter **Settings > Secrets and variables > Actions** das Repository-Secret `ONESIGNAL_API_KEY` hinterlegt sein. Das Skript:
 
@@ -69,10 +69,10 @@ Für den Versand muss unter **Settings > Secrets and variables > Actions** das R
 2. erstellt eine kurze Wetterzusammenfassung mit passendem Hinweis,
 3. filtert nach `destination` und `notification_topics`,
 4. verlinkt direkt zum Tagesplan der Region und
-5. verhindert Doppelversand mit einem täglichen Idempotency-Key.
+5. verhindert Doppelversand mit einem Idempotency-Key pro Region, Tag und Sendezeit.
 
 Der geplante Lauf verwendet automatisch `all` und verarbeitet somit jeden Standort. Pro Nutzer wird nur die Nachricht zugestellt, deren `destination` seiner zuletzt in der App ausgewählten Region entspricht.
 
-Unter **Actions > Send daily ISTRIVA weather updates > Run workflow** kann der Ablauf manuell gestartet werden. `dry_run` ist standardmäßig aktiviert und sendet keine Push-Nachricht. Für einen echten Einzeltest eine Region wählen und `dry_run` deaktivieren.
+Unter **Actions > Send scheduled ISTRIVA weather updates > Run workflow** kann der Ablauf manuell gestartet werden. `dry_run` ist standardmäßig aktiviert und sendet keine Push-Nachricht. Für einen echten Einzeltest eine Region wählen und `dry_run` deaktivieren.
 
-Manuelle Läufe erhalten einen eigenen Idempotency-Key, damit mehrere Tests am selben Tag möglich sind. Wenn ein Einzeltest keine passenden Empfänger findet, schlägt der Workflow sichtbar fehl und zeigt die OneSignal-Antwort im Log; tägliche Läufe überspringen Regionen ohne Empfänger dagegen erwartungsgemäß.
+Manuelle Läufe erhalten einen eigenen Idempotency-Key, damit mehrere Tests am selben Tag möglich sind. Wenn ein Einzeltest keine passenden Empfänger findet, schlägt der Workflow sichtbar fehl und zeigt die OneSignal-Antwort im Log; geplante Läufe überspringen Regionen ohne Empfänger dagegen erwartungsgemäß.
