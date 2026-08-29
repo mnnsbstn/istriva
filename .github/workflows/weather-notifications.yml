@@ -1,4 +1,4 @@
-name: Send daily ISTRIVA weather updates
+name: Send scheduled ISTRIVA weather updates
 
 on:
   pull_request:
@@ -7,8 +7,9 @@ on:
       - "scripts/send_weather_updates.py"
       - "tests/test_weather_notifications.py"
   schedule:
-    # 09:00 in Europe/Zagreb: 07:00 UTC in summer, 08:00 UTC in winter.
-    - cron: "0 7,8 * * *"
+    # 09:00, 12:00, 15:00, 18:00 and 21:00 in Europe/Zagreb.
+    # Two UTC slots per local hour cover summer (CEST) and winter (CET).
+    - cron: "0 7,8,10,11,13,14,16,17,19,20 * * *"
   workflow_dispatch:
     inputs:
       location:

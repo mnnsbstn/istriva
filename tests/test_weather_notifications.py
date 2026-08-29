@@ -37,6 +37,22 @@ class ScheduleTests(unittest.TestCase):
         now = datetime(2026, 8, 27, 7, 5, tzinfo=ZoneInfo("UTC"))
         self.assertTrue(weather.should_send_now(now))
 
+    def test_summer_time_sends_at_noon_in_zagreb(self):
+        now = datetime(2026, 8, 27, 10, 5, tzinfo=ZoneInfo("UTC"))
+        self.assertTrue(weather.should_send_now(now))
+
+    def test_summer_time_sends_at_fifteen_in_zagreb(self):
+        now = datetime(2026, 8, 27, 13, 5, tzinfo=ZoneInfo("UTC"))
+        self.assertTrue(weather.should_send_now(now))
+
+    def test_summer_time_sends_at_eighteen_in_zagreb(self):
+        now = datetime(2026, 8, 27, 16, 5, tzinfo=ZoneInfo("UTC"))
+        self.assertTrue(weather.should_send_now(now))
+
+    def test_summer_time_sends_at_twenty_one_in_zagreb(self):
+        now = datetime(2026, 8, 27, 19, 5, tzinfo=ZoneInfo("UTC"))
+        self.assertTrue(weather.should_send_now(now))
+
     def test_summer_time_skips_second_dst_window(self):
         now = datetime(2026, 8, 27, 8, 5, tzinfo=ZoneInfo("UTC"))
         self.assertFalse(weather.should_send_now(now))
@@ -45,8 +61,16 @@ class ScheduleTests(unittest.TestCase):
         now = datetime(2026, 1, 15, 8, 5, tzinfo=ZoneInfo("UTC"))
         self.assertTrue(weather.should_send_now(now))
 
+    def test_winter_time_sends_at_noon_in_zagreb(self):
+        now = datetime(2026, 1, 15, 11, 5, tzinfo=ZoneInfo("UTC"))
+        self.assertTrue(weather.should_send_now(now))
+
     def test_winter_time_skips_first_dst_window(self):
         now = datetime(2026, 1, 15, 7, 5, tzinfo=ZoneInfo("UTC"))
+        self.assertFalse(weather.should_send_now(now))
+
+    def test_off_schedule_hour_is_skipped(self):
+        now = datetime(2026, 8, 27, 12, 0, tzinfo=ZoneInfo("UTC"))
         self.assertFalse(weather.should_send_now(now))
 
     def test_force_ignores_local_hour(self):
@@ -83,7 +107,7 @@ class MessageTests(unittest.TestCase):
 
 class NotificationPayloadTests(unittest.TestCase):
     def test_payload_targets_region_and_weather_topics(self):
-        payload = weather.build_notification("pula", "Pula", forecast(), "2026-08-27")
+        payload = weather.build_notification("pula", "Pula", forecast(), "2026-08-27", 9)
 
         self.assertEqual(payload["app_id"], weather.ONESIGNAL_APP_ID)
         self.assertEqual(payload["target_channel"], "push")
@@ -124,22 +148,24 @@ class NotificationPayloadTests(unittest.TestCase):
             ],
         )
 
-    def test_idempotency_key_is_stable_per_date_and_destination(self):
-        first = weather.idempotency_key("2026-08-27", "pula")
-        second = weather.idempotency_key("2026-08-27", "pula")
-        other = weather.idempotency_key("2026-08-27", "rovinj")
+    def test_idempotency_key_is_stable_per_date_destination_and_hour(self):
+        first = weather.idempotency_key("2026-08-27", "pula", 9)
+        second = weather.idempotency_key("2026-08-27", "pula", 9)
+        other_destination = weather.idempotency_key("2026-08-27", "rovinj", 9)
+        other_hour = weather.idempotency_key("2026-08-27", "pula", 12)
         self.assertEqual(first, second)
-        self.assertNotEqual(first, other)
+        self.assertNotEqual(first, other_destination)
+        self.assertNotEqual(first, other_hour)
         self.assertEqual(len(first), 36)
 
     def test_manual_runs_get_a_distinct_idempotency_key(self):
-        daily = weather.idempotency_key("2026-08-27", "pula", "daily")
-        manual = weather.idempotency_key("2026-08-27", "pula", "33118843266")
+        daily = weather.idempotency_key("2026-08-27", "pula", 9, "daily")
+        manual = weather.idempotency_key("2026-08-27", "pula", 9, "33118843266")
         self.assertNotEqual(daily, manual)
 
     def test_every_location_has_unique_idempotency_key(self):
         keys = {
-            weather.idempotency_key("2026-08-27", destination)
+            weather.idempotency_key("2026-08-27", destination, 9)
             for destination in weather.LOCATIONS
         }
         self.assertEqual(len(keys), len(weather.LOCATIONS))
