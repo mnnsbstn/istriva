@@ -1071,6 +1071,29 @@ function mapSearchUrl(query) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
+function renderTripAdvisorBadge({ map, title, key } = {}) {
+  const info = getTripAdvisorInfo({ map, title, key });
+  if (!info?.url) return "";
+
+  const ratingLabel = tripAdvisorRatingLabel(info.rating);
+  const reviewLabel = formatTripAdvisorReviews(info.reviews);
+  const ratingContent = ratingLabel
+    ? `<strong>${ratingLabel}</strong><span class="tripadvisor-bubbles" aria-hidden="true">${"●".repeat(Math.min(5, Math.round(info.rating)))}${"○".repeat(Math.max(0, 5 - Math.round(info.rating)))}</span>${reviewLabel ? `<span class="tripadvisor-count">(${reviewLabel})</span>` : ""}`
+    : `<span class="tripadvisor-cta">Bewertungen ansehen</span>`;
+
+  return `<a class="tripadvisor-badge" href="${info.url}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(title)} auf TripAdvisor ansehen"><span class="tripadvisor-brand">TripAdvisor</span>${ratingContent}</a>`;
+}
+
+function initStaticTripAdvisorBadges() {
+  document.querySelectorAll("[data-tripadvisor-map]").forEach((slot) => {
+    slot.innerHTML = renderTripAdvisorBadge({
+      map: slot.dataset.tripadvisorMap,
+      title: slot.dataset.tripadvisorTitle,
+      key: slot.dataset.tripadvisorKey
+    });
+  });
+}
+
 function guideItems(destinationKey, category, family) {
   const catalog = guideCatalog[destinationKey] || guideCatalog.pula;
   return catalog[category]
@@ -1134,6 +1157,7 @@ function renderGuideCards(grid, destinationKey, category, label, family) {
           <span class="guide-card-label">${label}</span>
           <h3><a class="place-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">${item.title}<span aria-hidden="true">↗</span></a></h3>
           <p>${item.description}</p>
+          ${renderTripAdvisorBadge({ map: item.map, title: item.title, key: `${category}:${item.key}` })}
           <div class="guide-card-bottom">
             <div class="guide-card-meta">${personalizedGuideMeta(item, family).map((entry) => `<span>${entry}</span>`).join("")}</div>
             <a class="guide-map-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer" aria-label="${item.title} in Google Maps öffnen">🗺️ Google Maps</a>
@@ -1207,6 +1231,7 @@ function renderPlan(animate = false) {
           </div>
           <h3><a class="place-link" href="${mapUrl(stop.map)}" target="_blank" rel="noopener noreferrer">${stop.title}<span aria-hidden="true">↗</span></a></h3>
           <p>${stop.description}</p>
+          ${renderTripAdvisorBadge({ map: stop.map, title: stop.title })}
           <div class="stop-meta">${stop.meta.map((item) => `<span>${item}</span>`).join("")}</div>
         </div>
         <div class="stop-image">
@@ -1315,6 +1340,7 @@ function renderFavorites() {
         <span>${escapeHTML(item.category)}</span>
         <h3><a class="place-link" href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">${escapeHTML(item.title)}<span aria-hidden="true">↗</span></a></h3>
         <p>${escapeHTML(item.description)}</p>
+        ${renderTripAdvisorBadge({ map: item.map, title: item.title })}
         <a href="${mapUrl(item.map)}" target="_blank" rel="noopener noreferrer">🗺️ Google Maps</a>
       </div>
       <button class="location-favorite selected" type="button" data-favorite-id="${escapeHTML(item.id)}" aria-label="${escapeHTML(item.title)} aus Favoriten entfernen" aria-pressed="true">♥</button>
@@ -1531,6 +1557,7 @@ updateDate();
 syncFavorites();
 updateFamilyUI();
 updateDestinationUI();
+initStaticTripAdvisorBadges();
 renderPlan();
 renderDiscoveryGuides();
 refreshLiveWeather({ applyToPlan: true });
