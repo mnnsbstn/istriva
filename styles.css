@@ -14,6 +14,8 @@
   --white: #fff;
   --line: #e2e5df;
   --shadow: 0 18px 55px rgba(0, 0, 0, .08);
+  --page-max: 1080px;
+  --page-gutter: clamp(14px, 4vw, 24px);
 }
 
 * {
@@ -36,7 +38,7 @@ body {
   width: 100%;
   max-width: 100%;
   position: relative;
-  min-width: 320px;
+  min-width: 0;
   color: var(--ink);
   background: var(--cream);
   font-family: Arial, Helvetica, sans-serif;
@@ -44,6 +46,17 @@ body {
   overflow-x: hidden;
   overflow-x: clip;
   overscroll-behavior-x: none;
+}
+
+body.app-shell {
+  overflow-x: clip;
+}
+
+img,
+iframe,
+video,
+svg {
+  max-width: 100%;
 }
 
 button,
@@ -106,13 +119,14 @@ a {
   min-height: 88px;
   height: calc(88px + env(safe-area-inset-top, 0px));
   margin: 0;
-  padding: env(safe-area-inset-top, 0px) max(24px, calc((100% - 1180px) / 2)) 0;
+  padding: env(safe-area-inset-top, 0px) max(var(--page-gutter), calc((100% - var(--page-max)) / 2 + var(--page-gutter))) 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px 18px;
   background: #000000;
   border-bottom: 0;
+  min-width: 0;
 }
 
 .brand {
@@ -465,20 +479,23 @@ nav a span {
 }
 
 main {
-  width: min(1080px, calc(100% - 48px));
+  width: 100%;
+  max-width: var(--page-max);
   margin: 0 auto;
+  padding-inline: var(--page-gutter);
+  min-width: 0;
 }
 
 .destination-map {
-  padding: 28px 10px 0;
+  padding: 0 0 clamp(18px, 3vw, 28px);
 }
 
 .destination-map-frame {
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 320px;
+  max-height: clamp(180px, 42vw, 320px);
   border: 3px solid #e5ff42;
-  border-radius: 18px;
+  border-radius: clamp(14px, 2vw, 18px);
   overflow: hidden;
   background: var(--sand);
   box-shadow: 6px 6px 0 var(--ink);
@@ -489,15 +506,16 @@ main {
   height: 100%;
   border: 0;
   display: block;
+  max-width: none;
 }
 
 .welcome {
   min-height: 350px;
   display: grid;
-  grid-template-columns: 1.15fr .85fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
   align-items: center;
-  gap: 70px;
-  padding: 34px 10px 42px;
+  gap: clamp(28px, 6vw, 70px);
+  padding: clamp(34px, 5vw, 50px) 0 clamp(28px, 4vw, 42px);
 }
 
 .eyebrow,
@@ -542,13 +560,13 @@ h1 em {
 }
 
 .intro {
-  max-width: 560px;
+  max-width: min(560px, 100%);
   color: var(--ink-soft);
-  font-size: 16px;
+  font-size: clamp(15px, 2.2vw, 16px);
 }
 
 .destination-switcher {
-  max-width: 520px;
+  max-width: min(520px, 100%);
   min-height: 62px;
   display: grid;
   grid-template-columns: 38px minmax(0, 1fr) auto;
@@ -610,7 +628,9 @@ h1 em {
 
 .weather-card {
   position: relative;
-  padding: 24px;
+  width: 100%;
+  max-width: 100%;
+  padding: clamp(20px, 3vw, 24px);
   border: 1px solid var(--line);
   border-top: 5px solid var(--accent);
   border-radius: 22px;
@@ -722,11 +742,12 @@ h1 em {
 }
 
 .planner {
-  padding: 34px 44px 12px;
+  padding: clamp(20px, 4vw, 34px) clamp(18px, 4vw, 44px) 12px;
   border: 1px solid var(--line);
-  border-radius: 26px;
+  border-radius: clamp(20px, 3vw, 26px);
   background: rgba(255, 255, 255, .88);
   box-shadow: var(--shadow);
+  min-width: 0;
 }
 
 .planner-top,
@@ -735,6 +756,7 @@ h1 em {
   align-items: flex-end;
   justify-content: space-between;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 h2 {
@@ -801,11 +823,11 @@ h2 {
 .filters {
   min-height: 70px;
   display: grid;
-  grid-template-columns: 1.55fr 1px .75fr .75fr;
+  grid-template-columns: minmax(0, 1.55fr) 1px minmax(0, .75fr) minmax(0, .75fr);
   align-items: center;
-  gap: 22px;
+  gap: clamp(12px, 2.5vw, 22px);
   margin-top: 26px;
-  padding: 12px 18px;
+  padding: 12px clamp(14px, 2.5vw, 18px);
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--mint-light);
@@ -973,8 +995,9 @@ h2 {
 
 .plan-summary {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  margin: 22px 0 13px 73px;
+  margin: 22px 0 13px clamp(0px, 8vw, 73px);
   color: var(--ink-soft);
   font-size: 10px;
 }
@@ -1009,10 +1032,11 @@ h2 {
 
 .stop {
   display: grid;
-  grid-template-columns: 46px 1fr auto;
-  gap: 26px;
+  grid-template-columns: minmax(38px, 46px) minmax(0, 1fr) auto;
+  gap: clamp(14px, 3vw, 26px);
   position: relative;
   padding: 18px 0 20px;
+  min-width: 0;
 }
 
 .time {
@@ -1121,7 +1145,7 @@ h2 {
 }
 
 .stop-image {
-  width: 126px;
+  width: clamp(96px, 18vw, 126px);
   height: 88px;
   position: relative;
   display: grid;
@@ -1177,7 +1201,7 @@ h2 {
 }
 
 .discover {
-  padding: 76px 0 64px;
+  padding: clamp(48px, 8vw, 76px) 0 clamp(42px, 6vw, 64px);
 }
 
 .section-heading {
@@ -1206,7 +1230,7 @@ h2 {
 
 .suggestion-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 18px;
 }
 
@@ -1409,6 +1433,7 @@ h2 {
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 22px;
+  flex-wrap: wrap;
 }
 
 .guide-heading h2 {
@@ -1416,7 +1441,7 @@ h2 {
 }
 
 .guide-heading > div > p:not(.section-kicker, .guide-family-context) {
-  max-width: 620px;
+  max-width: min(620px, 100%);
   color: var(--ink-soft);
   font-size: 13px;
 }
@@ -1445,7 +1470,7 @@ h2 {
 
 .guide-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 16px;
 }
 
@@ -1623,9 +1648,9 @@ h2 {
 }
 
 .favorites-section {
-  margin: 64px 0 34px;
-  padding: 28px;
-  border-radius: 24px;
+  margin: clamp(42px, 6vw, 64px) 0 clamp(24px, 4vw, 34px);
+  padding: clamp(20px, 3vw, 28px);
+  border-radius: clamp(18px, 3vw, 24px);
   color: var(--white);
   background: var(--ink);
   scroll-margin-top: 24px;
@@ -1670,7 +1695,7 @@ h2 {
 
 .favorites-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 12px;
   margin-top: 18px;
 }
@@ -1753,8 +1778,10 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
   margin-bottom: 64px;
-  padding: 18px 22px;
+  padding: 18px clamp(16px, 3vw, 22px);
   border: 1px dashed var(--ink);
   border-radius: 16px;
   background: var(--mint-light);
@@ -1791,15 +1818,17 @@ footer {
   width: 100%;
   min-height: 120px;
   margin: 0;
-  padding: 0 max(24px, calc((100% - 1180px) / 2));
+  padding: clamp(24px, 4vw, 32px) max(var(--page-gutter), calc((100% - var(--page-max)) / 2 + var(--page-gutter)));
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 25px;
+  flex-wrap: wrap;
   border-top: 0;
   color: #aeb3ae;
   background: #000000;
   font-size: 10px;
+  min-width: 0;
 }
 
 .footer-brand {
@@ -1887,11 +1916,15 @@ footer p a {
   .welcome {
     grid-template-columns: 1fr;
     gap: 28px;
-    padding-top: 45px;
+    padding-top: clamp(34px, 6vw, 45px);
   }
 
   .weather-card {
-    max-width: 520px;
+    max-width: none;
+  }
+
+  .weather-details {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .filters {
@@ -1906,21 +1939,54 @@ footer p a {
     grid-column: 1 / -1;
   }
 
-  .suggestion-grid {
-    grid-template-columns: 1fr;
+  .plan-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 780px) {
+  .itinerary::before {
+    left: 48px;
+  }
+
+  .stop {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding-left: 64px;
+  }
+
+  .stop-content::before {
+    left: -24px;
+  }
+
+  .time {
+    width: 38px;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    padding-top: 0;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .stop-image {
+    width: 100%;
+    height: 112px;
+    grid-column: 1;
+    margin-top: -9px;
+  }
+
+  .plan-summary {
+    margin-left: 0;
   }
 }
 
 @media (max-width: 620px) {
-  main {
-    width: min(100% - 28px, 1080px);
-  }
-
   .site-header {
     width: 100%;
     min-height: 72px;
     height: calc(72px + env(safe-area-inset-top, 0px));
-    padding: env(safe-area-inset-top, 0px) 14px 0;
+    padding: env(safe-area-inset-top, 0px) var(--page-gutter) 0;
     gap: 8px;
   }
 
@@ -1970,14 +2036,14 @@ footer p a {
   }
 
   .notification-dialog {
-    width: calc(100vw - 24px);
-    max-width: calc(100vw - 24px);
+    width: min(560px, calc(100% - 24px));
+    max-width: calc(100% - 24px);
     max-height: calc(100dvh - 24px);
-    margin: 0;
+    margin: auto;
     inset: auto;
     top: 50%;
-    left: 12px;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 18px;
     box-shadow: 6px 6px 0 var(--ink);
   }
@@ -2002,16 +2068,20 @@ footer p a {
 
   .welcome {
     min-height: auto;
-    padding: 42px 2px 34px;
+    padding: clamp(28px, 6vw, 42px) 0 clamp(24px, 4vw, 34px);
+  }
+
+  .destination-map-frame {
+    box-shadow: 4px 4px 0 var(--ink);
   }
 
   h1 {
-    font-size: 46px;
+    font-size: clamp(34px, 11vw, 46px);
   }
 
   .destination-switcher {
     grid-template-columns: 38px minmax(0, 1fr);
-    margin-right: 6px;
+    margin-right: 0;
   }
 
   .destination-total {
@@ -2028,8 +2098,7 @@ footer p a {
   }
 
   .planner {
-    margin: 0 -5px;
-    padding: 26px 18px 8px;
+    padding: clamp(18px, 4vw, 26px) clamp(14px, 3vw, 18px) 8px;
     border-radius: 20px;
   }
 
@@ -2084,37 +2153,6 @@ footer p a {
 
   .plan-summary span:first-child {
     display: none;
-  }
-
-  .itinerary::before {
-    left: 48px;
-  }
-
-  .stop {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
-    padding-left: 64px;
-  }
-
-  .stop-content::before {
-    left: -24px;
-  }
-
-  .time {
-    width: 38px;
-    position: absolute;
-    top: 25px;
-    left: 0;
-    padding-top: 0;
-    font-size: 10px;
-    white-space: nowrap;
-  }
-
-  .stop-image {
-    width: 100%;
-    height: 112px;
-    grid-column: 1;
-    margin-top: -9px;
   }
 
   .discover {
