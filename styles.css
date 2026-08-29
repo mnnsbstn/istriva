@@ -750,6 +750,70 @@ h1 em {
   line-height: 1.2;
 }
 
+.weather-forecast {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--line);
+}
+
+.weather-forecast-title {
+  margin-bottom: var(--space-sm);
+  color: var(--teal);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.weather-forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.weather-forecast-day {
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 10px 6px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--sand);
+  text-align: center;
+}
+
+.weather-forecast-day.is-today {
+  border-color: var(--ink);
+  background: var(--mint-light);
+  box-shadow: 3px 3px 0 var(--accent);
+}
+
+.weather-forecast-label {
+  color: var(--ink-soft);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.weather-forecast-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.weather-forecast-temps {
+  color: var(--ink);
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.weather-forecast-rain {
+  color: var(--ink-soft);
+  font-size: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .weather-tip {
   display: flex;
   align-items: flex-start;
