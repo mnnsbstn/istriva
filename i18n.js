@@ -134,7 +134,7 @@
         trips: "Tagesausflüge",
         food: "Essen & Trinken",
         beachesKicker: "BADEN & MEER ·",
-        beachesTitle: "Strände für euren Tag",
+        beachesTitle: "Strände",
         beachesDesc: "Von geschützten Familienbuchten bis zu wilden Felsküsten.",
         beachesLink: "Alle Strände",
         tripsKicker: "MEHR ENTDECKEN ·",
