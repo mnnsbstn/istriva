@@ -511,7 +511,6 @@ const weatherElements = {
   sunrise: document.querySelector("#weather-sunrise"),
   sunset: document.querySelector("#weather-sunset"),
   uvIndex: document.querySelector("#weather-uv"),
-  humidity: document.querySelector("#weather-humidity"),
   waterTemperature: document.querySelector("#weather-water"),
   tip: document.querySelector("#weather-tip")
 };
@@ -781,9 +780,6 @@ function applyWeatherData(data, { isLive, applyToPlan }) {
   weatherElements.uvIndex.textContent = Number.isFinite(data.uvIndex)
     ? data.uvIndex.toFixed(1).replace(".0", "")
     : "--";
-  weatherElements.humidity.textContent = Number.isFinite(data.humidity)
-    ? `${Math.round(data.humidity)}%`
-    : "--%";
   weatherElements.waterTemperature.textContent = Number.isFinite(data.waterTemperature)
     ? `${Math.round(data.waterTemperature)}°`
     : "--°";
@@ -828,7 +824,7 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
   endpoint.search = new URLSearchParams({
     latitude,
     longitude,
-    current: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation,relative_humidity_2m,uv_index",
+    current: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation,uv_index",
     daily: "temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset",
     timezone: "auto",
     forecast_days: "1"
@@ -864,7 +860,6 @@ async function refreshLiveWeather({ applyToPlan = false } = {}) {
       weatherCode: payload.current.weather_code,
       windSpeed: payload.current.wind_speed_10m,
       precipitation: payload.current.precipitation,
-      humidity: payload.current.relative_humidity_2m,
       uvIndex: payload.current.uv_index,
       waterTemperature,
       temperatureMin: payload.daily.temperature_2m_min[0],
