@@ -139,7 +139,53 @@ def describe_weather(code: int) -> tuple[str, str]:
     return "wechselhaft", "🌤️"
 
 
-def build_message(location_name: str, forecast: dict[str, Any]) -> tuple[str, str]:
+def build_advice(
+    send_hour: int,
+    *,
+    code: int,
+    rain_probability: int,
+    wind: int,
+    gusts: int,
+    maximum: int,
+) -> str:
+    if code >= 95:
+        return "Gewitter möglich – Ausflüge flexibel planen."
+    if gusts >= 50 or wind >= 35:
+        return "Windig – Fähren und Bootstouren bitte prüfen."
+    if rain_probability >= 55:
+        return "Die Regenoption ist in ISTRIVA vorbereitet."
+
+    if send_hour <= 9:
+        if maximum >= 28:
+            return "Es wird warm – den Tagesplan am besten früh starten."
+        return "Guter Start in den Tag – Tagesplan und Wetter im Blick behalten."
+
+    if send_hour == 12:
+        if maximum >= 28:
+            return "Mittagshitze meiden und genug Wasser einpacken."
+        return "Jetzt lohnt sich eine Schattenpause oder ein entspannter Mittagsstopp."
+
+    if send_hour == 15:
+        if maximum >= 28:
+            return "Strand und Baden sind jetzt oft angenehmer als zur Mittagszeit."
+        return "Guter Zeitpunkt für einen späteren Ausflug oder Strandbesuch."
+
+    if send_hour == 18:
+        if rain_probability >= 35:
+            return "Abends kann es wechselhafter werden – Plan flexibel halten."
+        return "Abendsonne und Konoba-Zeit – gut für einen entspannten Ausklang."
+
+    if send_hour >= 21:
+        return "Kurzer Blick auf morgen lohnt sich – der Tagesplan ist schon vorbereitet."
+
+    return "Gute Bedingungen für euren Tagesplan."
+
+
+def build_message(
+    location_name: str,
+    forecast: dict[str, Any],
+    send_hour: int | None = None,
+) -> tuple[str, str]:
     code = round(first_daily_value(forecast, "weather_code"))
     minimum = round(first_daily_value(forecast, "temperature_2m_min"))
     maximum = round(first_daily_value(forecast, "temperature_2m_max"))
@@ -147,17 +193,15 @@ def build_message(location_name: str, forecast: dict[str, Any]) -> tuple[str, st
     wind = round(first_daily_value(forecast, "wind_speed_10m_max"))
     gusts = round(first_daily_value(forecast, "wind_gusts_10m_max"))
     condition, emoji = describe_weather(code)
-
-    if code >= 95:
-        advice = "Gewitter möglich – Ausflüge flexibel planen."
-    elif gusts >= 50 or wind >= 35:
-        advice = "Windig – Fähren und Bootstouren bitte prüfen."
-    elif rain_probability >= 55:
-        advice = "Die Regenoption ist in ISTRIVA vorbereitet."
-    elif maximum >= 30:
-        advice = "Mittagshitze meiden und genug Wasser einpacken."
-    else:
-        advice = "Gute Bedingungen für euren Tagesplan."
+    advice_hour = send_hour if send_hour is not None else 12
+    advice = build_advice(
+        advice_hour,
+        code=code,
+        rain_probability=rain_probability,
+        wind=wind,
+        gusts=gusts,
+        maximum=maximum,
+    )
 
     title = f"{emoji} Wetter in {location_name}"
     body = (
@@ -217,7 +261,7 @@ def build_notification(
     send_hour: int,
     context: str = "daily",
 ) -> dict[str, Any]:
-    title, body = build_message(location_name, forecast)
+    title, body = build_message(location_name, forecast, send_hour)
     launch_url = f"{APP_URL}?{urllib.parse.urlencode({'destination': destination})}"
 
     return {
