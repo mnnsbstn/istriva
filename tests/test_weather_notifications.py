@@ -79,30 +79,42 @@ class ScheduleTests(unittest.TestCase):
 
 
 class MessageTests(unittest.TestCase):
-    def test_regular_weather_message(self):
-        title, body = weather.build_message("Pula", forecast())
+    def test_regular_weather_message_at_noon(self):
+        title, body = weather.build_message("Pula", forecast(maximum=25), send_hour=12)
         self.assertEqual(title, "🌤️ Wetter in Pula")
-        self.assertIn("22–29 °C", body)
+        self.assertIn("22–25 °C", body)
         self.assertIn("Regen 15 %", body)
-        self.assertIn("Gute Bedingungen", body)
+        self.assertIn("Schattenpause", body)
+
+    def test_morning_message_differs_from_evening(self):
+        _, morning = weather.build_message("Pula", forecast(maximum=25), send_hour=9)
+        _, evening = weather.build_message("Pula", forecast(maximum=25), send_hour=21)
+        self.assertIn("Start in den Tag", morning)
+        self.assertIn("morgen", evening)
+        self.assertNotEqual(morning, evening)
 
     def test_rain_advice(self):
-        _, body = weather.build_message("Pula", forecast(code=61, rain=70))
+        _, body = weather.build_message("Pula", forecast(code=61, rain=70), send_hour=12)
         self.assertIn("Regenoption", body)
 
     def test_wind_advice_takes_priority(self):
-        _, body = weather.build_message("Pula", forecast(code=61, rain=70, gusts=55))
+        _, body = weather.build_message("Pula", forecast(code=61, rain=70, gusts=55), send_hour=21)
         self.assertIn("Fähren und Bootstouren", body)
 
-    def test_heat_advice(self):
-        _, body = weather.build_message("Pula", forecast(maximum=33))
+    def test_heat_advice_at_noon(self):
+        _, body = weather.build_message("Pula", forecast(maximum=33), send_hour=12)
         self.assertIn("Mittagshitze", body)
+
+    def test_heat_advice_at_evening_is_different(self):
+        _, body = weather.build_message("Pula", forecast(maximum=33), send_hour=21)
+        self.assertNotIn("Mittagshitze", body)
+        self.assertIn("morgen", body)
 
     def test_missing_weather_value_is_rejected(self):
         broken = forecast()
         broken["daily"]["temperature_2m_max"] = []
         with self.assertRaisesRegex(ValueError, "temperature_2m_max"):
-            weather.build_message("Pula", broken)
+            weather.build_message("Pula", broken, send_hour=12)
 
 
 class NotificationPayloadTests(unittest.TestCase):
